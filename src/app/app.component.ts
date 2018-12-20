@@ -38,6 +38,13 @@ export class AppComponent {
     q.available = false
   }
 
+  minus(p): void {
+    p.score = p.score - 100
+  }
+  
+  plus(p): void {
+    p.score = p.score + 100
+  }
 
   close(): void {
     this.selectedQuestion = undefined

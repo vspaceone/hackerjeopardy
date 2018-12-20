@@ -81,7 +81,7 @@
   <div class="card text-center" *ngFor="let p of players">
     <div class="card-body">
       <h5 class="card-title" style="font-size: 2em;">{{p.name}}</h5>
-      <p style="font-size: 3em">{{p.score}}</p>
+      <p style="font-size: 3em"><button class="btn" style="color:white; background-color: white" (click)="minus(p)">-</button>{{p.score}}<button class="btn" style="color:white; background-color: white" (click)="plus(p)">+</button></p>
     </div>
   </div>
 </div>

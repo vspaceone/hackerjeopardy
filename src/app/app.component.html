@@ -26,12 +26,16 @@
   <div *ngIf="selectedQuestion" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
     <div class="card-body">
       <h5 class="card-title">{{selectedQuestion.value}}</h5>
-      <p class="card-text" style="margin: auto;">{{selectedQuestion.answer}}</p>
+      <p *ngIf="selectedQuestion.answer" class="card-text" style="margin: auto;">{{selectedQuestion.answer}}</p>
+      <img *ngIf="selectedQuestion.image" class="card-text" style="margin: auto;" src="{{selectedQuestion.image}}">
+      <br>
 
 
-      <p class="card-text"><a href="#" class="btn btn-danger" (click)="answered(selectedQuestion,undefined)">None</a></p>
-      <p class="card-text" *ngFor="let p of players"><a href="#" class="btn btn-danger" (click)="answered(selectedQuestion,p)">{{p.name}}</a></p>
-
+<div class="btn-group" *ngIf="selectedQuestion.available">
+      <button type="button" *ngFor="let p of players" class="btn btn-primary" (click)="answered(selectedQuestion,p)">{{p.name}}</button>
+      <button type="button" class="btn btn-danger" (click)="answered(selectedQuestion,undefined)">None</button>
+      <button type="button" class="btn btn-danger" (click)="cancel()">cancel</button>
+</div>
       <div *ngIf="!selectedQuestion.available">
         <p class="card-text">{{selectedQuestion.question}}</p>
         <p class="card-text"><a href="#" class="btn btn-danger" (click)="close()">ok</a></p>

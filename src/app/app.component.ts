@@ -9,9 +9,23 @@ export class AppComponent {
   title = 'app';
 
 
+  selectedQuestion = undefined
+
   onSelect(q): void {
     console.log("Hallo onSelect", q)
     q.available = false
+    this.selectedQuestion = q
+  }
+
+  answered(q,p): void {
+    console.log(q)
+
+    if(!p){
+      
+    }else{
+      p.score = p.score + this.selectedQuestion.value;
+    }
+    this.selectedQuestion = undefined
   }
 
   category = [

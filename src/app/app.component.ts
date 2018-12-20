@@ -13,7 +13,6 @@ export class AppComponent {
 
   onSelect(q): void {
     console.log("Hallo onSelect", q)
-    q.available = false
     this.selectedQuestion = q
   }
 
@@ -21,10 +20,15 @@ export class AppComponent {
     console.log(q)
 
     if(!p){
-      
+
     }else{
       p.score = p.score + this.selectedQuestion.value;
     }
+    q.available = false
+  }
+
+
+  close(): void {
     this.selectedQuestion = undefined
   }
 

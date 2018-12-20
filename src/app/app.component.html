@@ -31,6 +31,11 @@
 
       <p class="card-text"><a href="#" class="btn btn-danger" (click)="answered(selectedQuestion,undefined)">None</a></p>
       <p class="card-text" *ngFor="let p of players"><a href="#" class="btn btn-danger" (click)="answered(selectedQuestion,p)">{{p.name}}</a></p>
+
+      <div *ngIf="!selectedQuestion.available">
+        <p class="card-text">{{selectedQuestion.question}}</p>
+        <p class="card-text"><a href="#" class="btn btn-danger" (click)="close()">ok</a></p>
+      </div>
     </div>
   </div>
 </div>

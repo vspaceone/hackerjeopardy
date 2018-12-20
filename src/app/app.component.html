@@ -7,6 +7,17 @@
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
 
+<style>
+  .av-false{
+    background-color: red
+  }
+
+  .av-true{
+    background-color: green;
+  }
+</style>
+
+
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
@@ -24,7 +35,7 @@
 </div>
 <div class="card-group">
   <div *ngFor="let d of qanda" class="card-column" style="width: 20%; padding: 10px">
-    <div class="card text-center" *ngFor="let q of d">
+    <div class="card text-center av-{{q.available}}" *ngFor="let q of d" (click)="onSelect(q)">
       <div class="card-body">
         <h5 class="card-title">{{q.value}}</h5>
       </div>

@@ -27,6 +27,17 @@ export class AppComponent {
     q.available = false
   }
 
+  notanswered(q,p): void {
+    console.log(q)
+
+    if(!p){
+
+    }else{
+      p.score = p.score - this.selectedQuestion.value;
+    }
+    q.available = false
+  }
+
 
   close(): void {
     this.selectedQuestion = undefined
@@ -54,7 +65,7 @@ export class AppComponent {
       {"question":"Welchen Port hat SSH?", "answer": "22", "value":500,"available":true},
     ],
     [
-      {"question":"Welchen Port hat SSH?", "answer": "22", "value":100,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "Was soll ich für einen Satz schrieben?", "value":100,"available":true},
       {"question":"Welchen Port hat SSH?", "answer": "22", "value":200,"available":true},
       {"question":"Welchen Port hat SSH?", "answer": "22", "value":300,"available":true},
       {"question":"Welchen Port hat SSH?", "answer": "22", "value":400,"available":true},

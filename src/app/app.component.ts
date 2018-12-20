@@ -7,4 +7,51 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  category = [
+    "ports","ports","ports","ports","ports"
+  ]
+
+  players = [
+    {"name":"max", "score": 0},
+    {"name":"nils", "score": 0},
+    {"name":"tom", "score": 0}    
+  ]
+
+  qanda = [[
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":100,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":200,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":300,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":400,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":500,"available":true},
+    ],
+    [
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":100,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":200,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":300,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":400,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":500,"available":true},
+    ],
+    [
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":100,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":200,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":300,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":400,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":500,"available":true},
+    ],
+    [
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":100,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":200,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":300,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":400,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":500,"available":true},
+    ],
+    [
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":100,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":200,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":300,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":400,"available":true},
+      {"question":"Welchen Port hat SSH?", "answer": "22", "value":500,"available":true},
+    ]
+  ]
 }

@@ -12,7 +12,8 @@ export class AppComponent {
 
   selectedQuestion = undefined
   renamePlayer = undefined
-  newname = "newname"
+  couldBeCanceled = true;
+
 
   onSelect(q): void {
     console.log("Hallo onSelect", q)

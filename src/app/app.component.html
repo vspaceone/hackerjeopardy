@@ -13,11 +13,13 @@
   }
 
   .av-false{
-    background-color: red
+    background-color: red;
+    border: none;
   }
 
   .av-false:hover{
-    background-color: red
+    background-color: red;
+    border: none;
   }
 
   button {
@@ -36,21 +38,21 @@
 
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1 style="padding: 70px;">
+  <h1 style="padding: 20px;">
     Welcome to  Hacker-Jeopardy!
   </h1>
   <div *ngIf="selectedQuestion" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
     <div class="card-body">
       <h5 class="card-title" style="font-size: 5em">{{selectedQuestion.value}}</h5>
       <p *ngIf="selectedQuestion.answer" class="card-text" style="margin: auto; padding: 200px; height= 50%; font-size: 5em">{{selectedQuestion.answer}}</p>
-      <img *ngIf="selectedQuestion.image" class="card-text" style="margin: auto;" src="{{selectedQuestion.image}}">
+      <img *ngIf="selectedQuestion.image" class="card-text" style="margin: auto; padding: 50px" src="{{selectedQuestion.image}}" height="500px">
       <br>
 
 
 <div class="btn-group" *ngIf="selectedQuestion.available">
       <button type="button" *ngFor="let p of players" class="btn btn-primary btn-lg" (click)="answered(selectedQuestion,p)">{{p.name}}</button>
       <button type="button" class="btn btn-warning btn-lg" (click)="answered(selectedQuestion,undefined)">None</button>
-      <button type="button" class="btn btn-warning btn-lg" (click)="cancel()">cancel</button>
+      <button type="button" *ngIf="couldBeCanceled" class="btn btn-warning btn-lg" (click)="cancel()">cancel</button>
       <button type="button" *ngFor="let p of players" class="btn btn-danger btn-lg" (click)="notanswered(selectedQuestion,p)">{{p.name}}</button>
 </div>
       <div *ngIf="!selectedQuestion.available">
@@ -81,7 +83,7 @@
   <div class="card text-center" *ngFor="let p of players">
     <div class="card-body">
       <h5 class="card-title" style="font-size: 2em;">{{p.name}}</h5>
-      <p style="font-size: 3em"><button class="btn" style="color:white; background-color: white" (click)="minus(p)">-</button>{{p.score}}<button class="btn" style="color:white; background-color: white" (click)="plus(p)">+</button></p>
+      <p style="font-size: 3em"><button class="btn" style="color:white; background-color: white" (click)="minus(p)">+</button>{{p.score}}<button class="btn" style="color:white; background-color: white" (click)="plus(p)">+</button></p>
     </div>
   </div>
 </div>

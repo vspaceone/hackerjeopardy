@@ -62,9 +62,9 @@ export class AppComponent {
   ]
 
   players = [
-    {"name":"max", "score": 0},
-    {"name":"nils", "score": 0},
-    {"name":"tom", "score": 0}
+    {"name":"player1", "score": 0},
+    {"name":"player2", "score": 0},
+    {"name":"player3", "score": 0}
   ]
 
   qanda = [[

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +11,8 @@ export class AppComponent {
 
 
   selectedQuestion = undefined
+  renamePlayer = undefined
+  newname = "newname"
 
   onSelect(q): void {
     console.log("Hallo onSelect", q)
@@ -55,6 +58,14 @@ export class AppComponent {
 
   cancel(): void {
     this.selectedQuestion = undefined
+  }
+
+  rename(p): void {
+    this.renamePlayer = p
+  }
+
+  renameFinished(): void {
+    this.renamePlayer = undefined
   }
 
   category = [

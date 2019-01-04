@@ -33,7 +33,8 @@ export class AppComponent {
     }else{
       p.score = p.score + this.selectedQuestion.value;
     }
-    q.available = false
+    q.available = false;
+    q.color = p.color;
     this.couldBeCanceled = false;
   }
 
@@ -80,9 +81,9 @@ export class AppComponent {
   }
 
   players = [
-    {"name":"player1", "score": 0},
-    {"name":"player2", "score": 0},
-    {"name":"player3", "score": 0}
+    {"name":"player1", "score": 0, "color": "#ff6b6b"},
+    {"name":"player2", "score": 0, "color": "#6eff6b"},
+    {"name":"player3", "score": 0, "color": "#ffec6b"}
   ]
 
   qanda = undefined;

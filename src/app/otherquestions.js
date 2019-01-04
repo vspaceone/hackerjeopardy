@@ -1,73 +1,7 @@
-import { Component } from '@angular/core';
 
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'app';
-
-
-  selectedQuestion = undefined
-  renamePlayer = undefined
-  couldBeCanceled = true;
-
-
-  onSelect(q): void {
-    console.log("Hallo onSelect", q)
-    this.selectedQuestion = q
-    this.couldBeCanceled = true;
-  }
-
-  answered(q,p): void {
-    console.log(q)
-
-    if(!p){
-
-    }else{
-      p.score = p.score + this.selectedQuestion.value;
-    }
-    q.available = false
-    this.couldBeCanceled = false;
-  }
-
-  notanswered(q,p): void {
-    console.log(q)
-
-    if(!p){
-
-    }else{
-      p.score = p.score - this.selectedQuestion.value;
-    }
-    //q.available = false
-    this.couldBeCanceled = false;
-  }
-
-  minus(p): void {
-    p.score = p.score - 100
-  }
-
-  plus(p): void {
-    p.score = p.score + 100
-  }
-
-  close(): void {
-    this.selectedQuestion = undefined
-  }
-
-  cancel(): void {
-    this.selectedQuestion = undefined
-  }
-
-  rename(p): void {
-    this.renamePlayer = p
-  }
-
-  renameFinished(): void {
-    this.renamePlayer = undefined
-  }
+  category = [
+    "Crypto","Famous Hackers","Simpsons","Hacker Movies","Exploits"
+  ]
 
   players = [
     {"name":"player1", "score": 0},
@@ -75,10 +9,7 @@ export class AppComponent {
     {"name":"player3", "score": 0}
   ]
 
-  qanda = [
-    {
-    "category":"Crypto",
-    "questions":[
+  qanda = [[
     {
       "available": true,
       "value": 100,
@@ -109,10 +40,8 @@ export class AppComponent {
       "question": "This cipher was used incorrectly in WEP",
       "answer": "RC4"
     }
-  ]},
-  {
-  "category":"Famous Hackers",
-  "questions":[
+    ],
+    [
       {
         "available": true,
         "value": 100,
@@ -142,11 +71,9 @@ export class AppComponent {
         "value": 500,
         "question": "This man helped the FBI capture Kevin Mitnick",
         "answer": "Tsutomu Shimomura"
-  }
-]},
-{
-"category":"Simpsons",
-"questions":[
+}
+    ],
+    [
       {
         "available": true,
         "value": 100,
@@ -177,10 +104,8 @@ export class AppComponent {
         "question": "This toy, released by Kid First Industries, was programmed to attack other toys",
         "answer": "Funzo"
       }
-    ]},
-    {
-    "category":"Hackermovies",
-    "questions":[
+    ],
+    [
       {
         "available": true,
         "value": 100,
@@ -211,10 +136,8 @@ export class AppComponent {
         "question": "This movie featured the memorable phrase \"My voice is my passport\".",
         "answer": "Sneakers"
       }
-    ]},
-    {
-    "category":"Exploits",
-    "questions":[
+    ],
+    [
       {"available": true,
         "value": 100,
         "question": "This exploit occurs when more data is written than memory is allocated.",
@@ -244,7 +167,5 @@ export class AppComponent {
         "question": "This attack involves logging into a service with a hashed password instead of the password itself.",
         "answer": "Pass the hash"
       }
-    ]}
-  ];
-
-}
+    ]
+  ]

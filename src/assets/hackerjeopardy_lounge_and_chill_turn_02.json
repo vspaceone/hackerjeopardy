@@ -1,0 +1,99 @@
+[
+  {
+  "category":"Farben",
+  "questions":[
+  {
+    "question": "Wie sieht Schwarz aus?",
+    "answer": "#000000"
+  },
+  {
+    "question": "Wie sieht Rot aus?",
+    "answer": "#ff0000"
+  },
+  {
+    "question": "Wie sieht Pink/Rosa aus?",
+    "answer": "#ff00ff"
+  },
+  {
+    "question": "Wie sieht Lila aus?",
+    "answer": "#7700ff"
+  },
+
+  {
+    "question": "Wie sieht Orange aus?",
+    "answer": "#ff6800"
+  }
+]},
+{
+"category":"Ascii",
+"questions":[
+    {
+      "question": "Welchen Ascii Code hat ein Space?",
+      "answer": "0x20"
+    },
+    {
+      "question": "Welchen Ascii Code hat eine großes A?",
+      "answer": "0x41"
+    },
+    {
+      "question": "Welchen Ascii Code hat ein Backspace?",
+      "answer": "0x08"
+    },
+    {
+      "question": "Welchen Ascii Code hat ein Linefeed?",
+      "answer": "0x0A"
+    },
+    {
+      "question": "Welchen Ascii Code hat ein Carriage Return?",
+      "answer": "0x0D"
+}
+]},
+{
+"category":"Global Places",
+"questions":[
+    {
+      "question": "Wie sieht die Sphinx aus?",
+      "image": "assets/sphinx_q.jpeg"
+    },
+    {
+      "question": "Wie sieht der Eiffelturm aus?",
+      "image": "assets/eiffelturm_q.jpeg"
+    },
+    {
+      "question": "Wie sieht das Brandenburgertor aus?",
+      "image": "assets/brandenburgertor_q.jpeg"
+    },
+    {
+      "question": "Wie sieht die Freiheitsstatue aus?",
+      "image": "assets/freiheitsstatue_q.jpeg"
+    },
+    {
+      "question": "Wie sieht die Sagrada Familia aus?",
+      "image": "assets/sagrada_q.jpeg"
+    }
+  ]},
+  {
+  "category":"Formen I",
+  "questions":[
+    {
+      "question": "Wie sieht eine Linie aus?",
+      "image": "assets/formen_line.png"
+    },
+    {
+      "question": "Wie sieht ein X aus?",
+      "image": "assets/formen_X.png"
+    },
+    {
+      "question": "Wie sieht ein Dreieck aus?",
+      "image": "assets/formen_triangle.png"
+    },
+    {
+      "question": "Wie sieht ein A aus?",
+      "image": "assets/formen_A.png"
+    },
+    {
+      "question": "This movie featured the memorable phrase \"My voice is my passport\".",
+      "image": "Sneakers"
+    }
+  ]}
+]

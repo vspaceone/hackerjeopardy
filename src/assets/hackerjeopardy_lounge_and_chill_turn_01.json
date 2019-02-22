@@ -1,0 +1,98 @@
+[
+  {
+  "category":"Szene",
+  "questions":[
+  {
+    "question": "Wieviele Mitglieder hat der vspace.one e.V.",
+    "answer": "17"
+  },
+  {
+    "question": "Der wievielte Chaos Communication Congress findet dieses Jahr statt?",
+    "answer": "36"
+  },
+  {
+    "question": "Wieviele Besucher waren auf dem 35c3 in Leipzig?",
+    "answer": "17.000"
+  },
+  {
+    "question": "Wieviel mg Koffein sind in 100ml Club Mate?",
+    "answer": "20mg"
+  },
+  {
+    "question": "In welchem Jahr wurde des CCC gegründet?",
+    "answer": "1981"
+  }
+]},
+{
+"category":"Ascii",
+"questions":[
+    {
+      "question": "Welchen Ascii Code hat ein Space?",
+      "answer": "0x20"
+    },
+    {
+      "question": "Welchen Ascii Code hat eine großes A?",
+      "answer": "0x41"
+    },
+    {
+      "question": "Welchen Ascii Code hat ein Backspace?",
+      "answer": "0x08"
+    },
+    {
+      "question": "Welchen Ascii Code hat ein Linefeed?",
+      "answer": "0x0A"
+    },
+    {
+      "question": "Welchen Ascii Code hat ein Carriage Return?",
+      "answer": "0x0D"
+}
+]},
+{
+"category":"Global Places",
+"questions":[
+    {
+      "question": "Wie sieht die Sphinx aus?",
+      "image": "assets/sphinx_q.jpeg"
+    },
+    {
+      "question": "Wie sieht der Eiffelturm aus?",
+      "image": "assets/eiffelturm_q.jpeg"
+    },
+    {
+      "question": "Wie sieht das Brandenburgertor aus?",
+      "image": "assets/brandenburgertor_q.jpeg"
+    },
+    {
+      "question": "Wie sieht die Freiheitsstatue aus?",
+      "image": "assets/freiheitsstatue_q.jpeg"
+    },
+    {
+      "question": "Wie sieht die Sagrada Familia aus?",
+      "image": "assets/sagrada_q.jpeg"
+    }
+  ]},
+  {
+  "category":"Formen I",
+  "questions":[
+    {
+      "question": "Wie sieht eine Linie aus?",
+      "image": "assets/formen_line.png"
+    },
+    {
+      "question": "Wie sieht ein X aus?",
+      "image": "assets/formen_X.png"
+    },
+    {
+      "question": "Wie sieht ein Dreieck aus?",
+      "image": "assets/formen_triangle.png"
+    },
+    {
+      "question": "Wie sieht ein A aus?",
+      "image": "assets/formen_A.png"
+    },
+    {
+      "question": "This movie featured the memorable phrase \"My voice is my passport\".",
+      "image": "Sneakers"
+    }
+  ]}
+]

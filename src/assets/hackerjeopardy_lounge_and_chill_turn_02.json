@@ -25,31 +25,31 @@
   }
 ]},
 {
-"category":"Ascii",
+"category":"Movies II",
 "questions":[
     {
-      "question": "Welchen Ascii Code hat ein Space?",
-      "answer": "0x20"
+      "question": "Wie sieht Matrix aus?",
+      "image": "assets/matrix_q.jpeg"
     },
     {
-      "question": "Welchen Ascii Code hat eine großes A?",
-      "answer": "0x41"
+      "question": "Wie sieht E.T. aus?",
+      "image": "assets/et_q.jpeg"
     },
     {
-      "question": "Welchen Ascii Code hat ein Backspace?",
-      "answer": "0x08"
+      "question": "Wie sieht Herr der Ringe aus?",
+      "image": "assets/herrderringe_q.jpeg"
     },
     {
-      "question": "Welchen Ascii Code hat ein Linefeed?",
-      "answer": "0x0A"
+      "question": "Wie sieht Game Of Thrones aus?",
+      "image": "assets/gameofthrones_q.jpeg"
     },
     {
-      "question": "Welchen Ascii Code hat ein Carriage Return?",
-      "answer": "0x0D"
+      "question": "Wie sieht StarWars aus?",
+      "image": "assets/starwars_q.jpeg"
 }
 ]},
 {
-"category":"Global Places",
+"category":"Local Places",
 "questions":[
     {
       "question": "Wie sieht die Sphinx aus?",
@@ -73,7 +73,7 @@
     }
   ]},
   {
-  "category":"Formen I",
+  "category":"Cat",
   "questions":[
     {
       "question": "Wie sieht eine Linie aus?",

@@ -41,6 +41,12 @@ export class AppComponent {
   selectSet(s): void {
     this.http.get("/assets/"+s).subscribe(data => {
       this.qanda = data;
+      for( var catIdx = 0; catIdx < (this.qanda.length); catIdx++){
+        for( var qIdx = 0; qIdx < (this.qanda[catIdx].questions.length); qIdx++){
+          this.qanda[catIdx].questions[qIdx].available = true;
+          this.qanda[catIdx].questions[qIdx].value = (qIdx + 1) * 100;
+        }
+      }
     })
   }
 
@@ -83,10 +89,15 @@ export class AppComponent {
   players = [
     {"name":"player1", "score": 0, "color": "#ff6b6b"},
     {"name":"player2", "score": 0, "color": "#6eff6b"},
-    {"name":"player3", "score": 0, "color": "#6771f1"}
+    {"name":"player3", "score": 0, "color": "#fcff47"}
   ]
 
   qanda = undefined;
-  sets = ["xmas18_rnd1.json", "xmas18_rnd2.json"];
+  sets = [
+    "xmas18_rnd1.json",
+    "xmas18_rnd2.json",
+    "hackerjeopardy_lounge_and_chill_turn_01.json",
+    "hackerjeopardy_lounge_and_chill_turn_02.json"
+  ];
 
 }

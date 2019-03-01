@@ -52,48 +52,48 @@
 "category":"Local Places",
 "questions":[
     {
-      "question": "Wie sieht die Sphinx aus?",
-      "image": "assets/sphinx_q.jpeg"
+      "question": "Wie sieht die Schneckenbrücke aus?",
+      "image": "assets/schneckenbrücke_q.jpeg"
     },
     {
-      "question": "Wie sieht der Eiffelturm aus?",
-      "image": "assets/eiffelturm_q.jpeg"
+      "question": "Wie sieht das Villinger Münster aus?",
+      "image": "assets/muenster_q.jpg"
     },
     {
-      "question": "Wie sieht das Brandenburgertor aus?",
-      "image": "assets/brandenburgertor_q.jpeg"
+      "question": "Wie sieht das Schwenninger Moos aus?",
+      "image": "assets/moos_q.jpeg"
     },
     {
-      "question": "Wie sieht die Freiheitsstatue aus?",
-      "image": "assets/freiheitsstatue_q.jpeg"
+      "question": "Wie sieht der Neckartower aus?",
+      "image": "assets/neckartower_q.jpeg"
     },
     {
-      "question": "Wie sieht die Sagrada Familia aus?",
-      "image": "assets/sagrada_q.jpeg"
+      "question": "Wie sieht der Muslenbrunnen aus?",
+      "image": "assets/muslenbrunnen_q.jpeg"
     }
   ]},
   {
-  "category":"Cat",
+  "category":"Personen II",
   "questions":[
     {
-      "question": "Wie sieht eine Linie aus?",
-      "image": "assets/formen_line.png"
+      "question": "Wie sieht Albert Einstein aus?",
+      "image": "assets/einstein.jpg"
     },
     {
-      "question": "Wie sieht ein X aus?",
-      "image": "assets/formen_X.png"
+      "question": "Wie sieht Jeff Bezos aus?",
+      "image": "assets/bezos.jpeg"
     },
     {
-      "question": "Wie sieht ein Dreieck aus?",
-      "image": "assets/formen_triangle.png"
+      "question": "Wie sieht Alan Turing aus?",
+      "image": "assets/turing.png"
     },
     {
-      "question": "Wie sieht ein A aus?",
-      "image": "assets/formen_A.png"
+      "question": "Wie sieht Gottfried Wilhelm Leibniz aus?",
+      "image": "assets/leibniz.jpg"
     },
     {
-      "question": "This movie featured the memorable phrase \"My voice is my passport\".",
-      "image": "Sneakers"
+      "question": "Wie sieht David Hilbert aus?",
+      "image": "assets/hilbert.jpg"
     }
   ]}
 ]

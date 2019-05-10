@@ -1,0 +1,68 @@
+[
+  {
+  "category":"Chemie",
+  "questions":[
+  {
+    "question": "Was sind Aggregatzustände?",
+    "answer": "fest, flüssig, gasförmig"
+  },
+  {
+    "question": "Was ist Ethanol / Alkohol?",
+    "image": "assets/ethanol.png"
+  },
+  {
+    "question": "Was sind Alkane?",
+    "answer": "Methan, Ethan, Propan, Butan, ..."
+  },
+  {
+    "question": "Was ist Trinitrotoluene (TNT)?",
+    "image": "assets/tnt.png"
+  },
+  {
+    "question": "Was ist Tetrahydrocannabinol (THC)?",
+    "image": "assets/thc.png"
+  }
+  ]},
+  {
+  "category":"MEMES LOOK LIKE?",
+  "questions":[
+    {"question":"Wie sieht NyanCat aus?", "image": "assets/nc.gif"},
+    {"question":"Wie sieht die Trollface aus?", "image": "assets/TrollFace.jpg"},
+    {"question":"Wie sieht MLP aus?", "image": "assets/mlp.jpg"},
+	  {"question":"Wie sieht Doge aus?", "image": "assets/doge.jpg"},
+	  {"question":"Wie sieht Y U NO Guy aus?", "image": "assets/YUNO.jpg"}
+  ]},
+  {
+  "category":"Chaos Computer Club",
+  "questions":[
+    {"question":"Wer waren die Gründer des CCC?", "answer": "Wau Holland,Klaus Schleisiek"},
+    {"question":"Wann fand der erste Chaos Communication Congress statt?", "answer": "1984"},
+    {"question":"Wann wurde der CCC gegründet?", "answer": "12. September 1981"},
+    {"question":"Wo fand der erste Chaos Communication Congress statt?", "answer": "Eidelstedter Bürgerhaus in Hamburg"},
+    {"question":"Wer ist der Vorsitzende des CCCs?", "answer": "Michael Hirdes"}
+  ]},
+  {
+  "category":"Netzwerk",
+  "questions":[
+    {
+      "question": "Was ist das OSI Schichtmodell?",
+      "image": "assets/osi.png"
+    },
+    {
+      "question": "Wie sieht die Bus-Topologie aus??",
+      "image": "assets/bus.png"
+    },
+    {
+      "question": "Welcher Standard spezifiziert Wireless-LAN?",
+      "answer": "IEEE 802.11"
+    },
+    {
+      "question": "Wie sieht die IPv6 Loopback-Adresse aus?",
+      "answer": "::1"
+    },
+    {
+      "question": "Mit welcher maximalen Länge sind übliche TwistedPair/Netzwerkkabel spezifiziert?",
+      "answer": "100m"
+    }
+  ]}
+]

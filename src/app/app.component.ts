@@ -5,99 +5,110 @@ declare var $ :any;
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+	title = 'app';
 
-  constructor(private http: HttpClient) { };
+	constructor(private http: HttpClient) { };
 
-  selectedQuestion = undefined
-  renamePlayer = undefined
-  couldBeCanceled = true;
+	selectedQuestion = undefined
+	renamePlayer = undefined
+	couldBeCanceled = true;
 
 
-  onSelect(q): void {
-    console.log("Hallo onSelect", q)
-    this.selectedQuestion = q
-    this.couldBeCanceled = true;
-  }
+	onSelect(q): void {
+		console.log("Hallo onSelect", q)
+		this.selectedQuestion = q
+		this.couldBeCanceled = true;
+	}
 
-  answered(q,p): void {
-    console.log(q)
+	answered(q,p): void {
+		console.log(q)
 
-    if(!p){
+		if(!p){
 
-    }else{
-      p.score = p.score + this.selectedQuestion.value;
-    }
-    q.available = false;
-    q.color = p.color;
-    this.couldBeCanceled = false;
-  }
+		}else{
+			p.score = p.score + this.selectedQuestion.value;
+		}
+		q.available = false;
+		q.color = p.color;
+		this.couldBeCanceled = false;
+	}
 
-  selectSet(s): void {
-    this.http.get("/assets/"+s).subscribe(data => {
-      this.qanda = data;
-      for( var catIdx = 0; catIdx < (this.qanda.length); catIdx++){
-        for( var qIdx = 0; qIdx < (this.qanda[catIdx].questions.length); qIdx++){
-          this.qanda[catIdx].questions[qIdx].available = true;
-          this.qanda[catIdx].questions[qIdx].value = (qIdx + 1) * 100;
-        }
-      }
-    })
-  }
+	selectSet(s): void {
+		this.http.get("/assets/"+s+"/turn.json").subscribe(data => {
+			this.qanda = []
+			for( var i = 0; i <= data["categories"].length; i ++){
+				this.http.get("/assets/"+s+"/"+data["categories"][i]+"/cat.json").subscribe(cat => {
+					for( var qIdx = 0; qIdx < cat["questions"].length; qIdx++){
+						cat["questions"][qIdx].available = true;
+						cat["questions"][qIdx].value = (qIdx + 1) * 100;
+						if(cat["questions"][qIdx]["image"]){
+							cat["questions"][qIdx]["image"] = "assets/"+s+"/"+cat["name"]+"/"+cat["questions"][qIdx]["image"]
+						}
+					}
+					console.log(cat);
+					this.qanda.push(cat);
+				});
+			}
+			for( var catIdx = 0; catIdx < (this.qanda.length); catIdx++){
+				for( var qIdx = 0; qIdx < (this.qanda[catIdx].questions.length); qIdx++){
+					this.qanda[catIdx].questions[qIdx].available = true;
+					this.qanda[catIdx].questions[qIdx].value = (qIdx + 1) * 100;
+				}
+			}
+		});
+	}
 
-  notanswered(q,p): void {
-    console.log(q)
 
-    if(!p){
+	notanswered(q,p): void {
+		console.log(q)
 
-    }else{
-      p.score = p.score - this.selectedQuestion.value;
-    }
-    //q.available = false
-    this.couldBeCanceled = false;
-  }
+		if(!p){
 
-  minus(p): void {
-    p.score = p.score - 100
-  }
+		}else{
+			p.score = p.score - this.selectedQuestion.value;
+		}
+		//q.available = false
+		this.couldBeCanceled = false;
+	}
 
-  plus(p): void {
-    p.score = p.score + 100
-  }
+	minus(p): void {
+		p.score = p.score - 100
+	}
 
-  close(): void {
-    this.selectedQuestion = undefined
-  }
+	plus(p): void {
+		p.score = p.score + 100
+	}
 
-  cancel(): void {
-    this.selectedQuestion = undefined
-  }
+	close(): void {
+		this.selectedQuestion = undefined
+	}
 
-  rename(p): void {
-    this.renamePlayer = p
-  }
+	cancel(): void {
+		this.selectedQuestion = undefined
+	}
 
-  renameFinished(): void {
-    this.renamePlayer = undefined
-  }
+	rename(p): void {
+		this.renamePlayer = p
+	}
 
-  players = [
-    {"name":"player1", "score": 0, "color": "#ff6b6b"},
-    {"name":"player2", "score": 0, "color": "#6eff6b"},
-    {"name":"player3", "score": 0, "color": "#fcff47"}
-  ]
+	renameFinished(): void {
+		this.renamePlayer = undefined
+	}
 
-  qanda = undefined;
-  sets = [
-    "xmas18_rnd1.json",
-    "xmas18_rnd2.json",
-    "hackerjeopardy_lounge_and_chill_turn_01.json",
-    "hackerjeopardy_lounge_and_chill_turn_02.json"
-  ];
+	players = [
+		{"name":"player1", "score": 0, "color": "#ff6b6b"},
+		{"name":"player2", "score": 0, "color": "#6eff6b"},
+		{"name":"player3", "score": 0, "color": "#9cfcff"}
+	]
+
+	qanda = undefined;
+	sets = [
+		"Lounge_And_Chill_1"
+	];
 
 }

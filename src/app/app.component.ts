@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 declare var jquery:any;
 declare var $ :any;
 
-
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -108,7 +107,13 @@ export class AppComponent {
 
 	qanda = undefined;
 	sets = [
-		"Lounge_And_Chill_1"
+		"Lounge_And_Chill_1",
+		"Lounge_And_Chill_2",
+		"Lounge_And_Chill_3",
+		"Tim_Runde",
+		"Turn1",
+		"XMAS18_RND1",
+		"XMAS18_RND2"
 	];
 
 }

@@ -1,0 +1,14 @@
+{
+  "name":"Fremdsprachen",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"Wie sieht Python Code aus?", "image": "python.png"},
+    {"question":"Wie sieht C++ Code aus", "image": "cpp.png"},
+    {"question":"Wie sieht Perl Code aus?", "image": "perl.png"},
+    {"question":"Wie sieht Shakespear Code aus?", "image": "shakespear.png"},
+    {"question":"Wie sieht Brainfuck Code aus?", "image": "brainfuck.png"}
+  ]}

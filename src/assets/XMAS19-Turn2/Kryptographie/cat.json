@@ -1,0 +1,31 @@
+
+  {
+  "name":"Kryptographie",
+  "path":"Kryptographie",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-11-27",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "Was sind natürliche Zahlen?",
+    "answer": "1,2,3,4,5,..."
+  },
+  {
+    "question": "Wie sieht eine Runde eines Feistelnetzwerkes aus?",
+    "image": "feistel.png"
+  },
+  {
+    "question": "Was ist ein Sicherheitsbegriff für Signaturen?",
+    "answer": "EUF-CMA"
+  },
+  {
+    "question": "Was sind vollkommene Zahlen?",
+    "answer": "6,28,496,..."
+  },
+  {
+    "question": "Was sind befreundete Zahlen?",
+    "answer": "(220, 284),(1184, 1210),(2620, 2924),..."
+  }
+]}

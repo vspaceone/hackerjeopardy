@@ -1,0 +1,29 @@
+{
+  "name":"Movies II",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "Wie sieht Matrix aus?",
+      "image": "matrix_q.jpeg"
+    },
+    {
+      "question": "Wie sieht E.T. aus?",
+      "image": "et_q.jpeg"
+    },
+    {
+      "question": "Wie sieht Herr der Ringe aus?",
+      "image": "herrderringe_q.jpeg"
+    },
+    {
+      "question": "Wie sieht Game Of Thrones aus?",
+      "image": "gameofthrones_q.jpeg"
+    },
+    {
+      "question": "Wie sieht StarWars aus?",
+      "image": "starwars_q.jpeg"
+    }
+]}

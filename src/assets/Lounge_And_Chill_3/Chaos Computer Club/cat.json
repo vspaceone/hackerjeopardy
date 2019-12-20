@@ -1,0 +1,14 @@
+{
+  "name":"Chaos Computer Club",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"Wer waren die Gründer des CCC?", "answer": "Wau Holland,Klaus Schleisiek"},
+    {"question":"Wann fand der erste Chaos Communication Congress statt?", "answer": "1984"},
+    {"question":"Wann wurde der CCC gegründet?", "answer": "12. September 1981"},
+    {"question":"Wo fand der erste Chaos Communication Congress statt?", "answer": "Eidelstedter Bürgerhaus in Hamburg"},
+    {"question":"Wer ist der Vorsitzende des CCCs?", "answer": "Michael Hirdes"}
+  ]}

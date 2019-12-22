@@ -31,13 +31,14 @@ export class AppComponent {
 		$('#audiotheme').trigger('load')
 
 		if(!p){
-
+			
 		}else{
 			p.score = p.score + this.selectedQuestion.value;
+			q.bgcolor = p.bgcolor;
+			q.fgcolor = p.fgcolor;
 		}
 		q.available = false;
-		q.bgcolor = p.bgcolor;
-		q.fgcolor = p.fgcolor;
+		
 		this.couldBeCanceled = false;
 	}
 
@@ -74,8 +75,6 @@ export class AppComponent {
 
 	notanswered(q,p): void {
 		console.log(q)
-		$('#audiotheme').trigger('pause')
-		$('#audiotheme').trigger('load')
 
 		if(!p){
 
@@ -125,6 +124,7 @@ export class AppComponent {
 		"XMAS19-Turn1",
 		"XMAS19-Turn2",
 		"XMAS19-Turn3",
+		"XMAS19-Turn4",
 		"Lounge_And_Chill_1",
 		"Lounge_And_Chill_2",
 		"Lounge_And_Chill_3",

@@ -9,23 +9,24 @@
   "email": "max@noppelmax.online",
   "questions":[
   {
-    "question": "Was sind natürliche Zahlen?",
-    "answer": "1,2,3,4,5,..."
+    "question": "Wie funktion die Caesar Chiffre?",
+    "image": "caesar3.png"
+  },
+  {
+    "question": "Was ist das häufigste Passwort? (engl. 2017)",
+    "answer": "\"123456\""
   },
   {
     "question": "Wie sieht eine Runde eines Feistelnetzwerkes aus?",
     "image": "feistel.png"
   },
   {
+    "question": "Wie funktioniert die Merkel-Damgard Konstruktion?",
+    "image": "merkeldamgard.png"
+  },
+  {
     "question": "Was ist ein Sicherheitsbegriff für Signaturen?",
     "answer": "EUF-CMA"
-  },
-  {
-    "question": "Was sind vollkommene Zahlen?",
-    "answer": "6,28,496,..."
-  },
-  {
-    "question": "Was sind befreundete Zahlen?",
-    "answer": "(220, 284),(1184, 1210),(2620, 2924),..."
   }
+
 ]}

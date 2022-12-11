@@ -1,0 +1,14 @@
+{
+  "name":"Internetphänomen",
+  "difficulty": "easy",
+  "author": "Tim",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "",
+  "questions":[
+    {"question":"Was ist Rule 34?", "answer": "Wenn es existiert, gibt es davon Pornografie. Ohne Ausnahmen."},
+    {"question":"Was habe ich/haben wir gerade verloren?", "answer": "The Game"},
+    {"question":"Wie heißt dieses Lied?", "answer": "Darude - Sandstorm"},
+    {"question":"Wie sah das Endergebnis von Reddit Place aus?", "image": "foo.png"},
+    {"question":"Was ist ein Rickroll?", "image": "bar.png"}
+  ]}

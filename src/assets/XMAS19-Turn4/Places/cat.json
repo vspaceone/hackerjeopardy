@@ -1,0 +1,31 @@
+
+  {
+  "name":"Important places",
+  "path":"Places",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-12-20",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "Wie sieht der vspace.one aus?",
+    "image": "vspaceone.png"
+  },
+  {
+    "question": "Wie sehen die Messenhallen in Leipzig aus?",
+    "image": "leipzig.png"
+  },
+  {
+    "question": "Wie sieht es in der Gulaschprogrammiernacht-Lounge aus?",
+    "image": "gpn.png"
+  },
+  {
+    "question": "Wie sieht es auf dem Camp aus?",
+    "image": "camp.png"
+  },
+  {
+    "question": "Wie sieht das Congresszentrum in Hamburg aus?",
+    "image": "cch.png"
+  }
+]}

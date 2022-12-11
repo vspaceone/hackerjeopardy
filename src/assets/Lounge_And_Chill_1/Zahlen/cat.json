@@ -1,0 +1,30 @@
+
+  {
+  "name":"Zahlen",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "Wieviele Mitglieder hat der vspace.one e.V.",
+    "answer": "17"
+  },
+  {
+    "question": "Der wievielte Chaos Communication Congress findet dieses Jahr statt?",
+    "answer": "36"
+  },
+  {
+    "question": "Wieviele Besucher waren auf dem 35c3 in Leipzig?",
+    "answer": "17.000"
+  },
+  {
+    "question": "Wieviel mg Koffein sind in 100ml Club Mate?",
+    "answer": "20mg"
+  },
+  {
+    "question": "In welchem Jahr wurde der CCC gegründet?",
+    "answer": "1981"
+  }]
+  }

@@ -1,0 +1,31 @@
+
+  {
+  "name":"Formeln",
+  "path":"Formeln",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-11-26",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "Was ist der Satz von Pythagoras?",
+    "image": "pythagoras.png"
+  },
+  {
+    "question": "Was ist Einsteins Energie-Masse Äquivalenz?",
+    "image": "energie-masse-aequivalenz.png"
+  },
+  {
+    "question": "Was ist die Euler Gleichung?",
+    "image": "euler.png"
+  },
+  {
+    "question": "Was sind die MaxWell'schen Gleichungen?",
+    "image": "maxwell.png"
+  },
+  {
+    "question": "Wie lautet die Schrödinger Gleichung (zeitunabhängig)?",
+    "image": "schroedinger.png"
+  }
+]}

@@ -116,7 +116,8 @@ export class AppComponent {
 	players = [
 		{"name":"player1", "score": 0, "bgcolor": "#ff6b6b", "fgcolor": "#9f0b0b"},
 		{"name":"player2", "score": 0, "bgcolor": "#6eff6b", "fgcolor": "#0e9f0b"},
-		{"name":"player3", "score": 0, "bgcolor": "#9cfcff", "fgcolor": "#3c9c9f"}
+		{"name":"player3", "score": 0, "bgcolor": "#9cfcff", "fgcolor": "#3c9c9f"},
+		{"name":"player4", "score": 0, "bgcolor": "#ffe48c", "fgcolor": "#efb600"}
 	]
 
 	qanda = undefined;
@@ -128,7 +129,7 @@ export class AppComponent {
 		"Lounge_And_Chill_1",
 		"Lounge_And_Chill_2",
 		"Lounge_And_Chill_3",
-		"Tim_Runde",
+		//"Tim_Runde",
 		"XMAS18_RND1",
 		"XMAS18_RND2"
 	];

@@ -16,10 +16,12 @@ export class AppComponent {
 	selectedQuestion = undefined
 	renamePlayer = undefined
 	couldBeCanceled = true;
-
+	audiotimer = null;
 
 	onSelect(q): void {
-		$('#audiotheme').trigger('play')
+		this.audiotimer = setTimeout(() => {
+			$('#audiotheme').trigger('play')
+		 }, 5000);
 		console.log("Hallo onSelect", q)
 		this.selectedQuestion = q
 		this.couldBeCanceled = true;
@@ -27,6 +29,7 @@ export class AppComponent {
 
 	answered(q,p): void {
 		console.log(q)
+		clearTimeout(this.audiotimer);
 		$('#audiotheme').trigger('pause')
 		$('#audiotheme').trigger('load')
 
@@ -94,12 +97,14 @@ export class AppComponent {
 	}
 
 	close(): void {
+		clearTimeout(this.audiotimer);
 		$('#audiotheme').trigger('pause')
 		$('#audiotheme').trigger('load')
 		this.selectedQuestion = undefined
 	}
 
 	cancel(): void {
+		clearTimeout(this.audiotimer);
 		$('#audiotheme').trigger('pause')
 		$('#audiotheme').trigger('load')
 		this.selectedQuestion = undefined
@@ -121,18 +126,35 @@ export class AppComponent {
 	]
 
 	qanda = undefined;
-	sets = [
-		"XMAS19-Turn1",
-		"XMAS19-Turn2",
-		"XMAS19-Turn3",
-		"XMAS19-Turn4",
-		"Lounge_And_Chill_1",
-		"Lounge_And_Chill_2",
-		"Lounge_And_Chill_3",
+
+	sets_de = [
+		"XMAS19_1_de",
+		"XMAS19_2_de",
+		"XMAS19_3_de",
+		"XMAS19_4_de",
+		"Lounge_And_Chill_1_de",
+		"Lounge_And_Chill_2_de",
+		"Lounge_And_Chill_3_de",
 		//"Tim_Runde",
-		"XMAS18_RND1",
-		"XMAS18_RND2"
+		"XMAS18_0_de",
+		"XMAS18_1_de"
 	];
+
+	sets_en = [
+		"XMAS19_1_en",
+		"XMAS19_2_en",
+		"XMAS19_3_en",
+		"XMAS19_4_en",
+		"Lounge_And_Chill_1_en",
+		"Lounge_And_Chill_2_en",
+		//"Lounge_And_Chill_3_en",
+		//"Tim_Runde",
+		"XMAS18_1_en",
+		"XMAS18_2_en",
+		"XMAS22_1_en",
+		"XMAS22_2_en"
+	];
+	sets = this.sets_en;
 
 
  }

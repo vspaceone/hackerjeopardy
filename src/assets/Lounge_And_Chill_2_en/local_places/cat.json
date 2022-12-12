@@ -1,0 +1,29 @@
+{
+  "name":"Local Places",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "How does the Karlsruhe Castle look like?",
+      "image": "schloss_q.jpg"
+    },
+    {
+      "question": "How does the Turmberg look like?",
+      "image": "turmberg_2_q.JPG"
+    },
+    {
+      "question": "How does the Marktplatz look like?",
+      "image": "marktplatz_2_q.jpeg"
+    },
+    {
+      "question": "How does the Naturkundemuseum look like?",
+      "image": "naturkundemuseum_q.jpg"
+    },
+    {
+      "question": "How does the Exhibition Hall (Messe) look like?",
+      "image": "messe_q.jpg"
+    }
+  ]}

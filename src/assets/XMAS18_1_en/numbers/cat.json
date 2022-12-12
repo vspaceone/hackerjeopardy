@@ -1,0 +1,14 @@
+{
+  "name":"Zahlen",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"When did the Unix Time start?", "answer": "1.Januar 1970"},
+    {"question":"How much can be stored on one 3.5 Zoll diskette?", "answer": "3,4MB"},
+    {"question":"In which years does 'Back to the Future' play?", "answer": "1885, 1955, 1985 und 2015"},
+    {"question":"When was the first Linux Kernel released?", "answer": "17. September 1991"},
+    {"question":"When was the first Z1 finished?", "answer": "1938"}
+  ]}

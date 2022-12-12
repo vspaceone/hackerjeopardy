@@ -1,0 +1,15 @@
+{
+  "name":"Latex",
+  "path":"latex",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2022-12-12",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"Welchen Port hat HTTP?", "answer": "80"},
+    {"question":"Welchen Port hat SSH?", "answer": "22"},
+    {"question":"Welchen Port hat DNS?", "answer": "53"},
+    {"question":"Welchen Port hat NTP?", "answer": "123"},
+    {"question":"Welchen Port hat IRC?", "answer": "194"}
+  ]}

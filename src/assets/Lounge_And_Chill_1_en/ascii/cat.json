@@ -1,0 +1,29 @@
+{
+  "name":"Ascii",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "Which Ascii code is a Space?",
+      "answer": "0x20"
+    },
+    {
+      "question": "Which Ascii code is a A?",
+      "answer": "0x41"
+    },
+    {
+      "question": "Which Ascii code is a Backspace?",
+      "answer": "0x08"
+    },
+    {
+      "question": "Which Ascii code is a Linefeed?",
+      "answer": "0x0A"
+    },
+    {
+      "question": "Which Ascii code is a Carriage Return?",
+      "answer": "0x0D"
+    }
+]}

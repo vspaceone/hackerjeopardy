@@ -1,0 +1,29 @@
+{
+  "name":"Global Places",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "How does the Sphinx look like?",
+      "image": "sphinx_q.jpeg"
+    },
+    {
+      "question": "How does the Eiffeltower look like?",
+      "image": "eiffelturm_q.jpeg"
+    },
+    {
+      "question": "How does the Brandenburgertor look like?",
+      "image": "brandenburgertor_q.jpeg"
+    },
+    {
+      "question": "How does the Statue of Liberty look like?",
+      "image": "freiheitsstatue_q.jpeg"
+    },
+    {
+      "question": "How does the Sagrada Familia look like?",
+      "image": "sagrada_q.jpeg"
+    }
+  ]}

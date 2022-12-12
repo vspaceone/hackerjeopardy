@@ -1,0 +1,29 @@
+{
+  "name":"Persons",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "Who is Albert Einstein?",
+      "image": "einstein.jpg"
+    },
+    {
+      "question": "Who is Jeff Bezos?",
+      "image": "bezos.jpeg"
+    },
+    {
+      "question": "Who is Alan Turing?",
+      "image": "turing.png"
+    },
+    {
+      "question": "Who is Gottfried Wilhelm Leibniz?",
+      "image": "leibniz.jpg"
+    },
+    {
+      "question": "Who is David Hilbert?",
+      "image": "hilbert.jpg"
+    }
+  ]}

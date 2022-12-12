@@ -1,0 +1,31 @@
+
+  {
+  "name":"Formulas",
+  "path":"formulas",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-11-26",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "What is the Pythagorean theorem?",
+    "image": "pythagoras.png"
+  },
+  {
+    "question": "What is Einstein's Energy-Mass-Equivalence?",
+    "image": "energie-masse-aequivalenz.png"
+  },
+  {
+    "question": "What are the Euler Equations?",
+    "image": "euler.png"
+  },
+  {
+    "question": "What are the MaxWell Equations?",
+    "image": "maxwell.png"
+  },
+  {
+    "question": "What is the Schrödinger Equation (time-independent)?",
+    "image": "schroedinger.png"
+  }
+]}

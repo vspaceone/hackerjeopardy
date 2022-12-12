@@ -1,0 +1,30 @@
+{
+  "name": "Let's get activated",
+  "path": "activationfunctions",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2022-12-12",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "How does the ReLU activation function look like?",
+    "image": "relu.png"
+  },
+  {
+    "question": "How does the tanh activation function look like?",
+    "image": "tanh.png"
+  },
+  {
+    "question": "How does the sigmoid activation function look like?",
+    "image": "sigmoid.png"
+  },
+  {
+    "question": "Joker!",
+    "image": "joker.jpeg"
+  },
+  {
+    "question": "How does the leaky ReLU activation function look like?",
+    "image": "leakyrelu.png"
+  }
+  ]}

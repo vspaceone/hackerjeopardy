@@ -1,0 +1,15 @@
+{
+  "name":"Let's get privat!",
+  "path": "private",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2022-12-12",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"How does Chris cat look like?", "image": "chris_q.jpg"},
+    {"question":"What is Gustavo's favourit meal in spain?", "image": "gus_q.jpg"},
+    {"question":"What is Max doing in its holiday?", "image": "max_q.jpg"},
+    {"question":"What are Niki and Gustavo are doing on the weekend?", "image": "niki_gus_q.jpg"},
+    {"question":"What is Qi's unloved project?", "image": "qi_q.jpg"}
+  ]}

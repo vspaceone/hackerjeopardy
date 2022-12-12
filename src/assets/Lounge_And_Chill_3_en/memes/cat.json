@@ -1,0 +1,14 @@
+{
+  "name":"MEMES LOOK LIKE",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"Wie sieht NyanCat aus?", "image": "nc.gif"},
+    {"question":"Wie sieht die Trollface aus?", "image": "TrollFace.jpg"},
+    {"question":"Wie sieht MLP aus?", "image": "mlp.jpg"},
+    {"question":"Wie sieht Doge aus?", "image": "doge.jpg"},
+    {"question":"Wie sieht Y U NO Guy aus?", "image": "YUNO.jpg"}
+  ]}

@@ -1,0 +1,29 @@
+{
+  "name":"Simpsons",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "Who is the all-too-friendly next door neighbour?",
+      "answer": "Ned Flanders"
+    },
+    {
+      "question": "What is the name of the Simpsons family's dog?",
+      "answer": "Santa's Little Helper"
+    },
+    {
+      "question": "Who soot Mr. Burns in a famous two-part episode?",
+      "answer": "Maggie Simpson"
+    },
+    {
+      "question": "Who are the three main bullies (not counting Nelson)?",
+      "answer": "Jimbo, Kearney, and Dolph (or \"James Jones\", \"Kevin Zzyzwicz\", and \"Darren Starbeam\")"
+    },
+    {
+      "question": "Which toy, released by Kid First Industries, was programmed to attack other toys?",
+      "answer": "Funzo"
+    }
+  ]}

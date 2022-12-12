@@ -1,0 +1,31 @@
+
+  {
+  "name":"Distris",
+  "path":"Distris",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-12-20",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "Wie sieht das Logo von Manjaro aus?",
+    "image": "manjaro.png"
+  },
+  {
+    "question": "Wie sieht das Logo von Lubuntu aus?",
+    "image": "lubuntu.png"
+  },
+  {
+    "question": "Wie sieht das Logo von QubesOS aus?",
+    "image": "qubesos.png"
+  },
+  {
+    "question": "Wie sieht das Logo von ScientificLinux aus?",
+    "image": "scientific.png"
+  },
+  {
+    "question": "Wie sieht das Logo von AlpineLinux aus?",
+    "image": "alpinelinux.png"
+  }
+]}

@@ -1,0 +1,30 @@
+{
+  "name":"Colors",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+		{
+	    "question": "How does black look like?",
+	    "answer": "#000000"
+	  },
+	  {
+	    "question": "How does red look like?",
+	    "answer": "#ff0000"
+	  },
+	  {
+	    "question": "How does pink/rose look like?",
+	    "answer": "#ff00ff"
+	  },
+	  {
+	    "question": "How does purple?",
+	    "answer": "#7700ff"
+	  },
+
+	  {
+	    "question": "How does orange look like?",
+	    "answer": "#ff6800"
+	  }
+]}

@@ -1,0 +1,29 @@
+{
+  "name":"Shapes",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "How does a line look like?",
+      "image": "formen_line.png"
+    },
+    {
+      "question": "How does a X look like?",
+      "image": "formen_X.png"
+    },
+    {
+      "question": "How does a Triangle look like?",
+      "image": "formen_triangle.png"
+    },
+    {
+      "question": "How does a A look like?",
+      "image": "formen_A.png"
+    },
+    {
+      "question": "Joker!",
+      "image": "joker.jpeg"
+    }
+  ]}

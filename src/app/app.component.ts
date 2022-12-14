@@ -70,12 +70,13 @@ export class AppComponent {
 	}
 
 	onSelect(q): void {
-		this.clicksound()
-		this.startAudio()
+		this.clicksound();
+		this.startAudio();
 		
-		console.log("Hallo onSelect", q)
+		console.log("Hallo onSelect", q);
 		this.selectedQuestion = q;
 		q.activePlayers = new Set();
+		q.activePlayersArr = Array.from(q.activePlayers)
 		q.availablePlayers = new Set( [1,2,3,4] );
 
 		q.buttonsActive = true;
@@ -90,53 +91,61 @@ export class AppComponent {
 		if (!q.availablePlayers.has(pid)) {
 			return;
 		}
-		this.clicksound()
-		this.stopAudio()
-		q.activePlayers.add(pid)
-		q.activePlayer = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+		this.clicksound();
+		this.stopAudio();
+		q.activePlayers.add(pid);
+		q.activePlayersArr = Array.from(q.activePlayers)
+		q.activePlayer = this.getPlayerByID(q.activePlayersArr[0]);
 		q.activated = true;
 		q.buttonsActive = false;
 	}
 
 	correct(q): void {
-		this.clicksound()
-		this.stopAudio()
-		this.successsound()
-		let p = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+		this.clicksound();
+		this.stopAudio();
+		this.successsound();
+		let p = this.getPlayerByID(q.activePlayersArr[0]);
 		p.score = p.score + this.selectedQuestion.value;
 
-		q.player = p.btn
+		q.player = p;
 		q.available = false;
-		q.buttonsActive = false;
-		q.activated = false;
+		q.availablePlayers.clear();
+		q.activePlayers.clear()
+		q.activePlayersArr = Array.from(q.activePlayers)
 		
 		this.couldBeCanceled = false;
 	}
 
 	incorrect(q): void {
-		this.clicksound()
-		this.stopAudio()
-		this.failsound()
-		let p = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+		this.clicksound();
+		this.stopAudio();
+		this.failsound();
+		let p = this.getPlayerByID(q.activePlayersArr[0]);
 		p.score = p.score - this.selectedQuestion.value;
 
-		q.activePlayers.delete(Array.from(q.activePlayers)[0])
-		q.availablePlayers.delete(p.id)
+		q.activePlayers.delete(q.activePlayersArr[0]);
+		q.activePlayersArr = Array.from(q.activePlayers)
+		q.availablePlayers.delete(p.id);
+		
+		if (q.availablePlayers.size == 0){
+			this.notanswered(q);
+		}
+
 		//q.available = false
 		this.couldBeCanceled = false;
-		q.buttonsActive = true;
-		q.activated = false;
+
+		if (q.activePlayers.size > 0){
+			q.activePlayer = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+		}
 	}
 
 	notanswered(q): void {
-		this.clicksound()
-		this.stopAudio()
+		this.clicksound();
+		this.stopAudio();
 		
-		q.player = "none"
+		q.availablePlayers.clear();
+		q.player = {"btn":"none"};
 		q.available = false;
-		q.buttonsActive = false;
-		q.activated = false;
-		
 		this.couldBeCanceled = false;
 	}
 
@@ -148,7 +157,7 @@ export class AppComponent {
 				this.http.get("/assets/"+s+"/"+data["categories"][i]+"/cat.json").subscribe(cat => {
 					for( var qIdx = 0; qIdx < cat["questions"].length; qIdx++){
 						cat["questions"][qIdx].available = true;
-						cat["questions"][qIdx].player = "primary";
+						cat["questions"][qIdx].player = {"btn":"primary"};
 						cat["questions"][qIdx].value = (qIdx + 1) * 100;
 						cat["questions"][qIdx].cat = cat["name"]
 						if(cat["questions"][qIdx]["image"] && cat["path"]){

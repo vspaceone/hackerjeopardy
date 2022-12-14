@@ -56,7 +56,7 @@
 
 			<br>
 
-			<div class="btn-group" *ngIf="selectedQuestion.buttonsActive">
+			<div class="btn-group" *ngIf="selectedQuestion.availablePlayers.size > 0 && selectedQuestion.activePlayers.size == 0">
 				<span *ngFor="let p of players">
 					<button type="button" *ngIf="selectedQuestion.availablePlayers.has(p.id)" class="btn btn-lg" (click)="activate(selectedQuestion,p.id)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button>
 					<!--button type="button" *ngIf="selectedQuestion.activePlayers.has(p.id)" class="btn btn-none" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button-->
@@ -70,10 +70,12 @@
 				<button type="button" class="card-text" class="btn btn-danger btn-lg" (click)="close()">ok</button>
 			</div>
 
-			<div *ngIf="selectedQuestion.activated">
-				<h1 ><span class="badge badge-{{selectedQuestion.activePlayer.btn}}">{{selectedQuestion.activePlayer.name}}: </span><span class="badge badge-danger">5</span></h1>
+			<div *ngIf="selectedQuestion.activePlayers.size > 0">
+				<span *ngFor="let pid of selectedQuestion.activePlayersArr">
+					<h1 ><span class="badge badge-{{getPlayerByID(pid).btn}}">{{getPlayerByID(pid).name}}: </span><span class="badge badge-danger">5</span></h1>
+				</span>
 			</div>
-			<div class="btn-group" *ngIf="selectedQuestion.activated">
+			<div class="btn-group" *ngIf="selectedQuestion.activePlayers.size > 0">
 				<button type="button" class="btn btn-success" (click)="correct(selectedQuestion)">correct</button>
 				<button type="button" class="btn btn-danger btn-lg" (click)="incorrect(selectedQuestion)">incorrect</button>
 			</div>
@@ -91,7 +93,7 @@
 </div>
 <div class="card-group" style="height:80%">
 	<div *ngFor="let d of qanda" class="card-column" id="questioncolums" [style.width.%]="(100/(this.qanda.length))" style="padding: 10px">
-		<button class="btn text-center btn-{{q.player}}"
+		<button class="btn text-center btn-{{q.player.btn}}"
 		style="width: 100%; height:20%; margin-top: 4px;" 
 		*ngFor="let q of d.questions" (click)="onSelect(q)">
 			{{q.value}}

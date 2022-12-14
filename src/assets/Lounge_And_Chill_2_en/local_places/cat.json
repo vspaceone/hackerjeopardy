@@ -1,5 +1,6 @@
 {
   "name":"Local Places",
+  "path":"local_places",
   "difficulty": "easy",
   "author": "Max Noppel",
   "licence": "MIT",
@@ -11,12 +12,12 @@
       "image": "schloss_q.jpg"
     },
     {
-      "question": "How does the Turmberg look like?",
-      "image": "turmberg_2_q.JPG"
-    },
-    {
       "question": "How does the Marktplatz look like?",
       "image": "marktplatz_2_q.jpeg"
+    },
+    {
+      "question": "How does the Turmberg look like?",
+      "image": "turmberg_2_q.JPG"
     },
     {
       "question": "How does the Naturkundemuseum look like?",

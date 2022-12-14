@@ -1,0 +1,32 @@
+
+  {
+  "name":"Cryptography",
+  "path":"crypto",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-11-27",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "How does a Caesar Chiffre work?",
+    "image": "caesar3.png"
+  },
+  {
+    "question": "What is the most common password? (engl. 2017)",
+    "answer": "\"123456\""
+  },
+  {
+    "question": "How does one round of Feistel look like?",
+    "image": "feistel.png"
+  },
+  {
+    "question": "How does the Merkel-Damgard construction work?",
+    "image": "merkeldamgard.png"
+  },
+  {
+    "question": "What is a security notion for signatures?",
+    "answer": "EUF-CMA"
+  }
+
+]}

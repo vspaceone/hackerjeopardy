@@ -1,0 +1,31 @@
+
+  {
+  "name":"Deeper?",
+  "path":"deep",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-12-20",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "How was the chess game between Garry Kasparov and Deep Blue looking?",
+    "image": "deepblue.png"
+  },
+  {
+    "question": "What is Deep Learning?",
+    "image": "deeplearning.png"
+  },
+  {
+    "question": "How do DeepDreams look like?",
+    "image": "deepdream.png"
+  },
+  {
+    "question": "How was the Go-game between AlphaGo by DeepMind and Lee Sedol looking?",
+    "image": "deepmind.png"
+  },
+  {
+    "question": "Which problem was solved by DeepCubeA?",
+    "image": "deepcubea.png"
+  }
+]}

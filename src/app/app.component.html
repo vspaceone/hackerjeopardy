@@ -42,7 +42,7 @@
 		<div class="card-body">
 			<h5 class="card-title" style="font-size: 5em;">{{selectedQuestion.cat}} - {{selectedQuestion.value}}</h5>
 			<p *ngIf="selectedQuestion.answer" class="card-text" style="margin: auto; padding: 200px; height: 50%; font-size: 5em">{{selectedQuestion.answer}}</p>
-			<img *ngIf="selectedQuestion.image" class="card-text" style="margin: auto; padding: 50px" src="{{selectedQuestion.image}}" height="500px">
+			<img *ngIf="selectedQuestion.image" class="card-text" style="margin: auto; padding: 50px" src="{{selectedQuestion.image}}" height="600px">
 			<p *ngIf="selectedQuestion.latex" class="card-text" style="margin: auto; padding: 200px; height: 50%; font-size: 5em">$${{selectedQuestion.latex}}$$</p>
 
 			<br>
@@ -101,10 +101,10 @@
 		</div>
 	</div>
 </div>
-<div class="card-group" style="height:80%">
+<div class="card-group" style="height:100%">
 	<div *ngFor="let d of qanda" class="card-column" id="questioncolums" [style.width.%]="(100/(this.qanda.length))" style="padding: 10px">
 		<button class="btn text-center btn-{{q.player.btn}}"
-		style="width: 100%; height:20%; margin-top: 4px;" 
+		style="width: 100%; height:70px; margin-top: 4px; font-size:2em" 
 		*ngFor="let q of d.questions" (click)="onSelect(q)">
 			{{q.value}}
 		</button>

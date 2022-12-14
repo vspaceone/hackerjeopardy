@@ -1,0 +1,15 @@
+{
+  "name":"The Internet is ...",
+  "path":"memes",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"How does NyanCat look like?", "image": "nc.gif"},
+    {"question":"How does a Trollface look like?", "image": "TrollFace.jpg"},
+    {"question":"What is My Little Pony??", "image": "mlp.jpg"},
+    {"question":"What is Doge?", "image": "doge.jpg"},
+    {"question":"How does the Y U NO Guy look like?", "image": "YUNO.jpg"}
+  ]}

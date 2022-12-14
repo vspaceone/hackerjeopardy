@@ -1,6 +1,6 @@
 {
 "name": "XMAS19-Turn2",
-"categories": ["Zahlen","Kryptographie","Maschinen","Logic"],
+"categories": ["numbers","crypto","machines","logic"],
 "difficulty": "easy",
 "author": "Max Noppel",
 "licence": "MIT",

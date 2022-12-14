@@ -1,0 +1,31 @@
+
+  {
+  "name":"Riding the bus is fun!",
+  "path":"busses",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-12-20",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "What is a field bus",
+    "image": "feldbus.png"
+  },
+  {
+    "question": "What is a control bus?",
+    "image": "steuerbus.png"
+  },
+  {
+    "question": "What is the CAN bus?",
+    "image": "canbus.png"
+  },
+  {
+    "question": "What is the PROFINET bus?",
+    "image": "profinet.png"
+  },
+  {
+    "question": "What is a LIN bus?",
+    "image": "linbus.png"
+  }
+]}

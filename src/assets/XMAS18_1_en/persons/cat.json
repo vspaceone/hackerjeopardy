@@ -1,14 +1,15 @@
 {
   "name":"Personen",
+  "path":"persons",
   "difficulty": "easy",
   "author": "Max Noppel",
   "licence": "MIT",
   "date": "2019-01-01",
   "email": "max@noppelmax.online",
   "questions":[
-    {"question":"Wie sieht Bill Gates aus?", "image": "gates.jpeg"},
-    {"question":"Wie sieht John von Neumann aus?", "image": "neumann.gif"},
-    {"question":"Wie sieht Richard Stallman aus?", "image": "stallman.JPG"},
-    {"question":"Wie sieht Donald E. Knuth aus?", "image": "knuth.jpg"},
-    {"question":"Wie sieht Edsger W. Dijkstra aus?", "image": "dijkstra.jpg"}
+    {"question":"How does Bill Gates look like?", "image": "gates.jpeg"},
+    {"question":"How does John von Neumann look like?", "image": "neumann.gif"},
+    {"question":"How does Richard Stallman look like?", "image": "stallman.JPG"},
+    {"question":"How does  Donald E. Knuth look like?", "image": "knuth.jpg"},
+    {"question":"How does Edsger W. Dijkstra look like?", "image": "dijkstra.jpg"}
   ]}

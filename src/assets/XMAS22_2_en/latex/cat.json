@@ -7,9 +7,9 @@
   "date": "2022-12-12",
   "email": "max@noppelmax.online",
   "questions":[
-    {"question":"Welchen Port hat HTTP?", "answer": "80"},
-    {"question":"Welchen Port hat SSH?", "answer": "22"},
-    {"question":"Welchen Port hat DNS?", "answer": "53"},
-    {"question":"Welchen Port hat NTP?", "answer": "123"},
-    {"question":"Welchen Port hat IRC?", "answer": "194"}
+    {"question":"What is 1?", "answer": "1^{4}"},
+    {"question":"What is 1/2?", "answer": "\\frac{2^2}{8}"},
+    {"question":"What is correct?", "answer": "e^x = \\int_{-\\infty}^{+\\infty}e^x"},
+    {"question":"What is 550?", "answer": "\\sum_{i=0}^{100}i"},
+    {"question":"Joker!", "image": "joker.jpeg"}
   ]}

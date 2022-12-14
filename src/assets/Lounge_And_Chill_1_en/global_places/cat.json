@@ -1,5 +1,6 @@
 {
   "name":"Global Places",
+  "path":"global_places",
   "difficulty": "easy",
   "author": "Max Noppel",
   "licence": "MIT",

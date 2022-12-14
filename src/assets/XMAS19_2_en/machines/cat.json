@@ -1,0 +1,31 @@
+
+  {
+  "name":"Famous Machines",
+  "path":"machines",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-12-20",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "What is a Commodore64?",
+    "image": "c64.png"
+  },
+  {
+    "question": "What is the Enigma?",
+    "image": "enigma.png"
+  },
+  {
+    "question": "What is a Atari VCS?",
+    "image": "atari.png"
+  },
+  {
+    "question": "What is the Zuse Z1?",
+    "image": "z1.png"
+  },
+  {
+    "question": "What is IBM Watson looking like?",
+    "image": "watson.png"
+  }
+]}

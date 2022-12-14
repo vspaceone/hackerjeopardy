@@ -155,9 +155,6 @@ export class AppComponent {
 		this.selectedQuestion.activePlayer.remainingtime --;
 		this.clocksound();
 		if (this.selectedQuestion.activePlayer.remainingtime == 0){
-			this.selectedQuestion.timeoutPlayers.add(this.selectedQuestion.activePlayer.id)
-			this.selectedQuestion.timeoutPlayersArr = Array.from(this.selectedQuestion.timeoutPlayers)
-			console.log("TimeoutPlayers",this.selectedQuestion.timeoutPlayersArr)
 			this.incorrect(this.selectedQuestion);
 		}
 	}
@@ -213,6 +210,11 @@ export class AppComponent {
 
 		q.activePlayers.delete(q.activePlayersArr[0]);
 		q.activePlayersArr = Array.from(q.activePlayers)
+
+		if (!this.selectedQuestion.timeoutPlayers.has(p.id)){
+			this.selectedQuestion.timeoutPlayers.add(p.id)
+			this.selectedQuestion.timeoutPlayersArr = Array.from(this.selectedQuestion.timeoutPlayers)
+		}
 		
 		if (q.availablePlayers.size == 0 && q.activePlayers.size == 0){
 			this.notanswered(q);
@@ -344,15 +346,16 @@ export class AppComponent {
 		"XMAS19_1_en",
 		"XMAS19_2_en",
 		"XMAS19_3_en",
-		"XMAS19_4_en",
+		//"XMAS19_4_en",
 		"Lounge_And_Chill_1_en",
 		"Lounge_And_Chill_2_en",
 		//"Lounge_And_Chill_3_en",
 		//"Tim_Runde",
 		"XMAS18_1_en",
-		"XMAS18_2_en",
+		//"XMAS18_2_en",
 		"XMAS22_1_en",
-		"XMAS22_2_en"
+		"XMAS22_2_en",
+		"Demo"
 	];
 
 	sets = this.sets_en;

@@ -8,23 +8,23 @@
   "email": "max@noppelmax.online",
   "questions":[
     {
-      "question": "Was ist das OSI Schichtmodell?",
+      "question": "What is the OSI Layer Model?",
       "image": "osi.png"
     },
     {
-      "question": "Wie sieht die Bus-Topologie aus??",
+      "question": "What is Bus Technology looking like?",
       "image": "bus.png"
     },
     {
-      "question": "Welcher Standard spezifiziert Wireless-LAN?",
+      "question": "Which Standard is specifying Wireless-LAN?",
       "answer": "IEEE 802.11"
     },
     {
-      "question": "Wie sieht die IPv6 Loopback-Adresse aus?",
+      "question": "What is the IPv6 Loopback-Address?",
       "answer": "::1"
     },
     {
-      "question": "Mit welcher maximalen Länge sind übliche TwistedPair/Netzwerkkabel spezifiziert?",
+      "question": "Up to which length are TwistedPair specified?",
       "answer": "100m"
     }
   ]}

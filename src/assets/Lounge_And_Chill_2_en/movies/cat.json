@@ -1,5 +1,6 @@
 {
   "name":"Movies",
+  "path":"movies",
   "difficulty": "easy",
   "author": "Max Noppel",
   "licence": "MIT",

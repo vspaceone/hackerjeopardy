@@ -1,6 +1,6 @@
 {
 "name": "Hackerjeopardy_Loung_and_Chill_1_en",
-"categories": ["ascii", "shapes", "global places", "numbers"],
+"categories": ["ascii", "shapes", "global_places", "kit"],
 "difficulty": "easy",
 "author": "Max Noppel",
 "licence": "MIT",

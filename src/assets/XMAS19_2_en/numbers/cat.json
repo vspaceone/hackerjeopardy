@@ -1,0 +1,31 @@
+
+  {
+  "name":"The beauty of numbers!",
+  "path":"numbers",
+  "difficulty": "hard",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-11-27",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "What are natural numbers?",
+    "answer": "1,2,3,4,5,..."
+  },
+  {
+    "question": "What are prime numbers?",
+    "answer": "2,3,5,7,11,13,17,19,..."
+  },
+  {
+    "question": "How does the Fibonacci numbers start?",
+    "answer": "1,1,2,3,5,8,13,..."
+  },
+  {
+    "question": "What are perfect numbers?",
+    "answer": "6,28,496,..."
+  },
+  {
+    "question": "What are amicable numbers (befreundete Zahlen)?",
+    "answer": "(220, 284),(1184, 1210),(2620, 2924),..."
+  }
+]}

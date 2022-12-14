@@ -1,0 +1,14 @@
+{
+  "name":"Ports",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"Which port has HTTP?", "answer": "80"},
+    {"question":"Which port has SSH?", "answer": "22"},
+    {"question":"Which port has DNS?", "answer": "53"},
+    {"question":"Which port has NTP?", "answer": "123"},
+    {"question":"Which port has IRC?", "answer": "194"}
+  ]}

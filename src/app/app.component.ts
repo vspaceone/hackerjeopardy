@@ -1,7 +1,16 @@
-import { Component } from '@angular/core';
+import { HostListener, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 declare var jquery:any;
 declare var $ :any;
+
+function hexToRgb(hex) {
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+	  r: parseInt(result[1], 16),
+	  g: parseInt(result[2], 16),
+	  b: parseInt(result[3], 16)
+	} : null;
+  }
 
 @Component({
   selector: 'app-root',
@@ -11,47 +20,135 @@ declare var $ :any;
 export class AppComponent {
   title = 'app';
 
-	constructor(private http: HttpClient) { };
+	constructor(private http: HttpClient) { 
+	};
 
 	selectedQuestion = undefined
 	renamePlayer = undefined
 	couldBeCanceled = true;
 	audiotimer = null;
+	activePlayer = null;
+	pressedKeys = null;
 
-	onSelect(q): void {
+	@HostListener('document:keydown', ['$event'])
+	handleKeyboardEvent(event: KeyboardEvent) {
+		console.log(event);
+		var key = event.key;
+		if (key != "1" && key != "2" && key != "3" && key != "4") {
+			console.log("Key must be in 1,2,3,4.")
+			return;
+		}
+		if (!this.selectedQuestion) {
+			console.log("No selected question.")
+		}
+		this.activate(this.selectedQuestion,parseInt(key))
+
+	}
+
+	startAudio(): void {
 		this.audiotimer = setTimeout(() => {
 			$('#audiotheme').trigger('play')
 		 }, 5000);
-		console.log("Hallo onSelect", q)
-		this.selectedQuestion = q
-		this.couldBeCanceled = true;
 	}
 
-	answered(q,p): void {
-		console.log(q)
+	stopAudio(): void {
 		clearTimeout(this.audiotimer);
 		$('#audiotheme').trigger('pause')
 		$('#audiotheme').trigger('load')
 
-		if(!p){
-			
-		}else{
-			p.score = p.score + this.selectedQuestion.value;
-			q.bgcolor = p.bgcolor;
-			q.fgcolor = p.fgcolor;
+	}
+
+	clicksound(): void {
+		$('#click').trigger('play')
+	}
+
+	successsound(): void {
+		$('#success_notification').trigger('play')
+	}
+	failsound(): void {
+		$('#fail_notification').trigger('play')
+	}
+
+	onSelect(q): void {
+		this.clicksound()
+		this.startAudio()
+		
+		console.log("Hallo onSelect", q)
+		this.selectedQuestion = q;
+		q.activePlayers = new Set();
+		q.availablePlayers = new Set( [1,2,3,4] );
+
+		q.buttonsActive = true;
+		this.couldBeCanceled = true;
+	}
+
+	activate(q,pid): void {
+		pid = parseInt(pid);
+		if (q.activePlayers.has(pid)) {
+			return;
 		}
+		if (!q.availablePlayers.has(pid)) {
+			return;
+		}
+		this.clicksound()
+		this.stopAudio()
+		q.activePlayers.add(pid)
+		q.activePlayer = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+		q.activated = true;
+		q.buttonsActive = false;
+	}
+
+	correct(q): void {
+		this.clicksound()
+		this.stopAudio()
+		this.successsound()
+		let p = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+		p.score = p.score + this.selectedQuestion.value;
+
+		q.player = p.btn
 		q.available = false;
+		q.buttonsActive = false;
+		q.activated = false;
+		
+		this.couldBeCanceled = false;
+	}
+
+	incorrect(q): void {
+		this.clicksound()
+		this.stopAudio()
+		this.failsound()
+		let p = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+		p.score = p.score - this.selectedQuestion.value;
+
+		q.activePlayers.delete(Array.from(q.activePlayers)[0])
+		q.availablePlayers.delete(p.id)
+		//q.available = false
+		this.couldBeCanceled = false;
+		q.buttonsActive = true;
+		q.activated = false;
+	}
+
+	notanswered(q): void {
+		this.clicksound()
+		this.stopAudio()
+		
+		q.player = "none"
+		q.available = false;
+		q.buttonsActive = false;
+		q.activated = false;
 		
 		this.couldBeCanceled = false;
 	}
 
 	selectSet(s): void {
+		this.clicksound()
 		this.http.get("/assets/"+s+"/turn.json").subscribe(data => {
 			this.qanda = []
 			for( var i = 0; i <= data["categories"].length-1; i ++){
 				this.http.get("/assets/"+s+"/"+data["categories"][i]+"/cat.json").subscribe(cat => {
 					for( var qIdx = 0; qIdx < cat["questions"].length; qIdx++){
 						cat["questions"][qIdx].available = true;
+						cat["questions"][qIdx].player = "primary";
 						cat["questions"][qIdx].value = (qIdx + 1) * 100;
 						cat["questions"][qIdx].cat = cat["name"]
 						if(cat["questions"][qIdx]["image"] && cat["path"]){
@@ -75,19 +172,6 @@ export class AppComponent {
 		});
 	}
 
-
-	notanswered(q,p): void {
-		console.log(q)
-
-		if(!p){
-
-		}else{
-			p.score = p.score - this.selectedQuestion.value;
-		}
-		//q.available = false
-		this.couldBeCanceled = false;
-	}
-
 	minus(p): void {
 		p.score = p.score - 100
 	}
@@ -97,32 +181,42 @@ export class AppComponent {
 	}
 
 	close(): void {
-		clearTimeout(this.audiotimer);
-		$('#audiotheme').trigger('pause')
-		$('#audiotheme').trigger('load')
+		this.clicksound()
+		this.stopAudio()
 		this.selectedQuestion = undefined
 	}
 
 	cancel(): void {
-		clearTimeout(this.audiotimer);
-		$('#audiotheme').trigger('pause')
-		$('#audiotheme').trigger('load')
+		this.clicksound()
+		this.stopAudio()
 		this.selectedQuestion = undefined
 	}
 
 	rename(p): void {
+		this.clicksound()
 		this.renamePlayer = p
 	}
 
 	renameFinished(): void {
+		this.clicksound()
 		this.renamePlayer = undefined
 	}
 
+	getPlayerByID(id){
+		console.log("getPlayerById", id)
+		for(var i = 0;i<4;i++) {
+			if (this.players[i].id == id){
+				return this.players[i];
+			}
+		}
+		return null;
+	}
+
 	players = [
-		{"name":"player1", "score": 0, "bgcolor": "#ff6b6b", "fgcolor": "#9f0b0b"},
-		{"name":"player2", "score": 0, "bgcolor": "#6eff6b", "fgcolor": "#0e9f0b"},
-		{"name":"player3", "score": 0, "bgcolor": "#9cfcff", "fgcolor": "#3c9c9f"},
-		{"name":"player4", "score": 0, "bgcolor": "#ffe48c", "fgcolor": "#efb600"}
+		{"id": 1, "btn": "player1", "name":"player1", "score": 0, "bgcolor": "#ff6b6b", "fgcolor": "#9f0b0b", "key": "1"},
+		{"id": 2, "btn": "player2", "name":"player2", "score": 0, "bgcolor": "#6eff6b", "fgcolor": "#0e9f0b", "key": "2"},
+		{"id": 3, "btn": "player3", "name":"player3", "score": 0, "bgcolor": "#9cfcff", "fgcolor": "#3c9c9f", "key": "3"},
+		{"id": 4, "btn": "player4", "name":"player4", "score": 0, "bgcolor": "#ffe48c", "fgcolor": "#efb600", "key": "4"}
 	]
 
 	qanda = undefined;
@@ -154,7 +248,7 @@ export class AppComponent {
 		"XMAS22_1_en",
 		"XMAS22_2_en"
 	];
-	sets = this.sets_en;
 
+	sets = this.sets_en;
 
  }

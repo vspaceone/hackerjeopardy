@@ -6,6 +6,15 @@
 	<audio class="audios" id="audiotheme" loop preload="none"> 
    		<source src="assets/theme.mp3" type="audio/mp3">
 	</audio>
+	<audio class="audios" id="click"> 
+		<source src="assets/click.mp3" type="audio/mp3">
+	</audio>
+	<audio class="audios" id="success_notification"> 
+		<source src="assets/success_notification.mp3" type="audio/mp3">
+	</audio>
+	<audio class="audios" id="fail_notification"> 
+		<source src="assets/fail_notification.mp3" type="audio/mp3">
+	</audio>
 
 	<div *ngIf="!qanda" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
 		<div class="card-body">
@@ -13,7 +22,7 @@
 			<form name="myForm">
 				<ul style="list-style-type:none">
 					<li *ngFor="let s of sets">
-						<p><button type="button" class="card-text" class="btn btn-danger btn-lg" (click)="selectSet(s)">{{s}}</button></p>
+						<p><button type="button" class="card-text btn btn-danger" (click)="selectSet(s)">{{s}}</button></p>
 					</li>
 				</ul>
 			</form>
@@ -24,44 +33,56 @@
 	<div *ngIf="renamePlayer" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
 		<div class="card-body">
 			<h5 class="card-title" style="font-size: 5em">{{renamePlayer.name}}</h5>
+			<div class="card-body">
 			<form name="myForm">
 				<label>Name:</label>
 				<p><input class="card-text" type="text" name="name" [value]="renamePlayer.name" [(ngModel)]="renamePlayer.name"></p>
-				<label [style.background-color]="renamePlayer.bgcolor" [style.color]="renamePlayer.fgcolor" >BGColor:</label>
+				<!--label [style.background-color]="renamePlayer.bgcolor" [style.color]="renamePlayer.fgcolor" >BGColor:</label>
 				<p><input class="card-text" type="text" name="bgcolor" [value]="renamePlayer.bgcolor" [(ngModel)]="renamePlayer.bgcolor"></p>
 				<label [style.background-color]="renamePlayer.bgcolor" [style.color]="renamePlayer.fgcolor" >FGColor:</label>
-				<p><input class="card-text" type="text" name="fgcolor" [value]="renamePlayer.fgcolor" [(ngModel)]="renamePlayer.fgcolor"></p>
+				<p><input class="card-text" type="text" name="fgcolor" [value]="renamePlayer.fgcolor" [(ngModel)]="renamePlayer.fgcolor"></p-->
 				<p><button type="button" class="card-text" class="btn btn-danger btn-lg" (click)="renameFinished()">ok</button></p>
 			</form>
+			</div>
 		</div>
 	</div>
 
 	<div *ngIf="selectedQuestion" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
 		<div class="card-body">
-			<h5 class="card-title" style="font-size: 5em">{{selectedQuestion.cat}} - {{selectedQuestion.value}}</h5>
-			<p *ngIf="selectedQuestion.answer" class="card-text" style="margin: auto; padding: 200px; height= 50%; font-size: 5em">{{selectedQuestion.answer}}</p>
+			<h5 class="card-title" style="font-size: 5em;">{{selectedQuestion.cat}} - {{selectedQuestion.value}}</h5>
+			<p *ngIf="selectedQuestion.answer" class="card-text" style="margin: auto; padding: 200px; height: 50%; font-size: 5em">{{selectedQuestion.answer}}</p>
 			<img *ngIf="selectedQuestion.image" class="card-text" style="margin: auto; padding: 50px" src="{{selectedQuestion.image}}" height="500px">
-			<p *ngIf="selectedQuestion.latex" class="card-text" style="margin: auto; padding: 200px; height= 50%; font-size: 5em">$${{selectedQuestion.latex}}$$</p>
+			<p *ngIf="selectedQuestion.latex" class="card-text" style="margin: auto; padding: 200px; height: 50%; font-size: 5em">$${{selectedQuestion.latex}}$$</p>
 
 			<br>
 
-
-			<div class="btn-group" *ngIf="selectedQuestion.available">
-				<button type="button" *ngFor="let p of players" class="btn btn-lg" (click)="answered(selectedQuestion,p)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button>
-				<button type="button" class="btn btn-danger btn-lg" (click)="answered(selectedQuestion,undefined)" style="margin-left:10px; margin-right:10px;">None</button>
-				<button type="button" *ngIf="couldBeCanceled" class="btn btn-danger btn-lg" (click)="cancel()" style="margin-left:10px; margin-right:10px;">cancel</button>
-				<button type="button" *ngFor="let p of players" class="btn btn-danger btn-lg" (click)="notanswered(selectedQuestion,p)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button>
+			<div class="btn-group" *ngIf="selectedQuestion.buttonsActive">
+				<span *ngFor="let p of players">
+					<button type="button" *ngIf="selectedQuestion.availablePlayers.has(p.id)" class="btn btn-lg" (click)="activate(selectedQuestion,p.id)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button>
+					<!--button type="button" *ngIf="selectedQuestion.activePlayers.has(p.id)" class="btn btn-none" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button-->
+				</span>
+				<button type="button" class="btn btn-secondary btn-lg" (click)="notanswered(selectedQuestion)">None</button>
+				<button type="button" *ngIf="couldBeCanceled" class="btn btn-primary btn-lg" (click)="cancel()">cancel</button>
+				<!--button type="button" *ngFor="let p of players" class="btn btn-danger btn-lg" (click)="notanswered(selectedQuestion,p)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button-->
 			</div>
 			<div *ngIf="!selectedQuestion.available">
 				<p class="card-text" style="font-size: 2em;">{{selectedQuestion.question}}</p>
 				<button type="button" class="card-text" class="btn btn-danger btn-lg" (click)="close()">ok</button>
+			</div>
+
+			<div *ngIf="selectedQuestion.activated">
+				<h1 ><span class="badge badge-{{selectedQuestion.activePlayer.btn}}">{{selectedQuestion.activePlayer.name}}: </span><span class="badge badge-danger">5</span></h1>
+			</div>
+			<div class="btn-group" *ngIf="selectedQuestion.activated">
+				<button type="button" class="btn btn-success" (click)="correct(selectedQuestion)">correct</button>
+				<button type="button" class="btn btn-danger btn-lg" (click)="incorrect(selectedQuestion)">incorrect</button>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="card-group">
 	<div *ngFor="let cat of qanda" class="card-column" id="catcolums" [style.width.%]="(100/(this.qanda.length))">
-		<div class="card">
+		<div class="card" style="margin: 10px;">
 			<div class="card-body">
 				<h2 class="card-title text-center">{{cat.name}}</h2>
 			</div>
@@ -70,7 +91,9 @@
 </div>
 <div class="card-group" style="height:80%">
 	<div *ngFor="let d of qanda" class="card-column" id="questioncolums" [style.width.%]="(100/(this.qanda.length))" style="padding: 10px">
-		<button class="btn btn-primary text-center av-{{q.available}}" [style.background-color]="q.bgcolor" [style.color]="q.fgcolor" style="width: 100%; height:20%; margin-top: 4px;" *ngFor="let q of d.questions" (click)="onSelect(q)">
+		<button class="btn text-center btn-{{q.player}}"
+		style="width: 100%; height:20%; margin-top: 4px;" 
+		*ngFor="let q of d.questions" (click)="onSelect(q)">
 			{{q.value}}
 		</button>
 	</div>
@@ -80,7 +103,10 @@
 	<div class="card text-center" *ngFor="let p of players">
 		<div class="card-body"  [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">
 			<h5 class="card-title" style="font-size: 2em;" (click)="rename(p)">{{p.name}}</h5>
-			<p style="font-size: 3em"><button class="btn" [style.background-color]="p.bgcolor" [style.color]="p.bgcolor" (click)="minus(p)">+</button><span [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.score}}</span><button class="btn" [style.background-color]="p.bgcolor" [style.color]="p.bgcolor" (click)="plus(p)">+</button></p>
+			<p style="font-size: 3em">
+				<button class="" [style.background-color]="p.bgcolor" [style.color]="p.bgcolor" (click)="minus(p)">-</button>
+				<span [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.score}}</span>
+				<button class="" [style.background-color]="p.bgcolor" [style.color]="p.bgcolor" (click)="plus(p)">+</button></p>
 		</div>
 	</div>
 </div>

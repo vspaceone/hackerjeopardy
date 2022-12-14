@@ -1,5 +1,7 @@
 import { HostListener, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Howl, Howler } from 'howler';
+
 declare var jquery:any;
 declare var $ :any;
 
@@ -31,8 +33,29 @@ export class AppComponent {
 	audiotimer = null;
 	activePlayer = null;
 	pressedKeys = null;
-	TIMEOUT = 12;
+	TIMEOUT = 6;
 	timer = null;
+
+	clicksoundfile = new Howl({
+		src: ['assets/click.mp3']
+	});
+	successsoundfile = new Howl({
+		src: ['assets/success_notification.mp3']
+	});
+	failsoundfile = new Howl({
+		src: ['assets/fail_notification.mp3']
+	});
+	clocksoundfile = new Howl({
+		src: ['assets/clock.mp3']
+	});
+
+	playerActivated(q,p):void {
+
+	}
+	playerTimeouted(q,p):void {
+
+	}
+
 
 	@HostListener('document:keydown', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -45,6 +68,7 @@ export class AppComponent {
 		if (!this.selectedQuestion) {
 			console.log("No selected question.")
 		}
+		this.clicksound();
 		this.activate(this.selectedQuestion,parseInt(key))
 
 	}
@@ -63,14 +87,17 @@ export class AppComponent {
 	}
 
 	clicksound(): void {
-		$('#click').trigger('play')
+		this.clicksoundfile.play()
 	}
 
 	successsound(): void {
-		$('#success_notification').trigger('play')
+		this.successsoundfile.play()
 	}
 	failsound(): void {
-		$('#fail_notification').trigger('play')
+		this.failsoundfile.play()
+	}
+	clocksound(): void {
+		this.clocksoundfile.play()
 	}
 
 	onSelect(q): void {
@@ -81,6 +108,8 @@ export class AppComponent {
 		this.selectedQuestion = q;
 		q.activePlayers = new Set();
 		q.activePlayersArr = Array.from(q.activePlayers)
+		q.timeoutPlayers = new Set();
+		q.timeoutPlayersArr = Array.from(q.timeoutPlayers)
 		q.availablePlayers = new Set( [1,2,3,4] );
 
 		q.buttonsActive = true;
@@ -95,6 +124,11 @@ export class AppComponent {
 		if (!q.availablePlayers.has(pid)) {
 			return;
 		}
+		if (!q.available){
+			return;
+		}
+
+		q.availablePlayers.delete(pid);
 
 		if (q.activePlayers.size == 0){
 			this.clicksound();
@@ -115,15 +149,38 @@ export class AppComponent {
 		}
 
 		this.getPlayerByID(pid).remainingtime = this.TIMEOUT;
-
-
 	}
 
 	decTimer(): void {
 		this.selectedQuestion.activePlayer.remainingtime --;
+		this.clocksound();
 		if (this.selectedQuestion.activePlayer.remainingtime == 0){
+			this.selectedQuestion.timeoutPlayers.add(this.selectedQuestion.activePlayer.id)
+			this.selectedQuestion.timeoutPlayersArr = Array.from(this.selectedQuestion.timeoutPlayers)
+			console.log("TimeoutPlayers",this.selectedQuestion.timeoutPlayersArr)
 			this.incorrect(this.selectedQuestion);
 		}
+	}
+
+	indeedcorrect(q,pid): void {
+		this.clicksound();
+		this.stopAudio();
+		this.successsound();
+
+		clearInterval(this.timer);
+		this.timer = null;
+
+		let p = this.getPlayerByID(pid);
+		p.score = p.score + (this.selectedQuestion.value * 2);
+
+		q.player = p;
+		q.available = false;
+		q.availablePlayers.clear();
+		q.activePlayers.clear()
+		q.activePlayersArr = Array.from(q.activePlayers)
+
+		
+		this.couldBeCanceled = false;
 	}
 
 	correct(q): void {
@@ -156,9 +213,8 @@ export class AppComponent {
 
 		q.activePlayers.delete(q.activePlayersArr[0]);
 		q.activePlayersArr = Array.from(q.activePlayers)
-		q.availablePlayers.delete(p.id);
 		
-		if (q.availablePlayers.size == 0){
+		if (q.availablePlayers.size == 0 && q.activePlayers.size == 0){
 			this.notanswered(q);
 		}
 
@@ -168,6 +224,9 @@ export class AppComponent {
 		if (q.activePlayers.size > 0){
 			q.activePlayer = this.getPlayerByID(Array.from(q.activePlayers)[0]);
 			q.activePlayer.activationtime = (new Date()).getTime();
+		}else{	
+			clearInterval(this.timer);
+			this.timer = null;
 		}
 	}
 

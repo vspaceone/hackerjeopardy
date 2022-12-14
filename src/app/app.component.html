@@ -6,15 +6,6 @@
 	<audio class="audios" id="audiotheme" loop preload="none"> 
    		<source src="assets/theme.mp3" type="audio/mp3">
 	</audio>
-	<audio class="audios" id="click"> 
-		<source src="assets/click.mp3" type="audio/mp3">
-	</audio>
-	<audio class="audios" id="success_notification"> 
-		<source src="assets/success_notification.mp3" type="audio/mp3">
-	</audio>
-	<audio class="audios" id="fail_notification"> 
-		<source src="assets/fail_notification.mp3" type="audio/mp3">
-	</audio>
 
 	<div *ngIf="!qanda" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
 		<div class="card-body">
@@ -56,29 +47,48 @@
 
 			<br>
 
-			<div class="btn-group" *ngIf="selectedQuestion.availablePlayers.size > 0 && selectedQuestion.activePlayers.size == 0">
+			<div *ngIf="selectedQuestion.timeoutPlayers.size > 0 && selectedQuestion.available">
+				<span *ngFor="let pid of selectedQuestion.timeoutPlayersArr">
+					<h1 ><span style="width:60%;" class="badge badge-none">
+						<span style="width: 50%;">{{getPlayerByID(pid).name}}: -{{selectedQuestion.value}}</span>
+						<span style="width: 50%;"><a (click)="indeedcorrect(selectedQuestion,pid)" style="font-size:0.5em;"> correct</a></span>
+					</span></h1>
+				</span>
+			</div>
+			<div *ngIf="selectedQuestion.activePlayers.size > 0 && selectedQuestion.available">
+				<span *ngFor="let pid of selectedQuestion.activePlayersArr">
+					<h1 ><span style="width:60%;" class="badge badge-{{getPlayerByID(pid).btn}}">
+						<span style="width: 50%;" [style.color]="getPlayerByID(pid).fgcolor">{{getPlayerByID(pid).name}}: {{getPlayerByID(pid).remainingtime}}</span>
+						<span style="width: 50%;"><i style="font-size:0.5em;" [style.color]="getPlayerByID(pid).fgcolor">s left</i></span>
+					</span></h1>
+				</span>
+			</div>
+			<div style="height: 20px">
+			</div>
+
+			<div class="btn-group" *ngIf="selectedQuestion.activePlayers.size > 0 && selectedQuestion.available">
+				<button type="button" class="btn btn-success" (click)="correct(selectedQuestion)" style="width:400px;">correct</button>
+				<button type="button" class="btn btn-danger btn-lg" (click)="incorrect(selectedQuestion)" style="width:400px;">incorrect</button>
+			</div>
+			<div style="height: 50px">
+			</div>
+
+			<div class="btn-group" *ngIf="selectedQuestion.availablePlayers.size > 0 && selectedQuestion.available">
 				<span *ngFor="let p of players">
-					<button type="button" *ngIf="selectedQuestion.availablePlayers.has(p.id)" class="btn btn-lg" (click)="activate(selectedQuestion,p.id)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button>
+					<button type="button" *ngIf="!selectedQuestion.activePlayers.has(p.id) && !selectedQuestion.timeoutPlayers.has(p.id)" class="btn btn-lg" (click)="activate(selectedQuestion,p.id)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor" style="width:150px">{{p.name}}</button>
 					<!--button type="button" *ngIf="selectedQuestion.activePlayers.has(p.id)" class="btn btn-none" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button-->
 				</span>
-				<button type="button" class="btn btn-secondary btn-lg" (click)="notanswered(selectedQuestion)">None</button>
-				<button type="button" *ngIf="couldBeCanceled" class="btn btn-primary btn-lg" (click)="cancel()">cancel</button>
+				<button type="button" class="btn btn-secondary btn-lg" (click)="notanswered(selectedQuestion)" style="width:150px">None</button>
+				<button type="button" *ngIf="couldBeCanceled" class="btn btn-primary btn-lg" (click)="cancel()" style="width:150px">cancel</button>
 				<!--button type="button" *ngFor="let p of players" class="btn btn-danger btn-lg" (click)="notanswered(selectedQuestion,p)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button-->
 			</div>
+
 			<div *ngIf="!selectedQuestion.available">
 				<p class="card-text" style="font-size: 2em;">{{selectedQuestion.question}}</p>
 				<button type="button" class="card-text" class="btn btn-danger btn-lg" (click)="close()">ok</button>
 			</div>
 
-			<div *ngIf="selectedQuestion.activePlayers.size > 0">
-				<span *ngFor="let pid of selectedQuestion.activePlayersArr">
-					<h1 ><span class="badge badge-{{getPlayerByID(pid).btn}}">{{getPlayerByID(pid).name}}: </span><span class="badge badge-danger">{{getPlayerByID(pid).remainingtime}}</span></h1>
-				</span>
-			</div>
-			<div class="btn-group" *ngIf="selectedQuestion.activePlayers.size > 0">
-				<button type="button" class="btn btn-success" (click)="correct(selectedQuestion)">correct</button>
-				<button type="button" class="btn btn-danger btn-lg" (click)="incorrect(selectedQuestion)">incorrect</button>
-			</div>
+
 		</div>
 	</div>
 </div>

@@ -72,7 +72,7 @@
 
 			<div *ngIf="selectedQuestion.activePlayers.size > 0">
 				<span *ngFor="let pid of selectedQuestion.activePlayersArr">
-					<h1 ><span class="badge badge-{{getPlayerByID(pid).btn}}">{{getPlayerByID(pid).name}}: </span><span class="badge badge-danger">5</span></h1>
+					<h1 ><span class="badge badge-{{getPlayerByID(pid).btn}}">{{getPlayerByID(pid).name}}: </span><span class="badge badge-danger">{{getPlayerByID(pid).remainingtime}}</span></h1>
 				</span>
 			</div>
 			<div class="btn-group" *ngIf="selectedQuestion.activePlayers.size > 0">

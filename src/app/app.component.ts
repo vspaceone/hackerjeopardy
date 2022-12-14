@@ -12,6 +12,8 @@ function hexToRgb(hex) {
 	} : null;
   }
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,6 +31,8 @@ export class AppComponent {
 	audiotimer = null;
 	activePlayer = null;
 	pressedKeys = null;
+	TIMEOUT = 12;
+	timer = null;
 
 	@HostListener('document:keydown', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -91,19 +95,45 @@ export class AppComponent {
 		if (!q.availablePlayers.has(pid)) {
 			return;
 		}
-		this.clicksound();
-		this.stopAudio();
-		q.activePlayers.add(pid);
-		q.activePlayersArr = Array.from(q.activePlayers)
-		q.activePlayer = this.getPlayerByID(q.activePlayersArr[0]);
-		q.activated = true;
-		q.buttonsActive = false;
+
+		if (q.activePlayers.size == 0){
+			this.clicksound();
+			this.stopAudio();
+			q.activePlayers.add(pid);
+			q.activePlayersArr = Array.from(q.activePlayers)
+			q.activePlayer = this.getPlayerByID(q.activePlayersArr[0]);
+			if (!this.timer){
+				this.timer = setInterval(() => {
+					this.decTimer()
+				},1000);
+			}
+
+
+		}else{
+			q.activePlayers.add(pid);
+			q.activePlayersArr = Array.from(q.activePlayers)
+		}
+
+		this.getPlayerByID(pid).remainingtime = this.TIMEOUT;
+
+
+	}
+
+	decTimer(): void {
+		this.selectedQuestion.activePlayer.remainingtime --;
+		if (this.selectedQuestion.activePlayer.remainingtime == 0){
+			this.incorrect(this.selectedQuestion);
+		}
 	}
 
 	correct(q): void {
 		this.clicksound();
 		this.stopAudio();
 		this.successsound();
+
+		clearInterval(this.timer);
+		this.timer = null;
+
 		let p = this.getPlayerByID(q.activePlayersArr[0]);
 		p.score = p.score + this.selectedQuestion.value;
 
@@ -112,6 +142,7 @@ export class AppComponent {
 		q.availablePlayers.clear();
 		q.activePlayers.clear()
 		q.activePlayersArr = Array.from(q.activePlayers)
+
 		
 		this.couldBeCanceled = false;
 	}
@@ -136,17 +167,24 @@ export class AppComponent {
 
 		if (q.activePlayers.size > 0){
 			q.activePlayer = this.getPlayerByID(Array.from(q.activePlayers)[0]);
+			q.activePlayer.activationtime = (new Date()).getTime();
 		}
 	}
 
 	notanswered(q): void {
 		this.clicksound();
 		this.stopAudio();
+
+		clearInterval(this.timer);
+		this.timer = null;
 		
 		q.availablePlayers.clear();
 		q.player = {"btn":"none"};
 		q.available = false;
 		this.couldBeCanceled = false;
+
+		clearInterval(this.timer);
+
 	}
 
 	selectSet(s): void {
@@ -222,10 +260,10 @@ export class AppComponent {
 	}
 
 	players = [
-		{"id": 1, "btn": "player1", "name":"player1", "score": 0, "bgcolor": "#ff6b6b", "fgcolor": "#9f0b0b", "key": "1"},
-		{"id": 2, "btn": "player2", "name":"player2", "score": 0, "bgcolor": "#6eff6b", "fgcolor": "#0e9f0b", "key": "2"},
-		{"id": 3, "btn": "player3", "name":"player3", "score": 0, "bgcolor": "#9cfcff", "fgcolor": "#3c9c9f", "key": "3"},
-		{"id": 4, "btn": "player4", "name":"player4", "score": 0, "bgcolor": "#ffe48c", "fgcolor": "#efb600", "key": "4"}
+		{"id": 1, "btn": "player1", "name":"player1", "score": 0, "bgcolor": "#ff6b6b", "fgcolor": "#9f0b0b", "key": "1", "remainingtime": null},
+		{"id": 2, "btn": "player2", "name":"player2", "score": 0, "bgcolor": "#6eff6b", "fgcolor": "#0e9f0b", "key": "2", "remainingtime": null},
+		{"id": 3, "btn": "player3", "name":"player3", "score": 0, "bgcolor": "#9cfcff", "fgcolor": "#3c9c9f", "key": "3", "remainingtime": null},
+		{"id": 4, "btn": "player4", "name":"player4", "score": 0, "bgcolor": "#ffe48c", "fgcolor": "#efb600", "key": "4", "remainingtime": null}
 	]
 
 	qanda = undefined;

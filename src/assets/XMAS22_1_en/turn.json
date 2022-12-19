@@ -1,6 +1,6 @@
 {
 "name": "XMAS22_1_en",
-"categories": ["activationfunctions","machinelearning","datasets","network","chemistry"],
+"categories": ["activationfunctions","machinelearning","network","datasets"],
 "difficulty": "easy",
 "author": "Max Noppel",
 "licence": "MIT",

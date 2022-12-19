@@ -355,6 +355,7 @@ export class AppComponent {
 		//"XMAS18_2_en",
 		"XMAS22_1_en",
 		"XMAS22_2_en",
+		"XMAS22_3_en",
 		"Demo"
 	];
 

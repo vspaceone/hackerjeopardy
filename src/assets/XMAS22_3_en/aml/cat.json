@@ -1,0 +1,15 @@
+{
+  "name":"More (A)ML!",
+  "path":"aml",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2022-12-12",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"What is an Adversarial Example", "image": "ae.png"},
+    {"question":"What is Data Poisoning!", "image": "poisoning.jpeg"},
+    {"question":"What is Active Learning?", "image": "activelearning.jpg"},
+    {"question":"What is a backdoor?", "image": "backdoor.jpg"},
+    {"question":"How to steal a model?", "image": "modelstealing.jpeg"}
+  ]}

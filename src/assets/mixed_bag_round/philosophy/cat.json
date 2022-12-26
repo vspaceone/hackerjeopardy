@@ -1,0 +1,28 @@
+{
+    "name": "Philosophische Antworten",
+    "path": "esoteric_devices",
+    "lang": "de",
+    "difficulty": "easy",
+    "author": "Nils Krause",
+    "licence": "MIT",
+    "date": "2022-12-19",
+    "questions": [
+
+        {
+            "question": "Was ist Logik?",
+            "answer": "Darunter wird im Allgemeinen das vernünftige Schlussfolgern und im Besonderen dessen Lehre verstanden."
+        },
+        {
+            "question": "Was ist der gesunde Menschenverstand?",
+            "answer": "ist der „normale, klare“ mithin einfache, erfahrungsbezogene und allgemein geteilte Verstand des Menschen bzw. dessen natürliches Urteilsvermögen. "
+        },
+        {
+            "question": "Was ist die Wahrheit?",
+            "answer": "Darunter kann die Übereinstimmung einer Äußerung mit einer Absicht oder einem bestimmten Sinn beziehungsweise einer normativ als richtig ausgezeichneten Auffassung oder mit den eigenen Erkenntnissen, Erfahrungen und Überzeugungen verstanden werden."
+        },
+        {
+            "question": "Was ist Dummheit?",
+            "answer": "Bezeichnet im engeren Sinn die mangelhafte Fähigkeit, aus Wahrnehmungen angemessene Schlüsse zu ziehen beziehungsweise zu lernen."
+        }
+    ]
+}

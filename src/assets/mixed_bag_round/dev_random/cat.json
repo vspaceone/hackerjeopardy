@@ -1,0 +1,31 @@
+{
+    "name": "/dev/urandom",
+    "path": "dev_random",
+    "lang": "de",
+    "difficulty": "medium",
+    "author": "Nils Krause",
+    "licence": "MIT",
+    "date": "2022-12-20",
+    "questions": [
+        {
+            "question": "Wer waren die ersten Vorstände des vspace.one?",
+            "answer": "Votteler, Noppel, Castano, Krause"
+        },
+        {
+            "question": "What is vspaceone \"encrypted\" with ROT13?",
+            "answer": "ifcnprbar"
+        },
+        {
+            "question": "Was kommt in pi nach der 3,1",
+            "answer": "415926535897932"
+        },
+        {
+            "question": "Wie sieht eine Z3 Rechenmaschine aus?",
+            "image": "z3.jpg"
+        },
+        {
+            "question": "Wie sieht ein Hello World in Piet aus?",
+            "image": "Piet.gif"
+        }
+    ]
+}

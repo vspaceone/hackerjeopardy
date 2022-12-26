@@ -1,0 +1,15 @@
+{
+  "name":"Neumodisches Glumb",
+  "path":"glumb",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2022-12-24", 
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"What is ChatGPT?", "image": "isec_team.png"},
+    {"question":"What is Stable Diffusion?", "image": "50.34.jpg"},
+    {"question":"What is Docker?", "image": "devnull.png"},
+    {"question":"What is CoPilot?", "image": "r-101.jpg"},
+    {"question":"What is Lensa?", "image": "staircase.jpg"}
+  ]}

@@ -250,7 +250,7 @@ export class AppComponent {
 
 	selectSet(s): void {
 		this.clicksound()
-		this.http.get("/assets/"+s+"/turn.json").subscribe(data => {
+		this.http.get("/assets/"+s+"/round.json").subscribe(data => {
 			this.qanda = []
 			for( var i = 0; i <= data["categories"].length-1; i ++){
 				this.http.get("/assets/"+s+"/"+data["categories"][i]+"/cat.json").subscribe(cat => {
@@ -329,7 +329,7 @@ export class AppComponent {
 
 	qanda = undefined;
 
-	sets_de = [
+	sets_vspace = [
 		"XMAS19_1_de",
 		"XMAS19_2_de",
 		"XMAS19_3_de",
@@ -339,10 +339,14 @@ export class AppComponent {
 		"Lounge_And_Chill_3_de",
 		//"Tim_Runde",
 		"XMAS18_0_de",
-		"XMAS18_1_de"
+		"XMAS18_1_de",
+		"XMAS22_1_en",
+		"XMAS22_2_en",
+		"XMAS22_3_en",
+		"mixed_bag_round"
 	];
 
-	sets_en = [
+	sets_kit = [
 		"XMAS19_1_en",
 		"XMAS19_2_en",
 		"XMAS19_3_en",
@@ -359,6 +363,6 @@ export class AppComponent {
 		"Demo"
 	];
 
-	sets = this.sets_en;
+	sets = this.sets_vspace;
 
  }

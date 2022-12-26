@@ -1,0 +1,27 @@
+{
+    "name": "Ewige zweite",
+    "path": "second_best",
+    "lang": "de",
+    "difficulty": "medium",
+    "author": "Nils Krause",
+    "licence": "MIT",
+    "date": "2022-12-19",
+    "questions": [
+        {
+            "question": "Wie schreibt man 42 als Binärzahl",
+            "answer": "101010"
+        },
+        {
+            "question": "Welche Rechnung ergibt 2?",
+            "answer": "floor(sqrt(2) + floor(sqrt(2)))"
+        },
+        {
+            "question": "Wie heisst die zweite Schicht im ISO / OSI Referenzmodell",
+            "answer": "Sicherung (Data Link)"
+        },
+        {
+            "question": "Was ist Second Life?",
+            "answer": "Dieses Metaversum startete unter dem Namen Linden World ist seit 2003 verfügbar."
+        }
+    ]
+}

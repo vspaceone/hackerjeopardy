@@ -1,0 +1,31 @@
+{
+    "name": "Esoterische Geräte",
+    "path": "esoteric_devices",
+    "lang": "de",
+    "difficulty": "hard",
+    "author": "Nils Krause",
+    "licence": "MIT",
+    "date": "2022-12-19",
+    "questions": [
+        {
+            "question": "Wie sieht eine Dvorak Tastatur aus?",
+            "image": "dvorak.jpg"
+        },
+        {
+            "question": "Was war Firefox OS?",
+            "answer": "Mit diesem Smartphone Betriebssystem wollte die Mozilla Foundation gegen Apple und Google antreten."
+        },
+        {
+            "question": "Wie sieht ein Nokia 9000 Communicator aus?",
+            "image": "nokia_communicator.jpg"
+        },
+        {
+            "question": "Was ist Sailfish OS?",
+            "answer": "Dieses mobile Betriebssystem basiert auf den Systemen Meego, Moblin und Maemo und wurde von ehemaligen Nokia Mitarbeitern entwickelt."
+        },
+        {
+            "question": "Wie sieht das Logo von Firewire aus?",
+            "image": "firewire.png"
+        }
+    ]
+}

@@ -60,8 +60,12 @@ export class AppComponent {
 	@HostListener('document:keydown', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
 		console.log(event);
+
+
+
 		var key = event.key;
-		if (key != "1" && key != "2" && key != "3" && key != "4") {
+		if (key != "1" && key != "2" && key != "3" && key != "4" &&
+			key != "¹" && key != "²" && key != "³" && key != "¤") {
 			console.log("Key must be in 1,2,3,4.")
 			return;
 		}
@@ -69,8 +73,19 @@ export class AppComponent {
 			console.log("No selected question.")
 		}
 		this.clicksound();
-		this.activate(this.selectedQuestion,parseInt(key))
 
+		// Work around!
+		if(key == "¹"){
+			key = '1'
+		}else if(key == "²"){
+			key = '2'
+		}else if(key == "³"){
+			key = '3'
+		}else if(key == "¤"){
+			key = '4'
+		}
+	
+		this.activate(this.selectedQuestion,parseInt(key))
 	}
 
 	startAudio(): void {
@@ -322,9 +337,9 @@ export class AppComponent {
 
 	players = [
 		{"id": 1, "btn": "player1", "name":"player1", "score": 0, "bgcolor": "#ff6b6b", "fgcolor": "#9f0b0b", "key": "1", "remainingtime": null},
-		{"id": 2, "btn": "player2", "name":"player2", "score": 0, "bgcolor": "#6eff6b", "fgcolor": "#0e9f0b", "key": "2", "remainingtime": null},
+		{"id": 2, "btn": "player2", "name":"player2", "score": 0, "bgcolor": "#ff9900", "fgcolor": "#995c00", "key": "2", "remainingtime": null},
 		{"id": 3, "btn": "player3", "name":"player3", "score": 0, "bgcolor": "#9cfcff", "fgcolor": "#3c9c9f", "key": "3", "remainingtime": null},
-		{"id": 4, "btn": "player4", "name":"player4", "score": 0, "bgcolor": "#ffe48c", "fgcolor": "#efb600", "key": "4", "remainingtime": null}
+		{"id": 4, "btn": "player4", "name":"player4", "score": 0, "bgcolor": "#FFFF66", "fgcolor": "#cccc00", "key": "4", "remainingtime": null}
 	]
 
 	qanda = undefined;
@@ -338,12 +353,13 @@ export class AppComponent {
 		"Lounge_And_Chill_2_de",
 		"Lounge_And_Chill_3_de",
 		//"Tim_Runde",
-		"XMAS18_0_de",
 		"XMAS18_1_de",
+		"XMAS18_2_de",
 		"XMAS22_1_en",
 		"XMAS22_2_en",
-		"XMAS22_3_en",
-		"mixed_bag_round"
+		//"XMAS22_3_en",
+		"mixed_bag_round",
+		"AlexRound"
 	];
 
 	sets_kit = [
@@ -363,6 +379,6 @@ export class AppComponent {
 		"Demo"
 	];
 
-	sets = this.sets_vspace;
+	sets = this.sets_kit;
 
  }

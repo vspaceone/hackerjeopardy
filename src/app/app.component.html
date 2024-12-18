@@ -57,8 +57,8 @@
 			</div>
 			<div *ngIf="selectedQuestion.activePlayers.size > 0 && selectedQuestion.available">
 				<span *ngFor="let pid of selectedQuestion.activePlayersArr">
-					<h1 ><span style="width:60%;" class="badge badge-{{getPlayerByID(pid).btn}}">
-						<span style="width: 50%;" [style.color]="getPlayerByID(pid).fgcolor">{{getPlayerByID(pid).name}}: {{getPlayerByID(pid).remainingtime}}</span>
+					<h1 ><span style="width:60%;" [style.background-color]="getPlayerByID(pid).bgcolor" class="badge badge-{{getPlayerByID(pid).btn}}">
+						<span style="width: 50%;" [style.color]="getPlayerByID(pid).fgcolor" [style.background-color]="getPlayerByID(pid).bgcolor">{{getPlayerByID(pid).name}}: {{getPlayerByID(pid).remainingtime}}</span>
 						<span style="width: 50%;"><i style="font-size:0.5em;" [style.color]="getPlayerByID(pid).fgcolor">s left</i></span>
 					</span></h1>
 				</span>

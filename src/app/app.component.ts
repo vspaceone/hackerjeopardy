@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { GameDataService } from './services/game-data.service';
 import { GameService } from './services/game.service';
 import { AudioService } from './services/audio.service';
+import { ContentManagerService } from './services/content/content-manager.service';
 import { SetSelectionComponent } from './components/set-selection/set-selection.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 import { QuestionDisplayComponent } from './components/question-display/question-display.component';
 import { PlayerControlsComponent } from './components/player-controls/player-controls.component';
+import { ContentManagerComponent } from './components/content-manager/content-manager.component';
 import { Category, Player, Question } from './models/game.models';
 
 
@@ -15,15 +17,42 @@ import { Category, Player, Question } from './models/game.models';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
 	standalone: true,
-	imports: [CommonModule, SetSelectionComponent, GameBoardComponent, QuestionDisplayComponent, PlayerControlsComponent]
+	imports: [CommonModule, SetSelectionComponent, GameBoardComponent, QuestionDisplayComponent, PlayerControlsComponent, ContentManagerComponent]
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	title = 'Hacker Jeopardy';
+	sets: string[] = [];
+	loading = true;
+	showContentManager = false;
 
-	constructor(private gameDataService: GameDataService, private gameService: GameService, private audioService: AudioService) { };
+	constructor(
+		private gameDataService: GameDataService,
+		private gameService: GameService,
+		private audioService: AudioService,
+		private contentManager: ContentManagerService
+	) { };
 
-	ngOnInit(): void {
-		this.sets = this.gameDataService.getAvailableSets();
+	async ngOnInit(): Promise<void> {
+		try {
+			// Initialize content manager
+			await this.contentManager.initialize();
+
+			// Load available sets
+			this.gameDataService.getAvailableSets().subscribe({
+				next: (sets) => {
+					this.sets = sets;
+					this.loading = false;
+				},
+				error: (error) => {
+					console.error('Failed to load available sets:', error);
+					this.sets = [];
+					this.loading = false;
+				}
+			});
+		} catch (error) {
+			console.error('Failed to initialize content manager:', error);
+			this.loading = false;
+		}
 	}
 
 	ngAfterViewInit(): void {
@@ -124,14 +153,22 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  resetQuestion(question: Question): void {
-    this.gameService.resetQuestion(question, this.players);
-    // Close modal if this question was selected
-    if (this.selectedQuestion === question) {
-      this.selectedQuestion = null;
-      this.couldBeCanceled = false;
-    }
-  }
+	resetQuestion(question: Question): void {
+		this.gameService.resetQuestion(question, this.players);
+		// Close modal if this question was selected
+		if (this.selectedQuestion === question) {
+			this.selectedQuestion = null;
+			this.couldBeCanceled = false;
+		}
+	}
+
+	backToRoundSelection(): void {
+		// Clear all game state and return to round selection
+		this.qanda = null;
+		this.selectedQuestion = null;
+		this.couldBeCanceled = false;
+		this.audioService.stopThemeMusic();
+	}
 
 	onSelect(q): void {
 		this.selectedQuestion = q;
@@ -217,8 +254,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 		{id: 3, btn: "player3", name: "player3", score: 0, bgcolor: "#9cfcff", fgcolor: "#3c9c9f", key: "3", remainingtime: null},
 		{id: 4, btn: "player4", name: "player4", score: 0, bgcolor: "#FFFF66", fgcolor: "#cccc00", key: "4", remainingtime: null}
 	]
-
-
-	sets: string[] = [];
 
 }

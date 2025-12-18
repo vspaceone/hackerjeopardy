@@ -13,15 +13,36 @@
 <div class="matrix-rain" id="matrixRain"></div>
 
 <div class="container scan-lines">
-  <h1 class="neon-text-blue">{{ title }}</h1>
+   <div class="app-header">
+     <h1 class="neon-text-blue">{{ title }}</h1>
+     <div class="header-controls">
+       <button
+         *ngIf="qanda"
+         class="rounds-btn neon-btn"
+         (click)="backToRoundSelection()"
+         title="Return to Round Selection">
+         <span class="btn-icon">🎯</span>
+         Select Round
+       </button>
+       <button class="content-btn neon-btn" (click)="showContentManager = !showContentManager">
+         <span class="btn-icon">⚙️</span>
+         Content Manager
+       </button>
+     </div>
+   </div>
 
-  <app-set-selection *ngIf="!qanda" [availableSets]="sets" (setSelected)="selectSet($event)"></app-set-selection>
+  <app-content-manager
+    *ngIf="showContentManager"
+    (close)="showContentManager = false">
+  </app-content-manager>
 
-  <app-game-board *ngIf="qanda" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
+  <app-set-selection *ngIf="!qanda && !showContentManager" [availableSets]="sets" (setSelected)="selectSet($event)"></app-set-selection>
 
-    <app-question-display *ngIf="selectedQuestion" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
+  <app-game-board *ngIf="qanda && !showContentManager" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
 
-  <div class="players-container" *ngIf="qanda">
+  <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
+
+  <div class="players-container" *ngIf="qanda && !showContentManager">
     <h2 class="neon-text-purple">Players</h2>
     <div class="players-row">
       <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" (rename)="rename(player)" (scoreAdjust)="adjustScore($event)"></app-player-controls>

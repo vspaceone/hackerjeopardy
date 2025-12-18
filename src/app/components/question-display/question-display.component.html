@@ -44,13 +44,12 @@
       </div>
     </div>
 
-    <div class="active-player-section">
-      <h4 *ngIf="question.activePlayer">Current Player: {{ question.activePlayer.name }}</h4>
-      <h4 *ngIf="!question.activePlayer">Waiting for Player</h4>
-
+    <div *ngIf="question.activePlayer" class="active-player-section">
+      <h4>Current Player: {{ question.activePlayer.name }}</h4>
+      
         <div class="action-buttons">
-          <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct" [disabled]="!question.activePlayer">Correct</button>
-          <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect" [disabled]="!question.activePlayer">Incorrect</button>
+          <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct">Correct</button>
+          <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect">Incorrect</button>
        </div>
     </div>
 

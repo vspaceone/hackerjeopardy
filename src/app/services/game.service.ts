@@ -91,19 +91,12 @@ export class GameService {
     if (question.activePlayer && question.activePlayer.remainingtime > 0) {
       question.activePlayer.remainingtime--;
       if (question.activePlayer.remainingtime <= 0) {
-        // Handle timeout - add to timeout players, clear active player, allow new buzzing
+        // Handle timeout - timer stops but player stays active for host judgment
         this.audioService.playFail();
         question.timeoutPlayers.add(question.activePlayer.id);
         question.timeoutPlayersArr = Array.from(question.timeoutPlayers);
-        question.activePlayers.delete(question.activePlayer.id);
-        question.activePlayersArr = Array.from(question.activePlayers);
-        question.activePlayer = undefined;
-
-        // For sequential buzzing, don't start timer for next player automatically
-        // Question stays open for remaining players to buzz in
-        if (question.availablePlayers.size === 0) {
-          this.notAnswered(question);
-        }
+        // Keep player active so host can still judge their answer
+        // Player will be deactivated when host clicks Correct/Incorrect
       }
     }
   }
@@ -117,12 +110,13 @@ export class GameService {
     if (question.activePlayer) {
       question.activePlayer.score += question.value;
       question.player = question.activePlayer;
+      // Remove from active players now that decision is made
+      question.activePlayers.delete(question.activePlayer.id);
+      question.activePlayersArr = Array.from(question.activePlayers);
     }
 
     question.available = false;
     question.availablePlayers.clear();
-    question.activePlayers.clear();
-    question.activePlayersArr = Array.from(question.activePlayers);
     question.activePlayer = undefined;
   }
 
@@ -136,11 +130,7 @@ export class GameService {
       question.activePlayers.delete(question.activePlayer.id);
       question.activePlayersArr = Array.from(question.activePlayers);
 
-      if (!question.timeoutPlayers.has(question.activePlayer.id)) {
-        question.timeoutPlayers.add(question.activePlayer.id);
-        question.timeoutPlayersArr = Array.from(question.timeoutPlayers);
-      }
-
+      // Player is already in timeout list from timer expiration
       // Decision is made - clear active player and allow new buzzing round
       question.activePlayer = undefined;
 

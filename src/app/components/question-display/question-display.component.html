@@ -53,9 +53,9 @@
        </div>
     </div>
 
-      <div class="modal-footer">
-         <button *ngIf="!question.available && !question.player" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
-         <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
-      </div>
+       <div class="modal-footer">
+          <button *ngIf="question.available" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
+          <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
+       </div>
   </div>
 </div>

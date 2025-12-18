@@ -87,7 +87,17 @@ Host Clicks "Correct" or "Incorrect":
 When no players can answer:
 - Manual "Reveal Question" button appears (except for correct answers)
 - Shows what the correct question should have been
+- Host can use "No One Knows" button to mark question as unanswered/incorrect
 - Question permanently unavailable
+```
+
+#### 6. Host Controls
+```
+"No One Knows" Button:
+- Available when question is open and active
+- Allows host to manually mark question as unanswered
+- Sets question as having incorrect answers
+- Useful for closing questions without waiting for player interaction
 ```
 
 ### ⏱️ Timer Logic
@@ -128,9 +138,10 @@ Game Board → Question Modal → Answer Display → Resolution → Back to Boar
 
 ✅ **Authentic Jeopardy Format**: Answers displayed as clues, questions revealed later
 ✅ **Sequential Buzzing**: Prevents simultaneous activation
-✅ **Host Control**: Manual judgment of answers
+✅ **Host Control**: Manual judgment of answers with "No One Knows" button for unanswered questions
 ✅ **Visual Feedback**: Clear indication of active players, timers, answered questions, and unanswered questions
 ✅ **Audio Enhancement**: Immersive sound effects
+✅ **Flexible Question Management**: Host can manually close questions at any time
 
 ### ⚠️ Potential Issues/Areas for Improvement
 
@@ -150,6 +161,7 @@ Game Board → Question Modal → Answer Display → Resolution → Back to Boar
 | `correctAnswer()` | Award points, close question, auto-reveal answer |
 | `incorrectAnswer()` | Deduct points, allow continued buzzing or close |
 | `notAnswered()` | Final closure when no valid answers |
+| `markQuestionIncorrect()` | Mark question as attempted but incorrectly answered by all |
 
 ### 📁 File Structure Impact
 

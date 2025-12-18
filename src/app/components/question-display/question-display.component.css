@@ -136,12 +136,18 @@
 
 .player-badge {
   padding: 8px 12px;
-  border-radius: 20px;
+  border-radius: 6px;
   font-weight: bold;
   font-size: 0.9em;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
   font-family: 'Roboto Mono', monospace;
   border: 1px solid;
+  transition: all 0.3s ease;
+}
+
+.player-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
 }
 
 .active-player-section {
@@ -202,6 +208,17 @@
   background: #ff073a;
   color: var(--bg-primary);
   box-shadow: 0 0 20px #ff073a;
+}
+
+.action-buttons .btn-warning {
+  color: #ffa500; /* Orange/warning color */
+  border-color: #ffa500;
+}
+
+.action-buttons .btn-warning:hover {
+  background: #ffa500;
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px #ffa500;
 }
 
 .answer-controls {
@@ -266,6 +283,17 @@
 .modal-footer .btn-primary:hover {
   background: var(--neon-blue);
   color: var(--bg-primary);
+}
+
+.modal-footer .btn-warning {
+  color: #ffa500; /* Orange/warning color */
+  border-color: #ffa500;
+}
+
+.modal-footer .btn-warning:hover {
+  background: #ffa500;
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px #ffa500;
 }
 
 @media (max-width: 768px) {

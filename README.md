@@ -9,7 +9,7 @@ A modern, web-based Jeopardy-style game built with Angular, featuring hacker-the
 - **Dynamic Question Sets**: Multiple themed rounds (cybersecurity, AI, blockchain, etc.)
 - **Audio Feedback**: Sound effects for correct/incorrect answers and background music
 - **Player Management**: Support for multiple players with score tracking
-- **Host Tools**: Automatic question reveal on correct answers, manual reveal otherwise
+- **Host Tools**: Automatic question reveal on correct answers, manual reveal, and "No One Knows" button for unanswered questions
 - **Responsive Design**: Mobile-friendly interface
 - **Accessibility**: ARIA labels, keyboard navigation, and screen reader support
 - **Modern Architecture**: Standalone Angular components, RxJS for reactive programming
@@ -88,6 +88,9 @@ src/
 - Refactored to clean architecture with services
 - Fixed Jeopardy-style grid layout
 - Updated dependencies and build tools
+- Added "No One Knows" button for host control of unanswered questions
+- Improved player badge styling with blue theme consistency
+- Enhanced button styling with proper color schemes
 
 ## Adding New Question Rounds
 

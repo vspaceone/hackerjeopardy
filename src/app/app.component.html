@@ -17,9 +17,9 @@
 
   <app-set-selection *ngIf="!qanda" [availableSets]="sets" (setSelected)="selectSet($event)"></app-set-selection>
 
-  <app-game-board *ngIf="qanda" [categories]="qanda" (questionSelected)="onSelect($event)"></app-game-board>
+  <app-game-board *ngIf="qanda" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
 
-   <app-question-display *ngIf="selectedQuestion" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()"></app-question-display>
+    <app-question-display *ngIf="selectedQuestion" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
 
   <div class="players-container" *ngIf="qanda">
     <h2 class="neon-text-purple">Players</h2>

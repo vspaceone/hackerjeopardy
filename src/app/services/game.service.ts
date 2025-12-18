@@ -81,74 +81,82 @@ export class GameService {
       // Set timer for the active player
       question.activePlayer.remainingtime = this.TIMEOUT;
       this.timer = timer(0, 1000).subscribe(() => {
-        this.decrementTimer(question, players);
+        this.decrementTimer(question);
       });
     }
   }
 
-  decrementTimer(question: Question, players: Player[]): void {
+  decrementTimer(question: Question): void {
     // Decrement the current active player (only one at a time in sequential mode)
     if (question.activePlayer && question.activePlayer.remainingtime > 0) {
       question.activePlayer.remainingtime--;
       if (question.activePlayer.remainingtime <= 0) {
-        // Handle timeout - add to timeout players, clear active player, allow new buzzing
+        // Handle timeout - timer stops but player stays active for host judgment
         this.audioService.playFail();
         question.timeoutPlayers.add(question.activePlayer.id);
         question.timeoutPlayersArr = Array.from(question.timeoutPlayers);
-        question.activePlayers.delete(question.activePlayer.id);
-        question.activePlayersArr = Array.from(question.activePlayers);
-        question.activePlayer = undefined;
-
-        // For sequential buzzing, don't start timer for next player automatically
-        // Question stays open for remaining players to buzz in
-        if (question.availablePlayers.size === 0) {
-          this.notAnswered(question);
-        }
+        // Keep player active so host can still judge their answer
+        // Player will be deactivated when host clicks Correct/Incorrect
       }
     }
   }
 
-  private handleTimeout(question: Question): void {
-    // This will be handled by the component that subscribes to timer events
-  }
 
-  correctAnswer(question: Question, players: Player[]): void {
+
+  correctAnswer(question: Question): void {
     this.audioService.playSuccess();
     this.clearTimer();
 
     if (question.activePlayer) {
       question.activePlayer.score += question.value;
       question.player = question.activePlayer;
+      // Track score change for potential reset
+      if (!question.scoreChanges) question.scoreChanges = [];
+      question.scoreChanges.push({
+        playerId: question.activePlayer.id,
+        change: question.value,
+        timestamp: Date.now()
+      });
+      // Remove from active players now that decision is made
+      question.activePlayers.delete(question.activePlayer.id);
+      question.activePlayersArr = Array.from(question.activePlayers);
     }
 
     question.available = false;
     question.availablePlayers.clear();
-    question.activePlayers.clear();
-    question.activePlayersArr = Array.from(question.activePlayers);
     question.activePlayer = undefined;
   }
 
-  incorrectAnswer(question: Question, players: Player[]): void {
+  incorrectAnswer(question: Question): void {
     this.audioService.playFail();
     this.clearTimer(); // Clear current timer - decision is made
     if (question.activePlayer) {
       question.activePlayer.score -= question.value;
+      question.hadIncorrectAnswers = true; // Mark that incorrect answers were given
+
+      // Track score change for potential reset
+      if (!question.scoreChanges) question.scoreChanges = [];
+      question.scoreChanges.push({
+        playerId: question.activePlayer.id,
+        change: -question.value,
+        timestamp: Date.now()
+      });
 
       // Remove current player from active players
       question.activePlayers.delete(question.activePlayer.id);
       question.activePlayersArr = Array.from(question.activePlayers);
-
-      if (!question.timeoutPlayers.has(question.activePlayer.id)) {
-        question.timeoutPlayers.add(question.activePlayer.id);
-        question.timeoutPlayersArr = Array.from(question.timeoutPlayers);
-      }
 
       // Decision is made - clear active player and allow new buzzing round
       question.activePlayer = undefined;
 
       // If no more players available to buzz in, close the question
       if (question.availablePlayers.size === 0) {
-        this.notAnswered(question);
+        // If incorrect answers were given, mark as incorrectly answered
+        if (question.hadIncorrectAnswers) {
+          this.markQuestionIncorrect(question);
+        } else {
+          this.notAnswered(question);
+        }
       }
       // Question stays open, allowing remaining players to buzz in sequentially
     }
@@ -158,10 +166,42 @@ export class GameService {
 
   notAnswered(question: Question): void {
     this.clearTimer();
-    
+
     question.availablePlayers.clear();
     question.player = { btn: "none" } as Player;
     question.available = false;
+  }
+
+  markQuestionIncorrect(question: Question): void {
+    // Mark the question as having been attempted but answered incorrectly by all
+    question.player = { btn: "incorrect" } as Player;
+    question.available = false;
+    this.clearTimer();
+  }
+
+  resetQuestion(question: Question, players: Player[]): void {
+    // Undo all recorded score changes
+    question.scoreChanges?.forEach(change => {
+      const player = players.find(p => p.id === change.playerId);
+      if (player) {
+        player.score -= change.change; // Undo the score change
+      }
+    });
+
+    // Reset question to initial state
+    question.available = true;
+    question.player = undefined;
+    question.activePlayer = undefined;
+    question.activePlayers.clear();
+    question.activePlayersArr = [];
+    question.timeoutPlayers.clear();
+    question.timeoutPlayersArr = [];
+    question.availablePlayers = new Set([1, 2, 3, 4]); // Reset to all players
+    question.hadIncorrectAnswers = false;
+    question.scoreChanges = [];
+    question.resetTimestamp = Date.now();
+
+    this.clearTimer();
   }
 
   getPlayerById(id: number, players: Player[]): Player | null {

@@ -8,8 +8,7 @@ import { GameBoardComponent } from './components/game-board/game-board.component
 import { QuestionDisplayComponent } from './components/question-display/question-display.component';
 import { PlayerControlsComponent } from './components/player-controls/player-controls.component';
 import { Category, Player, Question } from './models/game.models';
-declare var jquery:any;
-declare var $ :any;
+
 
 @Component({
 	selector: 'app-root',
@@ -57,16 +56,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	private activatePlayer(playerId: number): void {
-		if (!this.selectedQuestion) return;
-
-		// Cast to Question type
-		const question = this.selectedQuestion as Question;
-
-		// Use game service to activate player
-		const activated = this.gameService.activatePlayer(question, playerId, this.players);
+		const activated = this.gameService.activatePlayer(this.selectedQuestion!, playerId, this.players);
 		if (activated) {
-			this.audioService.playClick();
-			console.log(`Player ${playerId} activated for question`);
+			this.audioService.playBuzzer();
+			this.couldBeCanceled = false; // Can't cancel once someone has buzzed in
 		}
 	}
 
@@ -114,33 +107,45 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	selectedQuestion: any = null;
 	renamePlayer: Player | null = null;
-	couldBeCanceled = true;
+	couldBeCanceled = false; // Only true when a question is open and cancellable
 	qanda: Category[] | null = null;
 
 
-	selectSet(s: string): void {
-		console.log('Selecting set:', s);
-		this.audioService.playClick();
-		this.gameDataService.loadGameRound(s).subscribe(categories => {
-			console.log('Loaded categories:', categories);
-			this.qanda = categories;
-		});
-	}
+  selectSet(s: string): void {
+    this.audioService.playClick();
+    this.gameDataService.loadGameRound(s).subscribe({
+      next: (categories) => {
+        this.qanda = categories;
+      },
+      error: (error) => {
+        console.error('Error loading round:', s, error);
+        alert(`Failed to load round "${s}": ${error.message}`);
+      }
+    });
+  }
+
+  resetQuestion(question: Question): void {
+    this.gameService.resetQuestion(question, this.players);
+    // Close modal if this question was selected
+    if (this.selectedQuestion === question) {
+      this.selectedQuestion = null;
+      this.couldBeCanceled = false;
+    }
+  }
 
 	onSelect(q): void {
 		this.selectedQuestion = q;
+		this.couldBeCanceled = true; // Allow canceling when question first opens
 		this.audioService.playClick();
 		this.audioService.startThemeMusic();
-		console.log('Selected question:', q);
 	}
 
 	answered(q, p): void {
-		console.log(q)
 		this.audioService.stopThemeMusic();
 
 		// Use GameService for correct answer handling
 		if (this.selectedQuestion) {
-			this.gameService.correctAnswer(this.selectedQuestion, this.players);
+			this.gameService.correctAnswer(this.selectedQuestion);
 		}
 
 		this.couldBeCanceled = false;
@@ -150,11 +155,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
 	notanswered(q, p): void {
-		console.log(q)
-
 		// Use GameService for incorrect answer handling
 		if (this.selectedQuestion) {
-			this.gameService.incorrectAnswer(this.selectedQuestion, this.players);
+			this.gameService.incorrectAnswer(this.selectedQuestion);
 		}
 
 		this.couldBeCanceled = false;
@@ -176,6 +179,15 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.notanswered(this.selectedQuestion, null);
 	}
 
+	noOneKnows(): void {
+		if (this.selectedQuestion) {
+			this.gameService.markQuestionIncorrect(this.selectedQuestion);
+		}
+		this.selectedQuestion = null;
+		// Keep couldBeCanceled as false since question is resolved
+		this.couldBeCanceled = false;
+	}
+
 	adjustScore(event: {player: Player, amount: number}): void {
 		event.player.score += event.amount;
 	}
@@ -183,10 +195,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 	close(): void {
 		this.audioService.stopThemeMusic();
 		this.selectedQuestion = null;
+		this.couldBeCanceled = false;
 	}
 
 	cancel(): void {
 		this.selectedQuestion = null;
+		this.couldBeCanceled = false;
 	}
 
 	rename(p): void {

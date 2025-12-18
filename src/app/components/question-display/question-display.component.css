@@ -41,6 +41,33 @@
   font-family: 'Orbitron', monospace;
 }
 
+.question-header .btn {
+  padding: 6px 12px;
+  font-size: 0.9em;
+  border-radius: 4px;
+  font-family: 'Orbitron', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid;
+  background: var(--bg-secondary);
+  transition: all 0.3s ease;
+}
+
+.question-header .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.question-header .btn-secondary {
+  color: var(--text-secondary);
+  border-color: var(--text-secondary);
+}
+
+.question-header .btn-secondary:hover {
+  background: var(--text-secondary);
+  color: var(--bg-primary);
+}
+
 .question-content {
   margin: 20px 0;
   text-align: center;
@@ -71,6 +98,8 @@
   max-height: 400px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 8px;
 }
 
 .answer-reveal {
@@ -136,12 +165,18 @@
 
 .player-badge {
   padding: 8px 12px;
-  border-radius: 20px;
+  border-radius: 6px;
   font-weight: bold;
   font-size: 0.9em;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
   font-family: 'Roboto Mono', monospace;
   border: 1px solid;
+  transition: all 0.3s ease;
+}
+
+.player-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
 }
 
 .active-player-section {
@@ -202,6 +237,17 @@
   background: #ff073a;
   color: var(--bg-primary);
   box-shadow: 0 0 20px #ff073a;
+}
+
+.action-buttons .btn-warning {
+  color: #ffa500; /* Orange/warning color */
+  border-color: #ffa500;
+}
+
+.action-buttons .btn-warning:hover {
+  background: #ffa500;
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px #ffa500;
 }
 
 .answer-controls {
@@ -266,6 +312,17 @@
 .modal-footer .btn-primary:hover {
   background: var(--neon-blue);
   color: var(--bg-primary);
+}
+
+.modal-footer .btn-warning {
+  color: #ffa500; /* Orange/warning color */
+  border-color: #ffa500;
+}
+
+.modal-footer .btn-warning:hover {
+  background: #ffa500;
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px #ffa500;
 }
 
 @media (max-width: 768px) {

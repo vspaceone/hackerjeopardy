@@ -11,7 +11,7 @@ export class GameFlowService {
   constructor(private http: HttpClient) { }
 
   selectSet(setName: string): Observable<Category[]> {
-    return this.http.get<any>(`/assets/${setName}/turn.json`).pipe(
+    return this.http.get<any>(`/assets/${setName}/round.json`).pipe(
       // Process the data
     );
   }

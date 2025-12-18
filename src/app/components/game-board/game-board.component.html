@@ -13,7 +13,9 @@
           class="btn m-2 question-button"
           [ngClass]="getQuestionButtonClass(category.questions[qIndex])"
           (click)="selectQuestion(category.questions[qIndex])"
-          [disabled]="!category.questions[qIndex].available"
+          (mousedown)="onQuestionMouseDown(category.questions[qIndex], $event)"
+          (mouseup)="onQuestionMouseUp()"
+          (mouseleave)="onQuestionMouseLeave()"
           role="gridcell"
           [attr.aria-label]="'Select question for ' + category.questions[qIndex].value + ' points in ' + category.name"
         >

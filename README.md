@@ -9,7 +9,8 @@ A modern, web-based Jeopardy-style game built with Angular, featuring hacker-the
 - **Dynamic Question Sets**: Multiple themed rounds (cybersecurity, AI, blockchain, etc.)
 - **Audio Feedback**: Sound effects for correct/incorrect answers and background music
 - **Player Management**: Support for multiple players with score tracking
-- **Host Tools**: Automatic question reveal on correct answers, manual reveal otherwise
+- **Host Tools**: Automatic question reveal on correct answers, manual reveal, "No One Knows" button, and long-press reset for fixing issues
+- **Score Integrity**: Complete undo of score changes when resetting questions during gameplay
 - **Responsive Design**: Mobile-friendly interface
 - **Accessibility**: ARIA labels, keyboard navigation, and screen reader support
 - **Modern Architecture**: Standalone Angular components, RxJS for reactive programming
@@ -24,8 +25,8 @@ A modern, web-based Jeopardy-style game built with Angular, featuring hacker-the
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/hacker-jeopardy.git
-   cd hacker-jeopardy
+   git clone https://github.com/krauni/hackerjeopardy.git
+   cd hackerjeopardy
    ```
 
 2. Install dependencies:
@@ -88,6 +89,12 @@ src/
 - Refactored to clean architecture with services
 - Fixed Jeopardy-style grid layout
 - Updated dependencies and build tools
+- Added "No One Knows" button for host control of unanswered questions
+- Implemented long-press question reset functionality with complete score undo
+- Improved player badge styling with blue theme consistency
+- Enhanced button styling with proper color schemes and hover effects
+- Fixed cancel button behavior and added proper state management
+- Added comprehensive visual feedback for all game actions
 
 ## Adding New Question Rounds
 

@@ -1,7 +1,7 @@
 .game-board {
   margin: 20px 0;
   padding: 20px;
-  background: rgba(10, 10, 10, 0.8);
+  background: transparent;
   border: 1px solid var(--neon-green);
   border-radius: 12px;
   box-shadow: var(--glow-green);
@@ -15,7 +15,7 @@
 }
 
 .category-cell {
-  background: var(--bg-secondary);
+  background: rgba(10, 10, 10, 0.5);
   color: var(--neon-purple);
   padding: 15px;
   text-align: center;
@@ -56,7 +56,7 @@
   font-weight: bold;
   border-radius: 8px;
   transition: all 0.3s ease;
-  background: var(--bg-secondary);
+  background: rgba(10, 10, 10, 0.3);
   border: 1px solid var(--neon-blue);
   color: var(--neon-blue);
   font-family: 'Orbitron', monospace;
@@ -93,12 +93,10 @@
   box-shadow: var(--glow-blue-dark);
 }
 
-.question-button.disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  border-color: var(--neon-red);
-  color: var(--neon-red);
-  background: rgba(255, 7, 58, 0.1);
+.question-button.answered-correctly,
+.question-button.answered-incorrectly,
+.question-button.unanswered {
+  cursor: default;
 }
 
 .question-button.answered-correctly {
@@ -115,6 +113,20 @@
   box-shadow: 0 0 20px #00ff88;
 }
 
+.question-button.answered-incorrectly {
+  background: #ff073a; /* Red for incorrect */
+  color: var(--bg-primary);
+  border-color: #ff073a;
+  box-shadow: 0 0 15px #ff073a;
+  opacity: 0.8;
+  cursor: default;
+}
+
+.question-button.answered-incorrectly:hover {
+  transform: none;
+  box-shadow: 0 0 20px #ff073a;
+}
+
 .question-button.unanswered {
   background: #ff073a !important; /* Red for incorrect */
   color: var(--bg-primary) !important;
@@ -128,6 +140,27 @@
 .question-button.unanswered:hover {
   transform: none;
   box-shadow: 0 0 20px #ff073a;
+}
+
+.question-button.long-pressing {
+  animation: longPressPulse 0.3s ease-in-out infinite alternate;
+  background: #ff073a !important;
+  color: var(--bg-primary) !important;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff073a;
+}
+
+.question-button.reset {
+  animation: resetBlink 0.5s ease-in-out infinite alternate;
+  background: #ff073a !important;
+  color: var(--bg-primary) !important;
+  border-color: #ff073a !important;
+  box-shadow: 0 0 20px #ff073a;
+}
+
+.question-button.long-pressing:hover,
+.question-button.reset:hover {
+  transform: none;
 }
 
 @keyframes redGlow {
@@ -163,6 +196,28 @@
   100% {
     transform: scale(1);
     box-shadow: var(--glow-blue-dark);
+  }
+}
+
+@keyframes longPressPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes resetBlink {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
   }
 }
 

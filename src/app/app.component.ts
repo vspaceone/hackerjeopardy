@@ -56,6 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	private activatePlayer(playerId: number): void {
+		this.audioService.playBuzzer();
 		this.gameService.activatePlayer(this.selectedQuestion!, playerId, this.players);
 	}
 

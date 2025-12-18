@@ -1,0 +1,25 @@
+{
+  "rounds": [
+    {
+      "id": "demo_round",
+      "name": "Demo Round - Hacker Jeopardy",
+      "language": "en",
+      "difficulty": "easy",
+      "categories": ["chemistry", "persons", "places"],
+      "author": "Hacker Jeopardy Team",
+      "lastModified": "2025-12-18T21:30:00Z",
+      "size": 1024,
+      "description": "A demonstration round for testing the multi-repository content system",
+      "tags": ["demo", "test"]
+    }
+  ],
+  "lastUpdated": "2025-12-18T21:30:00Z",
+  "totalRounds": 1,
+  "totalSize": 1024,
+  "version": "1.0.0",
+  "repository": {
+    "name": "hackerjeopardy-content",
+    "description": "Content repository for Hacker Jeopardy game rounds",
+    "author": "Hacker Jeopardy Team"
+  }
+}

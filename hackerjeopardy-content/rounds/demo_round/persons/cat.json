@@ -1,0 +1,40 @@
+{
+  "name": "Persons",
+  "questions": [
+    {
+      "question": "Who is known as the father of computer science?",
+      "answer": "Alan Turing",
+      "value": 100,
+      "available": true,
+      "cat": "persons"
+    },
+    {
+      "question": "Who founded Microsoft?",
+      "answer": "Bill Gates",
+      "value": 200,
+      "available": true,
+      "cat": "persons"
+    },
+    {
+      "question": "Who is the creator of Linux?",
+      "answer": "Linus Torvalds",
+      "value": 300,
+      "available": true,
+      "cat": "persons"
+    },
+    {
+      "question": "Who is considered the first programmer?",
+      "answer": "Ada Lovelace",
+      "value": 400,
+      "available": true,
+      "cat": "persons"
+    },
+    {
+      "question": "Who developed the theory of relativity?",
+      "answer": "Albert Einstein",
+      "value": 500,
+      "available": true,
+      "cat": "persons"
+    }
+  ]
+}

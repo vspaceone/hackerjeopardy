@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	sets: string[] = [];
 	loading = true;
 	showContentManager = false;
+	currentRoundName = '';
 
 	constructor(
 		private gameDataService: GameDataService,
@@ -135,13 +136,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	selectedQuestion: any = null;
-	renamePlayer: Player | null = null;
+
 	couldBeCanceled = false; // Only true when a question is open and cancellable
 	qanda: Category[] | null = null;
 
 
   selectSet(s: string): void {
     this.audioService.playClick();
+    this.currentRoundName = s;
     this.gameDataService.loadGameRound(s).subscribe({
       next: (categories) => {
         this.qanda = categories;
@@ -220,7 +222,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 		if (this.selectedQuestion) {
 			this.gameService.markQuestionIncorrect(this.selectedQuestion);
 		}
-		this.selectedQuestion = null;
+		// Keep selectedQuestion to show the answer, user can close manually
+		// this.selectedQuestion = null;
 		// Keep couldBeCanceled as false since question is resolved
 		this.couldBeCanceled = false;
 	}
@@ -240,13 +243,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.couldBeCanceled = false;
 	}
 
-	rename(p): void {
-		this.renamePlayer = p
-	}
 
-	renameFinished(): void {
-		this.renamePlayer = undefined
-	}
 
 	players: Player[] = [
 		{id: 1, btn: "player1", name: "player1", score: 0, bgcolor: "#ff6b6b", fgcolor: "#9f0b0b", key: "1", remainingtime: null},

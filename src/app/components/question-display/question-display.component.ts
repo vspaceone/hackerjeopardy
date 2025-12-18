@@ -42,6 +42,7 @@ export class QuestionDisplayComponent {
   }
 
   onNoOneKnows(): void {
+    this.showAnswer = true;
     this.noOneKnows.emit();
   }
 

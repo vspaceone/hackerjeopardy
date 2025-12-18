@@ -1,0 +1,199 @@
+<div class="content-manager">
+  <div class="content-header">
+    <h2>Content Management</h2>
+    <button class="close-btn" (click)="onClose()">✕</button>
+  </div>
+
+  <!-- Cache Status -->
+  <div class="status-section">
+    <h3>Cache Status</h3>
+    <div class="status-grid">
+      <div class="status-item">
+        <span class="label">Rounds Cached:</span>
+        <span class="value">{{ cacheStats?.cachedRounds || 0 }}</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Categories Cached:</span>
+        <span class="value">{{ cacheStats?.cachedCategories || 0 }}</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Cache Size:</span>
+        <span class="value">{{ formattedCacheSize }}</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Last Cleanup:</span>
+        <span class="value">{{ cacheStats?.lastCleanup | date:'short' || 'Never' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Section -->
+  <div class="update-section">
+    <h3>Content Updates</h3>
+
+    <button
+      class="btn btn-primary"
+      (click)="checkForUpdates()"
+      [disabled]="checking"
+    >
+      {{ checking ? 'Checking...' : 'Check for Updates' }}
+    </button>
+
+    <div *ngIf="updateInfo" class="update-info">
+      <div *ngIf="updateInfo.hasUpdates" class="has-updates">
+        <p>Updates available!</p>
+        <ul>
+          <li *ngIf="updateInfo.newRounds.length">New rounds: {{ updateInfo.newRounds.length }}</li>
+          <li *ngIf="updateInfo.updatedRounds.length">Updated rounds: {{ updateInfo.updatedRounds.length }}</li>
+          <li *ngIf="updateInfo.removedRounds.length">Removed rounds: {{ updateInfo.removedRounds.length }}</li>
+        </ul>
+
+        <button
+          class="btn btn-success"
+          (click)="updateContent()"
+          [disabled]="updating"
+        >
+          {{ updating ? 'Downloading...' : 'Download Updates' }}
+        </button>
+      </div>
+
+      <div *ngIf="!updateInfo.hasUpdates" class="no-updates">
+        <p>Content is up to date</p>
+      </div>
+    </div>
+  </div>
+
+   <!-- Repository Management -->
+   <div class="repository-section">
+     <div class="section-header">
+       <h3>Content Repositories</h3>
+       <button
+         class="btn btn-secondary"
+         (click)="showAddRepo = !showAddRepo"
+       >
+         {{ showAddRepo ? 'Cancel' : 'Add Repository' }}
+       </button>
+     </div>
+
+     <!-- Add Repository Form -->
+     <div *ngIf="showAddRepo" class="add-repo-form">
+       <h4>Add New Repository</h4>
+       <p>Enter the GitHub repository URL in the format "username/repo". The repository must have GitHub Pages enabled.</p>
+
+       <div class="form-group">
+         <label for="repoUrl">GitHub Repository URL:</label>
+         <input
+           id="repoUrl"
+           type="text"
+           [(ngModel)]="newRepoUrl"
+           placeholder="username/repo"
+           (input)="validationResult = null"
+           class="form-input"
+         />
+       </div>
+
+       <div class="form-actions">
+         <button
+           class="btn btn-secondary"
+           (click)="validateNewRepository()"
+           [disabled]="!newRepoUrl.trim() || validatingRepo"
+         >
+           {{ validatingRepo ? 'Validating...' : 'Validate' }}
+         </button>
+
+         <button
+           class="btn btn-primary"
+           (click)="addRepository()"
+           [disabled]="!validationResult?.isValid || addingRepo"
+         >
+           {{ addingRepo ? 'Adding...' : 'Add Repository' }}
+         </button>
+       </div>
+
+       <!-- Validation Result -->
+       <div *ngIf="validationResult" class="validation-result" [ngClass]="validationResult.isValid ? 'valid' : 'invalid'">
+         <div *ngIf="validationResult.isValid" class="valid-repo">
+           <p>✅ Valid repository found!</p>
+           <div class="repo-info">
+             <span class="repo-name">{{ validationResult.manifest?.repository?.name || 'Unknown' }}</span>
+             <span class="repo-rounds">{{ validationResult.manifest?.rounds.length || 0 }} rounds available</span>
+           </div>
+         </div>
+
+         <div *ngIf="!validationResult.isValid" class="invalid-repo">
+           <p>❌ {{ validationResult.error }}</p>
+         </div>
+       </div>
+     </div>
+
+     <!-- Repository List -->
+     <div class="repository-list" *ngIf="!loadingRepos">
+       <div *ngIf="repositories.length === 0" class="no-repositories">
+         <p>No repositories configured. Add a repository to get started.</p>
+       </div>
+
+       <div *ngFor="let repo of repositories" class="repository-item">
+         <div class="repo-header">
+           <div class="repo-info">
+             <h4>{{ repo.name }}</h4>
+             <span class="repo-url">{{ repo.githubUrl }}</span>
+           </div>
+
+           <div class="repo-status" [ngClass]="getStatusClass(repo.status.state)">
+             {{ getStatusText(repo) }}
+           </div>
+         </div>
+
+         <div class="repo-details">
+           <div class="repo-stats">
+             <span class="stat">Priority: {{ repo.priority }}</span>
+             <span class="stat">Added: {{ repo.addedDate | date:'short' }}</span>
+             <span *ngIf="repo.lastChecked" class="stat">Last checked: {{ repo.lastChecked | date:'short' }}</span>
+           </div>
+
+           <div class="repo-actions">
+             <button
+               class="btn btn-sm"
+               [ngClass]="repo.enabled ? 'btn-warning' : 'btn-success'"
+               (click)="toggleRepository(repo.id)"
+             >
+               {{ repo.enabled ? 'Disable' : 'Enable' }}
+             </button>
+
+             <button
+               class="btn btn-sm btn-info"
+               (click)="refreshRepository(repo.id)"
+             >
+               Refresh
+             </button>
+
+             <button
+               class="btn btn-sm btn-danger"
+               (click)="removeRepository(repo.id)"
+             >
+               Remove
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <div *ngIf="loadingRepos" class="loading">
+       Loading repositories...
+     </div>
+   </div>
+
+   <!-- Cache Management -->
+   <div class="cache-section">
+     <h3>Cache Management</h3>
+     <p>Clear cached content to free up storage space. Content will need to be re-downloaded for offline use.</p>
+
+     <button
+       class="btn btn-danger"
+       (click)="clearCache()"
+       [disabled]="clearing"
+     >
+       {{ clearing ? 'Clearing...' : 'Clear Cache' }}
+     </button>
+   </div>
+ </div>

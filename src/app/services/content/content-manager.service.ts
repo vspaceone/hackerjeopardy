@@ -223,20 +223,31 @@ export class ContentManagerService {
   private getRoundsFromProvider(provider: ContentProvider): Observable<RoundMetadata[]> {
     return provider.getManifest().pipe(
       map(manifest => {
-        if (!manifest || !manifest.rounds) return [];
+        console.log(`ContentManager: Got manifest from ${provider.name}:`, manifest);
+        if (!manifest || !manifest.rounds) {
+          console.warn(`ContentManager: No manifest or rounds from ${provider.name}`);
+          return [];
+        }
+
+        console.log(`ContentManager: Processing ${manifest.rounds.length} rounds from ${provider.name}`);
 
         // Validate round metadata
-        return manifest.rounds.filter(round => {
+        const validRounds = manifest.rounds.filter(round => {
+          console.log(`ContentManager: Validating round ${round.id} from ${provider.name}`);
           const validation = this.validator.validateRoundMetadata(round);
           if (!validation.isValid) {
-            console.warn(`Invalid round metadata from ${provider.name}:`, round.id, validation.errors);
+            console.warn(`ContentManager: Invalid round metadata from ${provider.name}:`, round.id, validation.errors);
             return false;
           }
+          console.log(`ContentManager: Round ${round.id} is valid`);
           return true;
         });
+
+        console.log(`ContentManager: ${validRounds.length} valid rounds from ${provider.name}`);
+        return validRounds;
       }),
       catchError(error => {
-        console.warn(`Failed to get manifest from provider ${provider.name}:`, error);
+        console.error(`ContentManager: Failed to get manifest from provider ${provider.name}:`, error);
         return of([]);
       })
     );
@@ -263,14 +274,13 @@ export class ContentManagerService {
         if (!manifest?.rounds) continue;
 
         for (const round of manifest.rounds) {
-          const prefixedId = `${repo.id}_${round.id}`;
-          if (!currentRoundIds.has(prefixedId)) {
-            newRounds.push({ ...round, id: prefixedId });
+          if (!currentRoundIds.has(round.id)) {
+            newRounds.push(round);
           } else {
             // Check if updated (simplified - could compare timestamps)
-            const current = currentRounds.find(r => r.id === prefixedId);
+            const current = currentRounds.find(r => r.id === round.id);
             if (current && round.lastModified !== current.lastModified) {
-              updatedRounds.push({ ...round, id: prefixedId });
+              updatedRounds.push(round);
             }
           }
         }

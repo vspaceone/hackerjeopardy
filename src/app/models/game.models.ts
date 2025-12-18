@@ -44,6 +44,7 @@ export interface Category {
 }
 
 export interface GameRound {
+  id?: string; // Added for multi-repository support
   name: string;
   categories: string[];
   comment?: string;

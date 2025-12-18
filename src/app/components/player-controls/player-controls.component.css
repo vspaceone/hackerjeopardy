@@ -14,6 +14,25 @@
   overflow: hidden;
 }
 
+.rename-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  color: currentColor;
+  padding: 8px 12px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  max-width: 160px;
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.rename-input:focus {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
 .player-card::before {
   content: '';
   position: absolute;
@@ -105,6 +124,7 @@
 .player-controls button:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 20px currentColor, 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: white;
 }
 
 .player-controls button:hover::before {
@@ -121,16 +141,28 @@
   border-color: var(--neon-blue-dark);
 }
 
+.rename-btn:hover {
+  color: white;
+}
+
 .add-btn {
   background: var(--neon-blue-light);
   color: var(--bg-primary);
   border-color: var(--neon-blue-light);
 }
 
+.add-btn:hover {
+  color: white;
+}
+
 .subtract-btn {
   background: var(--neon-blue-muted);
   color: var(--bg-primary);
   border-color: var(--neon-blue-muted);
+}
+
+.subtract-btn:hover {
+  color: white;
 }
 
 .active-indicator {

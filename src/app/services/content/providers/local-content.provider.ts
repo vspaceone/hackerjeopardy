@@ -29,6 +29,10 @@ export class LocalContentProvider extends BaseContentProvider {
     const url = `${this.baseUrl}/${roundId}/round.json`;
     console.log(`LocalContentProvider: Loading round from ${url}`);
     return this.http.get<GameRound>(url).pipe(
+      map(round => {
+        console.log(`LocalContentProvider: Loaded round:`, round);
+        return round;
+      }),
       catchError(error => {
         console.error(`LocalContentProvider: Failed to load ${url}:`, error);
         throw error;
@@ -37,7 +41,8 @@ export class LocalContentProvider extends BaseContentProvider {
   }
 
   getCategory(roundId: string, categoryName: string): Observable<Category> {
-    const url = `${this.baseUrl}/${roundId}/${categoryName}/cat.json`;
+    const encodedCategoryName = encodeURIComponent(categoryName);
+    const url = `${this.baseUrl}/${roundId}/${encodedCategoryName}/cat.json`;
     console.log(`LocalContentProvider: Loading category from ${url}`);
     return this.http.get<Category>(url).pipe(
       catchError(error => {

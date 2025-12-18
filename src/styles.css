@@ -191,6 +191,7 @@ p {
 
 .cyber-button:hover {
   color: var(--bg-primary);
+  background: var(--neon-blue);
   box-shadow: var(--glow-blue);
 }
 

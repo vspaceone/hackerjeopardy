@@ -202,6 +202,22 @@ p {
   transform: scale(0.95);
 }
 
+.btn-icon {
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+
+.header-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.header-controls .cyber-button {
+  font-size: 0.9em;
+  padding: 10px 16px;
+}
+
 /* Matrix Rain Background Animation */
 .matrix-rain {
   position: fixed;

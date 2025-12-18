@@ -27,6 +27,8 @@ export interface Question {
   activePlayer?: Player;
   activationtime?: number;
   hadIncorrectAnswers?: boolean;
+  scoreChanges?: Array<{playerId: number, change: number, timestamp: number}>;
+  resetTimestamp?: number;
 }
 
 export interface Category {

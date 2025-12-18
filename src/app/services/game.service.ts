@@ -110,6 +110,13 @@ export class GameService {
     if (question.activePlayer) {
       question.activePlayer.score += question.value;
       question.player = question.activePlayer;
+      // Track score change for potential reset
+      if (!question.scoreChanges) question.scoreChanges = [];
+      question.scoreChanges.push({
+        playerId: question.activePlayer.id,
+        change: question.value,
+        timestamp: Date.now()
+      });
       // Remove from active players now that decision is made
       question.activePlayers.delete(question.activePlayer.id);
       question.activePlayersArr = Array.from(question.activePlayers);
@@ -127,14 +134,17 @@ export class GameService {
       question.activePlayer.score -= question.value;
       question.hadIncorrectAnswers = true; // Mark that incorrect answers were given
 
+      // Track score change for potential reset
+      if (!question.scoreChanges) question.scoreChanges = [];
+      question.scoreChanges.push({
+        playerId: question.activePlayer.id,
+        change: -question.value,
+        timestamp: Date.now()
+      });
+
       // Remove current player from active players
       question.activePlayers.delete(question.activePlayer.id);
       question.activePlayersArr = Array.from(question.activePlayers);
-
-      if (!question.timeoutPlayers.has(question.activePlayer.id)) {
-        question.timeoutPlayers.add(question.activePlayer.id);
-        question.timeoutPlayersArr = Array.from(question.timeoutPlayers);
-      }
 
       // Decision is made - clear active player and allow new buzzing round
       question.activePlayer = undefined;
@@ -166,6 +176,31 @@ export class GameService {
     // Mark the question as having been attempted but answered incorrectly by all
     question.player = { btn: "incorrect" } as Player;
     question.available = false;
+    this.clearTimer();
+  }
+
+  resetQuestion(question: Question, players: Player[]): void {
+    // Undo all recorded score changes
+    question.scoreChanges?.forEach(change => {
+      const player = players.find(p => p.id === change.playerId);
+      if (player) {
+        player.score -= change.change; // Undo the score change
+      }
+    });
+
+    // Reset question to initial state
+    question.available = true;
+    question.player = undefined;
+    question.activePlayer = undefined;
+    question.activePlayers.clear();
+    question.activePlayersArr = [];
+    question.timeoutPlayers.clear();
+    question.timeoutPlayersArr = [];
+    question.availablePlayers = new Set([1, 2, 3, 4]); // Reset to all players
+    question.hadIncorrectAnswers = false;
+    question.scoreChanges = [];
+    question.resetTimestamp = Date.now();
+
     this.clearTimer();
   }
 

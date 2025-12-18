@@ -111,18 +111,27 @@ export class AppComponent implements OnInit, AfterViewInit {
 	qanda: Category[] | null = null;
 
 
-	selectSet(s: string): void {
-		this.audioService.playClick();
-		this.gameDataService.loadGameRound(s).subscribe({
-			next: (categories) => {
-				this.qanda = categories;
-			},
-			error: (error) => {
-				console.error('Error loading round:', s, error);
-				alert(`Failed to load round "${s}": ${error.message}`);
-			}
-		});
-	}
+  selectSet(s: string): void {
+    this.audioService.playClick();
+    this.gameDataService.loadGameRound(s).subscribe({
+      next: (categories) => {
+        this.qanda = categories;
+      },
+      error: (error) => {
+        console.error('Error loading round:', s, error);
+        alert(`Failed to load round "${s}": ${error.message}`);
+      }
+    });
+  }
+
+  resetQuestion(question: Question): void {
+    this.gameService.resetQuestion(question, this.players);
+    // Close modal if this question was selected
+    if (this.selectedQuestion === question) {
+      this.selectedQuestion = null;
+      this.couldBeCanceled = false;
+    }
+  }
 
 	onSelect(q): void {
 		this.selectedQuestion = q;

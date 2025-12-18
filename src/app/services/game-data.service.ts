@@ -77,8 +77,7 @@ export class GameDataService {
           timeoutPlayers: new Set<number>(),
           timeoutPlayersArr: [],
           availablePlayers: new Set<number>([1, 2, 3, 4]),
-          buttonsActive: false,
-          hasIncorrectAnswers: false
+          buttonsActive: false
         };
 
         if (question.image && category.path) {

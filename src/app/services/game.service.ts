@@ -125,21 +125,28 @@ export class GameService {
     this.clearTimer(); // Clear current timer - decision is made
     if (question.activePlayer) {
       question.activePlayer.score -= question.value;
-
-      // Mark question as having had incorrect answers
-      question.hasIncorrectAnswers = true;
+      question.hadIncorrectAnswers = true; // Mark that incorrect answers were given
 
       // Remove current player from active players
       question.activePlayers.delete(question.activePlayer.id);
       question.activePlayersArr = Array.from(question.activePlayers);
 
-      // Player is already in timeout list from timer expiration
+      if (!question.timeoutPlayers.has(question.activePlayer.id)) {
+        question.timeoutPlayers.add(question.activePlayer.id);
+        question.timeoutPlayersArr = Array.from(question.timeoutPlayers);
+      }
+
       // Decision is made - clear active player and allow new buzzing round
       question.activePlayer = undefined;
 
       // If no more players available to buzz in, close the question
       if (question.availablePlayers.size === 0) {
-        this.notAnswered(question);
+        // If incorrect answers were given, mark as incorrectly answered
+        if (question.hadIncorrectAnswers) {
+          this.markQuestionIncorrect(question);
+        } else {
+          this.notAnswered(question);
+        }
       }
       // Question stays open, allowing remaining players to buzz in sequentially
     }
@@ -149,10 +156,17 @@ export class GameService {
 
   notAnswered(question: Question): void {
     this.clearTimer();
-    
+
     question.availablePlayers.clear();
     question.player = { btn: "none" } as Player;
     question.available = false;
+  }
+
+  markQuestionIncorrect(question: Question): void {
+    // Mark the question as having been attempted but answered incorrectly by all
+    question.player = { btn: "incorrect" } as Player;
+    question.available = false;
+    this.clearTimer();
   }
 
   getPlayerById(id: number, players: Player[]): Player | null {

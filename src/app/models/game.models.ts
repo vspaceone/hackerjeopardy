@@ -23,10 +23,10 @@ export interface Question {
   timeoutPlayers: Set<number>;
   timeoutPlayersArr: number[];
   availablePlayers: Set<number>;
+  buttonsActive: boolean;
   activePlayer?: Player;
   activationtime?: number;
-  buttonsActive?: boolean;
-  hasIncorrectAnswers?: boolean; // Tracks if question was answered incorrectly by at least one player
+  hadIncorrectAnswers?: boolean;
 }
 
 export interface Category {

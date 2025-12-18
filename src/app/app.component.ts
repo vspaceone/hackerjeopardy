@@ -162,6 +162,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.notanswered(this.selectedQuestion, null);
 	}
 
+	noOneKnows(): void {
+		if (this.selectedQuestion) {
+			this.gameService.markQuestionIncorrect(this.selectedQuestion);
+		}
+		this.selectedQuestion = null;
+		this.couldBeCanceled = true;
+	}
+
 	adjustScore(event: {player: Player, amount: number}): void {
 		event.player.score += event.amount;
 	}

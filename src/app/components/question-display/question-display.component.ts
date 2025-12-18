@@ -17,6 +17,7 @@ export class QuestionDisplayComponent {
   @Output() cancel = new EventEmitter<void>();
   @Output() correct = new EventEmitter<void>();
   @Output() incorrect = new EventEmitter<void>();
+  @Output() noOneKnows = new EventEmitter<void>();
   @Output() playerRename = new EventEmitter<Player>();
 
   showAnswer: boolean = false;
@@ -38,6 +39,10 @@ export class QuestionDisplayComponent {
 
   onIncorrect(): void {
     this.incorrect.emit();
+  }
+
+  onNoOneKnows(): void {
+    this.noOneKnows.emit();
   }
 
   onRenamePlayer(player: Player): void {

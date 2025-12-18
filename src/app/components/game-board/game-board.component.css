@@ -112,21 +112,21 @@
 
 .question-button.answered-correctly:hover {
   transform: none;
-  box-shadow: var(--glow-blue-light);
+  box-shadow: 0 0 20px #00ff88;
 }
 
 .question-button.answered-incorrectly {
-  background: #ff8c00; /* Orange for difficult questions */
+  background: #ff073a; /* Red for incorrect */
   color: var(--bg-primary);
-  border-color: #ff8c00;
-  box-shadow: 0 0 15px #ff8c00;
-  opacity: 0.9;
+  border-color: #ff073a;
+  box-shadow: 0 0 15px #ff073a;
+  opacity: 0.8;
   cursor: default;
 }
 
 .question-button.answered-incorrectly:hover {
   transform: none;
-  box-shadow: 0 0 20px #ff8c00;
+  box-shadow: 0 0 20px #ff073a;
 }
 
 .question-button.unanswered {

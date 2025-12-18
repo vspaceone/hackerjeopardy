@@ -21,11 +21,11 @@ export class GameBoardComponent {
   }
 
   getQuestionButtonClass(question: Question): string {
+    if (!question.available && question.player && question.player.btn === "incorrect") {
+      return 'btn-warning answered-incorrectly';
+    }
     if (!question.available && question.player && question.player.btn !== "none") {
       return 'btn-success answered-correctly';
-    }
-    if (!question.available && question.hasIncorrectAnswers) {
-      return 'btn-warning answered-incorrectly';
     }
     if (!question.available) {
       return 'btn-danger unanswered';

@@ -29,6 +29,9 @@ Based on examination of the codebase, here's a comprehensive analysis of the cur
 - `buttonsActive`: Legacy field (not actively used)
 - `activePlayer`: Currently active player with timer
 - `activationtime`: When player became active (for potential future use)
+- `hadIncorrectAnswers`: Boolean indicating if any incorrect answers were given
+- `scoreChanges`: Array tracking all score modifications during question lifecycle (for reset functionality)
+- `resetTimestamp`: Timestamp when question was last reset (for visual feedback)
 
 **Player Object:**
 - `id`: Unique identifier (1-4)
@@ -98,6 +101,14 @@ When no players can answer:
 - Allows host to manually mark question as unanswered
 - Sets question as having incorrect answers
 - Useful for closing questions without waiting for player interaction
+
+Question Reset (Long-Press):
+- Long-press (1.5 seconds) on any answered question tile
+- Completely undoes the question transaction
+- Reverts all score changes (points awarded/deducted)
+- Returns question to initial available state on game board
+- Visual feedback: red blinking animation for 1 second
+- Available at any time during or after question resolution
 ```
 
 ### ⏱️ Timer Logic
@@ -139,9 +150,11 @@ Game Board → Question Modal → Answer Display → Resolution → Back to Boar
 ✅ **Authentic Jeopardy Format**: Answers displayed as clues, questions revealed later
 ✅ **Sequential Buzzing**: Prevents simultaneous activation
 ✅ **Host Control**: Manual judgment of answers with "No One Knows" button for unanswered questions
+✅ **Question Reset**: Long-press reset functionality for fixing gameplay issues
+✅ **Score Integrity**: Complete undo of all score changes when resetting questions
 ✅ **Visual Feedback**: Clear indication of active players, timers, answered questions, and unanswered questions
 ✅ **Audio Enhancement**: Immersive sound effects
-✅ **Flexible Question Management**: Host can manually close questions at any time
+✅ **Flexible Question Management**: Host can manually close or reset questions at any time
 
 ### ⚠️ Potential Issues/Areas for Improvement
 
@@ -162,6 +175,7 @@ Game Board → Question Modal → Answer Display → Resolution → Back to Boar
 | `incorrectAnswer()` | Deduct points, allow continued buzzing or close |
 | `notAnswered()` | Final closure when no valid answers |
 | `markQuestionIncorrect()` | Mark question as attempted but incorrectly answered by all |
+| `resetQuestion()` | Complete undo of question transaction and score changes |
 
 ### 📁 File Structure Impact
 

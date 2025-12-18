@@ -1,0 +1,30 @@
+{
+    "name": "Spyware",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of malware is designed to gather information about a person or organization without their knowledge.",
+            "answer": "What is Spyware?"
+        },
+        {
+            "question": "This term refers to the practice of monitoring and recording a user's activities on their device without their consent.",
+            "answer": "What is Surveillance?"
+        },
+        {
+            "question": "This type of spyware records the keystrokes of a user to capture sensitive information such as passwords.",
+            "answer": "What is a Keylogger?"
+        },
+        {
+            "question": "This software is commonly used to detect and remove spyware from infected devices.",
+            "answer": "What is Anti-Spyware Software?"
+        },
+        {
+            "question": "This term refers to the unauthorized access and collection of personal data by spyware.",
+            "answer": "What is Data Theft?"
+        }
+    ]
+}

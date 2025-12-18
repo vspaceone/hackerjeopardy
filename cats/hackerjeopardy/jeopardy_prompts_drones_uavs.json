@@ -1,0 +1,30 @@
+{
+    "name": "Drones and UAVs",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to an aircraft that is operated without a human pilot on board.",
+            "answer": "What is a Drone?"
+        },
+        {
+            "question": "This type of drone is commonly used for aerial photography and videography.",
+            "answer": "What is a Quadcopter?"
+        },
+        {
+            "question": "This term refers to the practice of using drones for delivering packages.",
+            "answer": "What is Drone Delivery?"
+        },
+        {
+            "question": "This technology allows drones to navigate and avoid obstacles autonomously.",
+            "answer": "What is Obstacle Avoidance?"
+        },
+        {
+            "question": "This term refers to the use of drones for agricultural purposes, such as crop monitoring and spraying.",
+            "answer": "What is Precision Agriculture?"
+        }
+    ]
+}

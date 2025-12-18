@@ -1,0 +1,30 @@
+{
+    "name": "Algorithm",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This algorithm sorts an array by repeatedly finding the minimum element from the unsorted part and putting it at the beginning.",
+            "answer": "Selection Sort"
+        },
+        {
+            "question": "This algorithm is used to find the minimum spanning tree for a graph, which means it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges in the tree is minimized.",
+            "answer": "Kruskal's algorithm"
+        },
+        {
+            "question": "This algorithm is used to solve the problem of finding the longest common subsequence (LCS) between two sequences.",
+            "answer": "Longest Common Subsequence algorithm"
+        },
+        {
+            "question": "This algorithm is used to solve the problem of finding the maximum flow in a flow network.",
+            "answer": "Ford-Fulkerson algorithm"
+        },
+        {
+            "question": "This algorithm is used to solve the problem of finding the shortest path in a weighted graph with negative weights.",
+            "answer": "Bellman-Ford algorithm"
+        }
+    ]
+}

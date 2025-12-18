@@ -1,0 +1,30 @@
+{
+    "name": "MFA (Multi-Factor Authentication)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This security mechanism requires users to provide two or more verification factors to gain access to a resource.",
+            "answer": "What is Multi-Factor Authentication (MFA)?"
+        },
+        {
+            "question": "This type of authentication factor involves something the user knows, such as a password or PIN.",
+            "answer": "What is a Knowledge Factor?"
+        },
+        {
+            "question": "This type of authentication factor involves something the user has, such as a security token or smartphone.",
+            "answer": "What is a Possession Factor?"
+        },
+        {
+            "question": "This type of authentication factor involves something the user is, such as a fingerprint or facial recognition.",
+            "answer": "What is an Inherence Factor?"
+        },
+        {
+            "question": "This term refers to the practice of using multiple authentication factors to enhance security.",
+            "answer": "What is Two-Factor Authentication (2FA)?"
+        }
+    ]
+}

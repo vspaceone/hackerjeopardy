@@ -1,0 +1,29 @@
+{
+  "name":"Local Places",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "Wie sieht die Schneckenbrücke aus?",
+      "image": "schneckenbrücke_q.jpeg"
+    },
+    {
+      "question": "Wie sieht das Villinger Münster aus?",
+      "image": "muenster_q.jpg"
+    },
+    {
+      "question": "Wie sieht das Schwenninger Moos aus?",
+      "image": "moos_q.jpeg"
+    },
+    {
+      "question": "Wie sieht der Neckartower aus?",
+      "image": "neckartower_q.jpeg"
+    },
+    {
+      "question": "Wie sieht der Muslenbrunnen aus?",
+      "image": "muslenbrunnen_q.jpeg"
+    }
+  ]}

@@ -1,0 +1,30 @@
+{
+    "name": "PCB Design",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This software is widely used for designing printed circuit boards (PCBs).",
+            "answer": "What is Eagle?"
+        },
+        {
+            "question": "This term refers to the thin layer of copper on a PCB that forms the electrical connections.",
+            "answer": "What is a Copper Trace?"
+        },
+        {
+            "question": "This process involves creating a physical prototype of a PCB to test its functionality.",
+            "answer": "What is PCB Prototyping?"
+        },
+        {
+            "question": "This term refers to the practice of placing components on both sides of a PCB.",
+            "answer": "What is Double-Sided PCB?"
+        },
+        {
+            "question": "This type of PCB has multiple layers of copper traces separated by insulating material.",
+            "answer": "What is a Multilayer PCB?"
+        }
+    ]
+}

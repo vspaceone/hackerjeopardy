@@ -1,0 +1,30 @@
+{
+    "name": "Open Source Software",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This open-source operating system is widely used for servers and desktops.",
+            "answer": "What is Linux?"
+        },
+        {
+            "question": "This open-source web browser is known for its speed and security.",
+            "answer": "What is Mozilla Firefox?"
+        },
+        {
+            "question": "This open-source office suite includes applications for word processing, spreadsheets, and presentations.",
+            "answer": "What is LibreOffice?"
+        },
+        {
+            "question": "This open-source version control system is widely used for managing source code.",
+            "answer": "What is Git?"
+        },
+        {
+            "question": "This open-source content management system is used to create and manage websites.",
+            "answer": "What is WordPress?"
+        }
+    ]
+}

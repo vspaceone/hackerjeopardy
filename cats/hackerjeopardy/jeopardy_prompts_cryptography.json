@@ -1,0 +1,30 @@
+{
+    "name": "Cryptography",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of cryptography uses the same key for both encryption and decryption.",
+            "answer": "What is Symmetric Cryptography?"
+        },
+        {
+            "question": "This algorithm is widely used for secure data transmission and is based on the difficulty of factoring large integers.",
+            "answer": "What is RSA?"
+        },
+        {
+            "question": "This term refers to the process of converting plaintext into ciphertext to protect its confidentiality.",
+            "answer": "What is Encryption?"
+        },
+        {
+            "question": "This type of cryptography uses a pair of keys, one for encryption and one for decryption.",
+            "answer": "What is Asymmetric Cryptography?"
+        },
+        {
+            "question": "This algorithm is used to create a fixed-size hash value from input data and is commonly used in digital signatures.",
+            "answer": "What is SHA-256?"
+        }
+    ]
+}

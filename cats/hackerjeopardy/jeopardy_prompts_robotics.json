@@ -1,0 +1,30 @@
+{
+    "name": "Robotics",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the branch of technology that deals with the design, construction, operation, and application of robots.",
+            "answer": "What is Robotics?"
+        },
+        {
+            "question": "This type of robot is designed to perform tasks in environments that are hazardous to humans.",
+            "answer": "What is an Industrial Robot?"
+        },
+        {
+            "question": "This term refers to the ability of a robot to move and interact with its environment.",
+            "answer": "What is Mobility?"
+        },
+        {
+            "question": "This type of sensor is commonly used in robotics to detect obstacles and measure distance.",
+            "answer": "What is an Ultrasonic Sensor?"
+        },
+        {
+            "question": "This programming language is widely used in robotics for its simplicity and versatility.",
+            "answer": "What is Python?"
+        }
+    ]
+}

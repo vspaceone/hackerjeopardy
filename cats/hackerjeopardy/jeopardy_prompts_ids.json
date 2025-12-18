@@ -1,0 +1,30 @@
+{
+    "name": "Intrusion Detection System (IDS)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of system monitors network traffic for suspicious activity and alerts administrators.",
+            "answer": "What is an Intrusion Detection System (IDS)?"
+        },
+        {
+            "question": "This type of IDS analyzes network traffic patterns to detect anomalies.",
+            "answer": "What is an Anomaly-Based IDS?"
+        },
+        {
+            "question": "This term refers to the practice of comparing network traffic to known attack signatures to detect intrusions.",
+            "answer": "What is Signature-Based Detection?"
+        },
+        {
+            "question": "This type of IDS is installed on individual devices to monitor and analyze incoming and outgoing traffic.",
+            "answer": "What is a Host-Based IDS (HIDS)?"
+        },
+        {
+            "question": "This open-source IDS is widely used for network intrusion detection and prevention.",
+            "answer": "What is Snort?"
+        }
+    ]
+}

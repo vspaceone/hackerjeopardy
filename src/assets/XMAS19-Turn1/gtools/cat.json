@@ -1,0 +1,31 @@
+
+  {
+  "name":"gtools",
+  "path":"gtools",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-11-26",
+  "email": "max@noppelmax.online",
+  "questions":[
+  {
+    "question": "Was ist gedit?",
+    "image": "gedit.png"
+  },
+  {
+    "question": "Was ist gzip?",
+    "image": "gzip.png"
+  },
+  {
+    "question": "Was ist git?",
+    "image": "git.png"
+  },
+  {
+    "question": "Was ist gcc?",
+    "image": "gcc.png"
+  },
+  {
+    "question": "Was ist gparted?",
+    "image": "gparted.png"
+  }
+]}

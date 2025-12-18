@@ -1,0 +1,30 @@
+{
+    "name": "Edge AI",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the deployment of artificial intelligence algorithms on edge devices, such as smartphones and IoT devices.",
+            "answer": "What is Edge AI?"
+        },
+        {
+            "question": "This type of edge AI device is commonly used in smart home applications to process data locally.",
+            "answer": "What is a smart speaker?"
+        },
+        {
+            "question": "This term refers to the practice of processing data on edge devices rather than sending it to a centralized cloud server.",
+            "answer": "What is edge computing?"
+        },
+        {
+            "question": "This technology allows edge AI devices to make real-time decisions based on sensor data.",
+            "answer": "What is real-time analytics?"
+        },
+        {
+            "question": "This company is known for its edge AI platform called Jetson, which is used for deploying AI applications on edge devices.",
+            "answer": "What is NVIDIA?"
+        }
+    ]
+}

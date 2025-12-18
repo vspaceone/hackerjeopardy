@@ -1,0 +1,14 @@
+{
+  "name":"Icons",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {"question":"Wie sieht das Icon von Linux aus?", "image": "linux.png"},
+    {"question":"Wie sieht das Icon von Github aus?", "image": "github.png"},
+    {"question":"Wie sieht das Icon vom Chaos Computer Club aus?", "image": "ccc.png"},
+    {"question":"Wie sieht das Icon von Gradle aus?", "image": "gradle.png"},
+    {"question":"Wie sieht das Icon von Apache aus?", "image": "apache.jpeg"}
+  ]}

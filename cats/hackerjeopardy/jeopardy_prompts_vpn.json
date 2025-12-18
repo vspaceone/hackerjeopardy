@@ -1,0 +1,30 @@
+{
+    "name": "VPN (Virtual Private Network)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This technology creates a secure, encrypted connection over a less secure network, such as the internet.",
+            "answer": "What is a VPN?"
+        },
+        {
+            "question": "This protocol is commonly used in VPNs to provide secure communication over the internet.",
+            "answer": "What is IPsec (Internet Protocol Security)?"
+        },
+        {
+            "question": "This type of VPN allows remote users to securely connect to a private network from anywhere in the world.",
+            "answer": "What is a Remote Access VPN?"
+        },
+        {
+            "question": "This term refers to the practice of routing internet traffic through a VPN server to hide the user's IP address and location.",
+            "answer": "What is VPN Tunneling?"
+        },
+        {
+            "question": "This open-source software is widely used for creating secure point-to-point or site-to-site connections in routed or bridged configurations.",
+            "answer": "What is OpenVPN?"
+        }
+    ]
+}

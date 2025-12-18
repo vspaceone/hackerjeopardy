@@ -1,0 +1,30 @@
+{
+    "name": "Adware",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of software automatically displays or downloads advertising material when a user is online.",
+            "answer": "What is Adware?"
+        },
+        {
+            "question": "This term refers to the practice of embedding adware in free software to generate revenue.",
+            "answer": "What is Bundling?"
+        },
+        {
+            "question": "This type of adware tracks a user's online activities to deliver targeted advertisements.",
+            "answer": "What is Spyware Adware?"
+        },
+        {
+            "question": "This software is commonly used to detect and remove adware from infected devices.",
+            "answer": "What is Anti-Adware Software?"
+        },
+        {
+            "question": "This term refers to the unauthorized collection of user data by adware for advertising purposes.",
+            "answer": "What is Data Harvesting?"
+        }
+    ]
+}

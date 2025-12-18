@@ -1,0 +1,30 @@
+{
+    "name": "SOC (Security Operations Center)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to a centralized unit that deals with security issues on an organizational and technical level.",
+            "answer": "What is a Security Operations Center (SOC)?"
+        },
+        {
+            "question": "This role in a SOC is responsible for monitoring and analyzing security events and incidents.",
+            "answer": "What is a SOC Analyst?"
+        },
+        {
+            "question": "This type of SOC operates 24/7 to provide continuous monitoring and response to security incidents.",
+            "answer": "What is a 24/7 SOC?"
+        },
+        {
+            "question": "This term refers to the practice of using automated tools and processes to detect and respond to security incidents in a SOC.",
+            "answer": "What is Security Orchestration, Automation, and Response (SOAR)?"
+        },
+        {
+            "question": "This framework is commonly used in SOCs to manage and improve cybersecurity operations.",
+            "answer": "What is the NIST Cybersecurity Framework?"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "Threat Intelligence",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the information about threats and threat actors that helps organizations understand and mitigate potential attacks.",
+            "answer": "What is Threat Intelligence?"
+        },
+        {
+            "question": "This type of threat intelligence focuses on understanding the tactics, techniques, and procedures (TTPs) used by threat actors.",
+            "answer": "What is Tactical Threat Intelligence?"
+        },
+        {
+            "question": "This framework is widely used for describing the behavior of cyber adversaries and their methods.",
+            "answer": "What is the MITRE ATT&CK framework?"
+        },
+        {
+            "question": "This type of threat intelligence involves analyzing data from various sources to identify patterns and trends in cyber threats.",
+            "answer": "What is Strategic Threat Intelligence?"
+        },
+        {
+            "question": "This term refers to the practice of sharing threat intelligence information between organizations to improve overall security.",
+            "answer": "What is Threat Intelligence Sharing?"
+        }
+    ]
+}

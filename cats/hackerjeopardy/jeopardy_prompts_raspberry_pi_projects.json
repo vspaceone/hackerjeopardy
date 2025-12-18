@@ -1,0 +1,30 @@
+{
+    "name": "Raspberry Pi Projects",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This project involves using a Raspberry Pi to create a home media center.",
+            "answer": "What is a Media Center?"
+        },
+        {
+            "question": "This project uses a Raspberry Pi to control a camera and take time-lapse photos.",
+            "answer": "What is a Time-Lapse Camera?"
+        },
+        {
+            "question": "This project involves using a Raspberry Pi to create a retro gaming console.",
+            "answer": "What is a Retro Gaming Console?"
+        },
+        {
+            "question": "This project uses a Raspberry Pi to monitor and log environmental data such as temperature and humidity.",
+            "answer": "What is an Environmental Monitor?"
+        },
+        {
+            "question": "This project involves using a Raspberry Pi to create a smart mirror that displays information such as weather and calendar events.",
+            "answer": "What is a Smart Mirror?"
+        }
+    ]
+}

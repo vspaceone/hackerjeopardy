@@ -1,0 +1,30 @@
+{
+    "name": "Virtual Reality (VR)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to a simulated experience that can be similar to or completely different from the real world.",
+            "answer": "What is Virtual Reality?"
+        },
+        {
+            "question": "This device is worn on the head and provides immersive virtual reality experiences.",
+            "answer": "What is a VR headset?"
+        },
+        {
+            "question": "This technology allows users to interact with virtual objects using their hands.",
+            "answer": "What is hand tracking?"
+        },
+        {
+            "question": "This term refers to the use of VR technology for training and education purposes.",
+            "answer": "What is VR training?"
+        },
+        {
+            "question": "This company is known for its popular VR headset called Oculus Rift.",
+            "answer": "What is Facebook (Meta)?"
+        }
+    ]
+}

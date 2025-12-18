@@ -1,0 +1,30 @@
+{
+    "name": "Famous Hackers",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This hacker, known as 'The Condor', was arrested in 1995 for hacking into dozens of computer networks.",
+            "answer": "Who is Kevin Mitnick?"
+        },
+        {
+            "question": "This British hacker was accused of hacking into U.S. military and NASA computers in 2002.",
+            "answer": "Who is Gary McKinnon?"
+        },
+        {
+            "question": "This hacker, known as 'Mafiaboy', was responsible for a series of high-profile DDoS attacks in 2000.",
+            "answer": "Who is Michael Calce?"
+        },
+        {
+            "question": "This hacker, known as 'Sabu', was a prominent member of the hacking group LulzSec.",
+            "answer": "Who is Hector Monsegur?"
+        },
+        {
+            "question": "This hacker, known as 'Guccifer', was responsible for a series of high-profile email leaks in 2013.",
+            "answer": "Who is Marcel Lazar Lehel?"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "Lock Picking",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the practice of unlocking a lock without using the original key.",
+            "answer": "What is Lock Picking?"
+        },
+        {
+            "question": "This tool is commonly used in lock picking to manipulate the pins inside a lock.",
+            "answer": "What is a Lock Pick?"
+        },
+        {
+            "question": "This type of lock is commonly used in padlocks and door locks and has a cylindrical shape.",
+            "answer": "What is a Pin Tumbler Lock?"
+        },
+        {
+            "question": "This tool is used in lock picking to apply rotational pressure to the lock cylinder.",
+            "answer": "What is a Tension Wrench?"
+        },
+        {
+            "question": "This term refers to the practice of using a bump key to open a lock by striking it with a hammer.",
+            "answer": "What is Bumping?"
+        }
+    ]
+}

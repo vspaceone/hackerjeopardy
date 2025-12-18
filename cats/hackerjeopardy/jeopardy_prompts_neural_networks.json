@@ -1,0 +1,30 @@
+{
+    "name": "Neural Networks",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of neural network is commonly used for image recognition tasks.",
+            "answer": "What is a Convolutional Neural Network (CNN)?"
+        },
+        {
+            "question": "This term refers to the process of adjusting the weights of a neural network based on the error of the output.",
+            "answer": "What is backpropagation?"
+        },
+        {
+            "question": "This type of neural network is designed to recognize patterns in sequences of data, such as time series or natural language.",
+            "answer": "What is a Recurrent Neural Network (RNN)?"
+        },
+        {
+            "question": "This term refers to the function used to introduce non-linearity into a neural network model.",
+            "answer": "What is an activation function?"
+        },
+        {
+            "question": "This type of neural network consists of multiple layers, including an input layer, hidden layers, and an output layer.",
+            "answer": "What is a Deep Neural Network (DNN)?"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "Cybersecurity",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of attack involves overwhelming a system with traffic to make it unavailable.",
+            "answer": "What is a DDoS attack?"
+        },
+        {
+            "question": "This term refers to the practice of protecting systems, networks, and programs from digital attacks.",
+            "answer": "What is Cybersecurity?"
+        },
+        {
+            "question": "This type of malware encrypts a victim's files and demands payment for the decryption key.",
+            "answer": "What is Ransomware?"
+        },
+        {
+            "question": "This cybersecurity framework is widely used to manage and reduce cybersecurity risk.",
+            "answer": "What is the NIST Cybersecurity Framework?"
+        },
+        {
+            "question": "This type of attack involves tricking individuals into divulging sensitive information by pretending to be a trustworthy entity.",
+            "answer": "What is Phishing?"
+        }
+    ]
+}

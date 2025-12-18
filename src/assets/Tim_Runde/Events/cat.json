@@ -1,0 +1,14 @@
+{
+  "name":"Events",
+  "difficulty": "easy",
+  "author": "Tim",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "",
+  "questions":[
+    {"question":"Wann wird Hackerjeopardy im vspace.one gespielt?", "answer": "02.03.2019"},
+    {"question":"Wann findet der 36. Chaos Communication Congress (36C3) statt?", "answer": "27.12.19 - 30.12.19"},
+    {"question":"Wann findet die 19. Gulaschprogrammiernacht (GPN19) statt?", "answer": "30.05.2019 - 02.06.2019"},
+    {"question":"Wo findet der Easterhegg 2019 statt?", "answer": "In Räumlichkeiten der Technischen Universität Wien."},
+    {"question":"Was ist beim Chaos Communication Camp/Hacken Open Air erhältlich?", "answer": "FTTT"}
+  ]}

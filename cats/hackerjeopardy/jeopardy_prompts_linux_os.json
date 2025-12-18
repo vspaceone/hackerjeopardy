@@ -1,0 +1,30 @@
+{
+    "name": "Linux Operating System",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This person is credited with creating the Linux kernel in 1991.",
+            "answer": "Who is Linus Torvalds?"
+        },
+        {
+            "question": "This command is used to list the contents of a directory in Linux.",
+            "answer": "What is 'ls'?"
+        },
+        {
+            "question": "This popular Linux distribution is known for its user-friendly interface and is based on Debian.",
+            "answer": "What is Ubuntu?"
+        },
+        {
+            "question": "This command is used to change the current directory in Linux.",
+            "answer": "What is 'cd'?"
+        },
+        {
+            "question": "This package manager is used in Red Hat-based distributions to install, update, and remove software packages.",
+            "answer": "What is 'yum'?"
+        }
+    ]
+}

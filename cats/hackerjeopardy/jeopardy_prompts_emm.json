@@ -1,0 +1,30 @@
+{
+    "name": "EMM (Enterprise Mobility Management)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the set of tools and technologies used to manage and secure mobile devices, applications, and data in an enterprise environment.",
+            "answer": "What is Enterprise Mobility Management (EMM)?"
+        },
+        {
+            "question": "This component of EMM focuses on managing and securing mobile applications used by employees.",
+            "answer": "What is Mobile Application Management (MAM)?"
+        },
+        {
+            "question": "This component of EMM involves managing and securing mobile devices such as smartphones and tablets.",
+            "answer": "What is Mobile Device Management (MDM)?"
+        },
+        {
+            "question": "This term refers to the practice of allowing employees to use their personal devices for work purposes while ensuring security and compliance.",
+            "answer": "What is Bring Your Own Device (BYOD)?"
+        },
+        {
+            "question": "This technology is commonly used in EMM to enforce security policies and ensure compliance on mobile devices.",
+            "answer": "What is Mobile Threat Defense (MTD)?"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "MDM (Mobile Device Management)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This technology is used to manage and secure mobile devices within an organization.",
+            "answer": "What is Mobile Device Management (MDM)?"
+        },
+        {
+            "question": "This term refers to the practice of allowing employees to use their personal devices for work purposes.",
+            "answer": "What is Bring Your Own Device (BYOD)?"
+        },
+        {
+            "question": "This feature of MDM allows administrators to remotely wipe data from a lost or stolen device.",
+            "answer": "What is Remote Wipe?"
+        },
+        {
+            "question": "This term refers to the process of enrolling a mobile device into an MDM system for management and security.",
+            "answer": "What is Device Enrollment?"
+        },
+        {
+            "question": "This type of policy in MDM restricts the use of certain applications or features on managed devices.",
+            "answer": "What is an App Restriction Policy?"
+        }
+    ]
+}

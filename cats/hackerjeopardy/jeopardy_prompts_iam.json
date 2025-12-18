@@ -1,0 +1,30 @@
+{
+    "name": "IAM (Identity and Access Management)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the framework of policies and technologies for ensuring that the right individuals have the appropriate access to technology resources.",
+            "answer": "What is Identity and Access Management (IAM)?"
+        },
+        {
+            "question": "This process involves verifying the identity of a user before granting access to resources.",
+            "answer": "What is Authentication?"
+        },
+        {
+            "question": "This term refers to the practice of granting users the minimum level of access necessary to perform their tasks.",
+            "answer": "What is the Principle of Least Privilege?"
+        },
+        {
+            "question": "This technology is commonly used in IAM to manage user identities and control access to resources.",
+            "answer": "What is a Directory Service?"
+        },
+        {
+            "question": "This term refers to the process of managing and controlling user access to resources based on their roles within an organization.",
+            "answer": "What is Role-Based Access Control (RBAC)?"
+        }
+    ]
+}

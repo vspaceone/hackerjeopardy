@@ -1,0 +1,30 @@
+{
+    "name": "Data Science",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This interdisciplinary field uses scientific methods, processes, algorithms, and systems to extract knowledge and insights from structured and unstructured data.",
+            "answer": "What is Data Science?"
+        },
+        {
+            "question": "This programming language is widely used in data science for its simplicity and readability.",
+            "answer": "What is Python?"
+        },
+        {
+            "question": "This library in Python provides powerful data structures for data analysis and manipulation.",
+            "answer": "What is Pandas?"
+        },
+        {
+            "question": "This type of analysis involves examining data from different perspectives and summarizing it into useful information.",
+            "answer": "What is Exploratory Data Analysis (EDA)?"
+        },
+        {
+            "question": "This term refers to the process of cleaning and preparing raw data for analysis.",
+            "answer": "What is Data Preprocessing?"
+        }
+    ]
+}

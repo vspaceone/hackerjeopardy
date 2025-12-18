@@ -1,0 +1,29 @@
+{
+  "name":"Formen I",
+  "difficulty": "easy",
+  "author": "Max Noppel",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "max@noppelmax.online",
+  "questions":[
+    {
+      "question": "Wie sieht eine Linie aus?",
+      "image": "formen_line.png"
+    },
+    {
+      "question": "Wie sieht ein X aus?",
+      "image": "formen_X.png"
+    },
+    {
+      "question": "Wie sieht ein Dreieck aus?",
+      "image": "formen_triangle.png"
+    },
+    {
+      "question": "Wie sieht ein A aus?",
+      "image": "formen_A.png"
+    },
+    {
+      "question": "Joker!",
+      "image": "joker.jpeg"
+    }
+  ]}

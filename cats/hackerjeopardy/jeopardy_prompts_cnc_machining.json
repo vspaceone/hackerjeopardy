@@ -1,0 +1,30 @@
+{
+    "name": "CNC Machining",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the use of computer-controlled machines to perform manufacturing tasks.",
+            "answer": "What is CNC Machining?"
+        },
+        {
+            "question": "This type of CNC machine is used for cutting and shaping metal and other materials.",
+            "answer": "What is a CNC Mill?"
+        },
+        {
+            "question": "This term refers to the process of creating a 3D model of a part before machining it.",
+            "answer": "What is CAD (Computer-Aided Design)?"
+        },
+        {
+            "question": "This type of CNC machine is used for cutting materials with a high-powered laser.",
+            "answer": "What is a CNC Laser Cutter?"
+        },
+        {
+            "question": "This term refers to the practice of using CNC machines to create custom parts and prototypes.",
+            "answer": "What is Rapid Prototyping?"
+        }
+    ]
+}

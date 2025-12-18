@@ -1,129 +1,30 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-	<h1 style="padding: 20px;">
-		Welcome to  Hacker-Jeopardy!
-	</h1>
-	<audio class="audios" id="audiotheme" loop preload="none"> 
-   		<source src="assets/theme.mp3" type="audio/mp3">
-	</audio>
-
-	<div *ngIf="!qanda" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
-		<div class="card-body">
-			<h5 class="card-title" style="font-size: 5em; margin: 100px;">Hacker Jeopardy</h5>
-			<form name="myForm">
-				<ul style="list-style-type:none">
-					<li *ngFor="let s of sets">
-						<p><button type="button" class="card-text btn btn-danger" (click)="selectSet(s)">{{s}}</button></p>
-					</li>
-				</ul>
-			</form>
-			<!--input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".zip"-->
-		</div>
-	</div>
-
-	<div *ngIf="renamePlayer" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
-		<div class="card-body">
-			<h5 class="card-title" style="font-size: 5em">{{renamePlayer.name}}</h5>
-			<div class="card-body">
-			<form name="myForm">
-				<label>Name:</label>
-				<p><input class="card-text" type="text" name="name" [value]="renamePlayer.name" [(ngModel)]="renamePlayer.name"></p>
-				<!--label [style.background-color]="renamePlayer.bgcolor" [style.color]="renamePlayer.fgcolor" >BGColor:</label>
-				<p><input class="card-text" type="text" name="bgcolor" [value]="renamePlayer.bgcolor" [(ngModel)]="renamePlayer.bgcolor"></p>
-				<label [style.background-color]="renamePlayer.bgcolor" [style.color]="renamePlayer.fgcolor" >FGColor:</label>
-				<p><input class="card-text" type="text" name="fgcolor" [value]="renamePlayer.fgcolor" [(ngModel)]="renamePlayer.fgcolor"></p-->
-				<p><button type="button" class="card-text" class="btn btn-danger btn-lg" (click)="renameFinished()">ok</button></p>
-			</form>
-			</div>
-		</div>
-	</div>
-
-	<div *ngIf="selectedQuestion" class="card" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 2;">
-		<div class="card-body">
-			<h5 class="card-title" style="font-size: 5em;">{{selectedQuestion.cat}} - {{selectedQuestion.value}}</h5>
-			<p *ngIf="selectedQuestion.answer" class="card-text" style="margin: auto; padding: 200px; height: 50%; font-size: 5em">{{selectedQuestion.answer}}</p>
-			<img *ngIf="selectedQuestion.image" class="card-text" style="margin: auto; padding: 50px" src="{{selectedQuestion.image}}" height="600px">
-			<p *ngIf="selectedQuestion.latex" class="card-text" style="margin: auto; padding: 200px; height: 50%; font-size: 5em">$${{selectedQuestion.latex}}$$</p>
-
-			<br>
-
-			<div *ngIf="selectedQuestion.timeoutPlayers.size > 0 && selectedQuestion.available">
-				<span *ngFor="let pid of selectedQuestion.timeoutPlayersArr">
-					<h1 ><span style="width:60%;" class="badge badge-none">
-						<span style="width: 50%;">{{getPlayerByID(pid).name}}: -{{selectedQuestion.value}}</span>
-						<span style="width: 50%;"><a (click)="indeedcorrect(selectedQuestion,pid)" style="font-size:0.5em;"> correct</a></span>
-					</span></h1>
-				</span>
-			</div>
-			<div *ngIf="selectedQuestion.activePlayers.size > 0 && selectedQuestion.available">
-				<span *ngFor="let pid of selectedQuestion.activePlayersArr">
-					<h1 ><span style="width:60%;" [style.background-color]="getPlayerByID(pid).bgcolor" class="badge badge-{{getPlayerByID(pid).btn}}">
-						<span style="width: 50%;" [style.color]="getPlayerByID(pid).fgcolor" [style.background-color]="getPlayerByID(pid).bgcolor">{{getPlayerByID(pid).name}}: {{getPlayerByID(pid).remainingtime}}</span>
-						<span style="width: 50%;"><i style="font-size:0.5em;" [style.color]="getPlayerByID(pid).fgcolor">s left</i></span>
-					</span></h1>
-				</span>
-			</div>
-			<div style="height: 20px">
-			</div>
-
-			<div class="btn-group" *ngIf="selectedQuestion.activePlayers.size > 0 && selectedQuestion.available">
-				<button type="button" class="btn btn-success" (click)="correct(selectedQuestion)" style="width:400px;">correct</button>
-				<button type="button" class="btn btn-danger btn-lg" (click)="incorrect(selectedQuestion)" style="width:400px;">incorrect</button>
-			</div>
-			<div style="height: 50px">
-			</div>
-
-			<div class="btn-group" *ngIf="selectedQuestion.availablePlayers.size > 0 && selectedQuestion.available">
-				<span *ngFor="let p of players">
-					<button type="button" *ngIf="!selectedQuestion.activePlayers.has(p.id) && !selectedQuestion.timeoutPlayers.has(p.id)" class="btn btn-lg" (click)="activate(selectedQuestion,p.id)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor" style="width:150px">{{p.name}}</button>
-					<!--button type="button" *ngIf="selectedQuestion.activePlayers.has(p.id)" class="btn btn-none" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button-->
-				</span>
-				<button type="button" class="btn btn-secondary btn-lg" (click)="notanswered(selectedQuestion)" style="width:150px">None</button>
-				<button type="button" *ngIf="couldBeCanceled" class="btn btn-primary btn-lg" (click)="cancel()" style="width:150px">cancel</button>
-				<!--button type="button" *ngFor="let p of players" class="btn btn-danger btn-lg" (click)="notanswered(selectedQuestion,p)" [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.name}}</button-->
-			</div>
-
-			<div *ngIf="!selectedQuestion.available">
-				<p class="card-text" style="font-size: 2em;">{{selectedQuestion.question}}</p>
-				<button type="button" class="card-text" class="btn btn-danger btn-lg" (click)="close()">ok</button>
-			</div>
-
-
-		</div>
-	</div>
-</div>
-<div class="card-group">
-	<div *ngFor="let cat of qanda" class="card-column" id="catcolums" [style.width.%]="(100/(this.qanda.length))">
-		<div class="card" style="margin: 10px;">
-			<div class="card-body">
-				<h2 class="card-title text-center">{{cat.name}}</h2>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="card-group" style="height:100%">
-	<div *ngFor="let d of qanda" class="card-column" id="questioncolums" [style.width.%]="(100/(this.qanda.length))" style="padding: 10px">
-		<button class="btn text-center btn-{{q.player.btn}}"
-		style="width: 100%; height:70px; margin-top: 4px; font-size:2em" 
-		*ngFor="let q of d.questions" (click)="onSelect(q)">
-			{{q.value}}
-		</button>
-	</div>
+<div class="floating-particles">
+  <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+  <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+  <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+  <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+  <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+  <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+  <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+  <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
 </div>
 
-<div class="card-group" style="margin: 20px;">
-	<div class="card text-center" *ngFor="let p of players">
-		<div class="card-body"  [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">
-			<h5 class="card-title" style="font-size: 2em;" (click)="rename(p)">{{p.name}}</h5>
-			<p style="font-size: 3em">
-				<button class="" [style.background-color]="p.bgcolor" [style.color]="p.bgcolor" (click)="minus(p)">-</button>
-				<span [style.background-color]="p.bgcolor" [style.color]="p.fgcolor">{{p.score}}</span>
-				<button class="" [style.background-color]="p.bgcolor" [style.color]="p.bgcolor" (click)="plus(p)">+</button></p>
-		</div>
-	</div>
+<div class="matrix-rain" id="matrixRain"></div>
+
+<div class="container scan-lines">
+  <h1 class="neon-text-blue">{{ title }}</h1>
+
+  <app-set-selection *ngIf="!qanda" [availableSets]="sets" (setSelected)="selectSet($event)"></app-set-selection>
+
+  <app-game-board *ngIf="qanda" [categories]="qanda" (questionSelected)="onSelect($event)"></app-game-board>
+
+   <app-question-display *ngIf="selectedQuestion" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()"></app-question-display>
+
+  <div class="players-container" *ngIf="qanda">
+    <h2 class="neon-text-purple">Players</h2>
+    <div class="players-row">
+      <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" (rename)="rename(player)" (scoreAdjust)="adjustScore($event)"></app-player-controls>
+    </div>
+  </div>
 </div>
-
-
-<!--li >
-	<ul *ngFor="let q of d">{{q.question}}</ul>
-</li-->

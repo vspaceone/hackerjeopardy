@@ -1,0 +1,30 @@
+{
+    "name": "Machine Learning",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of machine learning involves training a model on labeled data.",
+            "answer": "What is Supervised Learning?"
+        },
+        {
+            "question": "This algorithm is used for classification and regression tasks and works by finding the hyperplane that best separates the data into classes.",
+            "answer": "What is Support Vector Machine (SVM)?"
+        },
+        {
+            "question": "This term refers to the process of reducing the number of features in a dataset while retaining as much information as possible.",
+            "answer": "What is Dimensionality Reduction?"
+        },
+        {
+            "question": "This type of neural network is commonly used for image recognition tasks.",
+            "answer": "What is Convolutional Neural Network (CNN)?"
+        },
+        {
+            "question": "This technique is used to prevent overfitting in machine learning models by adding noise to the input data during training.",
+            "answer": "What is Data Augmentation?"
+        }
+    ]
+}

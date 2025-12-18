@@ -1,0 +1,30 @@
+{
+    "name": "Natural Language Processing (NLP)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This field of AI focuses on the interaction between computers and humans through natural language.",
+            "answer": "What is Natural Language Processing?"
+        },
+        {
+            "question": "This technique is used to convert text into a numerical representation that can be processed by machine learning algorithms.",
+            "answer": "What is Text Vectorization?"
+        },
+        {
+            "question": "This model, developed by Google, is widely used for natural language understanding and generation tasks.",
+            "answer": "What is BERT (Bidirectional Encoder Representations from Transformers)?"
+        },
+        {
+            "question": "This term refers to the process of identifying and extracting meaningful entities from text, such as names, dates, and locations.",
+            "answer": "What is Named Entity Recognition (NER)?"
+        },
+        {
+            "question": "This technique involves predicting the next word in a sequence based on the previous words.",
+            "answer": "What is Language Modeling?"
+        }
+    ]
+}

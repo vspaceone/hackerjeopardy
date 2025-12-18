@@ -1,0 +1,30 @@
+{
+    "name": "Robotic Process Automation (RPA)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This technology uses software robots to automate repetitive tasks.",
+            "answer": "What is Robotic Process Automation (RPA)?"
+        },
+        {
+            "question": "This term refers to the software robots used in RPA to perform automated tasks.",
+            "answer": "What are bots?"
+        },
+        {
+            "question": "This RPA tool is widely used for automating business processes and tasks.",
+            "answer": "What is UiPath?"
+        },
+        {
+            "question": "This term refers to the practice of using RPA to improve efficiency and reduce human error in business processes.",
+            "answer": "What is process automation?"
+        },
+        {
+            "question": "This type of RPA involves using artificial intelligence and machine learning to enhance automation capabilities.",
+            "answer": "What is intelligent automation?"
+        }
+    ]
+}

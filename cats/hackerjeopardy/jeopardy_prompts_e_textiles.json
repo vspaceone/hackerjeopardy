@@ -1,0 +1,30 @@
+{
+    "name": "E-Textiles",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to fabrics that have electronic components embedded in them.",
+            "answer": "What are E-Textiles?"
+        },
+        {
+            "question": "This type of thread is commonly used in e-textiles for its conductivity.",
+            "answer": "What is Conductive Thread?"
+        },
+        {
+            "question": "This component is often used in e-textiles to create light-up designs.",
+            "answer": "What is an LED?"
+        },
+        {
+            "question": "This microcontroller platform is popular for creating e-textile projects.",
+            "answer": "What is Arduino?"
+        },
+        {
+            "question": "This term refers to the practice of integrating electronic devices into clothing and accessories.",
+            "answer": "What is Wearable Technology?"
+        }
+    ]
+}

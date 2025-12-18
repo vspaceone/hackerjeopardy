@@ -1,0 +1,30 @@
+{
+    "name": "Firewall",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This security device monitors and controls incoming and outgoing network traffic based on predetermined security rules.",
+            "answer": "What is a Firewall?"
+        },
+        {
+            "question": "This type of firewall filters traffic based on the source and destination IP addresses, ports, and protocols.",
+            "answer": "What is a Packet-Filtering Firewall?"
+        },
+        {
+            "question": "This type of firewall inspects the state of active connections and makes decisions based on the context of the traffic.",
+            "answer": "What is a Stateful Firewall?"
+        },
+        {
+            "question": "This term refers to a firewall that combines multiple security functions, such as intrusion prevention and antivirus, into a single device.",
+            "answer": "What is a Next-Generation Firewall (NGFW)?"
+        },
+        {
+            "question": "This type of firewall is implemented in software and runs on a general-purpose operating system.",
+            "answer": "What is a Host-Based Firewall?"
+        }
+    ]
+}

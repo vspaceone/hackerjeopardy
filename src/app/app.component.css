@@ -1,0 +1,24 @@
+.players-container {
+  margin: 20px 0;
+}
+
+.players-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Reduce margins on player cards when in row layout */
+.players-row app-player-controls {
+  margin: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .players-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,30 @@
+{
+    "name": "Wind Turbines",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to a device that converts kinetic energy from the wind into electrical power.",
+            "answer": "What is a Wind Turbine?"
+        },
+        {
+            "question": "This component of a wind turbine houses the generator and other key components.",
+            "answer": "What is the Nacelle?"
+        },
+        {
+            "question": "This type of wind turbine has blades that rotate around a horizontal axis.",
+            "answer": "What is a Horizontal Axis Wind Turbine (HAWT)?"
+        },
+        {
+            "question": "This term refers to the practice of placing multiple wind turbines in a single location to generate electricity.",
+            "answer": "What is a Wind Farm?"
+        },
+        {
+            "question": "This component of a wind turbine is responsible for converting mechanical energy into electrical energy.",
+            "answer": "What is the Generator?"
+        }
+    ]
+}

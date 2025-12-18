@@ -1,0 +1,30 @@
+{
+    "name": "Intrusion Prevention System (IPS)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of system monitors network traffic for suspicious activity and takes action to block or prevent it.",
+            "answer": "What is an Intrusion Prevention System (IPS)?"
+        },
+        {
+            "question": "This type of IPS uses predefined attack signatures to detect and block known threats.",
+            "answer": "What is a Signature-Based IPS?"
+        },
+        {
+            "question": "This term refers to the practice of analyzing network traffic patterns to identify and block anomalies.",
+            "answer": "What is Anomaly-Based Detection?"
+        },
+        {
+            "question": "This type of IPS is installed on individual devices to monitor and prevent malicious activity.",
+            "answer": "What is a Host-Based IPS (HIPS)?"
+        },
+        {
+            "question": "This open-source IPS is widely used for network intrusion prevention and detection.",
+            "answer": "What is Suricata?"
+        }
+    ]
+}

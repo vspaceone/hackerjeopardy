@@ -1,0 +1,25 @@
+<div class="game-board" role="grid">
+  <div class="categories-header" role="row">
+    <div class="category-cell" *ngFor="let category of categories; trackBy: trackByCategory" role="columnheader">
+      {{ category.name }}
+    </div>
+  </div>
+
+  <div class="questions-grid">
+    <div class="question-row" *ngFor="let qIndex of [0,1,2,3,4]; trackBy: trackByQuestion" role="row">
+      <div class="category-column" *ngFor="let category of categories; trackBy: trackByCategory">
+        <button
+          *ngIf="category.questions[qIndex]"
+          class="btn m-2 question-button"
+          [ngClass]="getQuestionButtonClass(category.questions[qIndex])"
+          (click)="selectQuestion(category.questions[qIndex])"
+          [disabled]="!category.questions[qIndex].available"
+          role="gridcell"
+          [attr.aria-label]="'Select question for ' + category.questions[qIndex].value + ' points in ' + category.name"
+        >
+          {{ category.questions[qIndex].value }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

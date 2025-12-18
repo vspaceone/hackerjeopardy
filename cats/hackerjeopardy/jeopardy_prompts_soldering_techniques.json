@@ -1,0 +1,30 @@
+{
+    "name": "Soldering Techniques",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This technique involves heating the soldering iron and applying it to the joint to melt the solder.",
+            "answer": "What is Tin Soldering?"
+        },
+        {
+            "question": "This term refers to the process of removing excess solder from a joint using a desoldering pump or wick.",
+            "answer": "What is Desoldering?"
+        },
+        {
+            "question": "This type of solder contains a core of flux, which helps to clean the joint and improve the flow of solder.",
+            "answer": "What is Rosin Core Solder?"
+        },
+        {
+            "question": "This technique involves heating both the component lead and the pad simultaneously to create a strong solder joint.",
+            "answer": "What is Through-Hole Soldering?"
+        },
+        {
+            "question": "This term refers to the practice of using a soldering iron with a fine tip to work on small, delicate components.",
+            "answer": "What is Precision Soldering?"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+  "name":"Chemie",
+  "difficulty": "easy",
+  "author": "Tim",
+  "licence": "MIT",
+  "date": "2019-01-01",
+  "email": "",
+  "questions":[
+    {"question":"Was ist Wasser?", "answer": "H2O"},
+    {"question":"Was ist Kochsalz?", "answer": "NaCl"},
+    {"question":"Was ist (bleifreies) Lötzinn?", "answer": "Sn95Ag4Cu1"},
+    {"question":"Was ist Salpetersäure", "answer": "HNO3"},
+    {"question":"Was ist Kohlensäure?", "answer": "H2CO3"}
+  ]}

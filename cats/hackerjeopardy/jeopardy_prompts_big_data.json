@@ -1,0 +1,30 @@
+{
+    "name": "Big Data",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to extremely large data sets that may be analyzed computationally to reveal patterns, trends, and associations.",
+            "answer": "What is Big Data?"
+        },
+        {
+            "question": "This open-source framework is used for distributed storage and processing of large data sets using the MapReduce programming model.",
+            "answer": "What is Hadoop?"
+        },
+        {
+            "question": "This term refers to the process of examining large data sets to uncover hidden patterns, unknown correlations, and other useful information.",
+            "answer": "What is Data Mining?"
+        },
+        {
+            "question": "This distributed computing system is designed for processing large-scale data across many computers.",
+            "answer": "What is Apache Spark?"
+        },
+        {
+            "question": "This term refers to the practice of collecting and analyzing data from various sources to gain insights and make informed decisions.",
+            "answer": "What is Data Analytics?"
+        }
+    ]
+}

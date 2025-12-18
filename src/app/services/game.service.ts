@@ -126,6 +126,9 @@ export class GameService {
     if (question.activePlayer) {
       question.activePlayer.score -= question.value;
 
+      // Mark question as having had incorrect answers
+      question.hasIncorrectAnswers = true;
+
       // Remove current player from active players
       question.activePlayers.delete(question.activePlayer.id);
       question.activePlayersArr = Array.from(question.activePlayers);

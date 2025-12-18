@@ -112,7 +112,21 @@
 
 .question-button.answered-correctly:hover {
   transform: none;
-  box-shadow: 0 0 20px #00ff88;
+  box-shadow: var(--glow-blue-light);
+}
+
+.question-button.answered-incorrectly {
+  background: #ff8c00; /* Orange for difficult questions */
+  color: var(--bg-primary);
+  border-color: #ff8c00;
+  box-shadow: 0 0 15px #ff8c00;
+  opacity: 0.9;
+  cursor: default;
+}
+
+.question-button.answered-incorrectly:hover {
+  transform: none;
+  box-shadow: 0 0 20px #ff8c00;
 }
 
 .question-button.unanswered {

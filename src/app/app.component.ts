@@ -56,8 +56,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	private activatePlayer(playerId: number): void {
-		this.audioService.playBuzzer();
-		this.gameService.activatePlayer(this.selectedQuestion!, playerId, this.players);
+		const activated = this.gameService.activatePlayer(this.selectedQuestion!, playerId, this.players);
+		if (activated) {
+			this.audioService.playBuzzer();
+		}
 	}
 
 	private initMatrixRain(): void {

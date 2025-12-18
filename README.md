@@ -24,8 +24,8 @@ A modern, web-based Jeopardy-style game built with Angular, featuring hacker-the
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/hacker-jeopardy.git
-   cd hacker-jeopardy
+   git clone https://github.com/krauni/hackerjeopardy.git
+   cd hackerjeopardy
    ```
 
 2. Install dependencies:

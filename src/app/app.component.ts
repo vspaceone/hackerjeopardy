@@ -106,7 +106,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	selectedQuestion: any = null;
 	renamePlayer: Player | null = null;
-	couldBeCanceled = true;
+	couldBeCanceled = false; // Only true when a question is open and cancellable
 	qanda: Category[] | null = null;
 
 
@@ -125,6 +125,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	onSelect(q): void {
 		this.selectedQuestion = q;
+		this.couldBeCanceled = true; // Allow canceling when question first opens
 		this.audioService.playClick();
 		this.audioService.startThemeMusic();
 	}
@@ -173,7 +174,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			this.gameService.markQuestionIncorrect(this.selectedQuestion);
 		}
 		this.selectedQuestion = null;
-		this.couldBeCanceled = true;
+		// Keep couldBeCanceled as false since question is resolved
+		this.couldBeCanceled = false;
 	}
 
 	adjustScore(event: {player: Player, amount: number}): void {
@@ -183,10 +185,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 	close(): void {
 		this.audioService.stopThemeMusic();
 		this.selectedQuestion = null;
+		this.couldBeCanceled = false;
 	}
 
 	cancel(): void {
 		this.selectedQuestion = null;
+		this.couldBeCanceled = false;
 	}
 
 	rename(p): void {

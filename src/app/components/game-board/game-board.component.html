@@ -16,7 +16,6 @@
           (mousedown)="onQuestionMouseDown(category.questions[qIndex], $event)"
           (mouseup)="onQuestionMouseUp()"
           (mouseleave)="onQuestionMouseLeave()"
-          [disabled]="!category.questions[qIndex].available"
           role="gridcell"
           [attr.aria-label]="'Select question for ' + category.questions[qIndex].value + ' points in ' + category.name"
         >

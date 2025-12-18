@@ -9,7 +9,7 @@ import { GameRound, Category, Question } from '../models/game.models';
 export class GameDataService {
   private readonly SETS_VSPACE = [
     "XMAS19_1_de",
-    "XMAS19_2_de", 
+    "XMAS19_2_de",
     "XMAS19_3_de",
     "XMAS19_4_de",
     "Lounge_And_Chill_1_de",
@@ -17,19 +17,36 @@ export class GameDataService {
     "Lounge_And_Chill_3_de",
     "XMAS18_1_de",
     "XMAS18_2_de",
+    "Tim_Runde_de",
     "XMAS22_1_en",
     "XMAS22_2_en",
-    "mixed_bag_round",
-    "AlexRound"
+    "mixed_bag_round"
   ];
 
   private readonly SETS_KIT = [
     "Lounge_And_Chill_1",
+    "Lounge_And_Chill_1_en",
+    "Lounge_And_Chill_2_en",
     "Lounge_And_Chill_3",
+    "Lounge_And_Chill_3_en",
     "Tim_Runde",
+    "Tim_Runde_de",
+    "XMAS18_1_en",
+    "XMAS18_2_en",
     "XMAS18_RND1",
     "XMAS18_RND2",
-    "XMAS19-Turn3"
+    "XMAS19_1_en",
+    "XMAS19_2_en",
+    "XMAS19_3_en",
+    "XMAS19_4_en",
+    "XMAS19-Turn1",
+    "XMAS19-Turn2",
+    "XMAS19-Turn3",
+    "XMAS19-Turn4",
+    "XMAS22_1_en",
+    "XMAS22_2_en",
+    "XMAS22_3_en",
+    "mixed_bag_round"
   ];
 
   constructor(private http: HttpClient) {}

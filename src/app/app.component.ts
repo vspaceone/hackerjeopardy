@@ -112,8 +112,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	selectSet(s: string): void {
 		this.audioService.playClick();
-		this.gameDataService.loadGameRound(s).subscribe(categories => {
-			this.qanda = categories;
+		this.gameDataService.loadGameRound(s).subscribe({
+			next: (categories) => {
+				this.qanda = categories;
+			},
+			error: (error) => {
+				console.error('Error loading round:', s, error);
+				alert(`Failed to load round "${s}": ${error.message}`);
+			}
 		});
 	}
 

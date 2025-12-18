@@ -40,7 +40,7 @@ export class GameDataService {
 
   loadGameRound(setName: string): Observable<Category[]> {
     return new Observable<Category[]>(observer => {
-      this.http.get<GameRound>(`/assets/${setName}/turn.json`).subscribe(
+      this.http.get<GameRound>(`/assets/${setName}/round.json`).subscribe(
         (roundData: GameRound) => {
           const categoryRequests = roundData.categories.map(categoryName =>
             this.http.get<Category>(`/assets/${setName}/${categoryName}/cat.json`)

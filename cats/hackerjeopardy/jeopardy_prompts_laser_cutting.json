@@ -1,0 +1,30 @@
+{
+    "name": "Laser Cutting",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of laser is commonly used in laser cutting for its high power and efficiency.",
+            "answer": "What is a CO2 laser?"
+        },
+        {
+            "question": "This term refers to the process of using a laser to cut materials by melting, burning, or vaporizing them.",
+            "answer": "What is Laser Cutting?"
+        },
+        {
+            "question": "This material is often used in laser cutting for its versatility and ease of cutting.",
+            "answer": "What is Acrylic?"
+        },
+        {
+            "question": "This software is commonly used to create vector designs for laser cutting.",
+            "answer": "What is Adobe Illustrator?"
+        },
+        {
+            "question": "This term refers to the practice of adjusting the laser's focus to achieve a precise cut.",
+            "answer": "What is Focusing?"
+        }
+    ]
+}

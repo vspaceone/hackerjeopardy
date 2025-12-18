@@ -1,0 +1,30 @@
+{
+    "name": "Incident Response",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the process of identifying, investigating, and responding to security incidents.",
+            "answer": "What is Incident Response?"
+        },
+        {
+            "question": "This phase of the incident response process involves preparing for potential security incidents by establishing policies and procedures.",
+            "answer": "What is Preparation?"
+        },
+        {
+            "question": "This term refers to the practice of containing and mitigating the impact of a security incident.",
+            "answer": "What is Containment?"
+        },
+        {
+            "question": "This phase of the incident response process involves identifying the root cause of a security incident and taking steps to prevent its recurrence.",
+            "answer": "What is Eradication?"
+        },
+        {
+            "question": "This term refers to the practice of restoring normal operations after a security incident has been resolved.",
+            "answer": "What is Recovery?"
+        }
+    ]
+}

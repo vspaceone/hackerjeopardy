@@ -1,0 +1,30 @@
+{
+    "name": "Endpoint Security",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of security focuses on protecting individual devices such as laptops, smartphones, and tablets.",
+            "answer": "What is Endpoint Security?"
+        },
+        {
+            "question": "This software is commonly used in endpoint security to detect and remove malware from devices.",
+            "answer": "What is Antivirus Software?"
+        },
+        {
+            "question": "This term refers to the practice of ensuring that all endpoints comply with security policies before granting them access to the network.",
+            "answer": "What is Network Access Control (NAC)?"
+        },
+        {
+            "question": "This type of attack involves exploiting vulnerabilities in endpoint devices to gain unauthorized access.",
+            "answer": "What is an Endpoint Attack?"
+        },
+        {
+            "question": "This technology is used in endpoint security to monitor and analyze endpoint activity for signs of malicious behavior.",
+            "answer": "What is Endpoint Detection and Response (EDR)?"
+        }
+    ]
+}

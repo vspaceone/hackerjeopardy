@@ -1,0 +1,30 @@
+{
+    "name": "Blockchain",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This technology is the underlying structure of cryptocurrencies like Bitcoin.",
+            "answer": "What is Blockchain?"
+        },
+        {
+            "question": "This consensus algorithm is used by Bitcoin to validate transactions.",
+            "answer": "What is Proof of Work?"
+        },
+        {
+            "question": "This type of blockchain allows anyone to join and participate in the network.",
+            "answer": "What is a Public Blockchain?"
+        },
+        {
+            "question": "This term refers to the process of adding a new block to the blockchain.",
+            "answer": "What is Mining?"
+        },
+        {
+            "question": "This consensus algorithm is used by Ethereum 2.0 to validate transactions.",
+            "answer": "What is Proof of Stake?"
+        }
+    ]
+}

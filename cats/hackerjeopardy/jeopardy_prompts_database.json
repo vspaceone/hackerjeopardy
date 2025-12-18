@@ -1,0 +1,30 @@
+{
+    "name": "Database",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of database is designed to handle large volumes of unstructured data.",
+            "answer": "What is a NoSQL database?"
+        },
+        {
+            "question": "This language is used to manage and manipulate relational databases.",
+            "answer": "What is SQL?"
+        },
+        {
+            "question": "This term refers to the process of ensuring that a database remains in a consistent state despite system failures.",
+            "answer": "What is ACID compliance?"
+        },
+        {
+            "question": "This type of database stores data in tables with rows and columns.",
+            "answer": "What is a Relational Database?"
+        },
+        {
+            "question": "This term refers to the practice of distributing data across multiple servers to improve performance and availability.",
+            "answer": "What is Database Sharding?"
+        }
+    ]
+}

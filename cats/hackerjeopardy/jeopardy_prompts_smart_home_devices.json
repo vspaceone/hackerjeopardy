@@ -1,0 +1,30 @@
+{
+    "name": "Smart Home Devices",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This device allows you to control your home's lighting, heating, and other systems using voice commands.",
+            "answer": "What is a Smart Speaker?"
+        },
+        {
+            "question": "This device is used to monitor and control the temperature of your home remotely.",
+            "answer": "What is a Smart Thermostat?"
+        },
+        {
+            "question": "This device allows you to see and speak to visitors at your door using your smartphone.",
+            "answer": "What is a Video Doorbell?"
+        },
+        {
+            "question": "This device is used to control the lighting in your home and can be programmed to turn on and off at specific times.",
+            "answer": "What is a Smart Light Bulb?"
+        },
+        {
+            "question": "This device is used to monitor the security of your home and can send alerts to your smartphone if it detects any unusual activity.",
+            "answer": "What is a Smart Security Camera?"
+        }
+    ]
+}

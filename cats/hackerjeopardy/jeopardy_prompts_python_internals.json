@@ -1,0 +1,30 @@
+{
+    "name": "Python Internals",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the process of converting Python code into bytecode before execution.",
+            "answer": "What is Compilation?"
+        },
+        {
+            "question": "This component of the Python interpreter is responsible for executing bytecode instructions.",
+            "answer": "What is the Python Virtual Machine (PVM)?"
+        },
+        {
+            "question": "This term refers to the internal data structure used by Python to manage memory allocation for objects.",
+            "answer": "What is a Reference Count?"
+        },
+        {
+            "question": "This module provides an interface to the built-in garbage collector in Python.",
+            "answer": "What is the 'gc' module?"
+        },
+        {
+            "question": "This term refers to the process of reclaiming memory that is no longer in use by the program.",
+            "answer": "What is Garbage Collection?"
+        }
+    ]
+}

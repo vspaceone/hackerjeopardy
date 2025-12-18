@@ -1,0 +1,21 @@
+<div class="set-selection-overlay">
+  <div class="set-selection-modal" role="dialog" aria-labelledby="game-title">
+    <div class="modal-header">
+      <h2 class="game-title" id="game-title">Hacker Jeopardy</h2>
+      <p class="subtitle">Select a question set to begin</p>
+    </div>
+    
+    <div class="sets-container">
+      <div class="sets-grid">
+        <button
+          *ngFor="let set of availableSets"
+          class="set-button btn btn-danger"
+          (click)="onSelectSet(set)"
+          [attr.aria-label]="'Select question set ' + set"
+        >
+          {{ set }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

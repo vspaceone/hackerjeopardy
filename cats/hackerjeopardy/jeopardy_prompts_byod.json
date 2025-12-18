@@ -1,0 +1,30 @@
+{
+    "name": "BYOD (Bring Your Own Device)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This policy allows employees to use their personal devices for work purposes.",
+            "answer": "What is BYOD (Bring Your Own Device)?"
+        },
+        {
+            "question": "This term refers to the practice of managing and securing personal devices used for work.",
+            "answer": "What is Mobile Device Management (MDM)?"
+        },
+        {
+            "question": "This type of security threat involves unauthorized access to sensitive data on personal devices.",
+            "answer": "What is Data Breach?"
+        },
+        {
+            "question": "This term refers to the practice of separating work and personal data on a single device.",
+            "answer": "What is Containerization?"
+        },
+        {
+            "question": "This technology is commonly used in BYOD policies to ensure secure access to corporate resources.",
+            "answer": "What is Virtual Private Network (VPN)?"
+        }
+    ]
+}

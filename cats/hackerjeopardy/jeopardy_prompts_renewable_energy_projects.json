@@ -1,0 +1,30 @@
+{
+    "name": "Renewable Energy Projects",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of renewable energy project involves using solar panels to convert sunlight into electricity.",
+            "answer": "What is a Solar Power System?"
+        },
+        {
+            "question": "This type of renewable energy project involves using wind turbines to generate electricity from wind.",
+            "answer": "What is a Wind Turbine?"
+        },
+        {
+            "question": "This term refers to the practice of using organic materials, such as plant and animal waste, to produce energy.",
+            "answer": "What is Biomass Energy?"
+        },
+        {
+            "question": "This type of renewable energy project involves using the heat from the Earth's interior to generate electricity.",
+            "answer": "What is Geothermal Energy?"
+        },
+        {
+            "question": "This term refers to the practice of using water to generate electricity, often through the use of dams.",
+            "answer": "What is Hydropower?"
+        }
+    ]
+}

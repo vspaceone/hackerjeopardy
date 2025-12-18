@@ -1,0 +1,30 @@
+{
+    "name": "Keyboard Layouts",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This keyboard layout is the most widely used and is named after the first six letters on the top row of letters.",
+            "answer": "What is QWERTY?"
+        },
+        {
+            "question": "This alternative keyboard layout is designed to reduce finger movement and increase typing speed and efficiency.",
+            "answer": "What is Dvorak?"
+        },
+        {
+            "question": "This keyboard layout is commonly used in French-speaking countries and is named after the first six letters on the top row of letters.",
+            "answer": "What is AZERTY?"
+        },
+        {
+            "question": "This keyboard layout is used in German-speaking countries and includes special characters such as umlauts.",
+            "answer": "What is QWERTZ?"
+        },
+        {
+            "question": "This term refers to the practice of customizing a keyboard layout to suit an individual's typing preferences.",
+            "answer": "What is Keyboard Remapping?"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "Quantum Computing",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This fundamental unit of quantum information is analogous to a bit in classical computing.",
+            "answer": "What is a qubit?"
+        },
+        {
+            "question": "This principle allows quantum particles to be in multiple states at once, leading to parallel computation.",
+            "answer": "What is superposition?"
+        },
+        {
+            "question": "This phenomenon allows quantum particles to be instantaneously connected regardless of distance.",
+            "answer": "What is entanglement?"
+        },
+        {
+            "question": "This algorithm, developed by Peter Shor, can factorize large numbers exponentially faster than classical algorithms.",
+            "answer": "What is Shor's algorithm?"
+        },
+        {
+            "question": "This type of quantum computer uses superconducting circuits to perform quantum computations.",
+            "answer": "What is a superconducting quantum computer?"
+        }
+    ]
+}

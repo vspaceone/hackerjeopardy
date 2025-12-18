@@ -1,0 +1,30 @@
+{
+    "name": "Ethical Hacking",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the practice of legally breaking into computers and devices to test an organization's defenses.",
+            "answer": "What is Ethical Hacking?"
+        },
+        {
+            "question": "This certification is widely recognized for professionals in the field of ethical hacking.",
+            "answer": "What is Certified Ethical Hacker (CEH)?"
+        },
+        {
+            "question": "This type of ethical hacker is hired to find vulnerabilities in a system without prior knowledge of the system's defenses.",
+            "answer": "What is a Black Box Tester?"
+        },
+        {
+            "question": "This term refers to the process of identifying and exploiting vulnerabilities in a system to gain unauthorized access.",
+            "answer": "What is Penetration Testing?"
+        },
+        {
+            "question": "This organization offers a popular certification for ethical hackers known as Offensive Security Certified Professional (OSCP).",
+            "answer": "What is Offensive Security?"
+        }
+    ]
+}

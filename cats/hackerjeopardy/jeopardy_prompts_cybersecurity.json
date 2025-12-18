@@ -1,0 +1,30 @@
+{
+    "name": "Cybersecurity",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to measures taken to protect computer systems and networks from cyber attacks.",
+            "answer": "What is Cybersecurity?"
+        },
+        {
+            "question": "This type of attack involves tricking individuals into revealing sensitive information through deceptive emails or websites.",
+            "answer": "What is Phishing?"
+        },
+        {
+            "question": "This software monitors and analyzes network traffic for suspicious activity and potential threats.",
+            "answer": "What is an Intrusion Detection System (IDS)?"
+        },
+        {
+            "question": "This type of malware encrypts a victim's files and demands payment for the decryption key.",
+            "answer": "What is Ransomware?"
+        },
+        {
+            "question": "This practice involves testing computer systems and networks for vulnerabilities that could be exploited by attackers.",
+            "answer": "What is Penetration Testing?"
+        }
+    ]
+}

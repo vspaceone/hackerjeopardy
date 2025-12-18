@@ -1,0 +1,23 @@
+<div [ngStyle]="getPlayerStyle()" class="player-card">
+  <div class="player-info">
+    <h3>{{ player.name }}</h3>
+    <p>Score: <span class="score-display" [class.updated]="scoreUpdated">{{ player.score }}</span></p>
+    <p *ngIf="player.remainingtime !== null" class="neon-text-red">Time: {{ player.remainingtime }}s</p>
+  </div>
+
+  <div class="player-controls">
+    <button *ngIf="canRename" class="rename-btn" (click)="onRename()" aria-label="Rename player">
+      ✏️ RENAME
+    </button>
+    <button class="add-btn" (click)="onPlus()" aria-label="Add 100 points">
+      ➕ +100
+    </button>
+    <button class="subtract-btn" (click)="onMinus()" aria-label="Subtract 100 points">
+      ➖ -100
+    </button>
+  </div>
+
+  <div *ngIf="isActive" class="active-indicator">
+    ⚡ ACTIVE
+  </div>
+</div>

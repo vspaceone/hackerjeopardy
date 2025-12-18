@@ -1,0 +1,30 @@
+{
+    "name": "Internet of Things (IoT)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the network of physical objects embedded with sensors, software, and other technologies to connect and exchange data with other devices and systems over the internet.",
+            "answer": "What is the Internet of Things (IoT)?"
+        },
+        {
+            "question": "This protocol is commonly used for communication between IoT devices and is known for its lightweight nature.",
+            "answer": "What is MQTT?"
+        },
+        {
+            "question": "This term refers to the process of collecting and analyzing data from IoT devices to gain insights and make informed decisions.",
+            "answer": "What is IoT Analytics?"
+        },
+        {
+            "question": "This type of network topology is commonly used in IoT applications to connect devices in a mesh-like structure.",
+            "answer": "What is a Mesh Network?"
+        },
+        {
+            "question": "This term refers to the practice of securing IoT devices and networks from cyber threats.",
+            "answer": "What is IoT Security?"
+        }
+    ]
+}

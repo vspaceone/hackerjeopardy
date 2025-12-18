@@ -1,0 +1,30 @@
+{
+    "name": "Home Automation",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This technology allows you to control home devices remotely using a smartphone or computer.",
+            "answer": "What is Home Automation?"
+        },
+        {
+            "question": "This popular home automation platform allows you to control smart devices using voice commands.",
+            "answer": "What is Amazon Alexa?"
+        },
+        {
+            "question": "This term refers to the practice of connecting various home devices to a central hub for automation and control.",
+            "answer": "What is a Smart Home Hub?"
+        },
+        {
+            "question": "This protocol is commonly used for communication between smart home devices and is known for its low power consumption.",
+            "answer": "What is Zigbee?"
+        },
+        {
+            "question": "This device is used in home automation to control lighting, heating, and other systems based on user preferences.",
+            "answer": "What is a Smart Thermostat?"
+        }
+    ]
+}

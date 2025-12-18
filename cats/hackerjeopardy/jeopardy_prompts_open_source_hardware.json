@@ -1,0 +1,30 @@
+{
+    "name": "Open Source Hardware",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This open-source electronics platform is based on easy-to-use hardware and software.",
+            "answer": "What is Arduino?"
+        },
+        {
+            "question": "This open-source single-board computer is widely used for DIY projects and education.",
+            "answer": "What is Raspberry Pi?"
+        },
+        {
+            "question": "This open-source hardware project provides a modular, reconfigurable computing platform.",
+            "answer": "What is BeagleBone?"
+        },
+        {
+            "question": "This open-source hardware project focuses on creating affordable, customizable 3D printers.",
+            "answer": "What is RepRap?"
+        },
+        {
+            "question": "This open-source hardware project aims to create a fully open-source laptop.",
+            "answer": "What is Novena?"
+        }
+    ]
+}

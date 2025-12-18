@@ -1,0 +1,30 @@
+{
+    "name": "Ransomware",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of malware encrypts a victim's files and demands payment for the decryption key.",
+            "answer": "What is Ransomware?"
+        },
+        {
+            "question": "This term refers to the practice of making a backup copy of data to protect against ransomware attacks.",
+            "answer": "What is Data Backup?"
+        },
+        {
+            "question": "This type of ransomware threatens to publish the victim's data unless a ransom is paid.",
+            "answer": "What is Doxware?"
+        },
+        {
+            "question": "This term refers to the process of restoring data from a backup after a ransomware attack.",
+            "answer": "What is Data Recovery?"
+        },
+        {
+            "question": "This type of ransomware encrypts the master boot record (MBR) of a computer, preventing it from booting up.",
+            "answer": "What is MBR Ransomware?"
+        }
+    ]
+}

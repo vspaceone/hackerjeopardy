@@ -1,0 +1,30 @@
+{
+    "name": "SSL/TLS (Secure Sockets Layer/Transport Layer Security)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This protocol is used to secure communications over a computer network by encrypting data.",
+            "answer": "What is SSL/TLS?"
+        },
+        {
+            "question": "This term refers to the process of establishing a secure connection between a client and a server using SSL/TLS.",
+            "answer": "What is the SSL/TLS Handshake?"
+        },
+        {
+            "question": "This type of certificate is used in SSL/TLS to verify the identity of a website and establish a secure connection.",
+            "answer": "What is an SSL/TLS Certificate?"
+        },
+        {
+            "question": "This version of SSL was deprecated due to security vulnerabilities and replaced by TLS.",
+            "answer": "What is SSL 3.0?"
+        },
+        {
+            "question": "This term refers to the practice of using SSL/TLS to encrypt data transmitted between a web browser and a web server.",
+            "answer": "What is HTTPS?"
+        }
+    ]
+}

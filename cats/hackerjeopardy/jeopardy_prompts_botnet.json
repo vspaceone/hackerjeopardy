@@ -1,0 +1,30 @@
+{
+    "name": "Botnet",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to a network of infected computers that are controlled by a central command and used to carry out malicious activities.",
+            "answer": "What is a Botnet?"
+        },
+        {
+            "question": "This type of attack involves using a botnet to overwhelm a target with traffic, causing it to become unavailable.",
+            "answer": "What is a DDoS attack?"
+        },
+        {
+            "question": "This term refers to the individual or group that controls a botnet.",
+            "answer": "What is a Botmaster?"
+        },
+        {
+            "question": "This type of malware is used to infect computers and add them to a botnet.",
+            "answer": "What is a Bot?"
+        },
+        {
+            "question": "This term refers to the process of taking control of a botnet by law enforcement or security researchers.",
+            "answer": "What is Botnet Takedown?"
+        }
+    ]
+}

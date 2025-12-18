@@ -1,0 +1,30 @@
+{
+    "name": "Containerization",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This platform is widely used for developing, shipping, and running applications inside containers.",
+            "answer": "What is Docker?"
+        },
+        {
+            "question": "This open-source system automates the deployment, scaling, and management of containerized applications.",
+            "answer": "What is Kubernetes?"
+        },
+        {
+            "question": "This term refers to a lightweight, standalone, executable package that includes everything needed to run a piece of software.",
+            "answer": "What is a Container?"
+        },
+        {
+            "question": "This tool provides container orchestration capabilities for managing containerized applications across multiple hosts.",
+            "answer": "What is Docker Swarm?"
+        },
+        {
+            "question": "This term refers to the practice of using containers to package and deploy applications consistently across different environments.",
+            "answer": "What is Containerization?"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "Battery Technology",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of battery is commonly used in portable electronic devices and electric vehicles for its high energy density.",
+            "answer": "What is a Lithium-ion Battery?"
+        },
+        {
+            "question": "This term refers to the process of converting chemical energy into electrical energy in a battery.",
+            "answer": "What is Electrochemical Reaction?"
+        },
+        {
+            "question": "This component of a battery separates the positive and negative electrodes and allows ions to flow between them.",
+            "answer": "What is an Electrolyte?"
+        },
+        {
+            "question": "This type of battery is known for its long cycle life and is commonly used in renewable energy storage systems.",
+            "answer": "What is a Lithium Iron Phosphate (LiFePO4) Battery?"
+        },
+        {
+            "question": "This term refers to the maximum amount of energy that a battery can store, typically measured in ampere-hours (Ah) or watt-hours (Wh).",
+            "answer": "What is Battery Capacity?"
+        }
+    ]
+}

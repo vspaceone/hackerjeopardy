@@ -1,0 +1,30 @@
+{
+    "name": "Artificial Intelligence (AI)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This AI technique involves training a model on a large dataset to make predictions or decisions without being explicitly programmed.",
+            "answer": "What is Machine Learning?"
+        },
+        {
+            "question": "This type of AI is designed to perform a narrow task, such as facial recognition or internet searches.",
+            "answer": "What is Narrow AI?"
+        },
+        {
+            "question": "This term refers to the ability of an AI system to understand and generate human language.",
+            "answer": "What is Natural Language Processing (NLP)?"
+        },
+        {
+            "question": "This AI technique involves using a network of artificial neurons to recognize patterns and make decisions.",
+            "answer": "What is Neural Networks?"
+        },
+        {
+            "question": "This term refers to the hypothetical future point at which AI will surpass human intelligence.",
+            "answer": "What is the Singularity?"
+        }
+    ]
+}

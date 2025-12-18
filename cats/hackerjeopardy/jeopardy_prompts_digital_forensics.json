@@ -1,0 +1,30 @@
+{
+    "name": "Digital Forensics",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This field involves the recovery and investigation of material found in digital devices, often in relation to computer crime.",
+            "answer": "What is Digital Forensics?"
+        },
+        {
+            "question": "This type of analysis involves examining digital evidence to reconstruct events and actions taken on a device.",
+            "answer": "What is forensic analysis?"
+        },
+        {
+            "question": "This term refers to the process of creating an exact copy of digital data for analysis without altering the original data.",
+            "answer": "What is data imaging?"
+        },
+        {
+            "question": "This tool is commonly used in digital forensics to analyze and recover data from hard drives.",
+            "answer": "What is EnCase?"
+        },
+        {
+            "question": "This term refers to the practice of documenting the handling and analysis of digital evidence to ensure its integrity.",
+            "answer": "What is chain of custody?"
+        }
+    ]
+}

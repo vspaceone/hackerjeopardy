@@ -1,0 +1,30 @@
+{
+    "name": "Data Mining",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This process involves discovering patterns and knowledge from large amounts of data.",
+            "answer": "What is Data Mining?"
+        },
+        {
+            "question": "This algorithm is commonly used in data mining to group similar data points together.",
+            "answer": "What is K-means clustering?"
+        },
+        {
+            "question": "This term refers to the process of reducing the number of features in a dataset while retaining as much information as possible.",
+            "answer": "What is Dimensionality Reduction?"
+        },
+        {
+            "question": "This technique is used to predict the value of a target variable based on input variables.",
+            "answer": "What is Regression Analysis?"
+        },
+        {
+            "question": "This type of data mining involves analyzing data to find associations between different items.",
+            "answer": "What is Association Rule Learning?"
+        }
+    ]
+}

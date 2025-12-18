@@ -1,0 +1,30 @@
+{
+    "name": "Wearable Technology",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This wearable device is commonly used to track physical activity and monitor health metrics.",
+            "answer": "What is a Fitness Tracker?"
+        },
+        {
+            "question": "This term refers to the practice of embedding electronic devices into clothing and accessories.",
+            "answer": "What is E-textiles?"
+        },
+        {
+            "question": "This wearable device is used to provide augmented reality experiences by overlaying digital information onto the real world.",
+            "answer": "What is a Smart Glasses?"
+        },
+        {
+            "question": "This company is known for its popular smartwatch that integrates with its ecosystem of devices and services.",
+            "answer": "What is Apple?"
+        },
+        {
+            "question": "This term refers to the practice of using wearable devices to monitor and improve health and wellness.",
+            "answer": "What is Wearable Health Technology?"
+        }
+    ]
+}

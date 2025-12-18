@@ -1,0 +1,30 @@
+{
+    "name": "Biohacking",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the practice of using science and technology to enhance the capabilities of the human body.",
+            "answer": "What is Biohacking?"
+        },
+        {
+            "question": "This type of biohacking involves implanting electronic devices into the body to enhance sensory perception.",
+            "answer": "What is Sensory Augmentation?"
+        },
+        {
+            "question": "This term refers to the practice of using genetic engineering techniques to modify the human genome.",
+            "answer": "What is Genetic Biohacking?"
+        },
+        {
+            "question": "This type of biohacking involves using nootropic supplements to enhance cognitive function.",
+            "answer": "What are Smart Drugs?"
+        },
+        {
+            "question": "This term refers to the practice of using wearable devices to monitor and optimize health and fitness.",
+            "answer": "What is Quantified Self?"
+        }
+    ]
+}

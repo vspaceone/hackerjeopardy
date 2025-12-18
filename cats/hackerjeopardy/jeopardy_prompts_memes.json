@@ -1,0 +1,30 @@
+{
+    "name": "Memes",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This meme features a dog sitting in a room on fire, saying 'This is fine.'",
+            "answer": "What is 'This is Fine' meme?"
+        },
+        {
+            "question": "This meme features a distracted boyfriend looking at another woman while his girlfriend looks at him disapprovingly.",
+            "answer": "What is the 'Distracted Boyfriend' meme?"
+        },
+        {
+            "question": "This meme features a Shiba Inu dog with captions in broken English and Comic Sans font.",
+            "answer": "What is the 'Doge' meme?"
+        },
+        {
+            "question": "This meme features a man pointing to his head, implying that he has a clever idea.",
+            "answer": "What is the 'Roll Safe' meme?"
+        },
+        {
+            "question": "This meme features a character from the TV show Futurama squinting suspiciously.",
+            "answer": "What is the 'Fry Squinting' meme?"
+        }
+    ]
+}

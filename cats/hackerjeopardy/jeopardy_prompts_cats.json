@@ -1,0 +1,30 @@
+{
+    "name": "Cats",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This breed of cat is known for its lack of fur and wrinkled skin.",
+            "answer": "What is the Sphynx?"
+        },
+        {
+            "question": "This term refers to a cat's ability to always land on its feet.",
+            "answer": "What is the Righting Reflex?"
+        },
+        {
+            "question": "This famous internet cat is known for its grumpy expression.",
+            "answer": "Who is Grumpy Cat?"
+        },
+        {
+            "question": "This breed of cat is known for its large size and tufted ears.",
+            "answer": "What is the Maine Coon?"
+        },
+        {
+            "question": "This term refers to a group of cats.",
+            "answer": "What is a Clowder?"
+        }
+    ]
+}

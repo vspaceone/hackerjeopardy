@@ -1,0 +1,78 @@
+Algorithm
+Big Data
+Blockchain
+Containerization
+Cybersecurity
+Database
+Artificial Intelligence (AI)
+Machine Learning
+Internet of Things (IoT)
+Virtual Reality (VR)
+Quantum Computing
+API (Application Programming Interface)
+Docker
+Data Mining
+Data Science
+Neural Networks
+Natural Language Processing (NLP)
+Robotic Process Automation (RPA)
+Edge AI
+Zero Trust Security
+Endpoint Security
+Threat Intelligence
+Incident Response
+Digital Forensics
+Penetration Testing
+Ethical Hacking
+Phishing
+Ransomware
+Malware
+Spyware
+Adware
+Botnet
+DDoS (Distributed Denial of Service)
+Firewall
+Intrusion Detection System (IDS)
+Intrusion Prevention System (IPS)
+SIEM (Security Information and Event Management)
+SOC (Security Operations Center)
+IAM (Identity and Access Management)
+MFA (Multi-Factor Authentication)
+SSO (Single Sign-On)
+OAuth
+OpenID Connect
+SAML (Security Assertion Markup Language)
+PKI (Public Key Infrastructure)
+SSL/TLS (Secure Sockets Layer/Transport Layer Security)
+VPN (Virtual Private Network)
+BYOD (Bring Your Own Device)
+MDM (Mobile Device Management)
+EMM (Enterprise Mobility Management)
+UEM (Unified Endpoint Management)
+VDI (Virtual Desktop Infrastructure)
+HCI (Hyper-Converged Infrastructure)
+SDN (Software-Defined Networking)
+NFV (Network Functions Virtualization)
+5G
+LTE (Long-Term Evolution)
+Wi-Fi 6
+Bluetooth Low Energy (BLE)
+Zigbee
+LoRaWAN
+MQTT (Message Queuing Telemetry Transport)
+REST (Representational State Transfer)
+GraphQL
+SOAP (Simple Object Access Protocol)
+JSON (JavaScript Object Notation)
+XML (eXtensible Markup Language)
+YAML (YAML Ain't Markup Language)
+CSV (Comma-Separated Values)
+NoSQL
+SQL (Structured Query Language)
+ORM (Object-Relational Mapping)
+ETL (Extract, Transform, Load)
+Data Lake
+Data Warehouse
+Business Intelligence (BI)
+Data Governance
+Data Analytics

@@ -1,0 +1,30 @@
+{
+    "name": "Electric Vehicles",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This company is known for its popular electric cars, including the Model S, Model 3, Model X, and Model Y.",
+            "answer": "What is Tesla?"
+        },
+        {
+            "question": "This term refers to the practice of charging an electric vehicle using a standard electrical outlet.",
+            "answer": "What is Level 1 Charging?"
+        },
+        {
+            "question": "This type of electric vehicle uses both an internal combustion engine and an electric motor.",
+            "answer": "What is a Hybrid Electric Vehicle (HEV)?"
+        },
+        {
+            "question": "This component stores electrical energy in an electric vehicle and provides power to the motor.",
+            "answer": "What is a Battery Pack?"
+        },
+        {
+            "question": "This term refers to the distance an electric vehicle can travel on a single charge.",
+            "answer": "What is Range?"
+        }
+    ]
+}

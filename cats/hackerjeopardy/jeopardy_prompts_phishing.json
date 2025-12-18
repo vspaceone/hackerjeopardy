@@ -1,0 +1,30 @@
+{
+    "name": "Phishing",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of cyber attack involves tricking individuals into revealing sensitive information by pretending to be a trustworthy entity.",
+            "answer": "What is Phishing?"
+        },
+        {
+            "question": "This term refers to a type of phishing attack that targets specific individuals or organizations.",
+            "answer": "What is Spear Phishing?"
+        },
+        {
+            "question": "This type of phishing attack involves using fraudulent emails to trick recipients into clicking on malicious links.",
+            "answer": "What is Email Phishing?"
+        },
+        {
+            "question": "This term refers to a type of phishing attack that uses text messages to trick individuals into revealing sensitive information.",
+            "answer": "What is Smishing?"
+        },
+        {
+            "question": "This type of phishing attack involves creating a fake website that mimics a legitimate one to steal login credentials.",
+            "answer": "What is Website Spoofing?"
+        }
+    ]
+}

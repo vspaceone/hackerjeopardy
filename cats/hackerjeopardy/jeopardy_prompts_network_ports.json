@@ -1,0 +1,30 @@
+{
+    "name": "Well known Network Port Numbers",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This port number is used by HTTP.",
+            "answer": "What is port 80?"
+        },
+        {
+            "question": "This port number is used by HTTPS.",
+            "answer": "What is port 443?"
+        },
+        {
+            "question": "This port number is used by FTP.",
+            "answer": "What is port 21?"
+        },
+        {
+            "question": "This port number is used by SSH.",
+            "answer": "What is port 22?"
+        },
+        {
+            "question": "This port number is used by DNS.",
+            "answer": "What is port 53?"
+        }
+    ]
+}

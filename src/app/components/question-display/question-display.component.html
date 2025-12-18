@@ -1,0 +1,60 @@
+<div *ngIf="question" class="question-overlay">
+  <div class="question-modal" role="dialog" aria-labelledby="question-header">
+     <div class="question-header" id="question-header">
+       <h3>{{ question.cat }} - {{ question.value }} points</h3>
+      <button *ngIf="canCancel" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    </div>
+    
+    <div class="question-content">
+      <h3>Answer:</h3>
+      <div class="answer-text">
+        {{ question.answer }}
+      </div>
+
+      <div *ngIf="question.image" class="answer-image">
+        <img [src]="question.image" alt="Answer image" />
+      </div>
+
+      <div *ngIf="!question.available && question.question && !showAnswer && !isCorrectlyAnswered" class="question-controls">
+        <button class="btn btn-reveal" (click)="toggleAnswer()" aria-label="Reveal the correct question">Reveal Question</button>
+      </div>
+
+      <div *ngIf="(!question.available && question.question && showAnswer) || isCorrectlyAnswered" class="question-reveal">
+        <h4>Correct Question:</h4>
+        <div class="question-text">{{ question.question }}</div>
+      </div>
+    </div>
+
+    <div *ngIf="question.activePlayersArr.length > 0" class="players-section">
+      <h4>Active Players:</h4>
+      <div class="active-players">
+        <div
+          *ngFor="let playerId of getActivePlayerIds()"
+          class="player-badge"
+          [ngStyle]="{
+            'background-color': getPlayerById(playerId)?.bgcolor,
+            'color': getPlayerById(playerId)?.fgcolor
+          }"
+        >
+          {{ getPlayerById(playerId)?.name }}
+          <span *ngIf="getPlayerById(playerId)?.remainingtime !== null">
+            ({{ getPlayerById(playerId)?.remainingtime }}s)
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="question.activePlayer" class="active-player-section">
+      <h4>Current Player: {{ question.activePlayer.name }}</h4>
+      
+        <div class="action-buttons">
+          <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct">Correct</button>
+          <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect">Incorrect</button>
+       </div>
+    </div>
+
+     <div class="modal-footer">
+        <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
+     </div>
+  </div>
+</div>

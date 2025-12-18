@@ -1,0 +1,30 @@
+{
+    "name": "Retro Computing",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This 8-bit home computer, released in 1982, is one of the best-selling computers of all time.",
+            "answer": "What is the Commodore 64?"
+        },
+        {
+            "question": "This early personal computer, introduced in 1981, was IBM's first entry into the home computer market.",
+            "answer": "What is the IBM PC?"
+        },
+        {
+            "question": "This 16-bit home computer, released in 1985, was known for its advanced graphics and sound capabilities.",
+            "answer": "What is the Amiga 1000?"
+        },
+        {
+            "question": "This early portable computer, released in 1981, is considered one of the first laptops.",
+            "answer": "What is the Osborne 1?"
+        },
+        {
+            "question": "This early home computer, released in 1977, was one of the first to come fully assembled and ready to use.",
+            "answer": "What is the Apple II?"
+        }
+    ]
+}

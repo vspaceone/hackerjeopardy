@@ -1,0 +1,30 @@
+{
+    "name": "Penetration Testing",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of testing involves simulating cyber attacks to identify vulnerabilities in a system.",
+            "answer": "What is Penetration Testing?"
+        },
+        {
+            "question": "This tool is widely used for penetration testing and security auditing.",
+            "answer": "What is Metasploit?"
+        },
+        {
+            "question": "This term refers to the process of gathering information about a target before conducting a penetration test.",
+            "answer": "What is Reconnaissance?"
+        },
+        {
+            "question": "This type of penetration test involves testing the security of web applications.",
+            "answer": "What is Web Application Penetration Testing?"
+        },
+        {
+            "question": "This report provides a detailed analysis of the findings from a penetration test, including vulnerabilities and recommendations.",
+            "answer": "What is a Penetration Test Report?"
+        }
+    ]
+}

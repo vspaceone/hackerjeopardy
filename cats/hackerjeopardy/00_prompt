@@ -1,0 +1,109 @@
+Generate 5 Jeopardy-style prompts about algorithms, sorted by difficulty levels from $100 to $500. Then, format the generated prompts into a JSON file with the following structure: { "name": "Algorithms", "difficulty": "varied", "author": "Copilot", "licence": "MIT", "date": "2023-01-01", "email": "copilot@microsoft.com", "questions": [ {"question": "This algorithm sorts an array by repeatedly finding the minimum element from the unsorted part and putting it at the beginning.", "answer": "Selection Sort"}, {"question": "This algorithm is used to find the minimum spanning tree for a graph, which means it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges in the tree is minimized.", "answer": "Kruskal's algorithm"}, {"question": "This algorithm is used to solve the problem of finding the longest common subsequence (LCS) between two sequences.", "answer": "Longest Common Subsequence algorithm"}, {"question": "This algorithm is used to solve the problem of finding the maximum flow in a flow network.", "answer": "Ford-Fulkerson algorithm"}, {"question": "This algorithm is used to solve the problem of finding the shortest path in a weighted graph with negative weights.", "answer": "Bellman-Ford algorithm"} ] }
+
+
+
+
+
+Multi:
+Generate 5 Jeopardy-style prompts about the following topics, sorted by difficulty levels from $100 to $500. Then, format the generated prompts into separate downloadable JSON files with the following structure:
+
+{
+  "name": "Topic Name",
+  "difficulty": "varied",
+  "author": "Copilot",
+  "licence": "MIT",
+  "date": "2023-01-01",
+  "email": "copilot@microsoft.com",
+  "questions": [
+    {"question": "Question 1", "answer": "Answer 1"},
+    {"question": "Question 2", "answer": "Answer 2"},
+    {"question": "Question 3", "answer": "Answer 3"},
+    {"question": "Question 4", "answer": "Answer 4"},
+    {"question": "Question 5", "answer": "Answer 5"}
+  ]
+}
+The topics are:
+
+API (Application Programming Interface)
+SaaS (Software as a Service)
+PaaS (Platform as a Service)
+IaaS (Infrastructure as a Service)
+Serverless Computing
+Kubernetes
+Docker
+Continuous Integration (CI)
+Continuous Deployment (CD)
+GitOps
+Blockchain
+Smart Contracts
+Data Mining
+Data Science
+Neural Networks
+Natural Language Processing (NLP)
+Robotic Process Automation (RPA)
+Cyber-Physical Systems
+Digital Twin
+Edge AI
+Fog Computing
+Hybrid Cloud
+Multi-Cloud
+
+
+
+Generate 5 Jeopardy-style prompts about the following topics, sorted by difficulty levels from $100 to $500. Then, format the generated prompts into separate downloadable JSON files with the following structure:
+
+{
+  "name": "Topic Name",
+  "difficulty": "varied",
+  "author": "Copilot",
+  "licence": "MIT",
+  "date": "2023-01-01",
+  "email": "copilot@microsoft.com",
+  "questions": [
+    {"question": "Question 1", "answer": "Answer 1"},
+    {"question": "Question 2", "answer": "Answer 2"},
+    {"question": "Question 3", "answer": "Answer 3"},
+    {"question": "Question 4", "answer": "Answer 4"},
+    {"question": "Question 5", "answer": "Answer 5"}
+  ]
+}
+The topics are:
+Famous Hackers
+Well known Network Port Numbers
+Cats
+Memes
+Keyboard Layouts
+Python Internals
+Obscure Computer Systems
+Odd devices
+Formerly well known Companies that vanished
+
+
+Generate 5 Jeopardy-style prompts about the following topics, sorted by difficulty levels from $100 to $500. Then, format the generated prompts into separate downloadable JSON files with the following structure:
+
+{
+  "name": "Topic Name",
+  "difficulty": "varied",
+  "author": "Copilot",
+  "licence": "MIT",
+  "date": "2023-01-01",
+  "email": "copilot@microsoft.com",
+  "questions": [
+    {"question": "Question 1", "answer": "Answer 1"},
+    {"question": "Question 2", "answer": "Answer 2"},
+    {"question": "Question 3", "answer": "Answer 3"},
+    {"question": "Question 4", "answer": "Answer 4"},
+    {"question": "Question 5", "answer": "Answer 5"}
+  ]
+}
+Open Source Hardware
+3D Printing
+Laser Cutting
+CNC Machining
+Arduino Projects
+Raspberry Pi Projects
+Wearable Technology
+Internet of Things (IoT)
+Robotics
+Drones and UAVs
+

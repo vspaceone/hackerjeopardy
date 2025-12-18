@@ -1,0 +1,30 @@
+{
+    "name": "Arduino Projects",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This project involves using an Arduino to control the brightness of an LED.",
+            "answer": "What is an LED Dimmer?"
+        },
+        {
+            "question": "This project uses an Arduino to measure temperature and display it on an LCD screen.",
+            "answer": "What is a Temperature Monitor?"
+        },
+        {
+            "question": "This project involves using an Arduino to create a simple robot that can avoid obstacles.",
+            "answer": "What is an Obstacle Avoiding Robot?"
+        },
+        {
+            "question": "This project uses an Arduino to control a servo motor based on input from a potentiometer.",
+            "answer": "What is a Servo Motor Controller?"
+        },
+        {
+            "question": "This project involves using an Arduino to create a digital clock with an RTC module.",
+            "answer": "What is a Digital Clock?"
+        }
+    ]
+}

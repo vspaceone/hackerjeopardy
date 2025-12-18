@@ -1,0 +1,30 @@
+{
+    "name": "DDoS (Distributed Denial of Service)",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This type of attack involves overwhelming a system with traffic to make it unavailable.",
+            "answer": "What is a DDoS attack?"
+        },
+        {
+            "question": "This term refers to the practice of using multiple compromised devices to launch a DDoS attack.",
+            "answer": "What is a botnet?"
+        },
+        {
+            "question": "This type of DDoS attack involves sending a large number of requests to a server to exhaust its resources.",
+            "answer": "What is an HTTP flood attack?"
+        },
+        {
+            "question": "This tool is commonly used by attackers to launch DDoS attacks.",
+            "answer": "What is LOIC (Low Orbit Ion Cannon)?"
+        },
+        {
+            "question": "This term refers to the practice of mitigating DDoS attacks by distributing traffic across multiple servers.",
+            "answer": "What is load balancing?"
+        }
+    ]
+}

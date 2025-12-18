@@ -1,0 +1,30 @@
+{
+    "name": "Circuit Bending",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This term refers to the creative short-circuiting of electronic devices to create new sounds.",
+            "answer": "What is Circuit Bending?"
+        },
+        {
+            "question": "This type of electronic device is commonly used in circuit bending for its simple circuits and sound generation capabilities.",
+            "answer": "What is a Toy Keyboard?"
+        },
+        {
+            "question": "This tool is essential for making precise connections and modifications in circuit bending.",
+            "answer": "What is a Soldering Iron?"
+        },
+        {
+            "question": "This component is often added to circuit-bent devices to control the pitch of the sound.",
+            "answer": "What is a Potentiometer?"
+        },
+        {
+            "question": "This term refers to the practice of experimenting with electronic circuits to discover new and unexpected sounds.",
+            "answer": "What is Creative Exploration?"
+        }
+    ]
+}

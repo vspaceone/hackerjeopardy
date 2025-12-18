@@ -1,0 +1,30 @@
+{
+    "name": "3D Printing",
+    "difficulty": "varied",
+    "author": "Copilot",
+    "licence": "MIT",
+    "date": "2023-01-01",
+    "email": "copilot@microsoft.com",
+    "questions": [
+        {
+            "question": "This process involves creating a three-dimensional object by adding material layer by layer.",
+            "answer": "What is 3D Printing?"
+        },
+        {
+            "question": "This type of 3D printing uses a laser to cure liquid resin into solid layers.",
+            "answer": "What is Stereolithography (SLA)?"
+        },
+        {
+            "question": "This material is commonly used in 3D printing and is known for its strength and durability.",
+            "answer": "What is ABS (Acrylonitrile Butadiene Styrene)?"
+        },
+        {
+            "question": "This type of 3D printing involves melting and extruding plastic filament to create objects.",
+            "answer": "What is Fused Deposition Modeling (FDM)?"
+        },
+        {
+            "question": "This term refers to the digital file that contains the instructions for a 3D printer to create an object.",
+            "answer": "What is a G-code file?"
+        }
+    ]
+}

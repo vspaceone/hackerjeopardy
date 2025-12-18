@@ -8,8 +8,7 @@ import { GameBoardComponent } from './components/game-board/game-board.component
 import { QuestionDisplayComponent } from './components/question-display/question-display.component';
 import { PlayerControlsComponent } from './components/player-controls/player-controls.component';
 import { Category, Player, Question } from './models/game.models';
-declare var jquery:any;
-declare var $ :any;
+
 
 @Component({
 	selector: 'app-root',
@@ -57,17 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	private activatePlayer(playerId: number): void {
-		if (!this.selectedQuestion) return;
-
-		// Cast to Question type
-		const question = this.selectedQuestion as Question;
-
-		// Use game service to activate player
-		const activated = this.gameService.activatePlayer(question, playerId, this.players);
-		if (activated) {
-			this.audioService.playClick();
-			console.log(`Player ${playerId} activated for question`);
-		}
+		this.gameService.activatePlayer(this.selectedQuestion!, playerId, this.players);
 	}
 
 	private initMatrixRain(): void {
@@ -119,10 +108,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
 	selectSet(s: string): void {
-		console.log('Selecting set:', s);
 		this.audioService.playClick();
 		this.gameDataService.loadGameRound(s).subscribe(categories => {
-			console.log('Loaded categories:', categories);
 			this.qanda = categories;
 		});
 	}
@@ -131,16 +118,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.selectedQuestion = q;
 		this.audioService.playClick();
 		this.audioService.startThemeMusic();
-		console.log('Selected question:', q);
 	}
 
 	answered(q, p): void {
-		console.log(q)
 		this.audioService.stopThemeMusic();
 
 		// Use GameService for correct answer handling
 		if (this.selectedQuestion) {
-			this.gameService.correctAnswer(this.selectedQuestion, this.players);
+			this.gameService.correctAnswer(this.selectedQuestion);
 		}
 
 		this.couldBeCanceled = false;
@@ -150,11 +135,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
 	notanswered(q, p): void {
-		console.log(q)
-
 		// Use GameService for incorrect answer handling
 		if (this.selectedQuestion) {
-			this.gameService.incorrectAnswer(this.selectedQuestion, this.players);
+			this.gameService.incorrectAnswer(this.selectedQuestion);
 		}
 
 		this.couldBeCanceled = false;

@@ -81,12 +81,12 @@ export class GameService {
       // Set timer for the active player
       question.activePlayer.remainingtime = this.TIMEOUT;
       this.timer = timer(0, 1000).subscribe(() => {
-        this.decrementTimer(question, players);
+        this.decrementTimer(question);
       });
     }
   }
 
-  decrementTimer(question: Question, players: Player[]): void {
+  decrementTimer(question: Question): void {
     // Decrement the current active player (only one at a time in sequential mode)
     if (question.activePlayer && question.activePlayer.remainingtime > 0) {
       question.activePlayer.remainingtime--;
@@ -108,11 +108,9 @@ export class GameService {
     }
   }
 
-  private handleTimeout(question: Question): void {
-    // This will be handled by the component that subscribes to timer events
-  }
 
-  correctAnswer(question: Question, players: Player[]): void {
+
+  correctAnswer(question: Question): void {
     this.audioService.playSuccess();
     this.clearTimer();
 
@@ -128,7 +126,7 @@ export class GameService {
     question.activePlayer = undefined;
   }
 
-  incorrectAnswer(question: Question, players: Player[]): void {
+  incorrectAnswer(question: Question): void {
     this.audioService.playFail();
     this.clearTimer(); // Clear current timer - decision is made
     if (question.activePlayer) {

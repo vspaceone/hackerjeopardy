@@ -105,7 +105,7 @@ describe('GameService', () => {
         buttonsActive: true
       };
 
-      service.correctAnswer(question, players);
+      service.correctAnswer(question);
       expect(players[0].score).toBe(200);
       expect(question.available).toBeFalsy();
       expect(question.player).toBe(players[0]);
@@ -130,7 +130,7 @@ describe('GameService', () => {
         buttonsActive: true
       };
 
-      service.incorrectAnswer(question, players);
+      service.incorrectAnswer(question);
       expect(players[0].score).toBe(-200);
       expect(question.activePlayers.has(1)).toBeFalsy();
       expect(question.timeoutPlayers.has(1)).toBeTruthy();

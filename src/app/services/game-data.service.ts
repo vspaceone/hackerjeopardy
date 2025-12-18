@@ -82,10 +82,8 @@ export class GameDataService {
 
         if (question.image && category.path) {
           processedQuestion.image = `assets/${setName}/${category.path}/${question.image}`;
-          console.log('Image path with category.path:', processedQuestion.image);
         } else if (question.image && category.name) {
           processedQuestion.image = `assets/${setName}/${category.name}/${question.image}`;
-          console.log('Image path with category.name:', processedQuestion.image);
         }
 
         return processedQuestion;

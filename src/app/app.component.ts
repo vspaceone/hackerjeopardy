@@ -59,6 +59,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		const activated = this.gameService.activatePlayer(this.selectedQuestion!, playerId, this.players);
 		if (activated) {
 			this.audioService.playBuzzer();
+			this.couldBeCanceled = false; // Can't cancel once someone has buzzed in
 		}
 	}
 

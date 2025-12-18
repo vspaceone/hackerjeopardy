@@ -41,6 +41,33 @@
   font-family: 'Orbitron', monospace;
 }
 
+.question-header .btn {
+  padding: 6px 12px;
+  font-size: 0.9em;
+  border-radius: 4px;
+  font-family: 'Orbitron', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid;
+  background: var(--bg-secondary);
+  transition: all 0.3s ease;
+}
+
+.question-header .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.question-header .btn-secondary {
+  color: var(--text-secondary);
+  border-color: var(--text-secondary);
+}
+
+.question-header .btn-secondary:hover {
+  background: var(--text-secondary);
+  color: var(--bg-primary);
+}
+
 .question-content {
   margin: 20px 0;
   text-align: center;

@@ -64,7 +64,7 @@ export class GameBoardComponent {
     }
 
     // Check for reset animation
-    if (question.resetTimestamp && (Date.now() - question.resetTimestamp) < 3000) {
+    if (question.resetTimestamp && (Date.now() - question.resetTimestamp) < 1000) {
       return 'btn-danger reset';
     }
 

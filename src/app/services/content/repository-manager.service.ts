@@ -57,13 +57,14 @@ export class RepositoryManagerService {
     }
 
      // Create repository object
-     const repository: ContentRepository = {
-       ...repoConfig,
-       id,
-       addedAt: new Date(),
-       status: { state: 'connected' },
-       validationResult: validation
-     };
+      const repository: ContentRepository = {
+        ...repoConfig,
+        id,
+        addedAt: new Date(),
+        githubUrl: repoConfig.url, // Set githubUrl for provider creation
+        status: { state: 'connected' },
+        validationResult: validation
+      };
 
     // Add to storage
     await this.storage.addRepository(repository);
@@ -71,7 +72,9 @@ export class RepositoryManagerService {
 
     // Create provider if enabled
     if (repository.enabled) {
+      console.log('RepositoryManager: Creating provider for repository:', repository.id, repository.githubUrl);
       await this.createProvider(repository);
+      console.log('RepositoryManager: Provider created, providers count:', this.providers.size);
     }
   }
 
@@ -185,22 +188,31 @@ export class RepositoryManagerService {
   }
 
   async refreshRepositoryStatus(repoId: string): Promise<void> {
+    console.log('RepositoryManager: Refreshing status for repo:', repoId);
     const repo = this.repositories.find(r => r.id === repoId);
-    if (!repo) return;
+    if (!repo) {
+      console.log('RepositoryManager: Repository not found:', repoId);
+      return;
+    }
 
     try {
       const provider = this.providers.get(repoId);
+      console.log('RepositoryManager: Provider found:', !!provider);
       if (!provider) {
         repo.status = { state: 'error', lastError: 'Provider not available' };
       } else {
+        console.log('RepositoryManager: Checking provider availability...');
         const available = await provider.isAvailable();
+        console.log('RepositoryManager: Provider available:', available);
         repo.status = {
           state: available ? 'connected' : 'offline',
           roundsCount: repo.manifest?.rounds.length,
           lastUpdated: new Date().toISOString()
         };
+        console.log('RepositoryManager: Status updated to:', repo.status.state);
       }
     } catch (error) {
+      console.log('RepositoryManager: Error refreshing status:', error);
       repo.status = {
         state: 'error',
         lastError: error instanceof Error ? error.message : 'Unknown error'

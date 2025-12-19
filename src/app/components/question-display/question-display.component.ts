@@ -37,8 +37,8 @@ export class QuestionDisplayComponent {
     }
 
     // Use ContentManagerService for proper URL resolution
-    if (this.question.roundId && this.question.cat) {
-      const url = this.contentManager.getImageUrl(this.question.roundId, this.question.cat, this.question.image);
+    if (this.question.roundId && this.question.folder) {
+      const url = this.contentManager.getImageUrl(this.question.roundId, this.question.folder, this.question.image);
       if (url) {
         return url;
       }

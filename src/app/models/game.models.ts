@@ -18,6 +18,7 @@ export interface Question {
   available: boolean;
   value: number;
   cat: string;
+  folder?: string; // Folder name for image URLs (may differ from display name)
   roundId?: string; // Add round ID for image URL construction
   player?: Player;
   activePlayers: Set<number>;

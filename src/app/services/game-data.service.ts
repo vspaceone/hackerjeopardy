@@ -83,6 +83,7 @@ export class GameDataService {
           available: true,
           value: (qIdx + 1) * 100,
           cat: category.name,
+          folder: category.path || category.name, // Use path for folder, fallback to name
           roundId: setName, // Add round ID
           activePlayers: new Set<number>(),
           activePlayersArr: [],

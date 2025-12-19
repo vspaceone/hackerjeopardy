@@ -49,33 +49,38 @@ Each round should be placed in its own directory under `rounds/[roundId]/`:
 {
   "name": "Category Name",
   "questions": [
-    {
-      "question": "What is the answer to this question?",
-      "answer": "The Answer",
-      "value": 100,
-      "available": true,
-      "cat": "category_name"
-    },
      {
-       "question": "Another question?",
-       "answer": "Another answer",
-       "value": 200,
+       "question": "This famous tower is located in Paris",
+       "answer": "What is the Eiffel Tower?",
+       "value": 100,
        "available": true,
-       "cat": "category_name",
-       "image": "diagram.jpg"
-     }
+       "cat": "category_name"
+     },
+      {
+        "question": "This programming language was created by Guido van Rossum",
+        "answer": "What is Python?",
+        "value": 200,
+        "available": true,
+        "cat": "category_name",
+        "image": "python-logo.jpg"
+      }
   ]
 }
 ```
 
-## Question Guidelines
+ ## Question Guidelines
 
-### Content Rules
-- **Questions should be Jeopardy-style**: Answer comes first, question follows
-- **Answers should be accurate** and verifiable
-- **Keep questions appropriate** for a general audience
-- **Include variety** in difficulty within categories
-- **Use clear, unambiguous language**
+ ### Jeopardy Format
+ In Jeopardy-style questions:
+ - The **"question" field** contains the **clue** that contestants see
+ - The **"answer" field** contains the **correct response** contestants should give
+ - Example: Contestants see "This famous tower is in Paris" and respond "What is the Eiffel Tower?"
+
+ ### Content Rules
+ - **Clues should be accurate** and verifiable
+ - **Keep questions appropriate** for a general audience
+ - **Include variety** in difficulty within categories
+ - **Use clear, unambiguous language**
 
 ### Technical Requirements
 - **Question values**: 100, 200, 300, 400, 500 (standard Jeopardy format)

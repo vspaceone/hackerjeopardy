@@ -92,16 +92,8 @@ export class GameDataService {
           buttonsActive: false
         };
 
-        // Update image URLs using content manager
-        if (question.image) {
-          // Skip processing if already a full URL
-          if (question.image.startsWith('http') || question.image.startsWith('/assets/')) {
-            processedQuestion.image = question.image;
-          } else {
-            const directoryName = category.path || category.name;
-            processedQuestion.image = this.contentManager.getImageUrl(setName, directoryName, question.image);
-          }
-        }
+        // Keep original image paths - URLs will be resolved when displaying
+        processedQuestion.image = question.image;
 
         return processedQuestion;
       });

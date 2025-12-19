@@ -30,7 +30,8 @@ export class GitHubContentProvider extends BaseContentProvider {
       map(manifest => {
         console.log(`GitHubContentProvider (${this.githubUrl}): Raw manifest fetched with ${manifest?.rounds?.length || 0} rounds`);
         const processed = this.processManifest(manifest);
-        console.log(`GitHubContentProvider (${this.githubUrl}): Processed manifest with ${processed?.rounds?.length || 0} rounds:`, processed?.rounds?.map(r => r.id));
+        console.log(`GitHubContentProvider (${this.githubUrl}): Processed manifest with ${processed?.rounds?.length || 0} rounds`,
+          processed?.rounds?.map(r => r.id));
         return processed;
       }),
       catchError(error => {

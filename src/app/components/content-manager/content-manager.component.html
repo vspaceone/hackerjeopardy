@@ -181,9 +181,35 @@
      <div *ngIf="loadingRepos" class="loading">
        Loading repositories...
      </div>
-   </div>
+    </div>
 
-   <!-- Cache Management -->
+    <!-- Controller Status -->
+    <div class="controller-section">
+      <div class="section-header">
+        <h3>Connected Controllers</h3>
+        <button
+          class="btn btn-secondary"
+          (click)="connectHID()"
+          [disabled]="hidConnected || !hidSupported"
+        >
+          {{ !hidSupported ? 'LEDs Not Supported' : hidConnected ? 'LEDs Connected' : 'Connect Buzz LEDs' }}
+        </button>
+      </div>
+      <div *ngIf="connectedControllers.length === 0" class="no-controllers">
+        <p>No Buzz controllers detected. Connect controllers and they will appear here.</p>
+      </div>
+      <div *ngIf="connectedControllers.length > 0" class="controller-list">
+        <div *ngFor="let controller of connectedControllers; let i = index" class="controller-item">
+          <div class="controller-info">
+            <h4>Player {{ i + 1 }}</h4>
+            <p>{{ controller.id }}</p>
+            <p>{{ controller.buttons.length }} buttons</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cache Management -->
    <div class="cache-section">
      <h3>Cache Management</h3>
      <p>Clear cached content to free up storage space. Content will need to be re-downloaded for offline use.</p>

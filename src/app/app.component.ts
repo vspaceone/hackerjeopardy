@@ -4,6 +4,7 @@ import { GameDataService } from './services/game-data.service';
 import { GameService } from './services/game.service';
 import { AudioService } from './services/audio.service';
 import { ContentManagerService } from './services/content/content-manager.service';
+import { ControllerService } from './services/controller.service';
 import { SetSelectionComponent } from './components/set-selection/set-selection.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 import { QuestionDisplayComponent } from './components/question-display/question-display.component';
@@ -30,15 +31,17 @@ import { RoundMetadata } from './services/content/content.types';
 export class AppComponent implements OnInit, AfterViewInit {
 	title = 'Hacker Jeopardy';
 	availableRounds: RoundMetadata[] = [];
-	loading = true;
-	showContentManager = false;
-	currentRoundName = '';
+  loading = true;
+  showContentManager = false;
+  currentRoundName = '';
+  hasControllers = false;
 
 	constructor(
 		private gameDataService: GameDataService,
 		private gameService: GameService,
 		private audioService: AudioService,
-		private contentManager: ContentManagerService
+		private contentManager: ContentManagerService,
+		private controllerService: ControllerService
 	) { };
 
   async ngOnInit(): Promise<void> {
@@ -65,6 +68,16 @@ export class AppComponent implements OnInit, AfterViewInit {
 					this.availableRounds = [];
 					this.loading = false;
 				}
+			});
+
+			// Subscribe to controller activations
+			this.controllerService.playerActivated$.subscribe(playerId => {
+				this.activatePlayer(playerId);
+			});
+
+			// Subscribe to controller detection
+			this.controllerService.connectedControllers$.subscribe(controllers => {
+				this.hasControllers = controllers.length > 0;
 			});
     } catch (error) {
       console.error('AppComponent: Failed to initialize content manager:', error);
@@ -102,10 +115,22 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	private activatePlayer(playerId: number): void {
-		const activated = this.gameService.activatePlayer(this.selectedQuestion!, playerId, this.players);
-		if (activated) {
-			this.audioService.playBuzzer();
-			this.couldBeCanceled = false; // Can't cancel once someone has buzzed in
+		if (this.selectedQuestion && this.qanda) {
+			// Normal buzzing during question
+			const activated = this.gameService.activatePlayer(this.selectedQuestion, playerId, this.players);
+			if (activated) {
+				this.audioService.playBuzzer();
+				this.couldBeCanceled = false; // Can't cancel once someone has buzzed in
+			}
+		} else if (this.qanda) {
+			// Highlight player for identification during question selection
+			const player = this.players.find(p => p.id === playerId);
+			if (player) {
+				player.highlighted = true;
+				setTimeout(() => {
+					player.highlighted = false;
+				}, 3000); // Highlight for 3 seconds
+			}
 		}
 	}
 
@@ -268,7 +293,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			bgcolor: '#ff6b6b',
 			fgcolor: '#9f0b0b',
 			key: '1',
-			remainingtime: null
+			remainingtime: null,
+			highlighted: false
 		},
 		{
 			id: 2,
@@ -278,7 +304,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			bgcolor: '#ff9900',
 			fgcolor: '#995c00',
 			key: '2',
-			remainingtime: null
+			remainingtime: null,
+			highlighted: false
 		},
 		{
 			id: 3,
@@ -288,7 +315,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			bgcolor: '#9cfcff',
 			fgcolor: '#3c9c9f',
 			key: '3',
-			remainingtime: null
+			remainingtime: null,
+			highlighted: false
 		},
 		{
 			id: 4,
@@ -298,7 +326,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			bgcolor: '#FFFF66',
 			fgcolor: '#cccc00',
 			key: '4',
-			remainingtime: null
+			remainingtime: null,
+			highlighted: false
 		}
 	];
 

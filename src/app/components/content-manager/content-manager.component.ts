@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContentManagerService } from '../../services/content/content-manager.service';
 import { RepositoryManagerService } from '../../services/content/repository-manager.service';
+import { ControllerService } from '../../services/controller.service';
 import {
   CacheStats,
   ContentUpdateInfo,
@@ -37,9 +38,15 @@ export class ContentManagerComponent implements OnInit {
   validationResult: RepositoryValidationResult | null = null;
   totalRounds = 0;
 
+  // Controllers
+  connectedControllers: Gamepad[] = [];
+  hidConnected = false;
+  hidSupported = false;
+
   constructor(
     private contentManager: ContentManagerService,
-    private repoManager: RepositoryManagerService
+    private repoManager: RepositoryManagerService,
+    private controllerService: ControllerService
   ) {}
 
 
@@ -108,6 +115,14 @@ export class ContentManagerComponent implements OnInit {
     this.contentManager.getAvailableRounds().subscribe(rounds => {
       this.totalRounds = rounds.length;
     });
+
+    // Subscribe to controller updates
+    this.controllerService.connectedControllers$.subscribe(controllers => {
+      this.connectedControllers = controllers;
+    });
+
+    // Check HID support
+    this.hidSupported = 'hid' in navigator;
   }
 
   async loadCacheStats(): Promise<void> {
@@ -240,6 +255,18 @@ export class ContentManagerComponent implements OnInit {
       case 'error': return `Error: ${repo.status.lastError || 'Unknown'}`;
       case 'checking': return 'Checking...';
       default: return 'Unknown';
+    }
+  }
+
+  async connectHID(): Promise<void> {
+    try {
+      console.log('Connecting HID...');
+      const success = await this.controllerService.connectHID();
+      console.log('HID connect result:', success);
+      this.hidConnected = success;
+    } catch (error) {
+      console.error('HID connect error:', error);
+      this.hidConnected = false;
     }
   }
 

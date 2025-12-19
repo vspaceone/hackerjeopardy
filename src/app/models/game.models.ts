@@ -8,6 +8,7 @@ export interface Player {
   key: string;
   remainingtime: number | null;
   activationtime?: number;
+  highlighted?: boolean;
 }
 
 export interface Question {

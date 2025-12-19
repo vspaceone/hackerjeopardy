@@ -117,4 +117,16 @@ export class CachedContentProvider extends BaseContentProvider {
   async getCachedRoundIds(): Promise<string[]> {
     return await this.indexedDB.getCachedRoundIds();
   }
+
+  async removeRound(roundId: string): Promise<void> {
+    await this.indexedDB.delete(`round-${roundId}`);
+    // Also remove all categories for this round
+    const categoryEntries = await this.indexedDB.getByType('category');
+    const roundCategories = categoryEntries.filter(entry =>
+      entry.key.startsWith(`category-${roundId}-`)
+    );
+    for (const categoryEntry of roundCategories) {
+      await this.indexedDB.delete(categoryEntry.key);
+    }
+  }
 }

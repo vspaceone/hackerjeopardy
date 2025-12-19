@@ -32,24 +32,25 @@
 
    <div class="players-container" *ngIf="qanda && !showContentManager">
      <h2 class="neon-text-purple">Players</h2>
-     <div class="players-row">
-       <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" (scoreAdjust)="adjustScore($event)"></app-player-controls>
-     </div>
+      <div class="players-row">
+        <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" [highlighted]="player.highlighted" (scoreAdjust)="adjustScore($event)"></app-player-controls>
+      </div>
    </div>
  </div>
 
  <div class="app-footer">
    <p *ngIf="currentRoundName && !showContentManager" class="center-text">Current Round: {{ currentRoundName }}</p>
-   <div class="footer-controls">
-     <button
-       *ngIf="qanda"
-       class="cyber-button rounds-btn"
-       (click)="backToRoundSelection()"
-       title="Return to Round Selection">
-       Select Round
-     </button>
-     <button class="cyber-button content-btn" (click)="showContentManager = !showContentManager">
-       Content Manager
-     </button>
-   </div>
+    <div class="footer-controls">
+      <span *ngIf="hasControllers" class="controller-indicator" title="Game controllers detected">🎮</span>
+      <button
+        *ngIf="qanda"
+        class="cyber-button rounds-btn"
+        (click)="backToRoundSelection()"
+        title="Return to Round Selection">
+        Select Round
+      </button>
+      <button class="cyber-button content-btn" (click)="showContentManager = !showContentManager">
+        Content Manager
+      </button>
+    </div>
  </div>

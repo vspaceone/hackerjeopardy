@@ -14,6 +14,7 @@ export class PlayerControlsComponent implements AfterViewInit {
   @Input() player!: Player;
   @Input() canRename = false;
   @Input() isActive = false;
+  @Input() highlighted = false;
 
   @Output() rename = new EventEmitter<Player>();
   @Output() scoreAdjust = new EventEmitter<{ player: Player; amount: number }>();

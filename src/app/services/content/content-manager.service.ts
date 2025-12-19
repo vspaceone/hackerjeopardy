@@ -274,7 +274,8 @@ export class ContentManagerService {
      console.log(`ContentManager: Trying to get manifest from ${provider.name} (priority: ${provider.priority})`);
      return provider.getManifest().pipe(
        map(manifest => {
-         console.log(`ContentManager: Got manifest from ${provider.name} with ${manifest?.rounds?.length || 0} rounds:`, manifest?.rounds?.map(r => r.id));
+           console.log(`Manifest from ${provider.name}: ${manifest?.rounds?.length || 0} rounds`,
+             manifest?.rounds?.map(r => r.id));
         if (!manifest || !manifest.rounds) {
           console.warn(`ContentManager: No manifest or rounds from ${provider.name}`);
           return [];
@@ -319,6 +320,7 @@ export class ContentManagerService {
     console.log('ContentManager: Checking repositories:', repositories.map(r => `${r.id} (${r.enabled ? 'enabled' : 'disabled'})`));
     const newRounds: RoundMetadata[] = [];
     const updatedRounds: RoundMetadata[] = [];
+    const freshRoundIds = new Set<string>();
 
     for (const repo of repositories.filter(r => r.enabled)) {
       console.log(`ContentManager: Checking updates for repo ${repo.id}`);
@@ -332,13 +334,15 @@ export class ContentManagerService {
         console.log(`ContentManager: Getting manifest from provider ${provider.name} (${provider.constructor.name})`);
         console.log(`ContentManager: Provider priority: ${provider.priority}`);
         const manifest = await firstValueFrom(provider.getManifest());
-        console.log(`ContentManager: Got manifest with ${manifest?.rounds?.length || 0} rounds:`, manifest?.rounds?.map(r => ({ id: r.id, name: r.name })));
+        console.log(`Got manifest with ${manifest?.rounds?.length || 0} rounds`,
+          manifest?.rounds?.map(r => r.id));
         if (!manifest?.rounds) {
           console.warn(`ContentManager: No rounds in manifest for repo ${repo.id}`);
           continue;
         }
 
         for (const round of manifest.rounds) {
+          freshRoundIds.add(round.id);
           console.log(`ContentManager: Checking round ${round.id} from repo ${repo.id}`);
           if (!currentRoundIds.has(round.id)) {
             console.log(`ContentManager: Found new round ${round.id}`);
@@ -357,11 +361,15 @@ export class ContentManagerService {
       }
     }
 
+    // Detect removed rounds
+    const removedRoundIds = currentRounds.filter(r => !freshRoundIds.has(r.id)).map(r => r.id);
+    console.log('ContentManager: Detected removed rounds:', removedRoundIds);
+
     const result = {
-      hasUpdates: newRounds.length > 0 || updatedRounds.length > 0,
+      hasUpdates: newRounds.length > 0 || updatedRounds.length > 0 || removedRoundIds.length > 0,
       newRounds,
       updatedRounds,
-      removedRounds: [] // Not implemented yet
+      removedRounds: removedRoundIds
     };
     console.log('ContentManager: Update check result:', result);
     return result;
@@ -388,6 +396,16 @@ export class ContentManagerService {
         await this.loadRound(round.id);
       } catch (error) {
         console.warn(`Failed to update round ${round.id}:`, error);
+      }
+    }
+
+    // Remove deleted rounds from cache
+    for (const roundId of updates.removedRounds) {
+      try {
+        await this.cachedProvider.removeRound(roundId);
+        console.log(`Removed round ${roundId} from cache`);
+      } catch (error) {
+        console.warn(`Failed to remove round ${roundId} from cache:`, error);
       }
     }
   }

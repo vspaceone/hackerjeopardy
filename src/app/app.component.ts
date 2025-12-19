@@ -278,9 +278,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.couldBeCanceled = false;
 	}
 
-	adjustScore(event: {player: Player, amount: number}): void {
-		event.player.score += event.amount;
-	}
+  adjustScore(event: {player: Player, amount: number}): void {
+    event.player.score += event.amount;
+  }
+
+  resetAllScores(): void {
+    if (confirm('Reset all player scores to 0? This cannot be undone.')) {
+      this.players.forEach(player => {
+        player.score = 0;
+      });
+    }
+  }
 
 	close(): void {
 		this.audioService.stopThemeMusic();

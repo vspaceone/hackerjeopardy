@@ -30,12 +30,15 @@
 
   <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
 
-   <div class="players-container" *ngIf="qanda && !showContentManager">
-     <h2 class="neon-text-purple">Players</h2>
+    <div class="players-container" *ngIf="qanda && !showContentManager">
+      <h2 class="neon-text-purple">Players</h2>
+      <div class="reset-controls">
+        <button class="cyber-button reset-btn" (click)="resetAllScores()" title="Reset all player scores to 0">Reset Scores</button>
+      </div>
       <div class="players-row">
         <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" [highlighted]="player.highlighted" (scoreAdjust)="adjustScore($event)"></app-player-controls>
       </div>
-   </div>
+    </div>
  </div>
 
  <div class="app-footer">

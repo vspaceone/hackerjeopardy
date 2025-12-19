@@ -38,17 +38,8 @@
     </div>
  </div>
 
- <div class="app-footer">
-   <p *ngIf="currentRoundName && !showContentManager" class="center-text">Current Round: {{ currentRoundName }}</p>
-    <div class="footer-controls">
-      <span *ngIf="hasControllers" class="controller-indicator" title="Buzz controllers detected">🔔</span>
-      <button
-        *ngIf="qanda"
-        class="cyber-button rounds-btn"
-        (click)="backToRoundSelection()"
-        title="Return to Round Selection">
-        Select Round
-      </button>
+  <div class="app-footer">
+    <div class="footer-left">
       <button
         *ngIf="qanda"
         class="long-press-btn"
@@ -67,8 +58,19 @@
         title="Long press to reset round">
         Reset Round
       </button>
+    </div>
+    <p *ngIf="currentRoundName && !showContentManager" class="center-text">Current Round: {{ currentRoundName }}</p>
+    <div class="footer-controls">
+      <span *ngIf="hasControllers" class="controller-indicator" title="Buzz controllers detected">🔔</span>
+      <button
+        *ngIf="qanda"
+        class="cyber-button rounds-btn"
+        (click)="backToRoundSelection()"
+        title="Return to Round Selection">
+        Select Round
+      </button>
       <button class="cyber-button content-btn" (click)="showContentManager = !showContentManager" title="Content Manager">
         ⚙️
       </button>
     </div>
- </div>
+  </div>

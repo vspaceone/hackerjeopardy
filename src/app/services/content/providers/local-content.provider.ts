@@ -21,22 +21,19 @@ export class LocalContentProvider extends BaseContentProvider {
   getManifest(): Observable<ContentManifest> {
     // Use the existing rounds-manifest.json as fallback
     console.log(`LocalContentProvider: Loading manifest from ${this.baseUrl}/rounds-manifest.json`);
-    return this.http.get<any>(`${this.baseUrl}/rounds-manifest.json`).pipe(
-      map(legacyManifest => {
-        console.log('LocalContentProvider: Loaded manifest with', legacyManifest.rounds?.length || 0, 'rounds');
-        const converted = this.convertLegacyManifest(legacyManifest);
-        console.log('LocalContentProvider: Converted manifest with', converted.rounds?.length || 0, 'rounds');
-        return converted;
+    return this.http.get<ContentManifest>(`${this.baseUrl}/rounds-manifest.json`).pipe(
+      map(manifest => {
+        console.log('LocalContentProvider: Loaded manifest with', manifest.rounds?.length || 0, 'rounds');
+        return manifest;
       }),
       catchError(error => {
         console.error('LocalContentProvider: Failed to load manifest from', `${this.baseUrl}/rounds-manifest.json`, error);
         // Try alternative path
         console.log('LocalContentProvider: Trying alternative path /rounds-manifest.json');
-        return this.http.get<any>('/rounds-manifest.json').pipe(
-          map(legacyManifest => {
-            console.log('LocalContentProvider: Loaded manifest from alternative path with', legacyManifest.rounds?.length || 0, 'rounds');
-            const converted = this.convertLegacyManifest(legacyManifest);
-            return converted;
+        return this.http.get<ContentManifest>('/rounds-manifest.json').pipe(
+          map(manifest => {
+            console.log('LocalContentProvider: Loaded manifest from alternative path with', manifest.rounds?.length || 0, 'rounds');
+            return manifest;
           }),
           catchError(error2 => {
             console.error('LocalContentProvider: Failed to load manifest from alternative path:', error2);

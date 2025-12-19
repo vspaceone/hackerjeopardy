@@ -25,7 +25,7 @@ export interface RoundMetadata {
   name: string;
   language: string;
   difficulty: string;
-  categories: string[];
+  categories?: string[]; // Optional - loaded from round.json when needed
   author?: string;
   lastModified: string;
   size: number; // Estimated download size in bytes

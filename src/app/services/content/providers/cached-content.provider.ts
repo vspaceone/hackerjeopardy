@@ -20,7 +20,14 @@ export class CachedContentProvider extends BaseContentProvider {
     return from(this.indexedDB.get('manifest')).pipe(
       map(entry => {
         if (entry?.data) return entry.data;
-        throw new Error('No cached manifest');
+        // Return empty manifest if nothing cached
+        return {
+          rounds: [],
+          lastUpdated: new Date().toISOString(),
+          totalRounds: 0,
+          totalSize: 0,
+          version: 'cached'
+        };
       })
     );
   }

@@ -81,14 +81,14 @@ export class ContentValidatorService {
       });
     }
 
-    // Validate categories array
-    if (!Array.isArray(metadata.categories)) {
+    // Validate categories array (optional)
+    if (metadata.categories !== undefined && !Array.isArray(metadata.categories)) {
       errors.push({
         field: 'categories',
-        message: 'Categories must be an array',
+        message: 'Categories must be an array if provided',
         severity: 'error'
       });
-    } else if (metadata.categories.length === 0) {
+    } else if (metadata.categories && metadata.categories.length === 0) {
       warnings.push({
         field: 'categories',
         message: 'Round should have at least one category',

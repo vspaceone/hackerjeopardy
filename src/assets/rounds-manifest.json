@@ -5,12 +5,6 @@
       "name": "XMAS22_2_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "memes",
-        "latex",
-        "private",
-        "places_ka"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -22,12 +16,6 @@
       "name": "XMAS19-Turn4",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "chemistry",
-        "persons",
-        "places",
-        "ports"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -39,12 +27,6 @@
       "name": "XMAS19-Turn1",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Bekannte Programmierer",
-        "gtools",
-        "Movies",
-        "Formeln"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -56,12 +38,6 @@
       "name": "XMAS18_1_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "languages",
-        "icons",
-        "persons",
-        "numbers"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -73,12 +49,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_Turn_2",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Farben",
-        "Local Places",
-        "Movies II",
-        "Personen II"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -90,12 +60,6 @@
       "name": "XMAS19-1_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "programmers",
-        "gtools",
-        "movies",
-        "formulas"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -107,9 +71,6 @@
       "name": "Demo",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "misc"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -121,12 +82,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_Turn_2",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Farben",
-        "Local Places",
-        "Movies II",
-        "Personen II"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -138,12 +93,6 @@
       "name": "XMAS19-Turn2",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Zahlen",
-        "Kryptographie",
-        "Maschinen",
-        "Logic"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -155,12 +104,6 @@
       "name": "XMAS19-Turn3",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Translation",
-        "Distris",
-        "Deep",
-        "Busses"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -172,12 +115,6 @@
       "name": "XMAS18_2_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "crypto",
-        "exploits",
-        "hackermovies",
-        "simpsons"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -189,12 +126,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_Turn_1",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Ascii",
-        "Formen I",
-        "Global Places",
-        "Zahlen"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -206,12 +137,6 @@
       "name": "XMAS19-Turn3",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Translation",
-        "Distris",
-        "Deep",
-        "Busses"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -223,13 +148,6 @@
       "name": "XMAS18_RND2",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Crypto",
-        "Exploits",
-        "Famous Hackers",
-        "Hackermovies",
-        "Simpsons"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -241,12 +159,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_Turn_1",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Ascii",
-        "Formen I",
-        "Global Places",
-        "Zahlen"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -258,12 +170,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_Turn_3",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Chaos Computer Club",
-        "Chemie",
-        "MEMES_LOOK_LIKE",
-        "Netzwerk"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -275,12 +181,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_1_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "ascii",
-        "shapes",
-        "global_places",
-        "kit"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -292,12 +192,6 @@
       "name": "XMAS22_1_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "activationfunctions",
-        "machinelearning",
-        "network",
-        "datasets"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -309,13 +203,6 @@
       "name": "XMAS18_RND1",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Fremdsprachen",
-        "Icons",
-        "Personen",
-        "Ports",
-        "Zahlen"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -327,12 +214,6 @@
       "name": "Tim_Runde",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Chemie",
-        "Events",
-        "Internetphänomen",
-        "Nummern"
-      ],
       "author": "Tim",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -344,12 +225,6 @@
       "name": "XMAS19-Turn4",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Chemie",
-        "Personen II",
-        "Places",
-        "Ports"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -361,12 +236,6 @@
       "name": "XMAS19-Turn1",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Bekannte Programmierer",
-        "gtools",
-        "Movies",
-        "Formeln"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -378,12 +247,6 @@
       "name": "XMAS19-Turn2",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Zahlen",
-        "Kryptographie",
-        "Maschinen",
-        "Logic"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -395,12 +258,6 @@
       "name": "Tim_Runde",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Chemie",
-        "Events",
-        "Internetphänomen",
-        "Nummern"
-      ],
       "author": "Tim",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -412,13 +269,6 @@
       "name": "XMAS18_RND1",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Fremdsprachen",
-        "Icons",
-        "Personen",
-        "Ports",
-        "Zahlen"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -430,12 +280,6 @@
       "name": "XMAS19-Turn3",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "distris",
-        "deep",
-        "busses",
-        "ports"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -447,12 +291,6 @@
       "name": "Mixed Bag",
       "language": "en",
       "difficulty": "medium",
-      "categories": [
-        "dev_random",
-        "esoteric_devices",
-        "philosophy",
-        "second_best"
-      ],
       "author": "Unknown",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -464,12 +302,6 @@
       "name": "XMAS19-Turn2",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "numbers",
-        "crypto",
-        "machines",
-        "logic"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -481,12 +313,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_3_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "ccc",
-        "chemistry",
-        "memes",
-        "network"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -498,12 +324,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_2_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "colors",
-        "local_places",
-        "movies",
-        "persons"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -515,13 +335,6 @@
       "name": "XMAS18_RND2",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Crypto",
-        "Exploits",
-        "Famous Hackers",
-        "Hackermovies",
-        "Simpsons"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -533,12 +346,6 @@
       "name": "Hackerjeopardy_Loung_and_Chill_Turn_3",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Chaos Computer Club",
-        "Chemie",
-        "memes",
-        "Netzwerk"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -550,12 +357,6 @@
       "name": "XMAS19-Turn4",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "Chemie",
-        "Personen II",
-        "Places",
-        "Ports"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,
@@ -567,12 +368,6 @@
       "name": "XMAS22_3_en",
       "language": "en",
       "difficulty": "easy",
-      "categories": [
-        "aml",
-        "chemistry",
-        "moreplaces_ka",
-        "lang"
-      ],
       "author": "Max Noppel",
       "lastModified": "2024-01-01T00:00:00.000Z",
       "size": 0,

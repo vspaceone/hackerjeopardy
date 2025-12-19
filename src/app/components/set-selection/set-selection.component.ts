@@ -12,9 +12,14 @@ import { RoundMetadata } from '../../services/content/content.types';
 export class SetSelectionComponent {
   @Input() availableRounds: RoundMetadata[] = [];
   @Output() setSelected = new EventEmitter<string>();
+  @Output() openContentManager = new EventEmitter<void>();
 
   onSelectSet(round: RoundMetadata): void {
     this.setSelected.emit(round.id);
+  }
+
+  onOpenContentManager(): void {
+    this.openContentManager.emit();
   }
 
   // Keep backward compatibility

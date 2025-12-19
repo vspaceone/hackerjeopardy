@@ -127,7 +127,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 			const player = this.players.find(p => p.id === playerId);
 			if (player) {
 				player.highlighted = true;
+				player.selectionBuzzes = (player.selectionBuzzes || 0) + 1;
 				this.audioService.playBuzzer(playerId); // Play buzzer sound for identification
+
+				// Punish excessive buzzing (>20) with -1 point
+				if (player.selectionBuzzes > 20) {
+					player.score -= 1;
+				}
+
 				setTimeout(() => {
 					player.highlighted = false;
 				}, 3000); // Highlight for 3 seconds
@@ -295,7 +302,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			fgcolor: '#9f0b0b',
 			key: '1',
 			remainingtime: null,
-			highlighted: false
+			highlighted: false,
+			selectionBuzzes: 0
 		},
 		{
 			id: 2,
@@ -306,7 +314,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			fgcolor: '#995c00',
 			key: '2',
 			remainingtime: null,
-			highlighted: false
+			highlighted: false,
+			selectionBuzzes: 0
 		},
 		{
 			id: 3,
@@ -317,7 +326,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			fgcolor: '#3c9c9f',
 			key: '3',
 			remainingtime: null,
-			highlighted: false
+			highlighted: false,
+			selectionBuzzes: 0
 		},
 		{
 			id: 4,
@@ -328,7 +338,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 			fgcolor: '#cccc00',
 			key: '4',
 			remainingtime: null,
-			highlighted: false
+			highlighted: false,
+			selectionBuzzes: 0
 		}
 	];
 

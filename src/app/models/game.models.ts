@@ -9,6 +9,7 @@ export interface Player {
   remainingtime: number | null;
   activationtime?: number;
   highlighted?: boolean;
+  selectionBuzzes?: number;
 }
 
 export interface Question {

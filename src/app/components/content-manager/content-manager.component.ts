@@ -20,7 +20,6 @@ import {
 })
 export class ContentManagerComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
-  @Output() selectRound = new EventEmitter<void>();
 
   // Cache management
   cacheStats: CacheStats | null = null;
@@ -269,10 +268,6 @@ export class ContentManagerComponent implements OnInit {
       console.error('HID connect error:', error);
       this.hidConnected = false;
     }
-  }
-
-  onSelectRound(): void {
-    this.selectRound.emit();
   }
 
   onClose(): void {

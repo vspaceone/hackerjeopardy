@@ -5,8 +5,8 @@
 - `ng build --configuration production` - Production build with optimization (373KB bundle)
 - `ng serve` - Start dev server on localhost:4200
 - `npm run watch` - Build with watch mode for development
-- `ng test` - Run unit tests (Karma/Jasmine) - comprehensive test suite exists
-- `ng test --watch=false` - Run tests once for CI
+- `ng test` - Run unit tests (Karma/Jasmine) - comprehensive test suite exists with tests colocated alongside source files
+- `ng test --watch=false` - Run tests once for CI with automated import management
 - `ng e2e` - Run end-to-end tests (Protractor) - outdated, migrate to Cypress recommended
 
 ## Code Style Guidelines
@@ -68,7 +68,7 @@ hackerjeopardy-content/ (separate GitHub repo)
   - `ContentProvider`, `ContentManifest`, `RoundMetadata` interfaces
 - **Data Flow**: Reactive with EventEmitter communication and RxJS
 - **Responsive Design**: Mobile-friendly CSS Grid and Flexbox layouts
-- **Testing**: Unit tests for services and components
+- **Testing**: Unit tests colocated with services and components following Angular best practices
 - **Dependencies**: Angular 18, Howler.js 2.2.4, RxJS 7.8.1, Zone.js 0.14.10
 
 ## Content Management Guidelines

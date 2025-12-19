@@ -36,6 +36,37 @@
     },
     {
       "files": [
+        "**/*.spec.ts",
+        "test.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "src/tsconfig.spec.json"
+      },
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "rules": {
+        "quotes": [
+          "error",
+          "single"
+        ],
+        "semi": [
+          "error",
+          "always"
+        ],
+        "max-len": [
+          "error",
+          {
+            "code": 140
+          }
+        ],
+        "no-console": "off",
+        "prefer-const": "error"
+      }
+    },
+    {
+      "files": [
         "*.html"
       ],
       "parser": "@angular-eslint/template-parser",

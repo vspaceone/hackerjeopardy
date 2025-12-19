@@ -51,7 +51,11 @@ A modern, web-based Jeopardy-style game built with Angular, featuring hacker-the
 ## Testing
 
 - **Unit Tests**: Run `ng test` to execute unit tests via Karma
+  - Tests are colocated with their source files following Angular best practices
+  - Test files use `.spec.ts` naming convention and are located alongside their corresponding source files
+  - Automated import management handles conditional test file inclusion for production builds
 - **End-to-End Tests**: Run `ng e2e` to execute e2e tests via Protractor (deprecated, migrate to Cypress recommended)
+- **CI Testing**: Run `ng test --watch=false` for headless test execution in continuous integration
 
 ## Architecture
 
@@ -60,17 +64,18 @@ A modern, web-based Jeopardy-style game built with Angular, featuring hacker-the
 src/
 ├── app/
 │   ├── components/          # Standalone UI components
-│   │   ├── game-board/      # Question grid display
-│   │   ├── question-display/# Answer modal with correct questions
-│   │   ├── player-controls/ # Player score management
-│   │   └── set-selection/   # Round selection screen
+│   │   ├── game-board/      # Question grid display + game-board.component.spec.ts
+│   │   ├── question-display/# Answer modal with correct questions + question-display.component.spec.ts
+│   │   ├── player-controls/ # Player score management + player-controls.component.spec.ts
+│   │   └── set-selection/   # Round selection screen + set-selection.component.spec.ts
 │   ├── services/            # Business logic services
-│   │   ├── game.service.ts  # Game state management
-│   │   ├── game-data.service.ts # Question loading
-│   │   └── audio.service.ts # Audio playback
+│   │   ├── game.service.ts  # Game state management + game.service.spec.ts
+│   │   ├── game-data.service.ts # Question loading + game-data.service.spec.ts
+│   │   └── audio.service.ts # Audio playback + audio.service.spec.ts
 │   ├── models/              # TypeScript interfaces
 │   │   └── game.models.ts   # Game data types
-│   └── app.component.ts     # Root component
+│   ├── app.component.ts     # Root component + app.component.spec.ts
+│   └── app.component.spec.ts # Unit tests (colocated with source files)
 ├── assets/                  # Static assets and question data
 └── environments/            # Environment configurations
 ```
@@ -84,7 +89,8 @@ src/
 
 ### Recent Improvements
 - Upgraded to Angular 18 with standalone components
-- Added comprehensive unit test coverage
+- Added comprehensive unit test coverage with tests colocated alongside source files
+- Implemented automated test import management for clean production builds
 - Implemented accessibility features (ARIA, alt text)
 - Refactored to clean architecture with services
 - Fixed Jeopardy-style grid layout

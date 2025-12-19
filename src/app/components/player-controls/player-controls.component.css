@@ -56,6 +56,16 @@
   letter-spacing: 1px;
 }
 
+.clickable-name {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clickable-name:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 15px currentColor;
+}
+
 .player-info p {
   margin: 8px 0;
   font-weight: bold;
@@ -94,8 +104,8 @@
 }
 
 .player-controls button {
-  padding: 8px 12px;
-  font-size: 0.9em;
+  padding: 10px 16px;
+  font-size: 0.95em;
   background: rgba(42, 42, 42, 0.8);
   border: 2px solid;
   color: inherit;
@@ -107,7 +117,7 @@
   letter-spacing: 1px;
   position: relative;
   overflow: hidden;
-  min-width: 50px;
+  min-width: 60px;
 }
 
 .player-controls button::before {
@@ -135,15 +145,7 @@
   transform: translateY(0);
 }
 
-.rename-btn {
-  background: var(--neon-blue-dark);
-  color: var(--bg-primary);
-  border-color: var(--neon-blue-dark);
-}
 
-.rename-btn:hover {
-  color: white;
-}
 
 .add-btn {
   background: var(--neon-blue-light);

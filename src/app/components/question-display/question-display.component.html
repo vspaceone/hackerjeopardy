@@ -15,11 +15,11 @@
          <img [src]="getImageUrl()" alt="Answer image" />
        </div>
 
-       <div *ngIf="(question.activePlayer || !question.available) && question.question && !showAnswer && !isCorrectlyAnswered" class="question-controls">
-        <button class="btn btn-reveal" (click)="toggleAnswer()" aria-label="Reveal the correct question">Reveal Question</button>
-      </div>
+       <div *ngIf="(question.activePlayer || !question.available) && question.question && !isCorrectlyAnswered" class="question-controls">
+         <button class="btn btn-reveal" (click)="toggleAnswer()" aria-label="Reveal the correct question">Reveal Question</button>
+       </div>
 
-      <div *ngIf="(!question.available && question.question && showAnswer) || isCorrectlyAnswered" class="question-reveal">
+       <div *ngIf="(showAnswer && question.question) || isCorrectlyAnswered" class="question-reveal">
         <h4>Correct Question:</h4>
         <div class="question-text">{{ question.question }}</div>
       </div>

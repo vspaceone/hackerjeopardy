@@ -133,7 +133,7 @@ describe('QuestionDisplayComponent', () => {
     expect(revealButton.textContent.trim()).toBe('Reveal Question');
   });
 
-  it('should not show reveal button when answer is already shown', () => {
+  it('should show reveal button even when answer is already shown (toggle functionality)', () => {
     const player: Player = {
       id: 1,
       name: 'Test Player',
@@ -161,13 +161,14 @@ describe('QuestionDisplayComponent', () => {
     };
 
     component.question = question;
-    component.showAnswer = true; // Answer already revealed
+    component.showAnswer = true; // Answer already revealed - button should still show for toggling
     component.isCorrectlyAnswered = false;
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement;
     const revealButton = compiled.querySelector('.btn-reveal');
-    expect(revealButton).toBeFalsy();
+    expect(revealButton).toBeTruthy(); // Button should remain visible as toggle
+    expect(revealButton.textContent.trim()).toBe('Reveal Question');
   });
 
   it('should not show reveal button when question has been correctly answered', () => {

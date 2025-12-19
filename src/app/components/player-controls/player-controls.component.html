@@ -2,8 +2,7 @@
    <div class="player-info">
      <h3 *ngIf="!isRenaming">{{ player.name }}</h3>
      <input *ngIf="isRenaming" type="text" [(ngModel)]="newName" (keyup.enter)="saveRename()" (keyup.escape)="cancelRename()" (blur)="saveRename()" class="rename-input" #nameInput />
-     <p>Score: <span class="score-display" [class.updated]="scoreUpdated">{{ player.score }}</span></p>
-     <p *ngIf="player.remainingtime !== null" class="neon-text-red">Time: {{ player.remainingtime }}s</p>
+      <p>Score: <span class="score-display" [class.updated]="scoreUpdated">{{ player.score }}</span></p>
    </div>
 
   <div class="player-controls">

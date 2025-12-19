@@ -24,7 +24,7 @@ export class GitHubContentProvider extends BaseContentProvider {
   }
 
   getManifest(): Observable<ContentManifest> {
-    const url = `${this.getPagesUrl()}/manifest.json`;
+    const url = `${this.getPagesUrl()}/manifest.json?t=${Date.now()}`;
     console.log(`GitHubContentProvider (${this.githubUrl}): Fetching manifest from ${url}`);
     return this.http.get<ContentManifest>(url).pipe(
       map(manifest => {

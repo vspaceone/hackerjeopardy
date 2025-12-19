@@ -224,6 +224,7 @@ export class RepositoryManagerService {
         if (available) {
           // Fetch the latest manifest to update repository info
           try {
+            // Force fresh fetch by calling getManifest (which now has cache-busting)
             const manifest = await firstValueFrom(provider.getManifest());
             console.log('RepositoryManager: Fetched manifest with', manifest?.rounds?.length || 0, 'rounds:', manifest?.rounds?.map(r => r.id));
             repo.manifest = manifest;

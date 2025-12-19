@@ -57,9 +57,12 @@ export class AudioService {
 
   playBuzzer(playerId: number = 1): void {
     if (!this.audioContext || this.isPlayingBuzzer) {
-      // Fallback to click sound if Web Audio API not available or already playing
-      this.clicksound.play();
       return;
+    }
+
+    // Ensure audio context is running
+    if (this.audioContext.state === 'suspended') {
+      this.audioContext.resume();
     }
 
     this.isPlayingBuzzer = true;
@@ -102,8 +105,7 @@ export class AudioService {
       }, duration * 1000 + 100);
 
     } catch (error) {
-      // Fallback if something goes wrong
-      this.clicksound.play();
+      console.warn('Buzzer sound failed:', error);
       this.isPlayingBuzzer = false;
     }
   }

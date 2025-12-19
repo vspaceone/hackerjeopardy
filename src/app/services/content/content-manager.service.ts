@@ -99,7 +99,10 @@ export class ContentManagerService {
       this.providers.map(provider => this.getRoundsFromProvider(provider))
     ).pipe(
       map(roundsArrays => {
-        console.log('ContentManager: Raw rounds arrays:', roundsArrays);
+        console.log('ContentManager: Raw rounds arrays from providers:', roundsArrays.map((arr, i) => `${i}: ${arr.length} rounds`));
+        roundsArrays.forEach((arr, i) => {
+          console.log(`ContentManager: Provider ${i} rounds:`, arr.map(r => r.id));
+        });
         // Flatten and remove duplicates (prefer higher priority providers)
         const allRounds = roundsArrays.flat();
         console.log('ContentManager: Flattened rounds:', allRounds.length);
@@ -112,7 +115,7 @@ export class ContentManagerService {
         });
 
         const finalRounds = Array.from(roundMap.values());
-        console.log('ContentManager: Final rounds:', finalRounds.length);
+        console.log('ContentManager: Final rounds after deduplication:', finalRounds.length);
         finalRounds.forEach(round => {
           console.log(`  - ${round.id}: ${round.name} (${round.categories?.length || 0} categories)`);
         });

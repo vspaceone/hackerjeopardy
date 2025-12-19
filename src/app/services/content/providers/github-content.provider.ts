@@ -24,9 +24,19 @@ export class GitHubContentProvider extends BaseContentProvider {
   }
 
   getManifest(): Observable<ContentManifest> {
-    return this.http.get<ContentManifest>(`${this.getPagesUrl()}/manifest.json`).pipe(
-      map(manifest => this.processManifest(manifest)),
-      catchError(this.handleError)
+    const url = `${this.getPagesUrl()}/manifest.json`;
+    console.log(`GitHubContentProvider (${this.githubUrl}): Fetching manifest from ${url}`);
+    return this.http.get<ContentManifest>(url).pipe(
+      map(manifest => {
+        console.log(`GitHubContentProvider (${this.githubUrl}): Raw manifest fetched with ${manifest?.rounds?.length || 0} rounds`);
+        const processed = this.processManifest(manifest);
+        console.log(`GitHubContentProvider (${this.githubUrl}): Processed manifest with ${processed?.rounds?.length || 0} rounds:`, processed?.rounds?.map(r => r.id));
+        return processed;
+      }),
+      catchError(error => {
+        console.error(`GitHubContentProvider (${this.githubUrl}): Failed to fetch manifest:`, error);
+        return this.handleError(error);
+      })
     );
   }
 

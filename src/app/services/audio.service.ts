@@ -12,6 +12,7 @@ export class AudioService {
   private themeAudio: HTMLAudioElement;
   private audiotimer: number | null = null;
   private audioContext: AudioContext | null = null;
+  private isPlayingBuzzer = false;
 
   constructor() {
     this.clicksound = new Howl({
@@ -55,12 +56,13 @@ export class AudioService {
   }
 
   playBuzzer(playerId: number = 1): void {
-    if (!this.audioContext) {
-      // Fallback to click sound if Web Audio API not available
+    if (!this.audioContext || this.isPlayingBuzzer) {
+      // Fallback to click sound if Web Audio API not available or already playing
       this.clicksound.play();
       return;
     }
 
+    this.isPlayingBuzzer = true;
     try {
       const oscillator = this.audioContext.createOscillator();
       const gainNode = this.audioContext.createGain();
@@ -74,7 +76,7 @@ export class AudioService {
 
       const startFrequencies = [800, 700, 600, 500];
       const endFrequencies = [200, 180, 160, 140];
-      const durations = [0.5, 0.6, 0.7, 0.6];
+      const durations = [0.4, 0.5, 0.6, 0.5];
       const waveforms: OscillatorType[] = ['sawtooth', 'square', 'sawtooth', 'square'];
 
       const startFrequency = startFrequencies[playerIndex];
@@ -94,9 +96,15 @@ export class AudioService {
       oscillator.start(this.audioContext.currentTime);
       oscillator.stop(this.audioContext.currentTime + duration);
 
+      // Reset flag after sound completes
+      setTimeout(() => {
+        this.isPlayingBuzzer = false;
+      }, duration * 1000 + 100);
+
     } catch (error) {
       // Fallback if something goes wrong
       this.clicksound.play();
+      this.isPlayingBuzzer = false;
     }
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, combineLatest, of } from 'rxjs';
+import { Observable, combineLatest, of, BehaviorSubject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { firstValueFrom } from 'rxjs';
 
@@ -20,6 +20,7 @@ import {
 })
 export class ContentManagerService {
   private providers: ContentProvider[] = [];
+  private availableRoundsSubject = new BehaviorSubject<RoundMetadata[]>([]);
 
   constructor(
     private repositoryManager: RepositoryManagerService,
@@ -69,6 +70,9 @@ export class ContentManagerService {
     this.providers.push(this.localProvider);
 
     console.log('ContentManager: Updated providers:', this.providers.map(p => `${p.name} (priority: ${p.priority})`));
+
+    // Load available rounds after provider update
+    this.loadAvailableRounds();
   }
 
   async initialize(): Promise<void> {
@@ -85,6 +89,9 @@ export class ContentManagerService {
     // Add GitHub providers for enabled repositories and local provider
     await this.updateProviders();
 
+    // Load initial available rounds
+    this.loadAvailableRounds();
+
     console.log('ContentManagerService: Initialization complete');
   }
 
@@ -92,10 +99,17 @@ export class ContentManagerService {
    * Get all available rounds from all enabled repositories
    */
   getAvailableRounds(): Observable<RoundMetadata[]> {
+    return this.availableRoundsSubject.asObservable();
+  }
+
+  /**
+   * Load available rounds from current providers
+   */
+  private loadAvailableRounds(): void {
     console.log('ContentManager: Getting available rounds from providers:', this.providers.map(p => `${p.name} (priority: ${p.priority})`));
     console.log('ContentManager: Total providers:', this.providers.length);
 
-    return combineLatest(
+    combineLatest(
       this.providers.map(provider => this.getRoundsFromProvider(provider))
     ).pipe(
       map(roundsArrays => {
@@ -125,7 +139,9 @@ export class ContentManagerService {
         console.error('ContentManager: Error getting available rounds:', error);
         return of([]);
       })
-    );
+    ).subscribe(rounds => {
+      this.availableRoundsSubject.next(rounds);
+    });
   }
 
   /**

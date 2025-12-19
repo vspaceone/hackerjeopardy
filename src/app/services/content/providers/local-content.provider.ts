@@ -51,7 +51,8 @@ export class LocalContentProvider extends BaseContentProvider {
   }
 
   getRound(roundId: string): Observable<GameRound> {
-    const url = `${this.baseUrl}/${roundId}/round.json`;
+    const encodedRoundId = encodeURIComponent(roundId);
+    const url = `${this.baseUrl}/${encodedRoundId}/round.json`;
     console.log(`LocalContentProvider: Loading round from ${url}`);
     return this.http.get<GameRound>(url).pipe(
       map(round => {
@@ -66,8 +67,9 @@ export class LocalContentProvider extends BaseContentProvider {
   }
 
   getCategory(roundId: string, categoryName: string): Observable<Category> {
-    // Don't URL-encode category names for local file system access
-    const url = `${this.baseUrl}/${roundId}/${categoryName}/cat.json`;
+    // URL-encode category names for proper URL handling
+    const encodedCategoryName = encodeURIComponent(categoryName);
+    const url = `${this.baseUrl}/${roundId}/${encodedCategoryName}/cat.json`;
     console.log(`LocalContentProvider: Loading category from ${url}`);
     return this.http.get<Category>(url).pipe(
       catchError(error => {
@@ -78,8 +80,9 @@ export class LocalContentProvider extends BaseContentProvider {
   }
 
   getImageUrl(roundId: string, categoryName: string, imageName: string): string {
-    // Don't URL-encode category names for local file system access
-    return `${this.baseUrl}/${roundId}/${categoryName}/${imageName}`;
+    // URL-encode category names for proper URL handling
+    const encodedCategoryName = encodeURIComponent(categoryName);
+    return `${this.baseUrl}/${roundId}/${encodedCategoryName}/${imageName}`;
   }
 
   private convertLegacyManifest(legacyManifest: any): ContentManifest {

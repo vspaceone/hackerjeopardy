@@ -86,25 +86,9 @@ export class ContentManagerService {
    * Get all available rounds from all enabled repositories
    */
   getAvailableRounds(): Observable<RoundMetadata[]> {
-    console.log('ContentManager: Getting available rounds from providers:', this.providers.map(p => p.name));
+    console.log('ContentManager: Getting available rounds from providers:', this.providers.map(p => `${p.name} (priority: ${p.priority})`));
+    console.log('ContentManager: Total providers:', this.providers.length);
 
-    // For debugging, try the local provider directly first
-    const localProvider = this.providers.find(p => p.name === 'Local');
-    if (localProvider) {
-      console.log('ContentManager: Trying local provider directly');
-      return localProvider.getManifest().pipe(
-        map(manifest => {
-          console.log('ContentManager: Local manifest:', manifest);
-          return manifest.rounds || [];
-        }),
-        catchError(error => {
-          console.error('ContentManager: Local provider failed:', error);
-          return of([]);
-        })
-      );
-    }
-
-    // Fallback to combineLatest
     return combineLatest(
       this.providers.map(provider => this.getRoundsFromProvider(provider))
     ).pipe(
@@ -278,10 +262,10 @@ export class ContentManagerService {
     * Private helper: Get rounds from a single provider
     */
    private getRoundsFromProvider(provider: ContentProvider): Observable<RoundMetadata[]> {
-     console.log(`ContentManager: Trying to get manifest from ${provider.name}`);
+     console.log(`ContentManager: Trying to get manifest from ${provider.name} (priority: ${provider.priority})`);
      return provider.getManifest().pipe(
        map(manifest => {
-         console.log(`ContentManager: Got manifest from ${provider.name}:`, manifest);
+         console.log(`ContentManager: Got manifest from ${provider.name} with ${manifest?.rounds?.length || 0} rounds:`, manifest?.rounds?.map(r => r.id));
         if (!manifest || !manifest.rounds) {
           console.warn(`ContentManager: No manifest or rounds from ${provider.name}`);
           return [];

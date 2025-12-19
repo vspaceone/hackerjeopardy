@@ -79,16 +79,23 @@ export class GitHubContentProvider extends BaseContentProvider {
 
   // Process manifest to add repository metadata and prefix round IDs
   private processManifest(manifest: ContentManifest): ContentManifest {
+    console.log(`GitHubContentProvider (${this.githubUrl}): Processing manifest with ${manifest.rounds?.length || 0} rounds`);
+    const processedRounds = manifest.rounds.map(round => {
+      const processedRound = {
+        ...round,
+        id: `${this.repoId}_${round.id}`
+      };
+      console.log(`GitHubContentProvider: Processed round ${round.id} -> ${processedRound.id}`);
+      return processedRound;
+    });
+
     return {
       ...manifest,
       repository: {
         name: this.githubUrl,
         ...manifest.repository
       },
-      rounds: manifest.rounds.map(round => ({
-        ...round,
-        id: `${this.repoId}_${round.id}`
-      }))
+      rounds: processedRounds
     };
   }
 

@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Question, Player } from '../../models/game.models';
+import { ContentManagerService } from '../../services/content/content-manager.service';
 
 @Component({
   selector: 'app-question-display',
@@ -23,19 +24,24 @@ export class QuestionDisplayComponent {
   showAnswer: boolean = false;
   isCorrectlyAnswered: boolean = false;
 
+  constructor(private contentManager: ContentManagerService) {}
+
 
 
   getImageUrl(): string | null {
     if (!this.question?.image) return null;
 
     // If it's already a full URL, return it
-    if (this.question.image.startsWith('/assets/')) {
+    if (this.question.image.startsWith('http') || this.question.image.startsWith('/assets/')) {
       return this.question.image;
     }
 
-    // Construct URL from roundId and category
+    // Use ContentManagerService for proper URL resolution
     if (this.question.roundId && this.question.cat) {
-      return `/assets/${this.question.roundId}/${this.question.cat}/${this.question.image}`;
+      const url = this.contentManager.getImageUrl(this.question.roundId, this.question.cat, this.question.image);
+      if (url) {
+        return url;
+      }
     }
 
     // Fallback: return as-is

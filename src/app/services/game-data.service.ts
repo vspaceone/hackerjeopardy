@@ -94,10 +94,13 @@ export class GameDataService {
 
         // Update image URLs using content manager
         if (question.image) {
-          const directoryName = category.path || category.name;
-          console.log(`GameDataService: Resolving image for ${category.name} using directory "${directoryName}"`);
-          processedQuestion.image = this.contentManager.getImageUrl(setName, directoryName, question.image);
-          console.log(`GameDataService: Resolved image URL: ${processedQuestion.image}`);
+          // Skip processing if already a full URL
+          if (question.image.startsWith('http') || question.image.startsWith('/assets/')) {
+            processedQuestion.image = question.image;
+          } else {
+            const directoryName = category.path || category.name;
+            processedQuestion.image = this.contentManager.getImageUrl(setName, directoryName, question.image);
+          }
         }
 
         return processedQuestion;

@@ -19,10 +19,11 @@
       </div>
    </div>
 
-  <app-content-manager
-    *ngIf="showContentManager"
-    (close)="showContentManager = false">
-  </app-content-manager>
+   <app-content-manager
+     *ngIf="showContentManager"
+     (close)="showContentManager = false"
+     (selectRound)="backToRoundSelection()">
+   </app-content-manager>
 
    <app-set-selection *ngIf="!qanda && !showContentManager" [availableRounds]="availableRounds" (setSelected)="selectSet($event)" (openContentManager)="showContentManager = true"></app-set-selection>
 

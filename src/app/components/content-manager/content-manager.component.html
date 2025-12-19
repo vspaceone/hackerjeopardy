@@ -1,8 +1,11 @@
 <div class="content-manager">
-  <div class="content-header">
-    <h2>Content Management</h2>
-    <button class="close-btn" (click)="onClose()">✕</button>
-  </div>
+   <div class="content-header">
+     <h2>Content Management</h2>
+     <div class="header-buttons">
+       <button class="round-btn" (click)="onSelectRound()" title="Go to Round Selection">📋</button>
+       <button class="close-btn" (click)="onClose()">✕</button>
+     </div>
+   </div>
 
   <!-- Cache Status -->
   <div class="status-section">

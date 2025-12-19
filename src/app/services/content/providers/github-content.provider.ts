@@ -56,20 +56,18 @@ export class GitHubContentProvider extends BaseContentProvider {
     const cleanCategoryName = categoryName.replace(`${this.repoId}_`, '');
 
     return this.http.get<Category>(`${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/cat.json`).pipe(
-      map(category => {
-        const processed = this.processCategory(category);
-        // Convert relative image paths to full URLs
-        processed.questions = processed.questions.map(question => ({
-          ...question,
-          image: question.image ? this.getImageUrl(cleanRoundId, cleanCategoryName, question.image) : question.image
-        }));
-        return processed;
-      }),
+      map(category => this.processCategory(category)),
       catchError(this.handleError)
     );
   }
 
   getImageUrl(roundId: string, categoryName: string, imageName: string): string {
+    // If imageName is already a full URL, return it
+    if (imageName.startsWith('http')) {
+      console.log(`GitHubContentProvider (${this.githubUrl}): Image already full URL: ${imageName}`);
+      return imageName;
+    }
+
     // Remove repository prefixes for URL construction
     const cleanRoundId = roundId.replace(`${this.repoId}_`, '');
     const cleanCategoryName = categoryName.replace(`${this.repoId}_`, '');

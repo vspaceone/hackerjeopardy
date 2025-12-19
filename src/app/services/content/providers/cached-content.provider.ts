@@ -53,7 +53,7 @@ export class CachedContentProvider extends BaseContentProvider {
   getImageUrl(roundId: string, categoryName: string, imageName: string): string {
     // Cached images would need special handling - for now, fall back to source
     // In a full implementation, images could also be cached as blobs
-    throw new Error('Cached images not implemented - use source provider');
+    return ''; // Return empty to let next provider handle it
   }
 
   // Override isAvailable to check if cache has content

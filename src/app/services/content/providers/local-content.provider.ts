@@ -80,9 +80,17 @@ export class LocalContentProvider extends BaseContentProvider {
   }
 
   getImageUrl(roundId: string, categoryName: string, imageName: string): string {
+    // If imageName is already a full URL, return it
+    if (imageName.startsWith('http') || imageName.startsWith('/')) {
+      console.log(`LocalContentProvider: Image already full URL: ${imageName}`);
+      return imageName;
+    }
+
     // URL-encode category names for proper URL handling
     const encodedCategoryName = encodeURIComponent(categoryName);
-    return `${this.baseUrl}/${roundId}/${encodedCategoryName}/${imageName}`;
+    const url = `${this.baseUrl}/${roundId}/${encodedCategoryName}/${imageName}`;
+    console.log(`LocalContentProvider: Generated image URL: ${url}`);
+    return url;
   }
 
   private convertLegacyManifest(legacyManifest: any): ContentManifest {

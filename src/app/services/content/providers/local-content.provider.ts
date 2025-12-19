@@ -85,10 +85,10 @@ export class LocalContentProvider extends BaseContentProvider {
       return imageName;
     }
 
-    // Clean category names to match folder names (replace special chars with -)
-    const cleanCategoryName = categoryName.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    // URL-encode category names for proper URL handling
+    const encodedCategoryName = encodeURIComponent(categoryName);
     const encodedImageName = encodeURIComponent(imageName);
-    const url = `${this.baseUrl}/${roundId}/${cleanCategoryName}/${encodedImageName}`;
+    const url = `${this.baseUrl}/${roundId}/${encodedCategoryName}/${encodedImageName}`;
     return url;
   }
 

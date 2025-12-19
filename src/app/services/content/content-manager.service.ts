@@ -49,13 +49,19 @@ export class ContentManagerService {
     console.log('ContentManager: Found', repositories.length, 'repositories');
 
     for (const repo of repositories.filter(r => r.enabled)) {
-      console.log('ContentManager: Adding provider for enabled repo:', repo.id);
+      console.log('ContentManager: Adding provider for enabled repo:', repo.id, 'url:', repo.githubUrl);
       const provider = this.repositoryManager.getProvider(repo.id);
       if (provider) {
         this.providers.push(provider);
-        console.log('ContentManager: Added provider:', provider.name);
+        console.log('ContentManager: Added provider:', provider.name, 'type:', provider.constructor.name);
       } else {
-        console.warn('ContentManager: No provider found for repo:', repo.id);
+        console.warn('ContentManager: No provider found for repo:', repo.id, '- checking if it exists in RepositoryManager');
+        // Try to create the provider if it doesn't exist
+        const repoObj = await this.repositoryManager.getRepository(repo.id);
+        if (repoObj) {
+          console.log('ContentManager: Repository exists, trying to create provider...');
+          // This shouldn't happen normally, but let's see
+        }
       }
     }
 
@@ -320,9 +326,10 @@ export class ContentManagerService {
           continue;
         }
 
-        console.log(`ContentManager: Getting manifest from provider ${provider.name}`);
+        console.log(`ContentManager: Getting manifest from provider ${provider.name} (${provider.constructor.name})`);
+        console.log(`ContentManager: Provider priority: ${provider.priority}`);
         const manifest = await firstValueFrom(provider.getManifest());
-        console.log(`ContentManager: Got manifest with ${manifest?.rounds?.length || 0} rounds:`, manifest?.rounds?.map(r => r.id));
+        console.log(`ContentManager: Got manifest with ${manifest?.rounds?.length || 0} rounds:`, manifest?.rounds?.map(r => ({ id: r.id, name: r.name })));
         if (!manifest?.rounds) {
           console.warn(`ContentManager: No rounds in manifest for repo ${repo.id}`);
           continue;

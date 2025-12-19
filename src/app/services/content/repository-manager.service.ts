@@ -225,11 +225,13 @@ export class RepositoryManagerService {
           // Fetch the latest manifest to update repository info
           try {
             const manifest = await firstValueFrom(provider.getManifest());
-            console.log('RepositoryManager: Fetched manifest with', manifest?.rounds?.length || 0, 'rounds');
+            console.log('RepositoryManager: Fetched manifest with', manifest?.rounds?.length || 0, 'rounds:', manifest?.rounds?.map(r => r.id));
             repo.manifest = manifest;
             repo.roundsCount = manifest?.rounds?.length;
+            console.log('RepositoryManager: Updated repo roundsCount to', repo.roundsCount);
           } catch (manifestError) {
             console.warn('RepositoryManager: Failed to fetch manifest:', manifestError);
+            repo.status = { state: 'error', lastError: 'Failed to fetch manifest' };
           }
         }
 

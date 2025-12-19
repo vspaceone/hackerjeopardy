@@ -1,25 +1,28 @@
 {
+  "name": "Hacker Jeopardy Content Repository",
+  "description": "Community-contributed question sets for Hacker Jeopardy",
+  "version": "1.0.0",
+  "lastUpdated": "2025-12-19T11:33:04.264Z",
+  "totalRounds": 1,
+  "totalSize": 1024,
   "rounds": [
     {
       "id": "demo_round",
-      "name": "Demo Round - Hacker Jeopardy",
+      "name": "Demo Round",
       "language": "en",
       "difficulty": "easy",
       "categories": ["chemistry", "persons", "places"],
       "author": "Hacker Jeopardy Team",
-      "lastModified": "2025-12-18T21:30:00Z",
+      "lastModified": "2025-12-19",
       "size": 1024,
-      "description": "A demonstration round for testing the multi-repository content system",
-      "tags": ["demo", "test"]
+      "description": "A demonstration round showing the content structure",
+      "tags": ["demo"]
     }
   ],
-  "lastUpdated": "2025-12-18T21:30:00Z",
-  "totalRounds": 1,
-  "totalSize": 1024,
-  "version": "1.0.0",
-  "repository": {
-    "name": "hackerjeopardy-content",
-    "description": "Content repository for Hacker Jeopardy game rounds",
-    "author": "Hacker Jeopardy Team"
-  }
+  "contributors": [
+    {
+      "name": "Hacker Jeopardy Team"
+    }
+  ],
+  "license": "MIT"
 }

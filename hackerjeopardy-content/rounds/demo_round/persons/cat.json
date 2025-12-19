@@ -1,40 +1,37 @@
 {
   "name": "Persons",
+  "path": "persons",
+  "lang": "en",
+  "difficulty": "easy",
+  "author": "Hacker Jeopardy Team",
+  "licence": "MIT",
+  "date": "2025-12-18",
+  "email": "team@hackerjeopardy.org",
   "questions": [
     {
-      "question": "Who is known as the father of computer science?",
-      "answer": "Alan Turing",
-      "value": 100,
-      "available": true,
-      "cat": "persons"
+      "answer": "Who is known as the father of computer science?",
+      "question": "Who is Alan Turing?",
+      "available": true
     },
     {
-      "question": "Who founded Microsoft?",
-      "answer": "Bill Gates",
-      "value": 200,
-      "available": true,
-      "cat": "persons"
+      "answer": "Who founded Microsoft?",
+      "question": "Who is Bill Gates?",
+      "available": true
     },
     {
-      "question": "Who is the creator of Linux?",
-      "answer": "Linus Torvalds",
-      "value": 300,
-      "available": true,
-      "cat": "persons"
+      "answer": "Who is the creator of Linux?",
+      "question": "Who is Linus Torvalds?",
+      "available": true
     },
     {
-      "question": "Who is considered the first programmer?",
-      "answer": "Ada Lovelace",
-      "value": 400,
-      "available": true,
-      "cat": "persons"
+      "answer": "Who is considered the first programmer?",
+      "question": "Who is Ada Lovelace?",
+      "available": true
     },
     {
-      "question": "Who developed the theory of relativity?",
-      "answer": "Albert Einstein",
-      "value": 500,
-      "available": true,
-      "cat": "persons"
+      "answer": "Who developed the theory of relativity?",
+      "question": "Who is Albert Einstein?",
+      "available": true
     }
   ]
 }

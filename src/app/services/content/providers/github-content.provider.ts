@@ -76,7 +76,8 @@ export class GitHubContentProvider extends BaseContentProvider {
     const cleanRoundId = roundId.replace(`${this.repoId}_`, '');
     const cleanCategoryName = encodeURIComponent(categoryName.replace(`${this.repoId}_`, ''));
 
-    return `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${encodeURIComponent(imageName)}`;
+    const url = `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${encodeURIComponent(imageName)}`;
+    return url;
   }
 
   override async isAvailable(): Promise<boolean> {

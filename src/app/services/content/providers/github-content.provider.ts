@@ -67,6 +67,11 @@ export class GitHubContentProvider extends BaseContentProvider {
       return imageName;
     }
 
+    // Only handle rounds that belong to this repository
+    if (!roundId.startsWith(`${this.repoId}_`)) {
+      return ''; // Not our repository, let next provider handle it
+    }
+
     // Remove repository prefixes for URL construction
     const cleanRoundId = roundId.replace(`${this.repoId}_`, '');
     const cleanCategoryName = categoryName.replace(`${this.repoId}_`, '');

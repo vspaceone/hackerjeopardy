@@ -43,26 +43,35 @@ Each round should be placed in its own directory under `rounds/[roundId]/`:
 }
 ```
 
-### Category Files (cat.json)
+ ### Category Files (cat.json)
 
-```json
-{
-  "name": "Category Name",
-  "questions": [
-      {
-        "answer": "This famous tower is located in Paris",
-        "question": "What is the Eiffel Tower?",
-        "value": 100,
-        "available": true,
-        "cat": "category_name"
-      },
+Each category needs a `cat.json` file containing the questions for that category.
+
+ ```json
+ {
+   "name": "Programming Languages",
+   "questions": [
        {
-         "answer": "This programming language was created by Guido van Rossum",
+         "answer": "This iconic French landmark was built for the 1889 World's Fair",
+         "question": "What is the Eiffel Tower?",
+         "value": 100,
+         "available": true,
+         "cat": "landmarks"
+       },
+       {
+         "answer": "This high-level programming language emphasizes code readability",
          "question": "What is Python?",
          "value": 200,
          "available": true,
-         "cat": "category_name",
+         "cat": "programming",
          "image": "python-logo.jpg"
+       },
+       {
+         "answer": "This algorithm sorts an array by repeatedly finding the minimum element",
+         "question": "What is selection sort?",
+         "value": 300,
+         "available": true,
+         "cat": "algorithms"
        }
   ]
 }

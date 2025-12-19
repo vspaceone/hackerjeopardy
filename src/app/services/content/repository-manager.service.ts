@@ -22,14 +22,18 @@ export class RepositoryManagerService {
   ) {}
 
   async initialize(): Promise<void> {
+    console.log('RepositoryManager: Initializing...');
     this.repositories = await this.storage.getRepositories();
+    console.log('RepositoryManager: Loaded repositories:', this.repositories.length);
 
     // Initialize providers for enabled repositories
     for (const repo of this.repositories) {
+      console.log('RepositoryManager: Repository:', repo.id, 'enabled:', repo.enabled);
       if (repo.enabled) {
         await this.createProvider(repo);
       }
     }
+    console.log('RepositoryManager: Initialized with providers:', this.providers.size);
   }
 
   async getRepositories(): Promise<ContentRepository[]> {

@@ -40,30 +40,38 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private contentManager: ContentManagerService
 	) { };
 
-	async ngOnInit(): Promise<void> {
-		try {
-			// Initialize content manager
-			await this.contentManager.initialize();
+  async ngOnInit(): Promise<void> {
+    try {
+      console.log('AppComponent: Starting initialization...');
+      // Initialize content manager
+      console.log('AppComponent: Initializing content manager...');
+      await this.contentManager.initialize();
+      console.log('AppComponent: Content manager initialized');
 
- 			// Load available sets
- 			console.log('AppComponent: Loading available sets...');
- 			this.gameDataService.getAvailableSets().subscribe({
- 				next: (sets) => {
- 					console.log('AppComponent: Loaded sets:', sets);
- 					this.sets = sets;
- 					this.loading = false;
- 				},
- 				error: (error) => {
- 					console.error('AppComponent: Failed to load available sets:', error);
- 					this.sets = [];
- 					this.loading = false;
- 				}
- 			});
-		} catch (error) {
-			console.error('Failed to initialize content manager:', error);
-			this.loading = false;
-		}
-	}
+			// Load available sets
+			console.log('AppComponent: Loading available sets...');
+			this.gameDataService.getAvailableSets().subscribe({
+				next: (sets) => {
+					console.log('AppComponent: Loaded sets:', sets);
+					console.log('AppComponent: Number of sets:', sets.length);
+					console.log('AppComponent: First few sets:', sets.slice(0, 3));
+					this.sets = sets;
+					this.loading = false;
+				},
+				error: (error) => {
+					console.error('AppComponent: Failed to load available sets:', error);
+					this.sets = [];
+					this.loading = false;
+				},
+				complete: () => {
+					console.log('AppComponent: getAvailableSets completed');
+				}
+			});
+    } catch (error) {
+      console.error('AppComponent: Failed to initialize content manager:', error);
+      this.loading = false;
+    }
+  }
 
 	ngAfterViewInit(): void {
 		this.initMatrixRain();

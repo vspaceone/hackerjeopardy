@@ -95,7 +95,10 @@ export class ContentManagerService {
         });
 
         const finalRounds = Array.from(roundMap.values());
-        console.log('ContentManager: Final rounds:', finalRounds.length, finalRounds.map(r => r.id));
+        console.log('ContentManager: Final rounds:', finalRounds.length);
+        finalRounds.forEach(round => {
+          console.log(`  - ${round.id}: ${round.name} (${round.categories?.length || 0} categories)`);
+        });
         return finalRounds;
       }),
       catchError(error => {

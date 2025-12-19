@@ -10,6 +10,7 @@ import { QuestionDisplayComponent } from './components/question-display/question
 import { PlayerControlsComponent } from './components/player-controls/player-controls.component';
 import { ContentManagerComponent } from './components/content-manager/content-manager.component';
 import { Category, Player, Question } from './models/game.models';
+import { RoundMetadata } from './services/content/content.types';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { Category, Player, Question } from './models/game.models';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	title = 'Hacker Jeopardy';
-	sets: string[] = [];
+	availableRounds: RoundMetadata[] = [];
 	loading = true;
 	showContentManager = false;
 	currentRoundName = '';
@@ -48,23 +49,21 @@ export class AppComponent implements OnInit, AfterViewInit {
       await this.contentManager.initialize();
       console.log('AppComponent: Content manager initialized');
 
-			// Load available sets
-			console.log('AppComponent: Loading available sets...');
-			this.gameDataService.getAvailableSets().subscribe({
-				next: (sets) => {
-					console.log('AppComponent: Loaded sets:', sets);
-					console.log('AppComponent: Number of sets:', sets.length);
-					console.log('AppComponent: First few sets:', sets.slice(0, 3));
-					this.sets = sets;
+			// Load available rounds
+			console.log('AppComponent: Loading available rounds...');
+			this.gameDataService.getAvailableRounds().subscribe({
+				next: (rounds) => {
+					console.log('AppComponent: Loaded rounds:', rounds.length);
+					rounds.forEach(round => {
+						console.log(`  - ${round.name} (${round.id}) - ${round.categories?.length || 0} categories`);
+					});
+					this.availableRounds = rounds;
 					this.loading = false;
 				},
 				error: (error) => {
-					console.error('AppComponent: Failed to load available sets:', error);
-					this.sets = [];
+					console.error('AppComponent: Failed to load available rounds:', error);
+					this.availableRounds = [];
 					this.loading = false;
-				},
-				complete: () => {
-					console.log('AppComponent: getAvailableSets completed');
 				}
 			});
     } catch (error) {

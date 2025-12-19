@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RoundMetadata } from '../../services/content/content.types';
 
 @Component({
   selector: 'app-set-selection',
@@ -9,10 +10,16 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class SetSelectionComponent {
-  @Input() availableSets: string[] = [];
+  @Input() availableRounds: RoundMetadata[] = [];
   @Output() setSelected = new EventEmitter<string>();
 
-  onSelectSet(setName: string): void {
-    this.setSelected.emit(setName);
+  onSelectSet(round: RoundMetadata): void {
+    this.setSelected.emit(round.id);
+  }
+
+  // Keep backward compatibility
+  @Input() set availableSets(sets: string[]) {
+    // If old string[] format is used, convert to empty RoundMetadata
+    this.availableRounds = sets.map(id => ({ id, name: id, language: 'en', difficulty: 'unknown' } as RoundMetadata));
   }
 }

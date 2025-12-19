@@ -8,12 +8,16 @@
     <div class="sets-container">
       <div class="sets-grid">
         <button
-          *ngFor="let set of availableSets"
+          *ngFor="let round of availableRounds"
           class="set-button btn btn-danger"
-          (click)="onSelectSet(set)"
-          [attr.aria-label]="'Select question set ' + set"
+          (click)="onSelectSet(round)"
+          [attr.aria-label]="'Select question set ' + round.name"
         >
-          {{ set }}
+          {{ round.name }}
+          <div class="round-meta" *ngIf="round.difficulty !== 'unknown'">
+            <span class="difficulty">{{ round.difficulty }}</span>
+            <span class="categories" *ngIf="round.categories"> • {{ round.categories.length }} categories</span>
+          </div>
         </button>
       </div>
     </div>

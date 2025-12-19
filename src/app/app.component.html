@@ -24,7 +24,7 @@
     (close)="showContentManager = false">
   </app-content-manager>
 
-  <app-set-selection *ngIf="!qanda && !showContentManager" [availableSets]="sets" (setSelected)="selectSet($event)"></app-set-selection>
+  <app-set-selection *ngIf="!qanda && !showContentManager" [availableRounds]="availableRounds" (setSelected)="selectSet($event)"></app-set-selection>
 
   <app-game-board *ngIf="qanda && !showContentManager" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
 

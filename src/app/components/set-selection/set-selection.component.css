@@ -79,6 +79,25 @@
   min-width: 250px;
   white-space: normal;
   word-wrap: break-word;
+  text-align: left;
+}
+
+.round-meta {
+  font-size: 0.8em;
+  margin-top: 8px;
+  opacity: 0.8;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.difficulty {
+  color: var(--neon-purple);
+  font-weight: bold;
+}
+
+.categories {
+  color: var(--neon-blue-light);
 }
 
 .set-button:hover {

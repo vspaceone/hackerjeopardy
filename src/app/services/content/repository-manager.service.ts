@@ -62,6 +62,7 @@ export class RepositoryManagerService {
         id,
         addedAt: new Date(),
         githubUrl: repoConfig.url, // Set githubUrl for provider creation
+        manifest: validation.manifest, // Store the manifest from validation
         status: { state: 'connected' },
         validationResult: validation
       };
@@ -73,6 +74,7 @@ export class RepositoryManagerService {
     // Create provider if enabled
     if (repository.enabled) {
       console.log('RepositoryManager: Creating provider for repository:', repository.id, repository.githubUrl);
+      console.log('RepositoryManager: Repository manifest rounds:', repository.manifest?.rounds?.length || 0);
       await this.createProvider(repository);
       console.log('RepositoryManager: Provider created, providers count:', this.providers.size);
     }
@@ -209,7 +211,7 @@ export class RepositoryManagerService {
           roundsCount: repo.manifest?.rounds.length,
           lastUpdated: new Date().toISOString()
         };
-        console.log('RepositoryManager: Status updated to:', repo.status.state);
+        console.log('RepositoryManager: Status updated to:', repo.status.state, 'with', repo.status.roundsCount, 'rounds');
       }
     } catch (error) {
       console.log('RepositoryManager: Error refreshing status:', error);

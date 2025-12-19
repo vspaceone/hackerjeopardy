@@ -1,37 +1,40 @@
 {
   "name": "Chemistry",
-  "path": "chemistry",
-  "lang": "en",
-  "difficulty": "easy",
-  "author": "Hacker Jeopardy Team",
-  "licence": "MIT",
-  "date": "2025-12-18",
-  "email": "team@hackerjeopardy.org",
   "questions": [
     {
-      "answer": "What is the chemical symbol for gold?",
-      "question": "What is Au?",
-      "available": true
+      "question": "What is the chemical symbol for gold?",
+      "answer": "Au",
+      "value": 100,
+      "available": true,
+      "cat": "chemistry"
     },
     {
-      "answer": "What element has the atomic number 1?",
-      "question": "What is Hydrogen?",
-      "available": true
+      "question": "What element has the atomic number 1?",
+      "answer": "Hydrogen",
+      "value": 200,
+      "available": true,
+      "cat": "chemistry"
     },
     {
-      "answer": "What is the most common isotope of uranium?",
-      "question": "What is U-238?",
-      "available": true
+      "question": "What is the most common isotope of uranium?",
+      "answer": "U-238",
+      "value": 300,
+      "available": true,
+      "cat": "chemistry"
     },
     {
-      "answer": "What gas makes up about 78% of Earth's atmosphere?",
-      "question": "What is Nitrogen?",
-      "available": true
+      "question": "What gas makes up about 78% of Earth's atmosphere?",
+      "answer": "Nitrogen",
+      "value": 400,
+      "available": true,
+      "cat": "chemistry"
     },
     {
-      "answer": "What is the pH of pure water?",
-      "question": "What is 7?",
-      "available": true
+      "question": "What is the pH of pure water?",
+      "answer": "7",
+      "value": 500,
+      "available": true,
+      "cat": "chemistry"
     }
   ]
 }

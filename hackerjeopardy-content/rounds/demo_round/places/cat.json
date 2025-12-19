@@ -1,37 +1,40 @@
 {
   "name": "Places",
-  "path": "places",
-  "lang": "en",
-  "difficulty": "easy",
-  "author": "Hacker Jeopardy Team",
-  "licence": "MIT",
-  "date": "2025-12-18",
-  "email": "team@hackerjeopardy.org",
   "questions": [
     {
-      "answer": "What is the capital of Germany?",
-      "question": "What is Berlin?",
-      "available": true
+      "question": "What is the capital of Germany?",
+      "answer": "Berlin",
+      "value": 100,
+      "available": true,
+      "cat": "places"
     },
     {
-      "answer": "What is the largest city in the world by population?",
-      "question": "What is Tokyo?",
-      "available": true
+      "question": "What is the largest city in the world by population?",
+      "answer": "Tokyo",
+      "value": 200,
+      "available": true,
+      "cat": "places"
     },
     {
-      "answer": "What European city is known as the 'City of Light'?",
-      "question": "What is Paris?",
-      "available": true
+      "question": "What European city is known as the 'City of Light'?",
+      "answer": "Paris",
+      "value": 300,
+      "available": true,
+      "cat": "places"
     },
     {
-      "answer": "What is the smallest country in the world?",
-      "question": "What is Vatican City?",
-      "available": true
+      "question": "What is the smallest country in the world?",
+      "answer": "Vatican City",
+      "value": 400,
+      "available": true,
+      "cat": "places"
     },
     {
-      "answer": "What mountain range contains Mount Everest?",
-      "question": "What are the Himalayas?",
-      "available": true
+      "question": "What mountain range contains Mount Everest?",
+      "answer": "Himalayas",
+      "value": 500,
+      "available": true,
+      "cat": "places"
     }
   ]
 }

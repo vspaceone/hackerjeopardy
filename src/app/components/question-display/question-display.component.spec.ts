@@ -94,4 +94,116 @@ describe('QuestionDisplayComponent', () => {
     expect(compiled.textContent).toContain('What is 2+2?');
     expect(compiled.textContent).toContain('4');
   });
+
+  it('should show reveal button when player has buzzed in (activePlayer exists)', () => {
+    const player: Player = {
+      id: 1,
+      name: 'Test Player',
+      score: 0,
+      bgcolor: '#fff',
+      fgcolor: '#000',
+      btn: 'player1',
+      key: '1',
+      remainingtime: null
+    };
+
+    const question: Question = {
+      question: 'What is the capital of France?',
+      answer: 'Paris',
+      value: 200,
+      cat: 'Geography',
+      available: true, // Question is still active
+      availablePlayers: new Set([1]),
+      activePlayers: new Set([1]),
+      activePlayersArr: [1],
+      timeoutPlayers: new Set(),
+      timeoutPlayersArr: [],
+      buttonsActive: true,
+      activePlayer: player // Player has buzzed in
+    };
+
+    component.question = question;
+    component.showAnswer = false; // Answer not yet revealed
+    component.isCorrectlyAnswered = false; // Not yet marked correct
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement;
+    const revealButton = compiled.querySelector('.btn-reveal');
+    expect(revealButton).toBeTruthy();
+    expect(revealButton.textContent.trim()).toBe('Reveal Question');
+  });
+
+  it('should not show reveal button when answer is already shown', () => {
+    const player: Player = {
+      id: 1,
+      name: 'Test Player',
+      score: 0,
+      bgcolor: '#fff',
+      fgcolor: '#000',
+      btn: 'player1',
+      key: '1',
+      remainingtime: null
+    };
+
+    const question: Question = {
+      question: 'What is the capital of France?',
+      answer: 'Paris',
+      value: 200,
+      cat: 'Geography',
+      available: true,
+      availablePlayers: new Set([1]),
+      activePlayers: new Set([1]),
+      activePlayersArr: [1],
+      timeoutPlayers: new Set(),
+      timeoutPlayersArr: [],
+      buttonsActive: true,
+      activePlayer: player
+    };
+
+    component.question = question;
+    component.showAnswer = true; // Answer already revealed
+    component.isCorrectlyAnswered = false;
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement;
+    const revealButton = compiled.querySelector('.btn-reveal');
+    expect(revealButton).toBeFalsy();
+  });
+
+  it('should not show reveal button when question has been correctly answered', () => {
+    const player: Player = {
+      id: 1,
+      name: 'Test Player',
+      score: 0,
+      bgcolor: '#fff',
+      fgcolor: '#000',
+      btn: 'player1',
+      key: '1',
+      remainingtime: null
+    };
+
+    const question: Question = {
+      question: 'What is the capital of France?',
+      answer: 'Paris',
+      value: 200,
+      cat: 'Geography',
+      available: true,
+      availablePlayers: new Set([1]),
+      activePlayers: new Set([1]),
+      activePlayersArr: [1],
+      timeoutPlayers: new Set(),
+      timeoutPlayersArr: [],
+      buttonsActive: true,
+      activePlayer: player
+    };
+
+    component.question = question;
+    component.showAnswer = false;
+    component.isCorrectlyAnswered = true; // Already marked correct
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement;
+    const revealButton = compiled.querySelector('.btn-reveal');
+    expect(revealButton).toBeFalsy();
+  });
 });

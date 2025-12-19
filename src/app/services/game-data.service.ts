@@ -94,7 +94,10 @@ export class GameDataService {
 
         // Update image URLs using content manager
         if (question.image) {
-          processedQuestion.image = this.contentManager.getImageUrl(setName, category.name, question.image);
+          const directoryName = category.path || category.name;
+          console.log(`GameDataService: Resolving image for ${category.name} using directory "${directoryName}"`);
+          processedQuestion.image = this.contentManager.getImageUrl(setName, directoryName, question.image);
+          console.log(`GameDataService: Resolved image URL: ${processedQuestion.image}`);
         }
 
         return processedQuestion;

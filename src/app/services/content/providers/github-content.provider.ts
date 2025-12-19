@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, map } from 'rxjs';
+import { Observable, throwError, map, firstValueFrom } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BaseContentProvider } from './base-content.provider';
 import { ContentManifest, GameRound, Category } from '../content.types';
@@ -69,19 +69,8 @@ export class GitHubContentProvider extends BaseContentProvider {
 
   override async isAvailable(): Promise<boolean> {
     try {
-      // Try to fetch a lightweight manifest file
-      await new Promise((resolve, reject) => {
-        this.http.head(`${this.getPagesUrl()}/manifest.json`).subscribe({
-          next: () => resolve(true),
-          error: (error) => {
-            // If HEAD fails, try GET as fallback
-            this.http.get(`${this.getPagesUrl()}/manifest.json`).subscribe({
-              next: () => resolve(true),
-              error: reject
-            });
-          }
-        });
-      });
+      // Try to fetch manifest to check if repository is available
+      await firstValueFrom(this.http.get(`${this.getPagesUrl()}/manifest.json`));
       return true;
     } catch {
       return false;

@@ -197,8 +197,9 @@ export class ContentManagerComponent implements OnInit {
 
     this.addingRepo = true;
     try {
+      const repoUrl = this.newRepoUrl.trim();
       await this.repoManager.addRepository({
-        url: this.newRepoUrl.trim(),
+        url: repoUrl,
         enabled: true
       });
 
@@ -208,6 +209,12 @@ export class ContentManagerComponent implements OnInit {
       this.showAddRepo = false;
 
       await this.loadRepositories(); // Refresh list
+
+      // Check the actual status of the newly added repository
+      const addedRepo = this.repositories.find(r => r.url === repoUrl);
+      if (addedRepo) {
+        await this.refreshRepository(addedRepo.id);
+      }
     } catch (error) {
       console.error('Failed to add repository:', error);
     } finally {

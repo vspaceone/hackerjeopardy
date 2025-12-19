@@ -49,21 +49,21 @@ Each round should be placed in its own directory under `rounds/[roundId]/`:
 {
   "name": "Category Name",
   "questions": [
-     {
-       "question": "This famous tower is located in Paris",
-       "answer": "What is the Eiffel Tower?",
-       "value": 100,
-       "available": true,
-       "cat": "category_name"
-     },
       {
-        "question": "This programming language was created by Guido van Rossum",
-        "answer": "What is Python?",
-        "value": 200,
+        "answer": "This famous tower is located in Paris",
+        "question": "What is the Eiffel Tower?",
+        "value": 100,
         "available": true,
-        "cat": "category_name",
-        "image": "python-logo.jpg"
-      }
+        "cat": "category_name"
+      },
+       {
+         "answer": "This programming language was created by Guido van Rossum",
+         "question": "What is Python?",
+         "value": 200,
+         "available": true,
+         "cat": "category_name",
+         "image": "python-logo.jpg"
+       }
   ]
 }
 ```
@@ -72,8 +72,8 @@ Each round should be placed in its own directory under `rounds/[roundId]/`:
 
  ### Jeopardy Format
  In Jeopardy-style questions:
- - The **"question" field** contains the **clue** that contestants see
- - The **"answer" field** contains the **correct response** contestants should give
+ - The **"answer" field** contains the **clue** that contestants see
+ - The **"question" field** contains the **correct response** contestants should give
  - Example: Contestants see "This famous tower is in Paris" and respond "What is the Eiffel Tower?"
 
  ### Content Rules

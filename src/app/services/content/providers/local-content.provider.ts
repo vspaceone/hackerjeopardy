@@ -85,9 +85,10 @@ export class LocalContentProvider extends BaseContentProvider {
       return imageName;
     }
 
-    // URL-encode category names for proper URL handling
+    // URL-encode category names and image names for proper URL handling
     const encodedCategoryName = encodeURIComponent(categoryName);
-    return `${this.baseUrl}/${roundId}/${encodedCategoryName}/${imageName}`;
+    const encodedImageName = encodeURIComponent(imageName);
+    return `${this.baseUrl}/${roundId}/${encodedCategoryName}/${encodedImageName}`;
   }
 
   private convertLegacyManifest(legacyManifest: any): ContentManifest {

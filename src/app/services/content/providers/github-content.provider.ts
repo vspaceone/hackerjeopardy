@@ -74,9 +74,9 @@ export class GitHubContentProvider extends BaseContentProvider {
 
     // Remove repository prefixes for URL construction
     const cleanRoundId = roundId.replace(`${this.repoId}_`, '');
-    const cleanCategoryName = categoryName.replace(`${this.repoId}_`, '');
+    const cleanCategoryName = encodeURIComponent(categoryName.replace(`${this.repoId}_`, ''));
 
-    return `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${imageName}`;
+    return `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${encodeURIComponent(imageName)}`;
   }
 
   override async isAvailable(): Promise<boolean> {

@@ -22,7 +22,19 @@ describe('QuestionDisplayComponent', () => {
 
   it('should emit correct event when onCorrect is called', () => {
     spyOn(component.correct, 'emit');
-    const question: Question = { question: 'Q?', answer: 'A', value: 100, cat: 'cat', available: true, availablePlayers: new Set(), activePlayers: new Set(), activePlayersArr: [], timeoutPlayers: new Set(), timeoutPlayersArr: [], buttonsActive: true };
+    const question: Question = {
+      question: 'Q?',
+      answer: 'A',
+      value: 100,
+      cat: 'cat',
+      available: true,
+      availablePlayers: new Set(),
+      activePlayers: new Set(),
+      activePlayersArr: [],
+      timeoutPlayers: new Set(),
+      timeoutPlayersArr: [],
+      buttonsActive: true
+    };
     component.question = question;
 
     component.onCorrect();
@@ -32,7 +44,19 @@ describe('QuestionDisplayComponent', () => {
 
   it('should emit incorrect event when onIncorrect is called', () => {
     spyOn(component.incorrect, 'emit');
-    const question: Question = { question: 'Q?', answer: 'A', value: 100, cat: 'cat', available: true, availablePlayers: new Set(), activePlayers: new Set(), activePlayersArr: [], timeoutPlayers: new Set(), timeoutPlayersArr: [], buttonsActive: true };
+    const question: Question = {
+      question: 'Q?',
+      answer: 'A',
+      value: 100,
+      cat: 'cat',
+      available: true,
+      availablePlayers: new Set(),
+      activePlayers: new Set(),
+      activePlayersArr: [],
+      timeoutPlayers: new Set(),
+      timeoutPlayersArr: [],
+      buttonsActive: true
+    };
     component.question = question;
 
     component.onIncorrect();
@@ -49,7 +73,19 @@ describe('QuestionDisplayComponent', () => {
   });
 
   it('should display question and answer', () => {
-    const question: Question = { question: 'What is 2+2?', answer: '4', value: 200, cat: 'Math', available: false, availablePlayers: new Set(), activePlayers: new Set(), activePlayersArr: [], timeoutPlayers: new Set(), timeoutPlayersArr: [], buttonsActive: true };
+    const question: Question = {
+      question: 'What is 2+2?',
+      answer: '4',
+      value: 200,
+      cat: 'Math',
+      available: false,
+      availablePlayers: new Set(),
+      activePlayers: new Set(),
+      activePlayersArr: [],
+      timeoutPlayers: new Set(),
+      timeoutPlayersArr: [],
+      buttonsActive: true
+    };
     component.question = question;
     component.showAnswer = true;
     fixture.detectChanges();

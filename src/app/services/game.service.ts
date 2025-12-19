@@ -16,42 +16,42 @@ export class GameService {
     return [
       {
         id: 1,
-        btn: "player1",
-        name: "player1",
+        btn: 'player1',
+        name: 'player1',
         score: 0,
-        bgcolor: "#00d4ff",
-        fgcolor: "#001122",
-        key: "1",
+        bgcolor: '#00d4ff',
+        fgcolor: '#001122',
+        key: '1',
         remainingtime: null
       },
       {
         id: 2,
-        btn: "player2",
-        name: "player2",
+        btn: 'player2',
+        name: 'player2',
         score: 0,
-        bgcolor: "#4dd4ff",
-        fgcolor: "#001133",
-        key: "2",
+        bgcolor: '#4dd4ff',
+        fgcolor: '#001133',
+        key: '2',
         remainingtime: null
       },
       {
         id: 3,
-        btn: "player3",
-        name: "player3",
+        btn: 'player3',
+        name: 'player3',
         score: 0,
-        bgcolor: "#80ddff",
-        fgcolor: "#001144",
-        key: "3",
+        bgcolor: '#80ddff',
+        fgcolor: '#001144',
+        key: '3',
         remainingtime: null
       },
       {
         id: 4,
-        btn: "player4",
-        name: "player4",
+        btn: 'player4',
+        name: 'player4',
         score: 0,
-        bgcolor: "#b3e6ff",
-        fgcolor: "#001155",
-        key: "4",
+        bgcolor: '#b3e6ff',
+        fgcolor: '#001155',
+        key: '4',
         remainingtime: null
       }
     ];
@@ -168,13 +168,13 @@ export class GameService {
     this.clearTimer();
 
     question.availablePlayers.clear();
-    question.player = { btn: "none" } as Player;
+    question.player = { btn: 'none' } as Player;
     question.available = false;
   }
 
   markQuestionIncorrect(question: Question): void {
     // Mark the question as having been attempted but answered incorrectly by all
-    question.player = { btn: "incorrect" } as Player;
+    question.player = { btn: 'incorrect' } as Player;
     question.available = false;
     this.clearTimer();
   }

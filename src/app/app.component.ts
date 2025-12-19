@@ -17,7 +17,14 @@ import { Category, Player, Question } from './models/game.models';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
 	standalone: true,
-	imports: [CommonModule, SetSelectionComponent, GameBoardComponent, QuestionDisplayComponent, PlayerControlsComponent, ContentManagerComponent]
+	imports: [
+		CommonModule,
+		SetSelectionComponent,
+		GameBoardComponent,
+		QuestionDisplayComponent,
+		PlayerControlsComponent,
+		ContentManagerComponent
+	]
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	title = 'Hacker Jeopardy';
@@ -203,11 +210,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	minus(p): void {
-		p.score = p.score - 100
+		p.score = p.score - 100;
 	}
 
 	plus(p): void {
-		p.score = p.score + 100
+		p.score = p.score + 100;
 	}
 
 	correct(): void {
@@ -243,13 +250,47 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.couldBeCanceled = false;
 	}
 
-
-
 	players: Player[] = [
-		{id: 1, btn: "player1", name: "player1", score: 0, bgcolor: "#ff6b6b", fgcolor: "#9f0b0b", key: "1", remainingtime: null},
-		{id: 2, btn: "player2", name: "player2", score: 0, bgcolor: "#ff9900", fgcolor: "#995c00", key: "2", remainingtime: null},
-		{id: 3, btn: "player3", name: "player3", score: 0, bgcolor: "#9cfcff", fgcolor: "#3c9c9f", key: "3", remainingtime: null},
-		{id: 4, btn: "player4", name: "player4", score: 0, bgcolor: "#FFFF66", fgcolor: "#cccc00", key: "4", remainingtime: null}
-	]
+		{
+			id: 1,
+			btn: 'player1',
+			name: 'player1',
+			score: 0,
+			bgcolor: '#ff6b6b',
+			fgcolor: '#9f0b0b',
+			key: '1',
+			remainingtime: null
+		},
+		{
+			id: 2,
+			btn: 'player2',
+			name: 'player2',
+			score: 0,
+			bgcolor: '#ff9900',
+			fgcolor: '#995c00',
+			key: '2',
+			remainingtime: null
+		},
+		{
+			id: 3,
+			btn: 'player3',
+			name: 'player3',
+			score: 0,
+			bgcolor: '#9cfcff',
+			fgcolor: '#3c9c9f',
+			key: '3',
+			remainingtime: null
+		},
+		{
+			id: 4,
+			btn: 'player4',
+			name: 'player4',
+			score: 0,
+			bgcolor: '#FFFF66',
+			fgcolor: '#cccc00',
+			key: '4',
+			remainingtime: null
+		}
+	];
 
 }

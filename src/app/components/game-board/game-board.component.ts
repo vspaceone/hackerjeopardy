@@ -69,10 +69,12 @@ export class GameBoardComponent {
     }
 
     // Existing logic
-    if (!question.available && question.player && question.player.btn === "incorrect") {
+    if (!question.available && question.player &&
+        question.player.btn === 'incorrect') {
       return 'btn-warning answered-incorrectly';
     }
-    if (!question.available && question.player && question.player.btn !== "none") {
+    if (!question.available && question.player &&
+        question.player.btn !== 'none') {
       return 'btn-success answered-correctly';
     }
     if (!question.available) {

@@ -42,7 +42,7 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'Hacker Jeopardy'`, () => {
+  it('should have as title \'Hacker Jeopardy\'', () => {
     expect(component.title).toEqual('Hacker Jeopardy');
   });
 

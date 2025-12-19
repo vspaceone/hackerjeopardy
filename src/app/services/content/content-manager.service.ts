@@ -115,7 +115,7 @@ export class ContentManagerService {
    */
   async loadCategory(roundId: string, categoryName: string): Promise<Category> {
     console.log(`ContentManagerService: Loading category ${categoryName} for round ${roundId}`);
-    console.log(`ContentManagerService: Available providers:`, this.providers.map(p => p.name));
+    console.log('ContentManagerService: Available providers:', this.providers.map(p => p.name));
 
     // Try each provider in order until one succeeds
     for (const provider of this.providers) {

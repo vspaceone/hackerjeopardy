@@ -30,7 +30,7 @@ export class LocalContentProvider extends BaseContentProvider {
     console.log(`LocalContentProvider: Loading round from ${url}`);
     return this.http.get<GameRound>(url).pipe(
       map(round => {
-        console.log(`LocalContentProvider: Loaded round:`, round);
+        console.log('LocalContentProvider: Loaded round:', round);
         return round;
       }),
       catchError(error => {

@@ -8,12 +8,10 @@
     "types": []
   },
   "exclude": [
-    "src/test.ts",
+    "test.ts",
     "**/*.spec.ts",
     "**/*spec.ts",
-    "**/tests/**",
-    "../tests/**",
-    "../../tests/**",
-    "tests/**"
+    "**/*.test.ts",
+    "**/*test.ts"
   ]
 }

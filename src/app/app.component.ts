@@ -36,6 +36,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   currentRoundName = '';
   hasControllers = false;
 
+  // Long press handling
+  private longPressTimer: any = null;
+  private longPressAction: string = '';
+
 	constructor(
 		private gameDataService: GameDataService,
 		private gameService: GameService,
@@ -288,6 +292,33 @@ export class AppComponent implements OnInit, AfterViewInit {
         player.score = 0;
       });
     }
+  }
+
+  startLongPress(action: string): void {
+    this.longPressAction = action;
+    this.longPressTimer = setTimeout(() => {
+      this.executeLongPress();
+    }, 1000); // 1 second long press
+  }
+
+  endLongPress(): void {
+    if (this.longPressTimer) {
+      clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
+    this.longPressAction = '';
+  }
+
+  private executeLongPress(): void {
+    switch (this.longPressAction) {
+      case 'resetScores':
+        this.resetAllScores();
+        break;
+      case 'resetRound':
+        this.backToRoundSelection();
+        break;
+    }
+    this.longPressAction = '';
   }
 
 	close(): void {

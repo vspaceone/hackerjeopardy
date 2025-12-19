@@ -218,6 +218,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.qanda = null;
 		this.selectedQuestion = null;
 		this.couldBeCanceled = false;
+		this.showContentManager = false; // Close content manager if open
 		this.audioService.stopThemeMusic();
 	}
 

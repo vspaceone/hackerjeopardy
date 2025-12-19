@@ -56,9 +56,10 @@
 
 .controller-indicator {
   font-size: 1.5em;
-  color: #00ff88;
-  text-shadow: 0 0 10px #00ff88;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
   animation: pulse 2s infinite;
+  filter: brightness(1.2) contrast(1.5) hue-rotate(200deg);
 }
 
 @keyframes pulse {

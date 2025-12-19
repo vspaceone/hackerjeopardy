@@ -59,12 +59,15 @@ export class ContentManagerService {
    * Get all available rounds from all enabled repositories
    */
   getAvailableRounds(): Observable<RoundMetadata[]> {
+    console.log('ContentManager: Getting available rounds from providers:', this.providers.map(p => p.name));
     return combineLatest(
       this.providers.map(provider => this.getRoundsFromProvider(provider))
     ).pipe(
       map(roundsArrays => {
+        console.log('ContentManager: Raw rounds arrays:', roundsArrays);
         // Flatten and remove duplicates (prefer higher priority providers)
         const allRounds = roundsArrays.flat();
+        console.log('ContentManager: Flattened rounds:', allRounds.length);
         const roundMap = new Map<string, RoundMetadata>();
 
         allRounds.forEach(round => {
@@ -73,7 +76,13 @@ export class ContentManagerService {
           }
         });
 
-        return Array.from(roundMap.values());
+        const finalRounds = Array.from(roundMap.values());
+        console.log('ContentManager: Final rounds:', finalRounds.length, finalRounds.map(r => r.id));
+        return finalRounds;
+      }),
+      catchError(error => {
+        console.error('ContentManager: Error getting available rounds:', error);
+        return of([]);
       })
     );
   }
@@ -218,12 +227,13 @@ export class ContentManagerService {
   }
 
   /**
-   * Private helper: Get rounds from a single provider
-   */
-  private getRoundsFromProvider(provider: ContentProvider): Observable<RoundMetadata[]> {
-    return provider.getManifest().pipe(
-      map(manifest => {
-        console.log(`ContentManager: Got manifest from ${provider.name}:`, manifest);
+    * Private helper: Get rounds from a single provider
+    */
+   private getRoundsFromProvider(provider: ContentProvider): Observable<RoundMetadata[]> {
+     console.log(`ContentManager: Trying to get manifest from ${provider.name}`);
+     return provider.getManifest().pipe(
+       map(manifest => {
+         console.log(`ContentManager: Got manifest from ${provider.name}:`, manifest);
         if (!manifest || !manifest.rounds) {
           console.warn(`ContentManager: No manifest or rounds from ${provider.name}`);
           return [];

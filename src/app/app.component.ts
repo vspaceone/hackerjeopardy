@@ -45,18 +45,20 @@ export class AppComponent implements OnInit, AfterViewInit {
 			// Initialize content manager
 			await this.contentManager.initialize();
 
-			// Load available sets
-			this.gameDataService.getAvailableSets().subscribe({
-				next: (sets) => {
-					this.sets = sets;
-					this.loading = false;
-				},
-				error: (error) => {
-					console.error('Failed to load available sets:', error);
-					this.sets = [];
-					this.loading = false;
-				}
-			});
+ 			// Load available sets
+ 			console.log('AppComponent: Loading available sets...');
+ 			this.gameDataService.getAvailableSets().subscribe({
+ 				next: (sets) => {
+ 					console.log('AppComponent: Loaded sets:', sets);
+ 					this.sets = sets;
+ 					this.loading = false;
+ 				},
+ 				error: (error) => {
+ 					console.error('AppComponent: Failed to load available sets:', error);
+ 					this.sets = [];
+ 					this.loading = false;
+ 				}
+ 			});
 		} catch (error) {
 			console.error('Failed to initialize content manager:', error);
 			this.loading = false;

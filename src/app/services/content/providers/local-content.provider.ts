@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BaseContentProvider } from './base-content.provider';
 import { ContentManifest, GameRound, Category } from '../content.types';
@@ -12,7 +12,7 @@ export class LocalContentProvider extends BaseContentProvider {
   readonly name = 'Local';
   readonly priority = 3; // Lowest priority - fallback only
 
-  private baseUrl = '/assets';
+  private baseUrl = '/assets'; // In production this works, in dev it might need adjustment
 
   constructor(private http: HttpClient) {
     super();
@@ -20,8 +20,36 @@ export class LocalContentProvider extends BaseContentProvider {
 
   getManifest(): Observable<ContentManifest> {
     // Use the existing rounds-manifest.json as fallback
+    console.log(`LocalContentProvider: Loading manifest from ${this.baseUrl}/rounds-manifest.json`);
     return this.http.get<any>(`${this.baseUrl}/rounds-manifest.json`).pipe(
-      map(legacyManifest => this.convertLegacyManifest(legacyManifest))
+      map(legacyManifest => {
+        console.log('LocalContentProvider: Loaded manifest with', legacyManifest.rounds?.length || 0, 'rounds');
+        const converted = this.convertLegacyManifest(legacyManifest);
+        console.log('LocalContentProvider: Converted manifest with', converted.rounds?.length || 0, 'rounds');
+        return converted;
+      }),
+      catchError(error => {
+        console.error('LocalContentProvider: Failed to load manifest from', `${this.baseUrl}/rounds-manifest.json`, error);
+        // Try alternative path
+        console.log('LocalContentProvider: Trying alternative path /rounds-manifest.json');
+        return this.http.get<any>('/rounds-manifest.json').pipe(
+          map(legacyManifest => {
+            console.log('LocalContentProvider: Loaded manifest from alternative path with', legacyManifest.rounds?.length || 0, 'rounds');
+            const converted = this.convertLegacyManifest(legacyManifest);
+            return converted;
+          }),
+          catchError(error2 => {
+            console.error('LocalContentProvider: Failed to load manifest from alternative path:', error2);
+            return of({
+              rounds: [],
+              lastUpdated: new Date().toISOString(),
+              totalRounds: 0,
+              totalSize: 0,
+              version: 'bundled'
+            });
+          })
+        );
+      })
     );
   }
 

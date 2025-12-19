@@ -54,7 +54,7 @@ export class AudioService {
     this.failsound.play();
   }
 
-  playBuzzer(): void {
+  playBuzzer(playerId: number = 1): void {
     if (!this.audioContext) {
       // Fallback to click sound if Web Audio API not available
       this.clicksound.play();
@@ -69,10 +69,18 @@ export class AudioService {
       oscillator.connect(gainNode);
       gainNode.connect(this.audioContext.destination);
 
-      // Buzzer characteristics: quick descending sweep for buzzing in
-      const startFrequency = 600; // Start mid-high
-      const endFrequency = 150;   // End low
-      const duration = 0.6;       // 600ms duration
+      // Unique buzzer characteristics per player
+      const playerIndex = Math.max(0, Math.min(3, playerId - 1)); // Clamp to 0-3
+
+      const startFrequencies = [800, 700, 600, 500];
+      const endFrequencies = [200, 180, 160, 140];
+      const durations = [0.5, 0.6, 0.7, 0.6];
+      const waveforms: OscillatorType[] = ['sawtooth', 'square', 'sawtooth', 'square'];
+
+      const startFrequency = startFrequencies[playerIndex];
+      const endFrequency = endFrequencies[playerIndex];
+      const duration = durations[playerIndex];
+      const waveform = waveforms[playerIndex];
 
       oscillator.frequency.setValueAtTime(startFrequency, this.audioContext.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(endFrequency, this.audioContext.currentTime + duration);
@@ -81,7 +89,7 @@ export class AudioService {
       gainNode.gain.setValueAtTime(0.2, this.audioContext.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration);
 
-      oscillator.type = 'sawtooth'; // Harsh, electronic buzzer sound
+      oscillator.type = waveform;
 
       oscillator.start(this.audioContext.currentTime);
       oscillator.stop(this.audioContext.currentTime + duration);

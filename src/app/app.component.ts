@@ -127,6 +127,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 			const player = this.players.find(p => p.id === playerId);
 			if (player) {
 				player.highlighted = true;
+				this.audioService.playBuzzer(playerId); // Play buzzer sound for identification
 				setTimeout(() => {
 					player.highlighted = false;
 				}, 3000); // Highlight for 3 seconds

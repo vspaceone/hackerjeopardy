@@ -74,7 +74,9 @@ export class GitHubContentProvider extends BaseContentProvider {
     const cleanRoundId = roundId.replace(`${this.repoId}_`, '');
     const cleanCategoryName = categoryName.replace(`${this.repoId}_`, '');
 
-    return `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${imageName}`;
+    const url = `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${imageName}`;
+    console.log(`GitHubContentProvider (${this.githubUrl}): Generated image URL: ${url}`);
+    return url;
   }
 
   override async isAvailable(): Promise<boolean> {

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PlayerControlsComponent } from '../src/app/components/player-controls/player-controls.component';
-import { Player } from '../src/app/models/game.models';
+import { PlayerControlsComponent } from './player-controls.component';
+import { Player } from '../../models/game.models';
 
 describe('PlayerControlsComponent', () => {
   let component: PlayerControlsComponent;

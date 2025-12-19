@@ -13,14 +13,13 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 
-// Manually import all .spec.ts files
-// Uncomment for testing:
-import '../tests/app.component.spec';
-import '../tests/game-data.service.spec';
-import '../tests/content-manager.service.spec';
-import '../tests/game.service.spec';
-import '../tests/audio.service.spec';
-import '../tests/game-board.component.spec';
-import '../tests/player-controls.component.spec';
-import '../tests/question-display.component.spec';
-import '../tests/set-selection.component.spec';
+// Import all .spec.ts files (now colocated with their source files)
+import './app/app.component.spec';
+import './app/services/game-data.service.spec';
+import './app/services/content/content-manager.service.spec';
+import './app/services/game.service.spec';
+import './app/services/audio.service.spec';
+import './app/components/game-board/game-board.component.spec';
+import './app/components/player-controls/player-controls.component.spec';
+import './app/components/question-display/question-display.component.spec';
+import './app/components/set-selection/set-selection.component.spec';

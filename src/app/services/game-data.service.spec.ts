@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { GameDataService } from '../src/app/services/game-data.service';
-import { ContentManagerService } from '../src/app/services/content/content-manager.service';
-import { GameRound, Category, Question } from '../src/app/models/game.models';
-import { RoundMetadata } from '../src/app/services/content/content.types';
+import { GameDataService } from './game-data.service';
+import { ContentManagerService } from './content/content-manager.service';
+import { GameRound, Category, Question } from '../models/game.models';
+import { RoundMetadata } from './content/content.types';
 import { of, throwError } from 'rxjs';
 
 describe('GameDataService', () => {

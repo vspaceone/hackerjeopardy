@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuestionDisplayComponent } from '../src/app/components/question-display/question-display.component';
-import { Question, Player } from '../src/app/models/game.models';
+import { QuestionDisplayComponent } from './question-display.component';
+import { Question, Player } from '../../models/game.models';
 
 describe('QuestionDisplayComponent', () => {
   let component: QuestionDisplayComponent;

@@ -1,9 +1,9 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { AppComponent } from '../src/app/app.component';
-import { GameDataService } from '../src/app/services/game-data.service';
-import { GameService } from '../src/app/services/game.service';
-import { AudioService } from '../src/app/services/audio.service';
-import { ContentManagerService } from '../src/app/services/content/content-manager.service';
+import { AppComponent } from './app.component';
+import { GameDataService } from './services/game-data.service';
+import { GameService } from './services/game.service';
+import { AudioService } from './services/audio.service';
+import { ContentManagerService } from './services/content/content-manager.service';
 import { of } from 'rxjs';
 
 describe('AppComponent', () => {

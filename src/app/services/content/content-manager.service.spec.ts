@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ContentManagerService } from '../src/app/services/content/content-manager.service';
-import { IndexedDBService } from '../src/app/services/content/indexed-db.service';
-import { ContentValidatorService } from '../src/app/services/content/content-validator.service';
+import { ContentManagerService } from './content-manager.service';
+import { IndexedDBService } from './indexed-db.service';
+import { ContentValidatorService } from './content-validator.service';
 
 describe('ContentManagerService', () => {
   let service: ContentManagerService;

@@ -217,12 +217,25 @@ export class RepositoryManagerService {
       if (!provider) {
         repo.status = { state: 'error', lastError: 'Provider not available' };
       } else {
-        console.log('RepositoryManager: Checking provider availability...');
+        console.log('RepositoryManager: Checking provider availability and fetching manifest...');
         const available = await provider.isAvailable();
         console.log('RepositoryManager: Provider available:', available);
+
+        if (available) {
+          // Fetch the latest manifest to update repository info
+          try {
+            const manifest = await firstValueFrom(provider.getManifest());
+            console.log('RepositoryManager: Fetched manifest with', manifest?.rounds?.length || 0, 'rounds');
+            repo.manifest = manifest;
+            repo.roundsCount = manifest?.rounds?.length;
+          } catch (manifestError) {
+            console.warn('RepositoryManager: Failed to fetch manifest:', manifestError);
+          }
+        }
+
         repo.status = {
           state: available ? 'connected' : 'offline',
-          roundsCount: repo.manifest?.rounds.length,
+          roundsCount: repo.roundsCount,
           lastUpdated: new Date().toISOString()
         };
         console.log('RepositoryManager: Status updated to:', repo.status.state, 'with', repo.status.roundsCount, 'rounds');
@@ -235,7 +248,7 @@ export class RepositoryManagerService {
       };
     }
 
-    await this.storage.updateRepository(repoId, { status: repo.status });
+    await this.storage.updateRepository(repoId, { status: repo.status, manifest: repo.manifest, roundsCount: repo.roundsCount });
   }
 
   private async createProvider(repository: ContentRepository): Promise<void> {

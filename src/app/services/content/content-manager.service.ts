@@ -299,29 +299,45 @@ export class ContentManagerService {
    * Check for content updates across all repositories
    */
   async checkForUpdates(): Promise<ContentUpdateInfo> {
+    console.log('ContentManager: Checking for updates...');
     const currentRounds = await firstValueFrom(this.getAvailableRounds());
     const currentRoundIds = new Set(currentRounds.map(r => r.id));
+    console.log('ContentManager: Current rounds:', currentRounds.map(r => r.id));
+    console.log('ContentManager: Current round IDs set:', Array.from(currentRoundIds));
 
     // Check each repository for updates
     const repositories = await this.repositoryManager.getRepositories();
+    console.log('ContentManager: Checking repositories:', repositories.map(r => `${r.id} (${r.enabled ? 'enabled' : 'disabled'})`));
     const newRounds: RoundMetadata[] = [];
     const updatedRounds: RoundMetadata[] = [];
 
     for (const repo of repositories.filter(r => r.enabled)) {
+      console.log(`ContentManager: Checking updates for repo ${repo.id}`);
       try {
         const provider = this.repositoryManager.getProvider(repo.id);
-        if (!provider) continue;
+        if (!provider) {
+          console.warn(`ContentManager: No provider found for repo ${repo.id}`);
+          continue;
+        }
 
+        console.log(`ContentManager: Getting manifest from provider ${provider.name}`);
         const manifest = await firstValueFrom(provider.getManifest());
-        if (!manifest?.rounds) continue;
+        console.log(`ContentManager: Got manifest with ${manifest?.rounds?.length || 0} rounds:`, manifest?.rounds?.map(r => r.id));
+        if (!manifest?.rounds) {
+          console.warn(`ContentManager: No rounds in manifest for repo ${repo.id}`);
+          continue;
+        }
 
         for (const round of manifest.rounds) {
+          console.log(`ContentManager: Checking round ${round.id} from repo ${repo.id}`);
           if (!currentRoundIds.has(round.id)) {
+            console.log(`ContentManager: Found new round ${round.id}`);
             newRounds.push(round);
           } else {
             // Check if updated (simplified - could compare timestamps)
             const current = currentRounds.find(r => r.id === round.id);
             if (current && round.lastModified !== current.lastModified) {
+              console.log(`ContentManager: Found updated round ${round.id}`);
               updatedRounds.push(round);
             }
           }
@@ -331,12 +347,14 @@ export class ContentManagerService {
       }
     }
 
-    return {
+    const result = {
       hasUpdates: newRounds.length > 0 || updatedRounds.length > 0,
       newRounds,
       updatedRounds,
       removedRounds: [] // Not implemented yet
     };
+    console.log('ContentManager: Update check result:', result);
+    return result;
   }
 
   /**

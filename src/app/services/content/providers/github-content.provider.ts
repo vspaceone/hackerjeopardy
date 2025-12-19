@@ -64,7 +64,6 @@ export class GitHubContentProvider extends BaseContentProvider {
   getImageUrl(roundId: string, categoryName: string, imageName: string): string {
     // If imageName is already a full URL, return it
     if (imageName.startsWith('http')) {
-      console.log(`GitHubContentProvider (${this.githubUrl}): Image already full URL: ${imageName}`);
       return imageName;
     }
 
@@ -72,9 +71,7 @@ export class GitHubContentProvider extends BaseContentProvider {
     const cleanRoundId = roundId.replace(`${this.repoId}_`, '');
     const cleanCategoryName = categoryName.replace(`${this.repoId}_`, '');
 
-    const url = `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${imageName}`;
-    console.log(`GitHubContentProvider (${this.githubUrl}): Generated image URL: ${url}`);
-    return url;
+    return `${this.getPagesUrl()}/rounds/${cleanRoundId}/${cleanCategoryName}/${imageName}`;
   }
 
   override async isAvailable(): Promise<boolean> {

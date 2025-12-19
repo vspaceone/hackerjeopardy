@@ -201,24 +201,18 @@ export class ContentManagerService {
    * Get image URL for a specific round/category/image
    */
   getImageUrl(roundId: string, categoryName: string, imageName: string): string {
-    console.log(`ContentManager: Getting image URL for ${roundId}/${categoryName}/${imageName}`);
     // Try providers in order, return first available URL
     for (const provider of this.providers) {
       try {
-        console.log(`ContentManager: Trying provider ${provider.name} (priority: ${provider.priority})`);
         const url = provider.getImageUrl(roundId, categoryName, imageName);
-        console.log(`ContentManager: Provider ${provider.name} returned: "${url}"`);
         if (url) {
-          console.log(`ContentManager: Using URL from ${provider.name}: ${url}`);
           return url;
         }
       } catch (error) {
-        console.warn(`ContentManager: Provider ${provider.name} failed:`, error);
         continue;
       }
     }
 
-    console.warn(`ContentManager: No provider returned URL for ${roundId}/${categoryName}/${imageName}`);
     // Fallback to empty string or default image
     return '';
   }

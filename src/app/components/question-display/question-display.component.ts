@@ -31,29 +31,20 @@ export class QuestionDisplayComponent {
   getImageUrl(): string | null {
     if (!this.question?.image) return null;
 
-    console.log('QuestionDisplay: Getting image URL for:', {
-      image: this.question.image,
-      roundId: this.question.roundId,
-      cat: this.question.cat
-    });
-
     // If it's already a full URL, return it
     if (this.question.image.startsWith('http') || this.question.image.startsWith('/assets/')) {
-      console.log('QuestionDisplay: Returning full URL:', this.question.image);
       return this.question.image;
     }
 
     // Use ContentManagerService for proper URL resolution
     if (this.question.roundId && this.question.cat) {
       const url = this.contentManager.getImageUrl(this.question.roundId, this.question.cat, this.question.image);
-      console.log('QuestionDisplay: ContentManager returned URL:', url);
       if (url) {
         return url;
       }
     }
 
     // Fallback: return as-is
-    console.log('QuestionDisplay: Falling back to original:', this.question.image);
     return this.question.image;
   }
 

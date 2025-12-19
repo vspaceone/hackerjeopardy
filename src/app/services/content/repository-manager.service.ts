@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
 import {
   ContentRepository,
@@ -15,6 +16,7 @@ import { GitHubContentProvider } from './providers/github-content.provider';
 export class RepositoryManagerService {
   private repositories: ContentRepository[] = [];
   private providers: Map<string, GitHubContentProvider> = new Map();
+  private repositoryChanges = new Subject<{type: 'added' | 'removed' | 'updated', repository?: ContentRepository, repoId?: string}>();
 
   constructor(
     private storage: RepositoryStorageService,
@@ -38,6 +40,10 @@ export class RepositoryManagerService {
 
   async getRepositories(): Promise<ContentRepository[]> {
     return [...this.repositories];
+  }
+
+  getRepositoryChanges(): Observable<{type: 'added' | 'removed' | 'updated', repository?: ContentRepository, repoId?: string}> {
+    return this.repositoryChanges.asObservable();
   }
 
   async addRepository(repoConfig: Omit<ContentRepository, 'id' | 'addedAt'>): Promise<void> {
@@ -74,10 +80,12 @@ export class RepositoryManagerService {
     // Create provider if enabled
     if (repository.enabled) {
       console.log('RepositoryManager: Creating provider for repository:', repository.id, repository.githubUrl);
-      console.log('RepositoryManager: Repository manifest rounds:', repository.manifest?.rounds?.length || 0);
       await this.createProvider(repository);
       console.log('RepositoryManager: Provider created, providers count:', this.providers.size);
     }
+
+    // Notify listeners of the change
+    this.repositoryChanges.next({ type: 'added', repository });
   }
 
   async removeRepository(repoId: string): Promise<void> {
@@ -89,6 +97,9 @@ export class RepositoryManagerService {
 
     // Remove provider
     this.providers.delete(repoId);
+
+    // Notify listeners of the change
+    this.repositoryChanges.next({ type: 'removed', repoId });
   }
 
   async updateRepository(repoId: string, updates: Partial<ContentRepository>): Promise<void> {
@@ -109,6 +120,9 @@ export class RepositoryManagerService {
         this.providers.delete(repoId);
       }
     }
+
+    // Notify listeners of the change
+    this.repositoryChanges.next({ type: 'updated', repository: repo });
   }
 
   async validateRepository(url: string): Promise<RepositoryValidationResult> {

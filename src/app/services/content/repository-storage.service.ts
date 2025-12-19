@@ -12,15 +12,16 @@ export class RepositoryStorageService {
     try {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (!stored) {
-        // Return default repository if none stored
-        return [this.getDefaultRepository()];
+        // Return empty array - no default repository
+        return [];
       }
 
       const data = JSON.parse(stored);
 
       // Handle version migration if needed
       if (data.version !== this.STORAGE_VERSION) {
-        return [this.getDefaultRepository()];
+        console.log('Repository storage version mismatch, clearing old data');
+        return [];
       }
 
       return data.repositories.map((repo: any) => ({
@@ -29,7 +30,7 @@ export class RepositoryStorageService {
       }));
     } catch (error) {
       console.error('Failed to load repositories:', error);
-      return [this.getDefaultRepository()];
+      return [];
     }
   }
 
@@ -75,15 +76,7 @@ export class RepositoryStorageService {
     return repositories.find(repo => repo.id === repoId) || null;
   }
 
-  private getDefaultRepository(): ContentRepository {
-    return {
-      id: 'default',
-      url: 'krauni/hackerjeopardy-content',
-      enabled: false, // Disable by default to use local content
-      addedAt: new Date(),
-      status: { state: 'checking' }
-    };
-  }
+
 
   async clearAll(): Promise<void> {
     localStorage.removeItem(this.STORAGE_KEY);

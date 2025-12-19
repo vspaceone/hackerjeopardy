@@ -26,33 +26,60 @@ export class ContentManagerService {
     private cachedProvider: CachedContentProvider,
     private localProvider: LocalContentProvider,
     private validator: ContentValidatorService
-  ) {}
+  ) {
+    // Listen for repository changes to update providers dynamically
+    this.repositoryManager.getRepositoryChanges().subscribe(change => {
+      console.log('ContentManager: Repository change detected:', change.type, change.repository?.id || change.repoId);
+      this.updateProviders();
+    });
+  }
+
+  /**
+   * Update the providers array when repositories change
+   */
+  private async updateProviders(): Promise<void> {
+    console.log('ContentManager: Updating providers...');
+
+    // Keep cached and local providers, replace GitHub providers
+    const githubProviders = this.providers.filter(p => p.name !== 'Cache' && p.name !== 'Local');
+    this.providers = [this.cachedProvider];
+
+    // Add GitHub providers for current enabled repositories
+    const repositories = await this.repositoryManager.getRepositories();
+    console.log('ContentManager: Found', repositories.length, 'repositories');
+
+    for (const repo of repositories.filter(r => r.enabled)) {
+      console.log('ContentManager: Adding provider for enabled repo:', repo.id);
+      const provider = this.repositoryManager.getProvider(repo.id);
+      if (provider) {
+        this.providers.push(provider);
+        console.log('ContentManager: Added provider:', provider.name);
+      } else {
+        console.warn('ContentManager: No provider found for repo:', repo.id);
+      }
+    }
+
+    // Add local provider last
+    this.providers.push(this.localProvider);
+
+    console.log('ContentManager: Updated providers:', this.providers.map(p => `${p.name} (priority: ${p.priority})`));
+  }
 
   async initialize(): Promise<void> {
+    console.log('ContentManagerService: Initializing...');
     await this.repositoryManager.initialize();
 
-    // Set up provider chain
+    // Set up initial provider chain
     this.providers = [
       this.cachedProvider, // Highest priority - check cache first
-      // GitHub providers will be added dynamically below
-      this.localProvider   // Lowest priority - bundled fallback
     ];
 
     console.log('ContentManagerService: Initial providers:', this.providers.map(p => p.name));
 
-    // Add GitHub providers for enabled repositories
-    const repositories = await this.repositoryManager.getRepositories();
-    console.log('ContentManagerService: Found repositories:', repositories.length);
+    // Add GitHub providers for enabled repositories and local provider
+    await this.updateProviders();
 
-    for (const repo of repositories.filter(r => r.enabled)) {
-      console.log('ContentManagerService: Adding GitHub provider for:', repo.id);
-      const provider = this.repositoryManager.getProvider(repo.id);
-      if (provider) {
-        this.providers.push(provider);
-      }
-    }
-
-    console.log('ContentManagerService: Final providers:', this.providers.map(p => `${p.name} (priority: ${p.priority})`));
+    console.log('ContentManagerService: Initialization complete');
   }
 
   /**

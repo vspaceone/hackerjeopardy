@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SetSelectionComponent } from './set-selection.component';
+import { SetSelectionComponent } from '../src/app/components/set-selection/set-selection.component';
 
 describe('SetSelectionComponent', () => {
   let component: SetSelectionComponent;

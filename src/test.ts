@@ -15,12 +15,12 @@ getTestBed().initTestEnvironment(
 
 // Manually import all .spec.ts files
 // Uncomment for testing:
-// import '../tests/app.component.spec';
-// import '../tests/game-data.service.spec';
-// import '../tests/content-manager.service.spec';
-// import '../tests/game.service.spec';
-// import '../tests/audio.service.spec';
-// import '../tests/game-board.component.spec';
-// import '../tests/player-controls.component.spec';
-// import '../tests/question-display.component.spec';
-// import '../tests/set-selection.component.spec';
+import '../tests/app.component.spec';
+import '../tests/game-data.service.spec';
+import '../tests/content-manager.service.spec';
+import '../tests/game.service.spec';
+import '../tests/audio.service.spec';
+import '../tests/game-board.component.spec';
+import '../tests/player-controls.component.spec';
+import '../tests/question-display.component.spec';
+import '../tests/set-selection.component.spec';

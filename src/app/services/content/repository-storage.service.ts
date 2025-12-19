@@ -79,7 +79,7 @@ export class RepositoryStorageService {
     return {
       id: 'default',
       url: 'krauni/hackerjeopardy-content',
-      enabled: true,
+      enabled: false, // Disable by default to use local content
       addedAt: new Date(),
       status: { state: 'checking' }
     };

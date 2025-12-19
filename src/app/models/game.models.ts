@@ -17,6 +17,7 @@ export interface Question {
   available: boolean;
   value: number;
   cat: string;
+  roundId?: string; // Add round ID for image URL construction
   player?: Player;
   activePlayers: Set<number>;
   activePlayersArr: number[];

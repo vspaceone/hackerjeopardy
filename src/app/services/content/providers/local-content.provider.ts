@@ -41,8 +41,8 @@ export class LocalContentProvider extends BaseContentProvider {
   }
 
   getCategory(roundId: string, categoryName: string): Observable<Category> {
-    const encodedCategoryName = encodeURIComponent(categoryName);
-    const url = `${this.baseUrl}/${roundId}/${encodedCategoryName}/cat.json`;
+    // Don't URL-encode category names for local file system access
+    const url = `${this.baseUrl}/${roundId}/${categoryName}/cat.json`;
     console.log(`LocalContentProvider: Loading category from ${url}`);
     return this.http.get<Category>(url).pipe(
       catchError(error => {
@@ -53,6 +53,7 @@ export class LocalContentProvider extends BaseContentProvider {
   }
 
   getImageUrl(roundId: string, categoryName: string, imageName: string): string {
+    // Don't URL-encode category names for local file system access
     return `${this.baseUrl}/${roundId}/${categoryName}/${imageName}`;
   }
 

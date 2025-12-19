@@ -23,6 +23,25 @@ export class QuestionDisplayComponent {
   showAnswer: boolean = false;
   isCorrectlyAnswered: boolean = false;
 
+
+
+  getImageUrl(): string | null {
+    if (!this.question?.image) return null;
+
+    // If it's already a full URL, return it
+    if (this.question.image.startsWith('/assets/')) {
+      return this.question.image;
+    }
+
+    // Construct URL from roundId and category
+    if (this.question.roundId && this.question.cat) {
+      return `/assets/${this.question.roundId}/${this.question.cat}/${this.question.image}`;
+    }
+
+    // Fallback: return as-is
+    return this.question.image;
+  }
+
   onClose(): void {
     this.close.emit();
   }

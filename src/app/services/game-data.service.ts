@@ -83,6 +83,7 @@ export class GameDataService {
           available: true,
           value: (qIdx + 1) * 100,
           cat: category.name,
+          roundId: setName, // Add round ID
           activePlayers: new Set<number>(),
           activePlayersArr: [],
           timeoutPlayers: new Set<number>(),
@@ -91,11 +92,9 @@ export class GameDataService {
           buttonsActive: false
         };
 
-        // Update image URLs to use content provider
+        // Update image URLs using content manager
         if (question.image) {
-          // The content manager will handle URL resolution
-          // For now, keep the relative path as the content provider will resolve it
-          processedQuestion.image = question.image;
+          processedQuestion.image = this.contentManager.getImageUrl(setName, category.name, question.image);
         }
 
         return processedQuestion;

@@ -52,14 +52,14 @@ export class RepositoryManagerService {
       throw new Error('Repository already added');
     }
 
-    // Create repository object
-    const repository: ContentRepository = {
-      ...repoConfig,
-      id,
-      addedAt: new Date(),
-      status: { state: 'connected' },
-      manifest: validation.manifest
-    };
+     // Create repository object
+     const repository: ContentRepository = {
+       ...repoConfig,
+       id,
+       addedAt: new Date(),
+       status: { state: 'connected' },
+       validationResult: validation
+     };
 
     // Add to storage
     await this.storage.addRepository(repository);

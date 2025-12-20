@@ -1,0 +1,32 @@
+{
+  "name": "hackerjeopardy-content",
+  "version": "1.0.0",
+  "description": "Content repository for Hacker Jeopardy game rounds",
+  "main": "manifest.json",
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "build": "node scripts/build.js",
+    "test": "npm run validate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/hackerjeopardy-content.git"
+  },
+  "keywords": [
+    "jeopardy",
+    "game",
+    "content",
+    "questions",
+    "hacker",
+    "trivia"
+  ],
+  "author": "Hacker Jeopardy Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/hackerjeopardy-content/issues"
+  },
+  "homepage": "https://github.com/yourusername/hackerjeopardy-content#readme",
+  "devDependencies": {
+    "ajv": "^8.12.0"
+  }
+}

@@ -1,21 +1,30 @@
 <div class="set-selection-overlay">
   <div class="set-selection-modal" role="dialog" aria-labelledby="game-title">
-    <div class="modal-header">
-      <h2 class="game-title" id="game-title">Hacker Jeopardy</h2>
-      <p class="subtitle">Select a question set to begin</p>
-    </div>
+     <div class="modal-header">
+       <h2 class="game-title" id="game-title">Hacker Jeopardy</h2>
+       <p class="subtitle">Select a question set to begin</p>
+       <button class="content-manager-btn" (click)="onOpenContentManager()" title="Content Manager">⚙️</button>
+     </div>
     
-    <div class="sets-container">
-      <div class="sets-grid">
-        <button
-          *ngFor="let set of availableSets"
-          class="set-button btn btn-danger"
-          (click)="onSelectSet(set)"
-          [attr.aria-label]="'Select question set ' + set"
-        >
-          {{ set }}
-        </button>
-      </div>
-    </div>
+     <div class="sets-container">
+       <div class="sets-grid">
+         <button
+           *ngFor="let round of availableRounds; let i = index"
+           class="set-button btn btn-danger"
+           [ngClass]="{'selected': isSelected(i)}"
+           (click)="onSelectSet(round)"
+           [attr.aria-label]="'Select question set ' + round.name"
+         >
+           {{ round.name }}
+           <div class="round-meta" *ngIf="round.difficulty !== 'unknown'">
+             <span class="difficulty">{{ round.difficulty }}</span>
+             <span class="categories" *ngIf="round.categories"> • {{ round.categories.length }} categories</span>
+           </div>
+         </button>
+       </div>
+       <div class="keyboard-hint" *ngIf="availableRounds.length > 0">
+         Use arrow keys to navigate, Enter to select, Esc for content manager
+       </div>
+     </div>
   </div>
 </div>

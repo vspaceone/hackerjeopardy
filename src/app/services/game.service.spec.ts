@@ -77,13 +77,13 @@ describe('GameService', () => {
       expect(result).toBeFalsy();
     });
 
-    it('should add second player to active players', () => {
+    it('should not activate second player while first is active', () => {
       service.activatePlayer(question, 1, players);
       service.clearTimer(); // clear to avoid timer
       const result = service.activatePlayer(question, 2, players);
-      expect(result).toBeTruthy();
-      expect(question.activePlayers.has(2)).toBeTruthy();
-      expect(question.activePlayers.size).toBe(2);
+      expect(result).toBeFalsy();
+      expect(question.activePlayers.has(2)).toBeFalsy();
+      expect(question.activePlayers.size).toBe(1);
     });
   });
 
@@ -155,11 +155,11 @@ describe('GameService', () => {
 
   describe('clearTimer', () => {
     it('should clear the timer', () => {
-      spyOn(window, 'clearInterval').and.callThrough();
-      service['timer'] = 123 as any;
+      const mockSubscription = jasmine.createSpyObj('Subscription', ['unsubscribe']);
+      service['timer'] = mockSubscription;
       service.clearTimer();
+      expect(mockSubscription.unsubscribe).toHaveBeenCalled();
       expect(service['timer']).toBeNull();
-      expect(window.clearInterval).toHaveBeenCalledWith(123);
     });
   });
 });

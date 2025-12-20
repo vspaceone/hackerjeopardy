@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Category, Question } from '../../models/game.models';
+import { Category, Question, Player } from '../../models/game.models';
+import { TIMING, BUTTON_VALUES } from '../../constants/game.constants';
 
 @Component({
   selector: 'app-game-board',
@@ -9,14 +10,25 @@ import { Category, Question } from '../../models/game.models';
   standalone: true,
   imports: [CommonModule]
 })
-export class GameBoardComponent {
+export class GameBoardComponent implements OnDestroy {
   @Input() categories!: Category[];
+  @Input() players!: Player[];
   @Input() selectedQuestion?: Question;
   @Output() questionSelected = new EventEmitter<Question>();
   @Output() questionReset = new EventEmitter<Question>();
 
-  private longPressTimer: any;
-  private readonly LONG_PRESS_DURATION = 1500; // 1.5 seconds
+  // Keyboard navigation state
+  keyboardSelectedCategory: number = 0;
+  keyboardSelectedQuestion: number = 0;
+
+  // Inactivity management for keyboard selection
+  private lastKeyActivity: number = 0;
+  private selectionTimeoutId?: any;
+  private readonly INACTIVITY_TIMEOUT = 5000; // 5 seconds
+  private readonly FADE_DURATION = 1000; // 1 second for CSS transition
+
+  private longPressTimer: number | null = null;
+  private readonly LONG_PRESS_DURATION = 1500; // 1.5 seconds for board reset (different from app-level)
   private longPressingQuestion?: Question;
 
   selectQuestion(question: Question): void {
@@ -31,13 +43,13 @@ export class GameBoardComponent {
     event.preventDefault();
     this.longPressingQuestion = question;
 
-    this.longPressTimer = setTimeout(() => {
+    this.longPressTimer = window.setTimeout(() => {
       this.triggerReset(question);
     }, this.LONG_PRESS_DURATION);
   }
 
   onQuestionMouseUp(): void {
-    if (this.longPressTimer) {
+    if (this.longPressTimer !== null) {
       clearTimeout(this.longPressTimer);
       this.longPressTimer = null;
     }
@@ -57,6 +69,160 @@ export class GameBoardComponent {
     this.longPressingQuestion = undefined;
   }
 
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    // Don't handle keyboard navigation when input elements are focused
+    const activeElement = document.activeElement;
+    if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+
+    if (!this.categories || this.categories.length === 0) return;
+
+    // Don't handle keyboard navigation if a question is already selected
+    if (this.selectedQuestion) return;
+
+    let handled = false;
+
+    switch (event.key) {
+      case 'ArrowUp':
+        handled = true;
+        this.moveSelection(0, -1);
+        this.resetInactivityTimer();
+        break;
+      case 'ArrowDown':
+        handled = true;
+        this.moveSelection(0, 1);
+        this.resetInactivityTimer();
+        break;
+      case 'ArrowLeft':
+        handled = true;
+        this.moveSelection(-1, 0);
+        this.resetInactivityTimer();
+        break;
+      case 'ArrowRight':
+        handled = true;
+        this.moveSelection(1, 0);
+        this.resetInactivityTimer();
+        break;
+      case 'Enter':
+        handled = true;
+        this.selectKeyboardQuestion();
+        this.clearKeyboardSelection();
+        break;
+    }
+
+    if (handled) {
+      event.preventDefault();
+    }
+  }
+
+  // Inactivity timer management
+  private resetInactivityTimer(): void {
+    this.lastKeyActivity = Date.now();
+    if (this.selectionTimeoutId) {
+      clearTimeout(this.selectionTimeoutId);
+    }
+    this.selectionTimeoutId = setTimeout(() => {
+      this.fadeOutKeyboardSelection();
+    }, this.INACTIVITY_TIMEOUT);
+  }
+
+  private fadeOutKeyboardSelection(): void {
+    // Start fade by setting invalid indices (CSS transition will handle fade)
+    this.keyboardSelectedCategory = -1;
+    this.keyboardSelectedQuestion = -1;
+    // Clear timeout reference
+    this.selectionTimeoutId = undefined;
+  }
+
+  private clearKeyboardSelection(): void {
+    if (this.selectionTimeoutId) {
+      clearTimeout(this.selectionTimeoutId);
+      this.selectionTimeoutId = undefined;
+    }
+    this.keyboardSelectedCategory = -1;
+    this.keyboardSelectedQuestion = -1;
+  }
+
+  // Hover handler to clear keyboard selection
+  onQuestionHover(): void {
+    this.clearKeyboardSelection();
+  }
+
+  private moveSelection(deltaCategory: number, deltaQuestion: number): void {
+    const maxCategory = this.categories.length - 1;
+    const maxQuestion = 4; // 5 questions per category (0-4)
+
+    const newCategory = Math.max(0, Math.min(maxCategory,
+      this.keyboardSelectedCategory + deltaCategory));
+
+    const newQuestion = Math.max(0, Math.min(maxQuestion,
+      this.keyboardSelectedQuestion + deltaQuestion));
+
+    // Find the next available question in the target direction
+    const targetQuestion = this.findNextAvailableQuestion(newCategory, newQuestion, deltaCategory, deltaQuestion);
+    if (targetQuestion) {
+      this.keyboardSelectedCategory = targetQuestion.categoryIndex;
+      this.keyboardSelectedQuestion = targetQuestion.questionIndex;
+    }
+  }
+
+  private findNextAvailableQuestion(
+    startCategory: number,
+    startQuestion: number,
+    deltaCategory: number,
+    deltaQuestion: number
+  ): {categoryIndex: number, questionIndex: number} | null {
+    let currentCategory = startCategory;
+    let currentQuestion = startQuestion;
+    const maxCategory = this.categories.length - 1;
+    const maxQuestion = 4;
+
+    // Check up to 20 positions to avoid infinite loops
+    for (let attempts = 0; attempts < 20; attempts++) {
+      // Check if current position has an available question
+      const category = this.categories[currentCategory];
+      if (category && category.questions[currentQuestion] &&
+          category.questions[currentQuestion].available) {
+        return { categoryIndex: currentCategory, questionIndex: currentQuestion };
+      }
+
+      // Move in the requested direction
+      currentCategory += deltaCategory;
+      currentQuestion += deltaQuestion;
+
+      // Wrap around if needed
+      if (currentCategory < 0) currentCategory = maxCategory;
+      if (currentCategory > maxCategory) currentCategory = 0;
+      if (currentQuestion < 0) currentQuestion = maxQuestion;
+      if (currentQuestion > maxQuestion) currentQuestion = 0;
+
+      // If we've looped back to start, stop
+      if (currentCategory === startCategory && currentQuestion === startQuestion) break;
+    }
+
+    // If no available question found, return the original position
+    return { categoryIndex: startCategory, questionIndex: startQuestion };
+  }
+
+  private selectKeyboardQuestion(): void {
+    const category = this.categories[this.keyboardSelectedCategory];
+    if (category && category.questions[this.keyboardSelectedQuestion]) {
+      const question = category.questions[this.keyboardSelectedQuestion];
+      if (question.available) {
+        this.selectQuestion(question);
+      }
+    }
+  }
+
+  isKeyboardSelected(categoryIndex: number, questionIndex: number): boolean {
+    return categoryIndex === this.keyboardSelectedCategory &&
+           questionIndex === this.keyboardSelectedQuestion &&
+           this.keyboardSelectedCategory >= 0 &&
+           this.keyboardSelectedQuestion >= 0;
+  }
+
   getQuestionButtonClass(question: Question): string {
     // Check for long-pressing state first
     if (question === this.longPressingQuestion) {
@@ -64,20 +230,23 @@ export class GameBoardComponent {
     }
 
     // Check for reset animation
-    if (question.resetTimestamp && (Date.now() - question.resetTimestamp) < 1000) {
+    if (question.resetTimestamp && (Date.now() - question.resetTimestamp) < TIMING.QUESTION_RESET_ANIMATION) {
       return 'btn-danger reset';
     }
 
-    // Existing logic
-    if (!question.available && question.player && question.player.btn === "incorrect") {
-      return 'btn-warning answered-incorrectly';
-    }
-    if (!question.available && question.player && question.player.btn !== "none") {
-      return 'btn-success answered-correctly';
-    }
+    // Check for completed questions
     if (!question.available) {
-      return 'btn-danger unanswered';
+      if (question.player && question.player.btn !== BUTTON_VALUES.NONE &&
+          question.player.btn !== BUTTON_VALUES.INCORRECT) {
+        // Correctly answered - use player color
+        return `answered-correctly player-${question.player.id}`;
+      } else {
+        // Incorrectly answered or unanswered - use muted disabled look
+        return 'muted-disabled';
+      }
     }
+
+    // Existing logic for active/selected states
     if (question.activePlayers && question.activePlayers.size > 0) {
       return 'btn-info active-question';
     }
@@ -93,5 +262,11 @@ export class GameBoardComponent {
 
   trackByQuestion(index: number): number {
     return index;
+  }
+
+  ngOnDestroy(): void {
+    if (this.selectionTimeoutId) {
+      clearTimeout(this.selectionTimeoutId);
+    }
   }
 }

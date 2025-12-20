@@ -288,17 +288,67 @@
 
 .badge-action-buttons {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 10px;
+  margin-top: 10px;
   justify-content: center;
 }
 
 .badge-btn {
-  padding: 6px 12px !important;
-  font-size: 0.8em !important;
-  min-width: 80px !important;
-  border-radius: 4px !important;
+  padding: 8px 16px !important;
+  font-size: 0.85em !important;
+  min-width: 90px !important;
+  border-radius: 6px !important;
   margin: 0 !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+}
+
+.badge-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.badge-btn:hover::before {
+  left: 100%;
+}
+
+.badge-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0 25px currentColor, 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.badge-btn.btn-success {
+  background: linear-gradient(45deg, #00ff88, #00cc66) !important;
+  border-color: #00ff88 !important;
+  color: #001100 !important;
+  box-shadow: 0 0 15px #00ff88, inset 0 0 15px rgba(255, 255, 255, 0.1) !important;
+}
+
+.badge-btn.btn-success:hover {
+  background: linear-gradient(45deg, #00ff88, #00aa55) !important;
+  box-shadow: 0 0 30px #00ff88, 0 0 50px #00ff88, 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+.badge-btn.btn-danger {
+  background: linear-gradient(45deg, #ff073a, #cc052f) !important;
+  border-color: #ff073a !important;
+  color: #110000 !important;
+  box-shadow: 0 0 15px #ff073a, inset 0 0 15px rgba(255, 255, 255, 0.1) !important;
+}
+
+.badge-btn.btn-danger:hover {
+  background: linear-gradient(45deg, #ff073a, #aa0425) !important;
+  box-shadow: 0 0 30px #ff073a, 0 0 50px #ff073a, 0 4px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 @keyframes currentPlayerPulse {

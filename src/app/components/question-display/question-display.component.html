@@ -26,7 +26,7 @@
     </div>
 
     <div *ngIf="question.activePlayersArr.length > 0" class="players-section">
-      <h4>Active Players:</h4>
+      <h4>Players in Line:</h4>
       <div class="active-players">
         <div
           *ngFor="let playerId of getActivePlayerIds()"
@@ -46,7 +46,7 @@
     </div>
 
     <div *ngIf="question.activePlayer" class="active-player-section">
-      <h4>Current Player:</h4>
+      <h4>Answering Now:</h4>
       <div class="current-player-display">
         <div
           class="player-badge current-player-badge"

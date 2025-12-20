@@ -38,7 +38,7 @@
       </div>
       <div class="players-content">
         <div class="players-row">
-          <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="selectedQuestion?.activePlayer?.id === player.id" [highlighted]="player.highlighted" (scoreAdjust)="adjustScore($event)"></app-player-controls>
+          <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" [highlighted]="player.highlighted" (scoreAdjust)="adjustScore($event)"></app-player-controls>
         </div>
         <div class="player-count-controls">
           <button class="cyber-button count-btn" (click)="decreasePlayerCount()" [disabled]="playerCount <= 1" title="Remove Player">-</button>

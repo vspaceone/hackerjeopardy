@@ -32,25 +32,42 @@
           *ngFor="let playerId of getActivePlayerIds()"
           class="player-badge"
           [ngStyle]="{
-            'background-color': getPlayerById(playerId)?.bgcolor,
-            'color': getPlayerById(playerId)?.fgcolor
+            'border-color': getPlayerById(playerId)?.fgcolor,
+            'color': getPlayerById(playerId)?.fgcolor,
+            'box-shadow': '0 0 25px ' + getPlayerById(playerId)?.fgcolor + ', inset 0 0 25px rgba(255, 255, 255, 0.05)'
           }"
         >
-          {{ getPlayerById(playerId)?.name }}
-          <span *ngIf="getPlayerById(playerId)?.remainingtime !== null">
-            ({{ getPlayerById(playerId)?.remainingtime }}s)
-          </span>
+          <div class="player-name">{{ getPlayerById(playerId)?.name }}</div>
+          <div *ngIf="getPlayerById(playerId)?.remainingtime !== null" class="player-timer">
+            {{ getPlayerById(playerId)?.remainingtime }}s
+          </div>
         </div>
       </div>
     </div>
 
     <div *ngIf="question.activePlayer" class="active-player-section">
-      <h4>Current Player: {{ question.activePlayer.name }}</h4>
-      
-        <div class="action-buttons">
-          <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct">Correct</button>
-          <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect">Incorrect</button>
-       </div>
+      <h4>Current Player:</h4>
+      <div class="current-player-display">
+        <div
+          class="player-badge current-player-badge"
+          [ngStyle]="{
+            'border-color': question.activePlayer.fgcolor,
+            'color': question.activePlayer.fgcolor,
+            'box-shadow': '0 0 40px ' + question.activePlayer.fgcolor + ', 0 0 60px ' + question.activePlayer.fgcolor + ', inset 0 0 40px rgba(255, 255, 255, 0.1)',
+            'animation': 'currentPlayerPulse 1.5s ease-in-out infinite'
+          }"
+        >
+          <div class="player-name">{{ question.activePlayer.name }}</div>
+          <div *ngIf="question.activePlayer.remainingtime !== null" class="player-timer active-timer">
+            {{ question.activePlayer.remainingtime }}s
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct">✓ Correct</button>
+        <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect">✗ Incorrect</button>
+      </div>
     </div>
 
        <div class="modal-footer">

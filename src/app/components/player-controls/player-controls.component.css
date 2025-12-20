@@ -11,6 +11,7 @@
   border: 2px solid;
   box-shadow: 0 0 25px currentColor, inset 0 0 25px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .rename-input {
@@ -164,42 +165,33 @@
 
 .active-indicator {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 5px;
+  right: 5px;
   background: var(--neon-blue-light);
   color: var(--bg-primary);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 1.2em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.7em;
   font-weight: bold;
   font-family: 'Orbitron', monospace;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  animation: activePulse 0.8s ease-in-out infinite alternate;
-  box-shadow: 0 0 30px var(--neon-blue-light), 0 0 60px var(--neon-blue-light);
-  border: 2px solid var(--neon-blue-light);
-  z-index: 10;
-  backdrop-filter: blur(10px);
+  animation: cyberPulse 1s infinite;
+  box-shadow: var(--glow-blue-light);
 }
 
-@keyframes activePulse {
+@keyframes cyberPulse {
   0% {
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    box-shadow: var(--glow-blue-light);
+  }
+  50% {
+    opacity: 0.7;
     box-shadow: 0 0 30px var(--neon-blue-light), 0 0 60px var(--neon-blue-light);
   }
   100% {
-    transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 0 50px var(--neon-blue-light), 0 0 100px var(--neon-blue-light), 0 0 150px var(--neon-blue-light);
+    opacity: 1;
+    box-shadow: var(--glow-blue-light);
   }
-}
-
-.player-card.active {
-  box-shadow: 0 0 40px var(--neon-blue-light), 0 0 80px var(--neon-blue-light), inset 0 0 40px rgba(0, 123, 255, 0.2);
-  border-color: var(--neon-blue-light);
-  animation: activeCardPulse 1s ease-in-out infinite alternate;
-  background: rgba(0, 123, 255, 0.1);
-  transform: scale(1.05);
 }
 
 .player-card.highlighted {
@@ -217,19 +209,6 @@
 .player-card.highlighted .score-display {
   color: var(--neon-green);
   text-shadow: 0 0 20px var(--neon-green);
-}
-
-@keyframes activeCardPulse {
-  0% {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px var(--neon-blue-light), 0 0 80px var(--neon-blue-light), inset 0 0 40px rgba(0, 123, 255, 0.2);
-    background: rgba(0, 123, 255, 0.1);
-  }
-  100% {
-    transform: scale(1.08);
-    box-shadow: 0 0 60px var(--neon-blue-light), 0 0 120px var(--neon-blue-light), inset 0 0 60px rgba(0, 123, 255, 0.3);
-    background: rgba(0, 123, 255, 0.15);
-  }
 }
 
 @keyframes highlightPulse {

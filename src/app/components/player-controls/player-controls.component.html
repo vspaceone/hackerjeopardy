@@ -1,4 +1,4 @@
-<div [ngStyle]="getPlayerStyle()" class="player-card" [class.highlighted]="highlighted" [class.active]="isActive">
+<div [ngStyle]="getPlayerStyle()" class="player-card" [class.highlighted]="highlighted">
     <div class="player-info">
       <h3 *ngIf="!isRenaming && canRename" (click)="onRename()" class="clickable-name">{{ player.name }}</h3>
       <h3 *ngIf="!isRenaming && !canRename">{{ player.name }}</h3>

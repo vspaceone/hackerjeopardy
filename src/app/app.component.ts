@@ -191,34 +191,34 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	/**
 	 * Handle player activation (buzzing in)
 	 */
-  private handlePlayerActivation(playerId: number): void {
-    // Check if player exists
-    if (!this.players.find(p => p.id === playerId)) return;
+	private handlePlayerActivation(playerId: number): void {
+		// Check if player exists
+		if (!this.players.find(p => p.id === playerId)) return;
 
-    if (this.selectedQuestion && this.qanda) {
-      // Normal buzzing during question
-      const activated = this.gameService.activatePlayer(this.selectedQuestion, playerId, this.players);
-      if (activated) {
-        // Cast playerId to 1-8 range for buzzer sound
-        const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-        this.audioService.playBuzzer(buzzerPlayerId);
-        this.gameStateService.markQuestionAnswered();
-      }
-    } else if (this.qanda) {
-      // Highlight player for identification during question selection
-      const player = this.gameStateService.getPlayerById(playerId);
-      if (player) {
-        this.gameStateService.highlightPlayer(playerId, TIMING.PLAYER_HIGHLIGHT_DURATION);
-        const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-        this.audioService.playBuzzer(buzzerPlayerId);
+		if (this.selectedQuestion && this.qanda) {
+			// Normal buzzing during question
+			const activated = this.gameService.activatePlayer(this.selectedQuestion, playerId, this.players);
+			if (activated) {
+				// Cast playerId to 1-8 range for buzzer sound
+				const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+				this.audioService.playBuzzer(buzzerPlayerId);
+				this.gameStateService.markQuestionAnswered();
+			}
+		} else if (this.qanda) {
+			// Highlight player for identification during question selection
+			const player = this.gameStateService.getPlayerById(playerId);
+			if (player) {
+				this.gameStateService.highlightPlayer(playerId, TIMING.PLAYER_HIGHLIGHT_DURATION);
+				const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+				this.audioService.playBuzzer(buzzerPlayerId);
 
-        // Punish excessive buzzing
-        if ((player.selectionBuzzes || 0) > PLAYER_CONFIG.MAX_SELECTION_BUZZES) {
-          this.gameStateService.updatePlayerScore(playerId, -1);
-        }
-      }
-    }
-  }
+				// Punish excessive buzzing
+				if ((player.selectionBuzzes || 0) > PLAYER_CONFIG.MAX_SELECTION_BUZZES) {
+					this.gameStateService.updatePlayerScore(playerId, -1);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Initialize Matrix rain background effect
@@ -302,11 +302,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	/**
 	 * Select a question
 	 */
-  onSelect(question: Question): void {
-    this.gameStateService.selectQuestion(question);
-    this.audioService.playClick();
-    this.audioService.startThemeMusic();
-  }
+	onSelect(question: Question): void {
+		this.gameStateService.selectQuestion(question);
+		this.audioService.playClick();
+		this.audioService.startThemeMusic();
+	}
 
 	/**
 	 * Increase player count

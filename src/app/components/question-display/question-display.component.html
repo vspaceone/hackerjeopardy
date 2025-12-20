@@ -25,26 +25,6 @@
       </div>
     </div>
 
-    <div *ngIf="question.activePlayersArr.length > 0" class="players-section">
-      <h4>Players in Line:</h4>
-      <div class="active-players">
-        <div
-          *ngFor="let playerId of getActivePlayerIds()"
-          class="player-badge"
-          [ngStyle]="{
-            'border-color': getPlayerById(playerId)?.fgcolor,
-            'color': getPlayerById(playerId)?.fgcolor,
-            'box-shadow': '0 0 25px ' + getPlayerById(playerId)?.fgcolor + ', inset 0 0 25px rgba(255, 255, 255, 0.05)'
-          }"
-        >
-          <div class="player-name">{{ getPlayerById(playerId)?.name }}</div>
-          <div *ngIf="getPlayerById(playerId)?.remainingtime !== null" class="player-timer">
-            {{ getPlayerById(playerId)?.remainingtime }}s
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div *ngIf="question.activePlayer" class="active-player-section">
       <h4>Answering Now:</h4>
       <div class="current-player-display">
@@ -67,6 +47,26 @@
       <div class="action-buttons">
         <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct">✓ Correct</button>
         <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect">✗ Incorrect</button>
+      </div>
+    </div>
+
+    <div *ngIf="question.activePlayersArr.length > 0" class="players-section">
+      <h4>Players in Line:</h4>
+      <div class="active-players">
+        <div
+          *ngFor="let playerId of getActivePlayerIds()"
+          class="player-badge"
+          [ngStyle]="{
+            'border-color': getPlayerById(playerId)?.fgcolor,
+            'color': getPlayerById(playerId)?.fgcolor,
+            'box-shadow': '0 0 25px ' + getPlayerById(playerId)?.fgcolor + ', inset 0 0 25px rgba(255, 255, 255, 0.05)'
+          }"
+        >
+          <div class="player-name">{{ getPlayerById(playerId)?.name }}</div>
+          <div *ngIf="getPlayerById(playerId)?.remainingtime !== null" class="player-timer">
+            {{ getPlayerById(playerId)?.remainingtime }}s
+          </div>
+        </div>
       </div>
     </div>
 

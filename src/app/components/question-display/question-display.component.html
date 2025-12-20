@@ -76,11 +76,14 @@
           <div *ngIf="queuedPlayer.status === 'answering' && getPlayerById(queuedPlayer.playerId)?.remainingtime !== null" class="player-timer active-timer">
             {{ getPlayerById(queuedPlayer.playerId)?.remainingtime }}s
           </div>
-          <div *ngIf="queuedPlayer.status === 'completed'" class="completion-indicator">✓</div>
-          <div *ngIf="queuedPlayer.status === 'eliminated'" class="elimination-indicator">✗</div>
-       <div class="modal-footer">
-          <button *ngIf="question.available" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
-          <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
+           <div *ngIf="queuedPlayer.status === 'completed'" class="completion-indicator">✓</div>
+           <div *ngIf="queuedPlayer.status === 'eliminated'" class="elimination-indicator">✗</div>
+         </div>
        </div>
-  </div>
+     </div>
+
+     <div class="modal-footer">
+       <button *ngIf="question.available" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
+       <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
+     </div>
 </div>

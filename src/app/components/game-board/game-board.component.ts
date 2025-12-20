@@ -99,15 +99,6 @@ export class GameBoardComponent {
         handled = true;
         this.selectKeyboardQuestion();
         break;
-      default:
-        // Check for number keys (1-5 for question values)
-        const numKey = parseInt(event.key);
-        if (numKey >= 1 && numKey <= 5) {
-          handled = true;
-          this.keyboardSelectedQuestion = numKey - 1;
-          this.selectKeyboardQuestion();
-        }
-        break;
     }
 
     if (handled) {

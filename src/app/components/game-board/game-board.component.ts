@@ -113,9 +113,10 @@ export class GameBoardComponent {
     const maxCategory = this.categories.length - 1;
     const maxQuestion = 4; // 5 questions per category (0-4)
 
-    let newCategory = Math.max(0, Math.min(maxCategory,
+    const newCategory = Math.max(0, Math.min(maxCategory,
       this.keyboardSelectedCategory + deltaCategory));
-    let newQuestion = Math.max(0, Math.min(maxQuestion,
+
+    const newQuestion = Math.max(0, Math.min(maxQuestion,
       this.keyboardSelectedQuestion + deltaQuestion));
 
     // Find the next available question in the target direction
@@ -126,7 +127,12 @@ export class GameBoardComponent {
     }
   }
 
-  private findNextAvailableQuestion(startCategory: number, startQuestion: number, deltaCategory: number, deltaQuestion: number): {categoryIndex: number, questionIndex: number} | null {
+  private findNextAvailableQuestion(
+    startCategory: number,
+    startQuestion: number,
+    deltaCategory: number,
+    deltaQuestion: number
+  ): {categoryIndex: number, questionIndex: number} | null {
     let currentCategory = startCategory;
     let currentQuestion = startQuestion;
     const maxCategory = this.categories.length - 1;
@@ -136,7 +142,8 @@ export class GameBoardComponent {
     for (let attempts = 0; attempts < 20; attempts++) {
       // Check if current position has an available question
       const category = this.categories[currentCategory];
-      if (category && category.questions[currentQuestion] && category.questions[currentQuestion].available) {
+      if (category && category.questions[currentQuestion] &&
+          category.questions[currentQuestion].available) {
         return { categoryIndex: currentCategory, questionIndex: currentQuestion };
       }
 

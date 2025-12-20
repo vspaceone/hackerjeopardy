@@ -19,6 +19,7 @@ export class PlayerControlsComponent implements AfterViewInit {
 
   @Output() rename = new EventEmitter<Player>();
   @Output() scoreAdjust = new EventEmitter<{ player: Player; amount: number }>();
+  @Output() renamingStateChange = new EventEmitter<boolean>();
 
   isRenaming = false;
   newName = '';
@@ -33,6 +34,7 @@ export class PlayerControlsComponent implements AfterViewInit {
   startRename(): void {
     this.isRenaming = true;
     this.newName = this.player.name;
+    this.renamingStateChange.emit(true);
     // Focus the input after the view updates
     setTimeout(() => {
       if (this.nameInput) {
@@ -48,13 +50,15 @@ export class PlayerControlsComponent implements AfterViewInit {
 
   saveRename(): void {
     if (this.newName.trim()) {
-      this.player.name = this.newName.trim();
+      this.player.name = this.player.name;
     }
     this.isRenaming = false;
+    this.renamingStateChange.emit(false);
   }
 
   cancelRename(): void {
     this.isRenaming = false;
+    this.renamingStateChange.emit(false);
   }
 
   onPlus(): void {

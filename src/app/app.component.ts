@@ -51,6 +51,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   private longPressAction = '';
   private destroy$ = new Subject<void>();
 
+  // Reveal trigger for keyboard shortcut
+  revealTrigger = false;
+  // Force reveal answer when all players answer incorrectly
+  forceRevealAnswer = false;
+  // Track if any player is currently being renamed
+  isAnyPlayerRenaming = false;
+
 	constructor(
 		private gameDataService: GameDataService,
 		private gameService: GameService,
@@ -150,12 +157,29 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	/**
-	 * Handle keyboard input for player buzzing
+	 * Handle keyboard input for player buzzing and host controls
 	 */
-	@HostListener('document:keydown', ['$event'])
-	onKeyDown(event: KeyboardEvent): void {
-		if (!this.selectedQuestion || !this.qanda) return;
+  onPlayerRenamingStateChange(isRenaming: boolean): void {
+    this.isAnyPlayerRenaming = isRenaming;
+  }
 
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    // Disable keyboard shortcuts when any player is being renamed
+    if (this.isAnyPlayerRenaming) return;
+
+    // Allow input when round is loaded (for player buzzing) or question is selected (for host controls)
+    if (!this.qanda) return;
+
+		// Handle host controls (available anytime during a round)
+		const hostAction = this.getHostActionFromKey(event.key, event.altKey, event.shiftKey);
+		if (hostAction) {
+			event.preventDefault();
+			this.handleHostAction(hostAction);
+			return;
+		}
+
+		// Handle player activation (during question selection or answering)
 		const playerId = this.getPlayerIdFromKey(event.key);
 		if (playerId) {
 			event.preventDefault();
@@ -189,34 +213,115 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	/**
+	 * Map keyboard key to host action
+	 */
+	private getHostActionFromKey(key: string, altKey: boolean, shiftKey?: boolean): string | null {
+		const { HOST_KEYS } = KEYBOARD;
+
+		// Host actions that don't require modifiers
+		const standardActions: Record<string, string> = {
+			[HOST_KEYS.CORRECT]: 'correct',
+			[HOST_KEYS.INCORRECT]: 'incorrect',
+			[HOST_KEYS.REVEAL]: 'reveal',
+			[HOST_KEYS.CLOSE]: 'close',
+			[HOST_KEYS.NO_ONE_KNOWS]: 'noOneKnows'
+		};
+
+		if (standardActions[key]) {
+			return standardActions[key];
+		}
+
+		// Host actions that require Shift (detected by uppercase key)
+		const shiftActions: Record<string, string> = {
+			[HOST_KEYS.RESET_SCORES]: 'resetScores', // 'S'
+			[HOST_KEYS.RESET_ROUND]: 'resetRound'     // 'Q'
+		};
+
+		if (shiftActions[key]) {
+			return shiftActions[key];
+		}
+
+		return null;
+	}
+
+	/**
+	 * Handle host control actions
+	 */
+	private handleHostAction(action: string): void {
+		switch (action) {
+			case 'correct':
+				// Only allow when there's an active player answering
+				if (this.selectedQuestion?.activePlayer) {
+					this.correct();
+				}
+				break;
+			case 'incorrect':
+				// Only allow when there's an active player answering
+				if (this.selectedQuestion?.activePlayer) {
+					this.incorrect();
+				}
+				break;
+			case 'reveal':
+				this.revealTrigger = !this.revealTrigger; // Toggle to trigger the input
+				break;
+			case 'close':
+				this.close();
+				break;
+			case 'noOneKnows':
+				this.noOneKnows();
+				break;
+			case 'resetScores':
+				this.resetAllScoresKeyboard();
+				break;
+			case 'resetRound':
+				this.backToRoundSelection();
+				break;
+		}
+	}
+
+	/**
 	 * Handle player activation (buzzing in)
 	 */
 	private handlePlayerActivation(playerId: number): void {
 		// Check if player exists
-		if (!this.players.find(p => p.id === playerId)) return;
+		const player = this.players.find(p => p.id === playerId);
+		if (!player) return;
 
-		if (this.selectedQuestion && this.qanda) {
-			// Normal buzzing during question
-			const activated = this.gameService.activatePlayer(this.selectedQuestion, playerId, this.players);
-			if (activated) {
-				// Cast playerId to 1-8 range for buzzer sound
-				const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-				this.audioService.playBuzzer(buzzerPlayerId);
-				this.gameStateService.markQuestionAnswered();
-			}
-		} else if (this.qanda) {
-			// Highlight player for identification during question selection
-			const player = this.gameStateService.getPlayerById(playerId);
-			if (player) {
-				this.gameStateService.highlightPlayer(playerId, TIMING.PLAYER_HIGHLIGHT_DURATION);
-				const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-				this.audioService.playBuzzer(buzzerPlayerId);
+		const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
-				// Punish excessive buzzing
-				if ((player.selectionBuzzes || 0) > PLAYER_CONFIG.MAX_SELECTION_BUZZES) {
-					this.gameStateService.updatePlayerScore(playerId, -1);
-				}
-			}
+		if (this.selectedQuestion) {
+			// Question is open - attempt to buzz in for answering
+			this.handleBuzzDuringQuestion(playerId, buzzerPlayerId);
+		} else {
+			// Question selection mode - highlight player for identification
+			this.handleBuzzDuringSelection(playerId, buzzerPlayerId);
+		}
+	}
+
+	/**
+	 * Handle buzzing during an open question
+	 */
+	private handleBuzzDuringQuestion(playerId: number, buzzerPlayerId: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void {
+		if (!this.selectedQuestion) return;
+
+		const activated = this.gameService.activatePlayer(this.selectedQuestion, playerId, this.players);
+		if (activated) {
+			this.audioService.playBuzzer(buzzerPlayerId);
+			this.gameStateService.markQuestionAnswered();
+		}
+	}
+
+	/**
+	 * Handle buzzing during question selection (for player identification)
+	 */
+	private handleBuzzDuringSelection(playerId: number, buzzerPlayerId: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void {
+		this.gameStateService.highlightPlayer(playerId, TIMING.PLAYER_HIGHLIGHT_DURATION);
+		this.audioService.playBuzzer(buzzerPlayerId);
+
+		// Punish excessive buzzing during selection
+		const player = this.gameStateService.getPlayerById(playerId);
+		if (player && (player.selectionBuzzes || 0) > PLAYER_CONFIG.MAX_SELECTION_BUZZES) {
+			this.gameStateService.updatePlayerScore(playerId, -1);
 		}
 	}
 
@@ -375,6 +480,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * Reset all player scores (keyboard shortcut version - no confirmation)
+   */
+  resetAllScoresKeyboard(): void {
+    this.gameStateService.resetAllScores();
+  }
+
+  /**
    * Start long press for special actions
    */
   startLongPress(action: string): void {
@@ -410,12 +522,20 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.longPressAction = '';
   }
 
-	/**
-	 * Close question display
-	 */
-	close(): void {
-		this.audioService.stopThemeMusic();
-		this.gameStateService.closeQuestion();
-	}
+ 	/**
+ 	 * Close question display
+ 	 */
+ 	close(): void {
+ 		this.audioService.stopThemeMusic();
+ 		this.gameStateService.closeQuestion();
+ 	}
+
+ 	/**
+ 	 * Reveal question (handled by QuestionDisplayComponent)
+ 	 */
+ 	reveal(): void {
+ 		// Reveal functionality is handled internally by QuestionDisplayComponent
+ 		// This method exists for keyboard shortcut consistency
+ 	}
 
 }

@@ -27,6 +27,12 @@ export class SetSelectionComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
+    // Don't handle keyboard navigation when input elements are focused
+    const activeElement = document.activeElement;
+    if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+
     if (this.availableRounds.length === 0) return;
 
     switch (event.key) {

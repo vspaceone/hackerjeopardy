@@ -2,7 +2,7 @@
     <div class="player-info">
       <h3 *ngIf="!isRenaming && canRename" (click)="onRename()" class="clickable-name">{{ player.name }}</h3>
       <h3 *ngIf="!isRenaming && !canRename">{{ player.name }}</h3>
-      <input *ngIf="isRenaming" type="text" [(ngModel)]="newName" (keyup.enter)="saveRename()" (keyup.escape)="cancelRename()" (blur)="saveRename()" class="rename-input" #nameInput />
+      <input *ngIf="isRenaming" type="text" [(ngModel)]="newName" (keydown.enter)="$event.stopPropagation(); saveRename()" (keyup.enter)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation(); cancelRename()" (keyup.escape)="$event.stopPropagation()" (blur)="saveRename()" class="rename-input" #nameInput />
        <p>Score: <span class="score-display" [class.updated]="scoreUpdated">{{ player.score }}</span></p>
     </div>
 

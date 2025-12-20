@@ -65,6 +65,12 @@ export class GameBoardComponent {
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
+    // Don't handle keyboard navigation when input elements are focused
+    const activeElement = document.activeElement;
+    if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+
     if (!this.categories || this.categories.length === 0) return;
 
     // Don't handle keyboard navigation if a question is already selected

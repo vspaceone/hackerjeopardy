@@ -165,6 +165,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
+    // Disable keyboard shortcuts when any input element is focused (for player renaming, etc.)
+    const activeElement = document.activeElement;
+    if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+
     // Disable keyboard shortcuts when any player is being renamed
     if (this.isAnyPlayerRenaming) return;
 

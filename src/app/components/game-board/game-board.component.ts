@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Category, Question } from '../../models/game.models';
+import { Category, Question, Player } from '../../models/game.models';
 import { TIMING, BUTTON_VALUES } from '../../constants/game.constants';
 
 @Component({
@@ -12,6 +12,7 @@ import { TIMING, BUTTON_VALUES } from '../../constants/game.constants';
 })
 export class GameBoardComponent {
   @Input() categories!: Category[];
+  @Input() players!: Player[];
   @Input() selectedQuestion?: Question;
   @Output() questionSelected = new EventEmitter<Question>();
   @Output() questionReset = new EventEmitter<Question>();
@@ -69,18 +70,19 @@ export class GameBoardComponent {
       return 'btn-danger reset';
     }
 
-    // Existing logic
-    if (!question.available && question.player &&
-        question.player.btn === BUTTON_VALUES.INCORRECT) {
-      return 'btn-warning answered-incorrectly';
-    }
-    if (!question.available && question.player &&
-        question.player.btn !== BUTTON_VALUES.NONE) {
-      return 'btn-success answered-correctly';
-    }
+    // Check for completed questions
     if (!question.available) {
-      return 'btn-danger unanswered';
+      if (question.player && question.player.btn !== BUTTON_VALUES.NONE &&
+          question.player.btn !== BUTTON_VALUES.INCORRECT) {
+        // Correctly answered - use player color
+        return `answered-correctly player-${question.player.id}`;
+      } else {
+        // Incorrectly answered or unanswered - use muted disabled look
+        return 'muted-disabled';
+      }
     }
+
+    // Existing logic for active/selected states
     if (question.activePlayers && question.activePlayers.size > 0) {
       return 'btn-info active-question';
     }

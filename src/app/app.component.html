@@ -28,9 +28,9 @@
 
     <app-set-selection *ngIf="!qanda && !showContentManager" [availableRounds]="availableRounds" (setSelected)="selectSet($event)" (openContentManager)="showContentManager = true"></app-set-selection>
 
-  <app-game-board *ngIf="qanda && !showContentManager" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
+  <app-game-board *ngIf="qanda && !showContentManager" [categories]="qanda" [players]="players" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
 
-  <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
+   <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [players]="players" [triggerReveal]="revealTrigger" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()" (reveal)="reveal()"></app-question-display>
 
     <div class="players-container" *ngIf="qanda && !showContentManager">
       <div class="players-header">
@@ -69,7 +69,25 @@
         Reset Round
       </button>
     </div>
-    <p *ngIf="currentRoundName && !showContentManager" class="center-text">Current Round: {{ currentRoundName }}</p>
+    <div class="center-text">
+      <p *ngIf="currentRoundName && !showContentManager && !selectedQuestion">Current Round: {{ currentRoundName }}</p>
+      <div *ngIf="qanda && !showContentManager" class="keyboard-controls">
+        <div *ngIf="!selectedQuestion" class="control-group">
+          <kbd>1</kbd>-<kbd>8</kbd> Player Buzz • <kbd>C</kbd> Correct • <kbd>I</kbd> Incorrect • <kbd>R</kbd> Reveal • <kbd>Esc</kbd> Close • <kbd>N</kbd> No One Knows
+        </div>
+        <span *ngIf="!selectedQuestion" class="control-group-alt">
+          <kbd>Shift</kbd>+<kbd>S</kbd> Reset Scores • <kbd>Shift</kbd>+<kbd>Q</kbd> Reset Round
+        </span>
+        <div *ngIf="selectedQuestion">
+          <span class="control-group">
+            <kbd>C</kbd> Correct • <kbd>I</kbd> Incorrect • <kbd>R</kbd> Reveal • <kbd>Esc</kbd> Close • <kbd>N</kbd> No One Knows
+          </span>
+        <span class="control-group-alt">
+          <kbd>Shift</kbd>+<kbd>S</kbd> Reset Scores • <kbd>Shift</kbd>+<kbd>Q</kbd> Reset Round
+        </span>
+        </div>
+      </div>
+    </div>
     <div class="footer-controls">
       <span *ngIf="hasControllers" class="controller-indicator" title="Buzz controllers detected">🔴</span>
       <button

@@ -113,11 +113,49 @@ export class GameBoardComponent {
     const maxCategory = this.categories.length - 1;
     const maxQuestion = 4; // 5 questions per category (0-4)
 
-    this.keyboardSelectedCategory = Math.max(0, Math.min(maxCategory,
+    let newCategory = Math.max(0, Math.min(maxCategory,
       this.keyboardSelectedCategory + deltaCategory));
-
-    this.keyboardSelectedQuestion = Math.max(0, Math.min(maxQuestion,
+    let newQuestion = Math.max(0, Math.min(maxQuestion,
       this.keyboardSelectedQuestion + deltaQuestion));
+
+    // Find the next available question in the target direction
+    const targetQuestion = this.findNextAvailableQuestion(newCategory, newQuestion, deltaCategory, deltaQuestion);
+    if (targetQuestion) {
+      this.keyboardSelectedCategory = targetQuestion.categoryIndex;
+      this.keyboardSelectedQuestion = targetQuestion.questionIndex;
+    }
+  }
+
+  private findNextAvailableQuestion(startCategory: number, startQuestion: number, deltaCategory: number, deltaQuestion: number): {categoryIndex: number, questionIndex: number} | null {
+    let currentCategory = startCategory;
+    let currentQuestion = startQuestion;
+    const maxCategory = this.categories.length - 1;
+    const maxQuestion = 4;
+
+    // Check up to 20 positions to avoid infinite loops
+    for (let attempts = 0; attempts < 20; attempts++) {
+      // Check if current position has an available question
+      const category = this.categories[currentCategory];
+      if (category && category.questions[currentQuestion] && category.questions[currentQuestion].available) {
+        return { categoryIndex: currentCategory, questionIndex: currentQuestion };
+      }
+
+      // Move in the requested direction
+      currentCategory += deltaCategory;
+      currentQuestion += deltaQuestion;
+
+      // Wrap around if needed
+      if (currentCategory < 0) currentCategory = maxCategory;
+      if (currentCategory > maxCategory) currentCategory = 0;
+      if (currentQuestion < 0) currentQuestion = maxQuestion;
+      if (currentQuestion > maxQuestion) currentQuestion = 0;
+
+      // If we've looped back to start, stop
+      if (currentCategory === startCategory && currentQuestion === startQuestion) break;
+    }
+
+    // If no available question found, return the original position
+    return { categoryIndex: startCategory, questionIndex: startQuestion };
   }
 
   private selectKeyboardQuestion(): void {

@@ -1,0 +1,40 @@
+{
+  "name": "Places",
+  "questions": [
+    {
+      "question": "What is the capital of Germany?",
+      "answer": "Berlin",
+      "value": 100,
+      "available": true,
+      "cat": "places"
+    },
+    {
+      "question": "What is the largest city in the world by population?",
+      "answer": "Tokyo",
+      "value": 200,
+      "available": true,
+      "cat": "places"
+    },
+    {
+      "question": "What European city is known as the 'City of Light'?",
+      "answer": "Paris",
+      "value": 300,
+      "available": true,
+      "cat": "places"
+    },
+    {
+      "question": "What is the smallest country in the world?",
+      "answer": "Vatican City",
+      "value": 400,
+      "available": true,
+      "cat": "places"
+    },
+    {
+      "question": "What mountain range contains Mount Everest?",
+      "answer": "Himalayas",
+      "value": 500,
+      "available": true,
+      "cat": "places"
+    }
+  ]
+}

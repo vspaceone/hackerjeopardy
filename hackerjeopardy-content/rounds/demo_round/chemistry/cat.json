@@ -1,0 +1,40 @@
+{
+  "name": "Chemistry",
+  "questions": [
+    {
+      "question": "What is the chemical symbol for gold?",
+      "answer": "Au",
+      "value": 100,
+      "available": true,
+      "cat": "chemistry"
+    },
+    {
+      "question": "What element has the atomic number 1?",
+      "answer": "Hydrogen",
+      "value": 200,
+      "available": true,
+      "cat": "chemistry"
+    },
+    {
+      "question": "What is the most common isotope of uranium?",
+      "answer": "U-238",
+      "value": 300,
+      "available": true,
+      "cat": "chemistry"
+    },
+    {
+      "question": "What gas makes up about 78% of Earth's atmosphere?",
+      "answer": "Nitrogen",
+      "value": 400,
+      "available": true,
+      "cat": "chemistry"
+    },
+    {
+      "question": "What is the pH of pure water?",
+      "answer": "7",
+      "value": 500,
+      "available": true,
+      "cat": "chemistry"
+    }
+  ]
+}

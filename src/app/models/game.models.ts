@@ -8,6 +8,15 @@ export interface Player {
   key: string;
   remainingtime: number | null;
   activationtime?: number;
+  highlighted?: boolean;
+  selectionBuzzes?: number;
+}
+
+export interface QueuedPlayer {
+  playerId: number;
+  buzzTimestamp: number;
+  position: number;
+  status: 'waiting' | 'answering' | 'completed' | 'eliminated';
 }
 
 export interface Question {
@@ -17,6 +26,8 @@ export interface Question {
   available: boolean;
   value: number;
   cat: string;
+  folder?: string; // Folder name for image URLs (may differ from display name)
+  roundId?: string; // Add round ID for image URL construction
   player?: Player;
   activePlayers: Set<number>;
   activePlayersArr: number[];
@@ -29,6 +40,10 @@ export interface Question {
   hadIncorrectAnswers?: boolean;
   scoreChanges?: Array<{playerId: number, change: number, timestamp: number}>;
   resetTimestamp?: number;
+  // New queuing system
+  buzzQueue: QueuedPlayer[];
+  currentQueueIndex: number;
+  queueResolved: boolean;
 }
 
 export interface Category {
@@ -44,6 +59,7 @@ export interface Category {
 }
 
 export interface GameRound {
+  id?: string; // Added for multi-repository support
   name: string;
   categories: string[];
   comment?: string;

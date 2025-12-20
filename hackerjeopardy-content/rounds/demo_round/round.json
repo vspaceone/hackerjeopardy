@@ -1,0 +1,10 @@
+{
+  "name": "Demo Round - Hacker Jeopardy",
+  "categories": ["chemistry", "persons", "places"],
+  "difficulty": "easy",
+  "author": "Hacker Jeopardy Team",
+  "licence": "MIT",
+  "date": "2025-12-18",
+  "email": "team@hackerjeopardy.org",
+  "comment": "Demo round for testing multi-repository content system"
+}

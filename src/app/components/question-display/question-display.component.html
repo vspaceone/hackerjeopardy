@@ -1,9 +1,8 @@
 <div *ngIf="question" class="question-overlay">
   <div class="question-modal" role="dialog" aria-labelledby="question-header">
-     <div class="question-header" id="question-header">
-       <h3>{{ question.cat }} - {{ question.value }} points</h3>
-      <button *ngIf="canCancel" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-    </div>
+      <div class="question-header" id="question-header">
+        <h3>{{ question.cat }} - {{ question.value }} points</h3>
+     </div>
     
     <div class="question-content">
       <h3>Answer:</h3>
@@ -11,51 +10,71 @@
         {{ question.answer }}
       </div>
 
-      <div *ngIf="question.image" class="answer-image">
-        <img [src]="question.image" alt="Answer image" />
-      </div>
-
-      <div *ngIf="!question.available && question.question && !showAnswer && !isCorrectlyAnswered" class="question-controls">
-        <button class="btn btn-reveal" (click)="toggleAnswer()" aria-label="Reveal the correct question">Reveal Question</button>
-      </div>
-
-      <div *ngIf="(!question.available && question.question && showAnswer) || isCorrectlyAnswered" class="question-reveal">
-        <h4>Correct Question:</h4>
-        <div class="question-text">{{ question.question }}</div>
-      </div>
-    </div>
-
-    <div *ngIf="question.activePlayersArr.length > 0" class="players-section">
-      <h4>Active Players:</h4>
-      <div class="active-players">
-        <div
-          *ngFor="let playerId of getActivePlayerIds()"
-          class="player-badge"
-          [ngStyle]="{
-            'background-color': getPlayerById(playerId)?.bgcolor,
-            'color': getPlayerById(playerId)?.fgcolor
-          }"
-        >
-          {{ getPlayerById(playerId)?.name }}
-          <span *ngIf="getPlayerById(playerId)?.remainingtime !== null">
-            ({{ getPlayerById(playerId)?.remainingtime }}s)
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="question.activePlayer" class="active-player-section">
-      <h4>Current Player: {{ question.activePlayer.name }}</h4>
-      
-        <div class="action-buttons">
-          <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct">Correct</button>
-          <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect">Incorrect</button>
+       <div *ngIf="getImageUrl()" class="answer-image">
+         <img [src]="getImageUrl()" alt="Answer image" />
        </div>
-    </div>
 
-       <div class="modal-footer">
+        <div class="question-actions">
+          <button *ngIf="(question.activePlayer || !question.available) && question.question && !isCorrectlyAnswered" class="btn btn-reveal" (click)="toggleAnswer()" aria-label="Reveal the correct question">Reveal Question</button>
           <button *ngIf="question.available" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
           <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
+        </div>
+
+         <div *ngIf="(showAnswer && question.question) || isCorrectlyAnswered" class="question-reveal">
+          <h4>Correct Question:</h4>
+          <div class="question-text">{{ question.question }}</div>
+        </div>
+     </div>
+
+      <div *ngIf="question.activePlayer" class="active-player-section">
+       <h4>Answering Now:</h4>
+       <div class="current-player-display">
+         <div
+           class="player-badge current-player-badge"
+           [ngStyle]="{
+             'border-color': question.activePlayer.fgcolor,
+             'color': question.activePlayer.fgcolor,
+             'box-shadow': '0 0 40px ' + question.activePlayer.fgcolor + ', 0 0 60px ' + question.activePlayer.fgcolor + ', inset 0 0 40px rgba(255, 255, 255, 0.1)',
+             'animation': 'currentPlayerPulse 1.5s ease-in-out infinite'
+           }"
+         >
+           <div class="player-name">{{ question.activePlayer.name }}</div>
+           <div *ngIf="question.activePlayer.remainingtime !== null" class="player-timer active-timer">
+             {{ question.activePlayer.remainingtime }}s
+           </div>
+           <div class="badge-action-buttons">
+             <button class="btn btn-success badge-btn" (click)="onCorrect()" aria-label="Mark answer as correct">✓ Correct</button>
+             <button class="btn btn-danger badge-btn" (click)="onIncorrect()" aria-label="Mark answer as incorrect">✗ Incorrect</button>
+           </div>
+          </div>
+        </div>
+      </div>
+
+    <div *ngIf="question.buzzQueue.length > 0" class="players-section">
+      <h4>Player Queue:</h4>
+      <div class="active-players">
+        <div
+          *ngFor="let queuedPlayer of question.buzzQueue"
+          class="player-badge"
+          [class.current-player-badge]="queuedPlayer.status === 'answering'"
+          [class.eliminated-badge]="queuedPlayer.status === 'eliminated'"
+          [class.completed-badge]="queuedPlayer.status === 'completed'"
+          [ngStyle]="{
+            'border-color': getPlayerById(queuedPlayer.playerId)?.fgcolor,
+            'color': getPlayerById(queuedPlayer.playerId)?.fgcolor,
+            'box-shadow': queuedPlayer.status === 'answering'
+              ? '0 0 40px ' + getPlayerById(queuedPlayer.playerId)?.fgcolor + ', 0 0 60px ' + getPlayerById(queuedPlayer.playerId)?.fgcolor + ', inset 0 0 40px rgba(255, 255, 255, 0.1)'
+              : '0 0 20px ' + getPlayerById(queuedPlayer.playerId)?.fgcolor + ', inset 0 0 20px rgba(255, 255, 255, 0.05)'
+          }"
+        >
+          <div class="player-name">{{ getPlayerById(queuedPlayer.playerId)?.name }}</div>
+          <div class="queue-position">{{ queuedPlayer.position }}{{ getOrdinalSuffix(queuedPlayer.position) }}</div>
+          <div *ngIf="queuedPlayer.status === 'answering' && getPlayerById(queuedPlayer.playerId)?.remainingtime !== null" class="player-timer active-timer">
+            {{ getPlayerById(queuedPlayer.playerId)?.remainingtime }}s
+          </div>
+           <div *ngIf="queuedPlayer.status === 'completed'" class="completion-indicator">✓</div>
+           <div *ngIf="queuedPlayer.status === 'eliminated'" class="elimination-indicator">✗</div>
+         </div>
        </div>
-  </div>
-</div>
+     </div>
+   </div>

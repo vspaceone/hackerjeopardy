@@ -1,0 +1,105 @@
+{
+  "name": "Hacker Jeopardy Content Repository",
+  "description": "Community-contributed question sets for Hacker Jeopardy",
+  "version": "1.0.0",
+  "lastUpdated": "2025-12-19T16:31:01.394Z",
+  "totalRounds": 5,
+  "totalSize": 507647,
+  "rounds": [
+    {
+      "id": "cybersecurity_basics",
+      "name": "Cybersecurity Basics",
+      "language": "en",
+      "difficulty": "mixed",
+      "categories": [
+        "Firewall Follies",
+        "Password Party",
+        "Phishing Fiasco",
+        "Encryption Extravaganza",
+        "Web Weirdness",
+        "Hackers Hall of Fame"
+      ],
+      "author": "Nils",
+      "lastModified": "2025-12-19",
+      "size": 19452,
+      "description": "Introduction to fundamental cybersecurity concepts",
+      "tags": []
+    },
+    {
+      "id": "cybersecurity_shenanigans",
+      "name": "Cybersecurity Shenanigans",
+      "language": "en",
+      "difficulty": "mixed",
+      "categories": [
+        "Firewall Follies",
+        "Password Party",
+        "Phishing Fiasco",
+        "Encryption Extravaganza",
+        "Web Weirdness",
+        "Hackers Hall of Fame"
+      ],
+      "author": "Hacker Jeopardy Community",
+      "lastModified": "2025-12-19",
+      "size": 19631,
+      "description": "A hilarious journey through cybersecurity basics with puns and practical tips",
+      "tags": []
+    },
+    {
+      "id": "demo_round",
+      "name": "Demo Round",
+      "language": "en",
+      "difficulty": "mixed",
+      "categories": ["Programming", "Security", "Fun"],
+      "author": "Hacker Jeopardy Team",
+      "lastModified": "2025-12-19",
+      "size": 7908,
+      "description": "A demonstration round showing the content structure",
+      "tags": []
+    },
+    {
+      "id": "pokemon_stars",
+      "name": "Pokemon Stars",
+      "language": "en",
+      "difficulty": "mixed",
+      "categories": [
+        "Berühmte Pokemon",
+        "Familien Bäume",
+        "Super Kräfte",
+        "Film Stars",
+        "Kult Figuren",
+        "Weltrekorde"
+      ],
+      "author": "Hacker Jeopardy Community",
+      "lastModified": "2025-12-19",
+      "size": 47896,
+      "description": "Berühmte Pokemon als Popkultur-Ikonen und ihre kulturelle Bedeutung",
+      "tags": []
+    },
+    {
+      "id": "what_if_scenarios",
+      "name": "What If? Tech Scenarios",
+      "language": "en",
+      "difficulty": "mixed",
+      "categories": [
+        "Digital Doomsdays",
+        "Alternate Algorithms",
+        "Security Nightmares",
+        "Tech Time Warps",
+        "Code Cataclysms",
+        "Network Nightmares"
+      ],
+      "author": "Hacker Jeopardy Community",
+      "lastModified": "2025-12-19",
+      "size": 20518,
+      "description": "Exploring hypothetical technology scenarios and alternate digital realities",
+      "tags": []
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Hacker Jeopardy Community",
+      "github": "https://github.com/yourusername"
+    }
+  ],
+  "license": "MIT"
+}

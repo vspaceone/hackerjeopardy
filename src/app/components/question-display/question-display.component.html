@@ -30,33 +30,29 @@
        </div>
      </div>
 
-     <div *ngIf="question.activePlayer" class="active-player-section">
-      <h4>Answering Now:</h4>
-      <div class="current-player-display">
-        <div
-          class="player-badge current-player-badge"
-          [ngStyle]="{
-            'border-color': question.activePlayer.fgcolor,
-            'color': question.activePlayer.fgcolor,
-            'box-shadow': '0 0 40px ' + question.activePlayer.fgcolor + ', 0 0 60px ' + question.activePlayer.fgcolor + ', inset 0 0 40px rgba(255, 255, 255, 0.1)',
-            'animation': 'currentPlayerPulse 1.5s ease-in-out infinite'
-          }"
-        >
-          <div class="player-name">{{ question.activePlayer.name }}</div>
-          <div *ngIf="question.activePlayer.remainingtime !== null" class="player-timer active-timer">
-            {{ question.activePlayer.remainingtime }}s
+      <div *ngIf="question.activePlayer" class="active-player-section">
+       <h4>Answering Now:</h4>
+       <div class="current-player-display">
+         <div
+           class="player-badge current-player-badge"
+           [ngStyle]="{
+             'border-color': question.activePlayer.fgcolor,
+             'color': question.activePlayer.fgcolor,
+             'box-shadow': '0 0 40px ' + question.activePlayer.fgcolor + ', 0 0 60px ' + question.activePlayer.fgcolor + ', inset 0 0 40px rgba(255, 255, 255, 0.1)',
+             'animation': 'currentPlayerPulse 1.5s ease-in-out infinite'
+           }"
+         >
+           <div class="player-name">{{ question.activePlayer.name }}</div>
+           <div *ngIf="question.activePlayer.remainingtime !== null" class="player-timer active-timer">
+             {{ question.activePlayer.remainingtime }}s
+           </div>
+           <div class="badge-action-buttons">
+             <button class="btn btn-success badge-btn" (click)="onCorrect()" aria-label="Mark answer as correct">✓ Correct</button>
+             <button class="btn btn-danger badge-btn" (click)="onIncorrect()" aria-label="Mark answer as incorrect">✗ Incorrect</button>
+           </div>
+          </div>
         </div>
       </div>
-    </div>
-
-   </div>
- </div>
-
-      <div class="action-buttons">
-        <button class="btn btn-success" (click)="onCorrect()" aria-label="Mark answer as correct">✓ Correct</button>
-        <button class="btn btn-danger" (click)="onIncorrect()" aria-label="Mark answer as incorrect">✗ Incorrect</button>
-      </div>
-    </div>
 
     <div *ngIf="question.buzzQueue.length > 0" class="players-section">
       <h4>Player Queue:</h4>

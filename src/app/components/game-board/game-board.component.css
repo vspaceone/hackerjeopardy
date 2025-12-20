@@ -234,6 +234,8 @@
   border-color: var(--neon-green);
   box-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
   animation: keyboardFocus 1.5s ease-in-out infinite;
+  /* Smooth fade transition */
+  transition: box-shadow 1s ease-out, border-color 1s ease-out;
 }
 
 .question-button.keyboard-selected::after {
@@ -245,6 +247,8 @@
   bottom: -3px;
   border: 2px solid var(--neon-green);
   border-radius: 10px;
+  /* Fade the border too */
+  transition: border-color 1s ease-out;
   animation: keyboardBorder 1.5s ease-in-out infinite;
   pointer-events: none;
 }

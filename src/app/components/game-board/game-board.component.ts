@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category, Question, Player } from '../../models/game.models';
 import { TIMING, BUTTON_VALUES } from '../../constants/game.constants';
@@ -10,7 +10,7 @@ import { TIMING, BUTTON_VALUES } from '../../constants/game.constants';
   standalone: true,
   imports: [CommonModule]
 })
-export class GameBoardComponent {
+export class GameBoardComponent implements OnDestroy {
   @Input() categories!: Category[];
   @Input() players!: Player[];
   @Input() selectedQuestion?: Question;
@@ -20,6 +20,12 @@ export class GameBoardComponent {
   // Keyboard navigation state
   keyboardSelectedCategory: number = 0;
   keyboardSelectedQuestion: number = 0;
+
+  // Inactivity management for keyboard selection
+  private lastKeyActivity: number = 0;
+  private selectionTimeoutId?: any;
+  private readonly INACTIVITY_TIMEOUT = 5000; // 5 seconds
+  private readonly FADE_DURATION = 1000; // 1 second for CSS transition
 
   private longPressTimer: number | null = null;
   private readonly LONG_PRESS_DURATION = 1500; // 1.5 seconds for board reset (different from app-level)
@@ -82,28 +88,66 @@ export class GameBoardComponent {
       case 'ArrowUp':
         handled = true;
         this.moveSelection(0, -1);
+        this.resetInactivityTimer();
         break;
       case 'ArrowDown':
         handled = true;
         this.moveSelection(0, 1);
+        this.resetInactivityTimer();
         break;
       case 'ArrowLeft':
         handled = true;
         this.moveSelection(-1, 0);
+        this.resetInactivityTimer();
         break;
       case 'ArrowRight':
         handled = true;
         this.moveSelection(1, 0);
+        this.resetInactivityTimer();
         break;
       case 'Enter':
         handled = true;
         this.selectKeyboardQuestion();
+        this.clearKeyboardSelection();
         break;
     }
 
     if (handled) {
       event.preventDefault();
     }
+  }
+
+  // Inactivity timer management
+  private resetInactivityTimer(): void {
+    this.lastKeyActivity = Date.now();
+    if (this.selectionTimeoutId) {
+      clearTimeout(this.selectionTimeoutId);
+    }
+    this.selectionTimeoutId = setTimeout(() => {
+      this.fadeOutKeyboardSelection();
+    }, this.INACTIVITY_TIMEOUT);
+  }
+
+  private fadeOutKeyboardSelection(): void {
+    // Start fade by setting invalid indices (CSS transition will handle fade)
+    this.keyboardSelectedCategory = -1;
+    this.keyboardSelectedQuestion = -1;
+    // Clear timeout reference
+    this.selectionTimeoutId = undefined;
+  }
+
+  private clearKeyboardSelection(): void {
+    if (this.selectionTimeoutId) {
+      clearTimeout(this.selectionTimeoutId);
+      this.selectionTimeoutId = undefined;
+    }
+    this.keyboardSelectedCategory = -1;
+    this.keyboardSelectedQuestion = -1;
+  }
+
+  // Hover handler to clear keyboard selection
+  onQuestionHover(): void {
+    this.clearKeyboardSelection();
   }
 
   private moveSelection(deltaCategory: number, deltaQuestion: number): void {
@@ -174,7 +218,9 @@ export class GameBoardComponent {
 
   isKeyboardSelected(categoryIndex: number, questionIndex: number): boolean {
     return categoryIndex === this.keyboardSelectedCategory &&
-           questionIndex === this.keyboardSelectedQuestion;
+           questionIndex === this.keyboardSelectedQuestion &&
+           this.keyboardSelectedCategory >= 0 &&
+           this.keyboardSelectedQuestion >= 0;
   }
 
   getQuestionButtonClass(question: Question): string {
@@ -216,5 +262,11 @@ export class GameBoardComponent {
 
   trackByQuestion(index: number): number {
     return index;
+  }
+
+  ngOnDestroy(): void {
+    if (this.selectionTimeoutId) {
+      clearTimeout(this.selectionTimeoutId);
+    }
   }
 }

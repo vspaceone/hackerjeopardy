@@ -10,6 +10,7 @@
   --neon-blue-light: #4dd4ff;
   --neon-blue-dark: #0099cc;
   --neon-blue-muted: #66e0ff;
+  --neon-green: #00ff88;
   --text-primary: #ffffff;
   --text-secondary: #9ca3af;
   --text-accent: var(--neon-blue);
@@ -17,6 +18,7 @@
   --glow-blue-light: 0 0 20px var(--neon-blue-light);
   --glow-blue-dark: 0 0 20px var(--neon-blue-dark);
   --glow-blue-muted: 0 0 20px var(--neon-blue-muted);
+  --glow-green: 0 0 20px var(--neon-green);
 }
 
 /* Global Reset and Base Styles */

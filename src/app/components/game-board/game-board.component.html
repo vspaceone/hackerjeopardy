@@ -5,23 +5,23 @@
     </div>
   </div>
 
-  <div class="questions-grid">
-    <div class="question-row" *ngFor="let qIndex of [0,1,2,3,4]; trackBy: trackByQuestion" role="row">
-      <div class="category-column" *ngFor="let category of categories; trackBy: trackByCategory">
-        <button
-          *ngIf="category.questions[qIndex]"
-          class="btn m-2 question-button"
-          [ngClass]="getQuestionButtonClass(category.questions[qIndex])"
-          (click)="selectQuestion(category.questions[qIndex])"
-          (mousedown)="onQuestionMouseDown(category.questions[qIndex], $event)"
-          (mouseup)="onQuestionMouseUp()"
-          (mouseleave)="onQuestionMouseLeave()"
-          role="gridcell"
-          [attr.aria-label]="'Select question for ' + category.questions[qIndex].value + ' points in ' + category.name"
-        >
-          {{ category.questions[qIndex].value }}
-        </button>
-      </div>
-    </div>
-  </div>
+   <div class="questions-grid">
+     <div class="question-row" *ngFor="let qIndex of [0,1,2,3,4]; trackBy: trackByQuestion" role="row">
+       <div class="category-column" *ngFor="let category of categories; let cIndex = index; trackBy: trackByCategory">
+         <button
+           *ngIf="category.questions[qIndex]"
+           class="btn m-2 question-button"
+           [ngClass]="[getQuestionButtonClass(category.questions[qIndex]), isKeyboardSelected(cIndex, qIndex) ? 'keyboard-selected' : '']"
+           (click)="selectQuestion(category.questions[qIndex])"
+           (mousedown)="onQuestionMouseDown(category.questions[qIndex], $event)"
+           (mouseup)="onQuestionMouseUp()"
+           (mouseleave)="onQuestionMouseLeave()"
+           role="gridcell"
+           [attr.aria-label]="'Select question for ' + category.questions[qIndex].value + ' points in ' + category.name"
+         >
+           {{ category.questions[qIndex].value }}
+         </button>
+       </div>
+     </div>
+   </div>
 </div>

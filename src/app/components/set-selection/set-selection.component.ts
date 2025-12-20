@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoundMetadata } from '../../services/content/content.types';
 
@@ -9,10 +9,49 @@ import { RoundMetadata } from '../../services/content/content.types';
   standalone: true,
   imports: [CommonModule]
 })
-export class SetSelectionComponent {
+export class SetSelectionComponent implements OnInit, OnDestroy {
   @Input() availableRounds: RoundMetadata[] = [];
   @Output() setSelected = new EventEmitter<string>();
   @Output() openContentManager = new EventEmitter<void>();
+
+  selectedIndex: number = 0;
+
+  ngOnInit(): void {
+    // Reset selection when rounds change
+    this.selectedIndex = 0;
+  }
+
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    if (this.availableRounds.length === 0) return;
+
+    switch (event.key) {
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        event.preventDefault();
+        this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+        break;
+      case 'ArrowDown':
+      case 'ArrowRight':
+        event.preventDefault();
+        this.selectedIndex = Math.min(this.availableRounds.length - 1, this.selectedIndex + 1);
+        break;
+      case 'Enter':
+        event.preventDefault();
+        if (this.availableRounds[this.selectedIndex]) {
+          this.onSelectSet(this.availableRounds[this.selectedIndex]);
+        }
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this.onOpenContentManager();
+        break;
+    }
+  }
 
   onSelectSet(round: RoundMetadata): void {
     this.setSelected.emit(round.id);
@@ -20,6 +59,10 @@ export class SetSelectionComponent {
 
   onOpenContentManager(): void {
     this.openContentManager.emit();
+  }
+
+  isSelected(index: number): boolean {
+    return index === this.selectedIndex;
   }
 
   // Keep backward compatibility

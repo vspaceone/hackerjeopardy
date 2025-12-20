@@ -17,12 +17,6 @@ export class PlayerControlsComponent implements AfterViewInit {
   @Input() isActive = false;
   @Input() highlighted = false;
 
-  ngOnChanges() {
-    if (this.isActive) {
-      console.log('Player', this.player.id, 'is active!');
-    }
-  }
-
   @Output() rename = new EventEmitter<Player>();
   @Output() scoreAdjust = new EventEmitter<{ player: Player; amount: number }>();
 

@@ -192,19 +192,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	 * Handle player activation (buzzing in)
 	 */
   private handlePlayerActivation(playerId: number): void {
-    console.log('Player activation triggered for player:', playerId);
     // Check if player exists
-    if (!this.players.find(p => p.id === playerId)) {
-      console.log('Player not found:', playerId);
-      return;
-    }
+    if (!this.players.find(p => p.id === playerId)) return;
 
     if (this.selectedQuestion && this.qanda) {
-      console.log('Activating player during question');
       // Normal buzzing during question
       const activated = this.gameService.activatePlayer(this.selectedQuestion, playerId, this.players);
       if (activated) {
-        console.log('Player activated successfully:', this.selectedQuestion.activePlayer);
         // Cast playerId to 1-8 range for buzzer sound
         const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
         this.audioService.playBuzzer(buzzerPlayerId);
@@ -312,7 +306,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gameStateService.selectQuestion(question);
     this.audioService.playClick();
     this.audioService.startThemeMusic();
-    console.log('Question selected:', question);
   }
 
 	/**

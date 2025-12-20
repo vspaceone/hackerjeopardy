@@ -15,19 +15,16 @@
          <img [src]="getImageUrl()" alt="Answer image" />
        </div>
 
-       <div *ngIf="(question.activePlayer || !question.available) && question.question && !isCorrectlyAnswered" class="question-controls">
-         <button class="btn btn-reveal" (click)="toggleAnswer()" aria-label="Reveal the correct question">Reveal Question</button>
-       </div>
+        <div class="question-actions">
+          <button *ngIf="(question.activePlayer || !question.available) && question.question && !isCorrectlyAnswered" class="btn btn-reveal" (click)="toggleAnswer()" aria-label="Reveal the correct question">Reveal Question</button>
+          <button *ngIf="question.available" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
+          <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
+        </div>
 
-        <div *ngIf="(showAnswer && question.question) || isCorrectlyAnswered" class="question-reveal">
-         <h4>Correct Question:</h4>
-         <div class="question-text">{{ question.question }}</div>
-       </div>
-
-       <div class="host-controls">
-         <button *ngIf="question.available" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
-         <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>
-       </div>
+         <div *ngIf="(showAnswer && question.question) || isCorrectlyAnswered" class="question-reveal">
+          <h4>Correct Question:</h4>
+          <div class="question-text">{{ question.question }}</div>
+        </div>
      </div>
 
       <div *ngIf="question.activePlayer" class="active-player-section">

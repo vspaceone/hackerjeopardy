@@ -24,16 +24,26 @@
      (close)="showContentManager = false">
    </app-content-manager>
 
-   <app-set-selection *ngIf="!qanda && !showContentManager" [availableRounds]="availableRounds" (setSelected)="selectSet($event)" (openContentManager)="showContentManager = true"></app-set-selection>
+
+
+    <app-set-selection *ngIf="!qanda && !showContentManager" [availableRounds]="availableRounds" (setSelected)="selectSet($event)" (openContentManager)="showContentManager = true"></app-set-selection>
 
   <app-game-board *ngIf="qanda && !showContentManager" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
 
   <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
 
     <div class="players-container" *ngIf="qanda && !showContentManager">
-      <h2 class="neon-text-purple">Players</h2>
-      <div class="players-row">
-        <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" [highlighted]="player.highlighted" (scoreAdjust)="adjustScore($event)"></app-player-controls>
+      <div class="players-header">
+        <h2 class="neon-text-purple">Players</h2>
+      </div>
+      <div class="players-content">
+        <div class="players-row">
+          <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" [highlighted]="player.highlighted" (scoreAdjust)="adjustScore($event)"></app-player-controls>
+        </div>
+        <div class="player-count-controls">
+          <button class="cyber-button count-btn" (click)="decreasePlayerCount()" [disabled]="playerCount <= 1" title="Remove Player">-</button>
+          <button class="cyber-button count-btn" (click)="increasePlayerCount()" [disabled]="playerCount >= 8" title="Add Player">+</button>
+        </div>
       </div>
     </div>
  </div>

@@ -5,6 +5,7 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { Category, Question } from '../models/game.models';
 import { RoundMetadata } from './content/content.types';
 import { ContentManagerService } from './content/content-manager.service';
+import { QUESTION_VALUES, PLAYER_CONFIG } from '../constants/game.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -81,7 +82,7 @@ export class GameDataService {
         const processedQuestion: Question = {
           ...question,
           available: true,
-          value: (qIdx + 1) * 100,
+          value: (qIdx + 1) * QUESTION_VALUES.BASE_MULTIPLIER,
           cat: category.name,
           folder: category.path || category.name, // Use path for folder, fallback to name
           roundId: setName, // Add round ID
@@ -89,7 +90,9 @@ export class GameDataService {
           activePlayersArr: [],
           timeoutPlayers: new Set<number>(),
           timeoutPlayersArr: [],
-          availablePlayers: new Set<number>([1, 2, 3, 4]),
+          availablePlayers: new Set<number>(
+            Array.from({ length: PLAYER_CONFIG.COUNT }, (_, i) => i + 1)
+          ),
           buttonsActive: false
         };
 

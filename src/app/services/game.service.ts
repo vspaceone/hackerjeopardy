@@ -2,60 +2,33 @@ import { Injectable } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { AudioService } from './audio.service';
 import { Player, Question } from '../models/game.models';
+import { TIMING, BUTTON_VALUES, PLAYER_CONFIG, PLAYER_COLORS } from '../constants/game.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  private readonly TIMEOUT = 6;
+  private readonly TIMEOUT = TIMING.ANSWER_TIMEOUT;
   private timer: Subscription | null = null;
 
   constructor(private audioService: AudioService) {}
 
   getDefaultPlayers(): Player[] {
-    return [
-      {
-        id: 1,
-        btn: 'player1',
-        name: 'player1',
-        score: 0,
-        bgcolor: '#00d4ff',
-        fgcolor: '#001122',
-        key: '1',
-        remainingtime: null
-      },
-      {
-        id: 2,
-        btn: 'player2',
-        name: 'player2',
-        score: 0,
-        bgcolor: '#4dd4ff',
-        fgcolor: '#001133',
-        key: '2',
-        remainingtime: null
-      },
-      {
-        id: 3,
-        btn: 'player3',
-        name: 'player3',
-        score: 0,
-        bgcolor: '#80ddff',
-        fgcolor: '#001144',
-        key: '3',
-        remainingtime: null
-      },
-      {
-        id: 4,
-        btn: 'player4',
-        name: 'player4',
-        score: 0,
-        bgcolor: '#b3e6ff',
-        fgcolor: '#001155',
-        key: '4',
-        remainingtime: null
-      }
-    ];
+    return PLAYER_COLORS.map(color => ({
+      id: color.id,
+      btn: color.btn,
+      name: color.btn,
+      score: PLAYER_CONFIG.INITIAL_SCORE,
+      bgcolor: color.bgcolor,
+      fgcolor: color.fgcolor,
+      key: color.key,
+      remainingtime: null,
+      highlighted: false,
+      selectionBuzzes: 0
+    }));
   }
+
+
 
   activatePlayer(question: Question, playerId: number, players: Player[]): boolean {
     const pid = parseInt(playerId.toString());
@@ -168,13 +141,13 @@ export class GameService {
     this.clearTimer();
 
     question.availablePlayers.clear();
-    question.player = { btn: 'none' } as Player;
+    question.player = { btn: BUTTON_VALUES.NONE } as Player;
     question.available = false;
   }
 
   markQuestionIncorrect(question: Question): void {
     // Mark the question as having been attempted but answered incorrectly by all
-    question.player = { btn: 'incorrect' } as Player;
+    question.player = { btn: BUTTON_VALUES.INCORRECT } as Player;
     question.available = false;
     this.clearTimer();
   }
@@ -196,7 +169,11 @@ export class GameService {
     question.activePlayersArr = [];
     question.timeoutPlayers.clear();
     question.timeoutPlayersArr = [];
-    question.availablePlayers = new Set([1, 2, 3, 4]); // Reset to all players
+     // Reset to all active players (1 through current player count)
+     const playerCount = players.length;
+     question.availablePlayers = new Set(
+       Array.from({ length: playerCount }, (_, i) => i + 1)
+     );
     question.hadIncorrectAnswers = false;
     question.scoreChanges = [];
     question.resetTimestamp = Date.now();

@@ -35,8 +35,8 @@ export class ControllerService {
     const currentGamepads = navigator.getGamepads();
     const buzzGamepads: { index: number; gamepad: Gamepad }[] = [];
 
-    // Find Buzz controllers (first 4 detected)
-    for (let i = 0; i < currentGamepads.length && buzzGamepads.length < 4; i++) {
+    // Find Buzz controllers (first 2 detected, supporting up to 8 players)
+    for (let i = 0; i < currentGamepads.length && buzzGamepads.length < 2; i++) {
       const gp = currentGamepads[i];
       if (gp && this.isBuzzController(gp)) {
         buzzGamepads.push({ index: i, gamepad: gp });
@@ -72,10 +72,12 @@ export class ControllerService {
 
         if (isPressed && !wasPressed) {
           // Button press detected
-          // Only activate on main buzzer buttons (assuming buttons 0,5,10,15 are main buzzers for P1-P4)
+          // Map buttons to players: controller 0 buttons 0,5,10,15 → players 1-4
+          // controller 1 buttons 0,5,10,15 → players 5-8
           if (btnIdx % 5 === 0) {
-            const playerId = Math.floor(btnIdx / 5) + 1;
-            if (playerId <= 4) {
+            const playerId = Math.floor(btnIdx / 5) + 1 + (i * 4); // i=0: 1-4, i=1: 5-8
+            // Only activate if player exists (checked by subscriber, but limit to reasonable max)
+            if (playerId <= 8) {
               this.playerActivated.next(playerId);
               this.setLed(playerId);
             }
@@ -132,6 +134,7 @@ export class ControllerService {
     if (!this.hidDevice) return;
     try {
       // Assume output report ID 0, data [mask] where mask = 1 << (playerId - 1)
+      // Supports up to 8 players with 8-bit mask
       const mask = 1 << (playerId - 1);
       await this.hidDevice.sendReport(0, new Uint8Array([mask]));
     } catch (e) {

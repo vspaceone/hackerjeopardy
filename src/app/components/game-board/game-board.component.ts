@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category, Question } from '../../models/game.models';
+import { TIMING, BUTTON_VALUES } from '../../constants/game.constants';
 
 @Component({
   selector: 'app-game-board',
@@ -15,8 +16,8 @@ export class GameBoardComponent {
   @Output() questionSelected = new EventEmitter<Question>();
   @Output() questionReset = new EventEmitter<Question>();
 
-  private longPressTimer: any;
-  private readonly LONG_PRESS_DURATION = 1500; // 1.5 seconds
+  private longPressTimer: number | null = null;
+  private readonly LONG_PRESS_DURATION = 1500; // 1.5 seconds for board reset (different from app-level)
   private longPressingQuestion?: Question;
 
   selectQuestion(question: Question): void {
@@ -31,13 +32,13 @@ export class GameBoardComponent {
     event.preventDefault();
     this.longPressingQuestion = question;
 
-    this.longPressTimer = setTimeout(() => {
+    this.longPressTimer = window.setTimeout(() => {
       this.triggerReset(question);
     }, this.LONG_PRESS_DURATION);
   }
 
   onQuestionMouseUp(): void {
-    if (this.longPressTimer) {
+    if (this.longPressTimer !== null) {
       clearTimeout(this.longPressTimer);
       this.longPressTimer = null;
     }
@@ -64,17 +65,17 @@ export class GameBoardComponent {
     }
 
     // Check for reset animation
-    if (question.resetTimestamp && (Date.now() - question.resetTimestamp) < 1000) {
+    if (question.resetTimestamp && (Date.now() - question.resetTimestamp) < TIMING.QUESTION_RESET_ANIMATION) {
       return 'btn-danger reset';
     }
 
     // Existing logic
     if (!question.available && question.player &&
-        question.player.btn === 'incorrect') {
+        question.player.btn === BUTTON_VALUES.INCORRECT) {
       return 'btn-warning answered-incorrectly';
     }
     if (!question.available && question.player &&
-        question.player.btn !== 'none') {
+        question.player.btn !== BUTTON_VALUES.NONE) {
       return 'btn-success answered-correctly';
     }
     if (!question.available) {

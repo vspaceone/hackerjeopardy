@@ -67,14 +67,24 @@ src/
 │   │   ├── game-board/      # Question grid display + game-board.component.spec.ts
 │   │   ├── question-display/# Answer modal with correct questions + question-display.component.spec.ts
 │   │   ├── player-controls/ # Player score management + player-controls.component.spec.ts
-│   │   └── set-selection/   # Round selection screen + set-selection.component.spec.ts
+│   │   ├── set-selection/   # Round selection screen + set-selection.component.spec.ts
+│   │   └── content-manager/ # Content management UI
 │   ├── services/            # Business logic services
-│   │   ├── game.service.ts  # Game state management + game.service.spec.ts
-│   │   ├── game-data.service.ts # Question loading + game-data.service.spec.ts
-│   │   └── audio.service.ts # Audio playback + audio.service.spec.ts
+│   │   ├── game-state.service.ts # Centralized reactive state management (NEW)
+│   │   ├── game.service.ts  # Game logic and rules engine + game.service.spec.ts
+│   │   ├── game-data.service.ts # Content loading facade + game-data.service.spec.ts
+│   │   ├── audio.service.ts # Audio playback + audio.service.spec.ts
+│   │   ├── controller.service.ts # Gamepad support
+│   │   └── content/         # Content management system
+│   │       ├── content-manager.service.ts
+│   │       ├── indexed-db.service.ts
+│   │       ├── content-validator.service.ts
+│   │       └── providers/   # Content loading strategies
+│   ├── constants/           # Configuration (NEW)
+│   │   └── game.constants.ts # All game configuration constants
 │   ├── models/              # TypeScript interfaces
 │   │   └── game.models.ts   # Game data types
-│   ├── app.component.ts     # Root component + app.component.spec.ts
+│   ├── app.component.ts     # Root coordinator + app.component.spec.ts
 │   └── app.component.spec.ts # Unit tests (colocated with source files)
 ├── assets/                  # Static assets and question data
 └── environments/            # Environment configurations
@@ -88,6 +98,14 @@ src/
 - **SCSS**: Component styling
 
 ### Recent Improvements
+- **Code Quality Refactoring (Latest)**:
+  - Created `GameStateService` for centralized reactive state management
+  - Extracted all configuration to `constants/game.constants.ts`
+  - Refactored AppComponent to follow Single Responsibility Principle
+  - Improved type safety and removed all `any` types
+  - Implemented proper RxJS subscription cleanup with `takeUntil`
+  - Centralized player initialization and configuration
+  - Enhanced maintainability with clear separation of concerns
 - Upgraded to Angular 18 with standalone components
 - Added comprehensive unit test coverage with tests colocated alongside source files
 - Implemented automated test import management for clean production builds

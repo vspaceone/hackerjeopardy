@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Player } from '../../models/game.models';
+import { PLAYER_CONFIG, TIMING } from '../../constants/game.constants';
 
 @Component({
   selector: 'app-player-controls',
@@ -58,17 +59,17 @@ export class PlayerControlsComponent implements AfterViewInit {
 
   onPlus(): void {
     this.triggerScoreAnimation();
-    this.scoreAdjust.emit({ player: this.player, amount: 100 });
+    this.scoreAdjust.emit({ player: this.player, amount: PLAYER_CONFIG.SCORE_INCREMENT });
   }
 
   onMinus(): void {
     this.triggerScoreAnimation();
-    this.scoreAdjust.emit({ player: this.player, amount: -100 });
+    this.scoreAdjust.emit({ player: this.player, amount: -PLAYER_CONFIG.SCORE_INCREMENT });
   }
 
   private triggerScoreAnimation(): void {
     this.scoreUpdated = true;
-    setTimeout(() => this.scoreUpdated = false, 600);
+    setTimeout(() => this.scoreUpdated = false, TIMING.SCORE_ANIMATION_DURATION);
   }
 
   getPlayerStyle(): any {

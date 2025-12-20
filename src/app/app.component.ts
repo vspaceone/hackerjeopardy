@@ -1,7 +1,9 @@
-import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
 import { GameDataService } from './services/game-data.service';
 import { GameService } from './services/game.service';
+import { GameStateService } from './services/game-state.service';
 import { AudioService } from './services/audio.service';
 import { ContentManagerService } from './services/content/content-manager.service';
 import { ControllerService } from './services/controller.service';
@@ -12,6 +14,7 @@ import { PlayerControlsComponent } from './components/player-controls/player-con
 import { ContentManagerComponent } from './components/content-manager/content-manager.component';
 import { Category, Player, Question } from './models/game.models';
 import { RoundMetadata } from './services/content/content.types';
+import { KEYBOARD, TIMING, PLAYER_CONFIG, MATRIX_RAIN } from './constants/game.constants';
 
 
 @Component({
@@ -28,37 +31,52 @@ import { RoundMetadata } from './services/content/content.types';
 		ContentManagerComponent
 	]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	title = 'Hacker Jeopardy';
 	availableRounds: RoundMetadata[] = [];
   loading = true;
   showContentManager = false;
-  currentRoundName = '';
   hasControllers = false;
 
+  // State from GameStateService
+  playerCount = 4;
+  players: Player[] = [];
+  qanda: Category[] | null = null;
+  selectedQuestion: Question | null = null;
+  currentRoundName = '';
+  couldBeCanceled = false;
+
   // Long press handling
-  private longPressTimer: any = null;
-  private longPressAction: string = '';
+  private longPressTimer: number | null = null;
+  private longPressAction = '';
+  private destroy$ = new Subject<void>();
 
 	constructor(
 		private gameDataService: GameDataService,
 		private gameService: GameService,
+		private gameStateService: GameStateService,
 		private audioService: AudioService,
 		private contentManager: ContentManagerService,
 		private controllerService: ControllerService
-	) { };
+	) { }
 
   async ngOnInit(): Promise<void> {
     try {
       console.log('AppComponent: Starting initialization...');
+      
       // Initialize content manager
       console.log('AppComponent: Initializing content manager...');
       await this.contentManager.initialize();
       console.log('AppComponent: Content manager initialized');
 
+			// Subscribe to game state changes
+			this.subscribeToGameState();
+
 			// Load available rounds
 			console.log('AppComponent: Loading available rounds...');
-			this.gameDataService.getAvailableRounds().subscribe({
+			this.gameDataService.getAvailableRounds()
+				.pipe(takeUntil(this.destroy$))
+				.subscribe({
 				next: (rounds) => {
 					console.log('AppComponent: Loaded rounds:', rounds.length);
 					rounds.forEach(round => {
@@ -75,14 +93,18 @@ export class AppComponent implements OnInit, AfterViewInit {
 			});
 
 			// Subscribe to controller activations
-			this.controllerService.playerActivated$.subscribe(playerId => {
-				this.activatePlayer(playerId);
-			});
+			this.controllerService.playerActivated$
+				.pipe(takeUntil(this.destroy$))
+				.subscribe(playerId => {
+					this.handlePlayerActivation(playerId);
+				});
 
 			// Subscribe to controller detection
-			this.controllerService.connectedControllers$.subscribe(controllers => {
-				this.hasControllers = controllers.length > 0;
-			});
+			this.controllerService.connectedControllers$
+				.pipe(takeUntil(this.destroy$))
+				.subscribe(controllers => {
+					this.hasControllers = controllers.length > 0;
+				});
     } catch (error) {
       console.error('AppComponent: Failed to initialize content manager:', error);
       this.loading = false;
@@ -93,59 +115,114 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.initMatrixRain();
 	}
 
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
+
+	/**
+	 * Subscribe to game state changes from GameStateService
+	 */
+	private subscribeToGameState(): void {
+		this.gameStateService.playerCount$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(count => this.playerCount = count);
+
+		this.gameStateService.players$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(players => this.players = players);
+
+		this.gameStateService.categories$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(categories => this.qanda = categories);
+
+		this.gameStateService.selectedQuestion$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(question => this.selectedQuestion = question);
+
+		this.gameStateService.currentRoundName$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(name => this.currentRoundName = name);
+
+		this.gameStateService.couldBeCanceled$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(value => this.couldBeCanceled = value);
+	}
+
+	/**
+	 * Handle keyboard input for player buzzing
+	 */
 	@HostListener('document:keydown', ['$event'])
 	onKeyDown(event: KeyboardEvent): void {
-		const key = event.key;
 		if (!this.selectedQuestion || !this.qanda) return;
 
-		// Handle number keys and special numpad keys
-		let playerKey = '';
-		if (key === '1' || key === '2' || key === '3' || key === '4') {
-			playerKey = key;
-		} else if (key === '¹' || key === '¡') {
-			playerKey = '1'; // ¹ is superscript 1, ¡ is inverted !
-		} else if (key === '²') {
-			playerKey = '2';
-		} else if (key === '³') {
-			playerKey = '3';
-		} else if (key === '¤' || key === '€') {
-			playerKey = '4'; // ¤ is currency symbol, € is euro
-		}
-
-		if (playerKey) {
+		const playerId = this.getPlayerIdFromKey(event.key);
+		if (playerId) {
 			event.preventDefault();
-			this.activatePlayer(parseInt(playerKey));
+			this.handlePlayerActivation(playerId);
 		}
 	}
 
-	private activatePlayer(playerId: number): void {
+	/**
+	 * Map keyboard key to player ID
+	 */
+	private getPlayerIdFromKey(key: string): number | null {
+		let playerId: number | null = null;
+
+		// Direct player keys
+		if ((KEYBOARD.PLAYER_KEYS as readonly string[]).includes(key)) {
+			playerId = parseInt(key);
+		}
+
+		// Special/international key mappings
+		if (key in KEYBOARD.KEY_MAPPINGS) {
+			const mappedKey = KEYBOARD.KEY_MAPPINGS[key as keyof typeof KEYBOARD.KEY_MAPPINGS];
+			playerId = parseInt(mappedKey);
+		}
+
+		// Only allow activation if player exists
+		if (playerId && playerId <= this.playerCount) {
+			return playerId;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Handle player activation (buzzing in)
+	 */
+	private handlePlayerActivation(playerId: number): void {
+		// Check if player exists
+		if (!this.players.find(p => p.id === playerId)) return;
+
 		if (this.selectedQuestion && this.qanda) {
 			// Normal buzzing during question
 			const activated = this.gameService.activatePlayer(this.selectedQuestion, playerId, this.players);
 			if (activated) {
-				this.audioService.playBuzzer(playerId);
-				this.couldBeCanceled = false; // Can't cancel once someone has buzzed in
+				// Cast playerId to 1-8 range for buzzer sound
+				const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+				this.audioService.playBuzzer(buzzerPlayerId);
+				this.gameStateService.markQuestionAnswered();
 			}
 		} else if (this.qanda) {
 			// Highlight player for identification during question selection
-			const player = this.players.find(p => p.id === playerId);
+			const player = this.gameStateService.getPlayerById(playerId);
 			if (player) {
-				player.highlighted = true;
-				player.selectionBuzzes = (player.selectionBuzzes || 0) + 1;
-				this.audioService.playBuzzer(playerId); // Play buzzer sound for identification
+				this.gameStateService.highlightPlayer(playerId, TIMING.PLAYER_HIGHLIGHT_DURATION);
+				const buzzerPlayerId = Math.max(1, Math.min(8, playerId)) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+				this.audioService.playBuzzer(buzzerPlayerId);
 
-				// Punish excessive buzzing (>20) with -1 point
-				if (player.selectionBuzzes > 20) {
-					player.score -= 1;
+				// Punish excessive buzzing
+				if ((player.selectionBuzzes || 0) > PLAYER_CONFIG.MAX_SELECTION_BUZZES) {
+					this.gameStateService.updatePlayerScore(playerId, -1);
 				}
-
-				setTimeout(() => {
-					player.highlighted = false;
-				}, 3000); // Highlight for 3 seconds
 			}
 		}
 	}
 
+	/**
+	 * Initialize Matrix rain background effect
+	 */
 	private initMatrixRain(): void {
 		const canvas = document.getElementById('matrixRain') as HTMLCanvasElement;
 		if (!canvas) return;
@@ -156,10 +233,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 
-		const matrix = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		const matrixArray = matrix.split('');
-
-		const fontSize = 16;
+		const matrixArray = MATRIX_RAIN.CHARACTERS.split('');
+		const fontSize = MATRIX_RAIN.FONT_SIZE;
 		const columns = canvas.width / fontSize;
 		const drops: number[] = [];
 
@@ -185,130 +260,144 @@ export class AppComponent implements OnInit, AfterViewInit {
 			}
 		};
 
-		setInterval(draw, 35);
+		setInterval(draw, TIMING.MATRIX_RAIN_INTERVAL);
 	}
 
-	selectedQuestion: any = null;
-
-	couldBeCanceled = false; // Only true when a question is open and cancellable
-	qanda: Category[] | null = null;
-
-
-  selectSet(s: string): void {
+  /**
+   * Load a game round
+   */
+  selectSet(roundId: string): void {
     this.audioService.playClick();
-    this.currentRoundName = s;
-    this.gameDataService.loadGameRound(s).subscribe({
+    this.gameDataService.loadGameRound(roundId).subscribe({
       next: (categories) => {
-        this.qanda = categories;
+        this.gameStateService.loadRound(roundId, categories);
       },
       error: (error) => {
-        console.error('Error loading round:', s, error);
-        alert(`Failed to load round "${s}": ${error.message}`);
+        console.error('Error loading round:', roundId, error);
+        alert(`Failed to load round "${roundId}": ${error.message}`);
       }
     });
   }
 
+	/**
+	 * Reset a question to its initial state
+	 */
 	resetQuestion(question: Question): void {
 		this.gameService.resetQuestion(question, this.players);
 		// Close modal if this question was selected
 		if (this.selectedQuestion === question) {
-			this.selectedQuestion = null;
-			this.couldBeCanceled = false;
+			this.gameStateService.closeQuestion();
 		}
 	}
 
+	/**
+	 * Return to round selection
+	 */
 	backToRoundSelection(): void {
-		// Clear all game state and return to round selection
-		this.qanda = null;
-		this.selectedQuestion = null;
-		this.couldBeCanceled = false;
-		this.showContentManager = false; // Close content manager if open
+		this.gameStateService.resetToRoundSelection();
+		this.showContentManager = false;
 		this.audioService.stopThemeMusic();
 	}
 
-	onSelect(q): void {
-		this.selectedQuestion = q;
-		this.couldBeCanceled = true; // Allow canceling when question first opens
+	/**
+	 * Select a question
+	 */
+	onSelect(question: Question): void {
+		this.gameStateService.selectQuestion(question);
 		this.audioService.playClick();
 		this.audioService.startThemeMusic();
 	}
 
-	answered(q, p): void {
-		this.audioService.stopThemeMusic();
+	/**
+	 * Increase player count
+	 */
+	increasePlayerCount(): void {
+		if (this.playerCount < 8) {
+			this.gameStateService.setPlayerCount(this.playerCount + 1);
+		}
+	}
 
-		// Use GameService for correct answer handling
+	/**
+	 * Decrease player count
+	 */
+	decreasePlayerCount(): void {
+		if (this.playerCount > 1) {
+			this.gameStateService.setPlayerCount(this.playerCount - 1);
+		}
+	}
+
+	/**
+	 * Mark question as correctly answered
+	 */
+	correct(): void {
+		this.audioService.stopThemeMusic();
 		if (this.selectedQuestion) {
 			this.gameService.correctAnswer(this.selectedQuestion);
 		}
-
-		this.couldBeCanceled = false;
+		this.gameStateService.markQuestionAnswered();
 	}
 
-
-
-
-	notanswered(q, p): void {
-		// Use GameService for incorrect answer handling
+	/**
+	 * Mark question as incorrectly answered
+	 */
+	incorrect(): void {
+		this.audioService.stopThemeMusic();
 		if (this.selectedQuestion) {
 			this.gameService.incorrectAnswer(this.selectedQuestion);
 		}
-
-		this.couldBeCanceled = false;
+		this.gameStateService.markQuestionAnswered();
 	}
 
-	minus(p): void {
-		p.score = p.score - 100;
-	}
-
-	plus(p): void {
-		p.score = p.score + 100;
-	}
-
-	correct(): void {
-		this.answered(this.selectedQuestion, null);
-	}
-
-	incorrect(): void {
-		this.notanswered(this.selectedQuestion, null);
-	}
-
+	/**
+	 * Mark that no one knows the answer
+	 */
 	noOneKnows(): void {
 		if (this.selectedQuestion) {
 			this.gameService.markQuestionIncorrect(this.selectedQuestion);
 		}
-		// Keep selectedQuestion to show the answer, user can close manually
-		// this.selectedQuestion = null;
-		// Keep couldBeCanceled as false since question is resolved
-		this.couldBeCanceled = false;
+		this.gameStateService.markQuestionAnswered();
 	}
 
+  /**
+   * Adjust player score
+   */
   adjustScore(event: {player: Player, amount: number}): void {
-    event.player.score += event.amount;
+    this.gameStateService.updatePlayerScore(event.player.id, event.amount);
   }
 
+  /**
+   * Reset all player scores
+   */
   resetAllScores(): void {
     if (confirm('Reset all player scores to 0? This cannot be undone.')) {
-      this.players.forEach(player => {
-        player.score = 0;
-      });
+      this.gameStateService.resetAllScores();
     }
   }
 
+  /**
+   * Start long press for special actions
+   */
   startLongPress(action: string): void {
     this.longPressAction = action;
-    this.longPressTimer = setTimeout(() => {
+    this.longPressTimer = window.setTimeout(() => {
       this.executeLongPress();
-    }, 1000); // 1 second long press
+    }, TIMING.LONG_PRESS_DURATION);
   }
 
+  /**
+   * End long press
+   */
   endLongPress(): void {
-    if (this.longPressTimer) {
+    if (this.longPressTimer !== null) {
       clearTimeout(this.longPressTimer);
       this.longPressTimer = null;
     }
     this.longPressAction = '';
   }
 
+  /**
+   * Execute long press action
+   */
   private executeLongPress(): void {
     switch (this.longPressAction) {
       case 'resetScores':
@@ -321,66 +410,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.longPressAction = '';
   }
 
+	/**
+	 * Close question display
+	 */
 	close(): void {
 		this.audioService.stopThemeMusic();
-		this.selectedQuestion = null;
-		this.couldBeCanceled = false;
+		this.gameStateService.closeQuestion();
 	}
 
+	/**
+	 * Cancel question selection
+	 */
 	cancel(): void {
-		this.selectedQuestion = null;
-		this.couldBeCanceled = false;
+		this.gameStateService.cancelQuestion();
 	}
-
-	players: Player[] = [
-		{
-			id: 1,
-			btn: 'player1',
-			name: 'player1',
-			score: 0,
-			bgcolor: '#ff6b6b',
-			fgcolor: '#9f0b0b',
-			key: '1',
-			remainingtime: null,
-			highlighted: false,
-			selectionBuzzes: 0
-		},
-		{
-			id: 2,
-			btn: 'player2',
-			name: 'player2',
-			score: 0,
-			bgcolor: '#ff9900',
-			fgcolor: '#995c00',
-			key: '2',
-			remainingtime: null,
-			highlighted: false,
-			selectionBuzzes: 0
-		},
-		{
-			id: 3,
-			btn: 'player3',
-			name: 'player3',
-			score: 0,
-			bgcolor: '#9cfcff',
-			fgcolor: '#3c9c9f',
-			key: '3',
-			remainingtime: null,
-			highlighted: false,
-			selectionBuzzes: 0
-		},
-		{
-			id: 4,
-			btn: 'player4',
-			name: 'player4',
-			score: 0,
-			bgcolor: '#FFFF66',
-			fgcolor: '#cccc00',
-			key: '4',
-			remainingtime: null,
-			highlighted: false,
-			selectionBuzzes: 0
-		}
-	];
-
 }

@@ -170,10 +170,10 @@
 }
 
 .player-badge {
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 14px;
+  border-radius: 8px;
   font-weight: bold;
-  font-size: 0.75em;
+  font-size: 0.8em;
   font-family: 'Orbitron', monospace;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -184,13 +184,13 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  min-height: 35px;
-  max-width: 140px;
+  min-height: 45px;
+  max-width: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
 }
 
 .player-badge::before {
@@ -224,22 +224,25 @@
 .player-name {
   font-weight: bold;
   text-align: center;
-  margin-bottom: 1px;
-  font-size: 0.9em;
+  margin-bottom: 2px;
+  font-size: 0.95em;
+  line-height: 1.1;
 }
 
 .queue-position {
-  font-size: 0.6em;
-  opacity: 0.7;
+  font-size: 0.65em;
+  opacity: 0.8;
   font-family: 'Roboto Mono', monospace;
   text-transform: uppercase;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
+  font-weight: normal;
 }
 
 .player-timer {
-  font-size: 0.9em;
-  opacity: 0.9;
+  font-size: 0.85em;
+  opacity: 0.95;
   font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
 }
 
 .active-timer {
@@ -251,17 +254,19 @@
 }
 
 .completion-indicator {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #00ff88;
-  text-shadow: 0 0 10px #00ff88;
+  text-shadow: 0 0 12px #00ff88, 0 0 24px #00ff88;
   font-weight: bold;
+  margin-top: 1px;
 }
 
 .elimination-indicator {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #ff073a;
-  text-shadow: 0 0 10px #ff073a;
+  text-shadow: 0 0 12px #ff073a, 0 0 24px #ff073a;
   font-weight: bold;
+  margin-top: 1px;
 }
 
 @keyframes timerPulse {

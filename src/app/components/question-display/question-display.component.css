@@ -431,49 +431,47 @@
 
 
 
-.modal-footer {
+.host-controls {
   text-align: center;
-  margin-top: 30px;
-  padding-top: 20px;
+  margin-top: 20px;
+  padding-top: 15px;
   border-top: 1px solid var(--neon-green);
-  clear: both;
 }
 
-.modal-footer .btn {
-  margin: 5px;
-  padding: 8px 16px;
-  font-size: 0.9em;
+.host-controls .btn {
+  margin: 0 8px;
+  padding: 10px 18px;
+  font-size: 0.95em;
   border-radius: 6px;
   font-family: 'Orbitron', monospace;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border: 1px solid;
+  border: 2px solid;
   background: var(--bg-secondary);
   transition: all 0.3s ease;
-  opacity: 0.8;
 }
 
-.modal-footer .btn:hover {
+.host-controls .btn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px currentColor;
 }
 
-.modal-footer .btn-primary {
+.host-controls .btn-primary {
   color: var(--neon-blue);
   border-color: var(--neon-blue);
 }
 
-.modal-footer .btn-primary:hover {
+.host-controls .btn-primary:hover {
   background: var(--neon-blue);
   color: var(--bg-primary);
 }
 
-.modal-footer .btn-warning {
+.host-controls .btn-warning {
   color: #ffa500; /* Orange/warning color */
   border-color: #ffa500;
 }
 
-.modal-footer .btn-warning:hover {
+.host-controls .btn-warning:hover {
   background: #ffa500;
   color: var(--bg-primary);
   box-shadow: 0 0 20px #ffa500;

@@ -142,7 +142,7 @@
 }
 
 .players-section {
-  margin: 20px 0;
+  margin: 20px 0 25px 0;
   padding: 20px;
   background: rgba(26, 26, 26, 0.95);
   backdrop-filter: blur(15px);
@@ -299,7 +299,7 @@
 }
 
 .active-player-section {
-  margin: 20px 0;
+  margin: 20px 0 25px 0;
   padding: 20px;
   background: rgba(26, 26, 26, 0.95);
   backdrop-filter: blur(15px);
@@ -433,22 +433,24 @@
 
 .modal-footer {
   text-align: center;
-  margin-top: 20px;
-  padding-top: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
   border-top: 1px solid var(--neon-green);
+  clear: both;
 }
 
 .modal-footer .btn {
   margin: 5px;
-  padding: 10px 20px;
-  font-size: 1.1em;
+  padding: 8px 16px;
+  font-size: 0.9em;
   border-radius: 6px;
   font-family: 'Orbitron', monospace;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border: 2px solid;
+  border: 1px solid;
   background: var(--bg-secondary);
   transition: all 0.3s ease;
+  opacity: 0.8;
 }
 
 .modal-footer .btn:hover {

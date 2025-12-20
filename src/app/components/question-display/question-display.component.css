@@ -440,15 +440,17 @@
 }
 
 .question-actions .btn-reveal {
-  color: #ffa500;
+  color: #ffffff;
   border-color: #ffa500;
-  background: rgba(255, 165, 0, 0.1);
+  background: linear-gradient(45deg, rgba(255, 165, 0, 0.2), rgba(255, 140, 0, 0.1));
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
 .question-actions .btn-reveal:hover {
   background: linear-gradient(45deg, #ffa500, #ff8c00);
-  color: var(--bg-primary);
-  box-shadow: 0 0 25px #ffa500, 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #000000;
+  box-shadow: 0 0 30px #ffa500, 0 0 50px #ffa500, 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-color: #ff8c00;
 }
 
 
@@ -461,21 +463,52 @@
 }
 
 .question-actions .btn {
-  padding: 8px 14px;
-  font-size: 0.85em;
-  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 0.9em;
+  border-radius: 8px;
   font-family: 'Orbitron', monospace;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: bold;
   border: 2px solid;
-  background: var(--bg-secondary);
+  background: rgba(20, 20, 20, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
-  min-width: 120px;
+  min-width: 130px;
+  color: #ffffff;
+}
+
+.question-actions .btn-warning {
+  color: #ffffff;
+  border-color: #ff6b35;
+  background: linear-gradient(45deg, rgba(255, 107, 53, 0.2), rgba(255, 77, 0, 0.1));
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.question-actions .btn-warning:hover {
+  background: linear-gradient(45deg, #ff6b35, #ff4500);
+  color: #ffffff;
+  box-shadow: 0 0 30px #ff6b35, 0 0 50px #ff6b35, 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-color: #ff4500;
+}
+
+.question-actions .btn-primary {
+  color: #ffffff;
+  border-color: #4a90e2;
+  background: linear-gradient(45deg, rgba(74, 144, 226, 0.2), rgba(0, 122, 255, 0.1));
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.question-actions .btn-primary:hover {
+  background: linear-gradient(45deg, #4a90e2, #007aff);
+  color: #ffffff;
+  box-shadow: 0 0 30px #4a90e2, 0 0 50px #4a90e2, 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-color: #007aff;
 }
 
 .question-actions .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 20px currentColor, 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .host-controls .btn-primary {

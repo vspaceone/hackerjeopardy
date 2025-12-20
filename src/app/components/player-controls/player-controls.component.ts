@@ -16,6 +16,7 @@ export class PlayerControlsComponent implements AfterViewInit {
   @Input() canRename = false;
   @Input() isActive = false;
   @Input() highlighted = false;
+  @Input() isCurrentSelector = false;
 
   @Output() rename = new EventEmitter<Player>();
   @Output() scoreAdjust = new EventEmitter<{ player: Player; amount: number }>();
@@ -77,9 +78,18 @@ export class PlayerControlsComponent implements AfterViewInit {
   }
 
   getPlayerStyle(): any {
-    return {
+    const baseStyle = {
       'color': this.player.fgcolor,
       'border-color': this.player.fgcolor
     };
+
+    if (this.isCurrentSelector) {
+      return {
+        ...baseStyle,
+        'box-shadow': `0 0 25px ${this.player.fgcolor}, 0 0 50px ${this.player.fgcolor}`
+      };
+    }
+
+    return baseStyle;
   }
 }

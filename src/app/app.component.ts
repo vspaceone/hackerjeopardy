@@ -57,6 +57,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   forceRevealAnswer = false;
   // Track if any player is currently being renamed
   isAnyPlayerRenaming = false;
+  // Current question selector
+  currentSelector: Player | null = null;
 
 	constructor(
 		private gameDataService: GameDataService,
@@ -154,6 +156,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.gameStateService.couldBeCanceled$
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(value => this.couldBeCanceled = value);
+
+		this.gameStateService.currentSelector$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(selector => this.currentSelector = selector);
 	}
 
 	/**
@@ -444,6 +450,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.audioService.stopThemeMusic();
 		if (this.selectedQuestion) {
 			this.gameService.correctAnswer(this.selectedQuestion);
+			// Set the correct answerer as the next question selector
+			if (this.selectedQuestion.player) {
+				this.gameStateService.setQuestionSelector(this.selectedQuestion.player);
+			}
 		}
 		this.gameStateService.markQuestionAnswered();
 	}
@@ -455,6 +465,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.audioService.stopThemeMusic();
 		if (this.selectedQuestion) {
 			this.gameService.incorrectAnswer(this.selectedQuestion, this.players);
+			// Set random selector for next question (no correct answer)
+			this.gameStateService.initializeRandomSelector();
 		}
 		this.gameStateService.markQuestionAnswered();
 	}
@@ -465,6 +477,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	noOneKnows(): void {
 		if (this.selectedQuestion) {
 			this.gameService.markQuestionIncorrect(this.selectedQuestion);
+			// Set random selector for next question (no one knew the answer)
+			this.gameStateService.initializeRandomSelector();
 		}
 		this.gameStateService.markQuestionAnswered();
 	}

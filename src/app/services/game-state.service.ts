@@ -18,6 +18,7 @@ export class GameStateService {
   private selectedQuestionSubject = new BehaviorSubject<Question | null>(null);
   private currentRoundNameSubject = new BehaviorSubject<string>('');
   private couldBeCanceledSubject = new BehaviorSubject<boolean>(false);
+  private currentSelectorSubject = new BehaviorSubject<Player | null>(null);
 
   // Public Observables
   readonly playerCount$ = this.playerCountSubject.asObservable();
@@ -26,6 +27,7 @@ export class GameStateService {
   readonly selectedQuestion$ = this.selectedQuestionSubject.asObservable();
   readonly currentRoundName$ = this.currentRoundNameSubject.asObservable();
   readonly couldBeCanceled$ = this.couldBeCanceledSubject.asObservable();
+  readonly currentSelector$ = this.currentSelectorSubject.asObservable();
 
   // Getters for current state (synchronous access)
   get playerCount(): number {
@@ -50,6 +52,10 @@ export class GameStateService {
 
   get couldBeCanceled(): boolean {
     return this.couldBeCanceledSubject.value;
+  }
+
+  get currentSelector(): Player | null {
+    return this.currentSelectorSubject.value;
   }
 
   /**
@@ -130,6 +136,9 @@ export class GameStateService {
     this.categoriesSubject.next(categories);
     this.selectedQuestionSubject.next(null);
     this.couldBeCanceledSubject.next(false);
+
+    // Initialize random question selector for the new round
+    this.initializeRandomSelector();
   }
 
   /**
@@ -165,6 +174,7 @@ export class GameStateService {
     this.selectedQuestionSubject.next(null);
     this.couldBeCanceledSubject.next(false);
     this.currentRoundNameSubject.next('');
+    this.currentSelectorSubject.next(null);
   }
 
   /**
@@ -221,6 +231,26 @@ export class GameStateService {
       player.selectionBuzzes = 0;
     });
     this.playersSubject.next([...this.players]);
+  }
+
+  /**
+   * Set the current question selector
+   */
+  setQuestionSelector(player: Player | null): void {
+    this.currentSelectorSubject.next(player);
+  }
+
+  /**
+   * Initialize random question selector from active players
+   */
+  initializeRandomSelector(): void {
+    const activePlayers = this.players.slice(0, this.playerCount);
+    if (activePlayers.length > 0) {
+      const randomIndex = Math.floor(Math.random() * activePlayers.length);
+      this.setQuestionSelector(activePlayers[randomIndex]);
+    } else {
+      this.setQuestionSelector(null);
+    }
   }
 
   /**

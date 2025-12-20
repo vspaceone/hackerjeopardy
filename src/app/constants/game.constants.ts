@@ -108,6 +108,16 @@ export const QUESTION_VALUES = {
 export const KEYBOARD = {
   /** Valid player keys */
   PLAYER_KEYS: ['1', '2', '3', '4', '5', '6', '7', '8'],
+  /** Host control keys */
+  HOST_KEYS: {
+    CORRECT: 'c',
+    INCORRECT: 'i',
+    REVEAL: 'r',
+    CLOSE: 'Escape',
+    NO_ONE_KNOWS: 'n',
+    RESET_SCORES: 'S',
+    RESET_ROUND: 'Q'
+  } as const,
   /** Special numpad/international key mappings */
   KEY_MAPPINGS: {
     '¹': '1',

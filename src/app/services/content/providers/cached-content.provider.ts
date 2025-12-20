@@ -17,19 +17,30 @@ export class CachedContentProvider extends BaseContentProvider {
   }
 
   getManifest(): Observable<ContentManifest> {
-    return from(this.indexedDB.get('manifest')).pipe(
-      map(entry => {
-        if (entry?.data) return entry.data;
-        // Return empty manifest if nothing cached
-        return {
-          rounds: [],
-          lastUpdated: new Date().toISOString(),
-          totalRounds: 0,
-          totalSize: 0,
-          version: 'cached'
-        };
-      })
+    return from(this.getValidatedManifest()).pipe(
+      map(manifest => manifest)
     );
+  }
+
+  // Get manifest with validation to ensure consistency
+  private async getValidatedManifest(): Promise<ContentManifest> {
+    const entry = await this.indexedDB.get('manifest');
+    if (entry?.data) {
+      // Validate manifest integrity in background (don't await to avoid blocking)
+      this.validateAndCleanManifest().catch(error =>
+        console.warn('Background manifest validation failed:', error)
+      );
+      return entry.data;
+    }
+
+    // Return empty manifest if nothing cached
+    return {
+      rounds: [],
+      lastUpdated: new Date().toISOString(),
+      totalRounds: 0,
+      totalSize: 0,
+      version: 'cached'
+    };
   }
 
   getRound(roundId: string): Observable<GameRound> {
@@ -80,6 +91,52 @@ export class CachedContentProvider extends BaseContentProvider {
     await this.indexedDB.set('manifest', entry);
   }
 
+  // Atomic manifest update to prevent race conditions
+  async updateManifest(updater: (manifest: ContentManifest) => ContentManifest): Promise<void> {
+    const currentEntry = await this.indexedDB.get('manifest');
+    const currentManifest = currentEntry?.data || {
+      rounds: [],
+      lastUpdated: new Date().toISOString(),
+      totalRounds: 0,
+      totalSize: 0,
+      version: 'cached'
+    };
+
+    const updatedManifest = updater(currentManifest);
+    await this.cacheManifest(updatedManifest);
+  }
+
+  // Validate and clean manifest to ensure all rounds exist in cache
+  async validateAndCleanManifest(): Promise<void> {
+    try {
+      const currentEntry = await this.indexedDB.get('manifest');
+      if (!currentEntry?.data?.rounds) return;
+
+      const validRounds = [];
+      for (const round of currentEntry.data.rounds) {
+        // Check if round data exists and is not expired
+        const roundEntry = await this.indexedDB.get(`round-${round.id}`);
+        if (roundEntry?.data) {
+          validRounds.push(round);
+        } else {
+          console.log(`CachedContentProvider: Removing stale round ${round.id} from manifest`);
+        }
+      }
+
+      const cleanedManifest: ContentManifest = {
+        ...currentEntry.data,
+        rounds: validRounds,
+        lastUpdated: new Date().toISOString(),
+        totalRounds: validRounds.length
+      };
+
+      await this.cacheManifest(cleanedManifest);
+      console.log('CachedContentProvider: Manifest validation and cleanup completed');
+    } catch (error) {
+      console.warn('CachedContentProvider: Failed to validate and clean manifest:', error);
+    }
+  }
+
   async cacheRound(roundId: string, round: GameRound): Promise<void> {
     const entry = {
       key: `round-${roundId}`,
@@ -110,6 +167,10 @@ export class CachedContentProvider extends BaseContentProvider {
     await this.indexedDB.clear();
   }
 
+  async cleanupExpiredEntries(): Promise<void> {
+    await this.indexedDB.cleanupExpired();
+  }
+
   async getCacheStats() {
     return await this.indexedDB.getStats();
   }
@@ -127,6 +188,22 @@ export class CachedContentProvider extends BaseContentProvider {
     );
     for (const categoryEntry of roundCategories) {
       await this.indexedDB.delete(categoryEntry.key);
+    }
+
+    // Update the cached manifest to remove this round
+    try {
+      await this.updateManifest(manifest => {
+        const updatedRounds = manifest.rounds.filter(round => round.id !== roundId);
+        return {
+          ...manifest,
+          rounds: updatedRounds,
+          lastUpdated: new Date().toISOString(),
+          totalRounds: updatedRounds.length
+        };
+      });
+      console.log(`CachedContentProvider: Removed round ${roundId} from cached manifest`);
+    } catch (error) {
+      console.warn(`CachedContentProvider: Failed to update manifest after removing round ${roundId}:`, error);
     }
   }
 }

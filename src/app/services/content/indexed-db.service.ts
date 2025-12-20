@@ -58,8 +58,9 @@ export class IndexedDBService {
 
       const request = store.put(cacheEntry);
 
-      request.onsuccess = () => {
-        this.enforceCacheSize();
+      request.onsuccess = async () => {
+        // Enforce cache size after every write operation
+        await this.enforceCacheSize();
         resolve();
       };
       request.onerror = () => reject(request.error);
@@ -180,6 +181,33 @@ export class IndexedDBService {
       cachedCategories: categories,
       lastCleanup: Date.now() // Could track this separately
     };
+  }
+
+  // Clean expired entries from cache
+  async cleanupExpired(): Promise<void> {
+    if (!this.db) await this.initDB();
+
+    return new Promise((resolve, reject) => {
+      const transaction = this.db!.transaction([this.STORE_NAME], 'readwrite');
+      const store = transaction.objectStore(this.STORE_NAME);
+      const request = store.openCursor();
+
+      request.onsuccess = (event) => {
+        const cursor = (event.target as IDBRequest).result;
+        if (cursor) {
+          const entry = cursor.value;
+          if (!this.isValidCache(entry)) {
+            console.log(`IndexedDB: Removing expired entry: ${entry.key}`);
+            cursor.delete();
+          }
+          cursor.continue();
+        } else {
+          resolve();
+        }
+      };
+
+      request.onerror = () => reject(request.error);
+    });
   }
 
   // Get all cached round IDs for quick lookup

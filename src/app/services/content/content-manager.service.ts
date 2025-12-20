@@ -12,7 +12,8 @@ import {
   RoundMetadata,
   GameRound,
   Category,
-  ContentUpdateInfo
+  ContentUpdateInfo,
+  ContentManifest
 } from './content.types';
 
 @Injectable({
@@ -79,6 +80,14 @@ export class ContentManagerService {
     console.log('ContentManagerService: Initializing...');
     await this.repositoryManager.initialize();
 
+    // Clean expired cache entries on startup
+    try {
+      await this.cachedProvider.cleanupExpiredEntries();
+      console.log('ContentManagerService: Cleaned expired cache entries');
+    } catch (error) {
+      console.warn('ContentManagerService: Failed to cleanup expired entries:', error);
+    }
+
     // Set up initial provider chain
     this.providers = [
       this.cachedProvider, // Highest priority - check cache first
@@ -139,9 +148,24 @@ export class ContentManagerService {
         console.error('ContentManager: Error getting available rounds:', error);
         return of([]);
       })
-    ).subscribe(rounds => {
-      this.availableRoundsSubject.next(rounds);
-    });
+     ).subscribe(async rounds => {
+       this.availableRoundsSubject.next(rounds);
+
+       // Cache the combined manifest for offline use
+       try {
+         const combinedManifest: ContentManifest = {
+           rounds,
+           lastUpdated: new Date().toISOString(),
+           totalRounds: rounds.length,
+           totalSize: 0, // Could calculate if needed
+           version: 'combined'
+         };
+         await this.cachedProvider.cacheManifest(combinedManifest);
+         console.log('ContentManager: Cached combined manifest with', rounds.length, 'rounds');
+       } catch (error) {
+         console.warn('ContentManager: Failed to cache combined manifest:', error);
+       }
+     });
   }
 
   /**
@@ -424,6 +448,12 @@ export class ContentManagerService {
         console.warn(`Failed to remove round ${roundId} from cache:`, error);
       }
     }
+
+    // Validate and clean cached manifest
+    await this.cachedProvider.validateAndCleanManifest();
+
+    // Refresh the available rounds list to reflect changes
+    this.loadAvailableRounds();
   }
 
   /**

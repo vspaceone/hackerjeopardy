@@ -68,9 +68,11 @@ export class ContentManagerComponent implements OnInit {
     try {
       await this.contentManager.updateContent();
       await this.loadStats();
-      this.updateInfo = null;
+      // Re-check for updates to show the current state
+      this.updateInfo = await this.contentManager.checkForUpdates();
     } catch (error) {
       console.error('Failed to update content:', error);
+      this.updateInfo = { hasUpdates: false, newRounds: [], updatedRounds: [], removedRounds: [] };
     } finally {
       this.updating = false;
     }

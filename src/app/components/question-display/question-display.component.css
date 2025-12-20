@@ -212,9 +212,26 @@
   box-shadow: 0 0 40px currentColor, 0 0 60px currentColor, inset 0 0 40px rgba(255, 255, 255, 0.1);
 }
 
+.player-badge.eliminated-badge {
+  opacity: 0.5;
+}
+
+.player-badge.completed-badge {
+  opacity: 0.7;
+}
+
 .player-name {
   font-weight: bold;
   text-align: center;
+  margin-bottom: 2px;
+}
+
+.queue-position {
+  font-size: 0.7em;
+  opacity: 0.8;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 }
 
 .player-timer {
@@ -229,6 +246,20 @@
   color: var(--neon-blue);
   text-shadow: var(--glow-blue);
   animation: timerPulse 1s ease-in-out infinite;
+}
+
+.completion-indicator {
+  font-size: 1.2em;
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+  font-weight: bold;
+}
+
+.elimination-indicator {
+  font-size: 1.2em;
+  color: #ff073a;
+  text-shadow: 0 0 10px #ff073a;
+  font-weight: bold;
 }
 
 @keyframes timerPulse {

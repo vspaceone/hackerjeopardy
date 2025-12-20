@@ -93,7 +93,11 @@ export class GameDataService {
           availablePlayers: new Set<number>(
             Array.from({ length: PLAYER_CONFIG.COUNT }, (_, i) => i + 1)
           ),
-          buttonsActive: false
+          buttonsActive: false,
+          // Initialize queuing system
+          buzzQueue: [],
+          currentQueueIndex: 0,
+          queueResolved: false
         };
 
         // Keep original image paths - URLs will be resolved when displaying

@@ -12,6 +12,13 @@ export interface Player {
   selectionBuzzes?: number;
 }
 
+export interface QueuedPlayer {
+  playerId: number;
+  buzzTimestamp: number;
+  position: number;
+  status: 'waiting' | 'answering' | 'completed' | 'eliminated';
+}
+
 export interface Question {
   question: string;
   answer?: string;
@@ -33,6 +40,10 @@ export interface Question {
   hadIncorrectAnswers?: boolean;
   scoreChanges?: Array<{playerId: number, change: number, timestamp: number}>;
   resetTimestamp?: number;
+  // New queuing system
+  buzzQueue: QueuedPlayer[];
+  currentQueueIndex: number;
+  queueResolved: boolean;
 }
 
 export interface Category {

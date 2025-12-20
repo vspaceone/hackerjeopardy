@@ -343,7 +343,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 	incorrect(): void {
 		this.audioService.stopThemeMusic();
 		if (this.selectedQuestion) {
-			this.gameService.incorrectAnswer(this.selectedQuestion);
+			this.gameService.incorrectAnswer(this.selectedQuestion, this.players);
 		}
 		this.gameStateService.markQuestionAnswered();
 	}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { AudioService } from './audio.service';
-import { Player, Question } from '../models/game.models';
+import { Player, Question, QueuedPlayer } from '../models/game.models';
 import { TIMING, BUTTON_VALUES, PLAYER_CONFIG, PLAYER_COLORS } from '../constants/game.constants';
 
 @Injectable({
@@ -33,20 +33,65 @@ export class GameService {
   activatePlayer(question: Question, playerId: number, players: Player[]): boolean {
     const pid = parseInt(playerId.toString());
 
-    // Only allow activation if no player is currently active (sequential buzzing)
-    if (question.activePlayers.size > 0 || !question.availablePlayers.has(pid) || !question.available) {
+    // Check if question is available and player can buzz
+    if (!question.available || question.queueResolved) {
       return false;
     }
 
-    question.availablePlayers.delete(pid);
-    question.activePlayers.add(pid);
-    question.activePlayersArr = Array.from(question.activePlayers);
-    question.activePlayer = this.getPlayerById(pid, players);
+    // If no queue exists yet, this is the first buzz - create queue
+    if (question.buzzQueue.length === 0) {
+      this.initializeBuzzQueue(question, pid, players);
+      return true;
+    }
 
-    // Start timer for this player (sets remainingtime)
-    this.startTimer(question, players);
+    // If queue exists but player already buzzed, ignore
+    if (question.buzzQueue.some(entry => entry.playerId === pid)) {
+      return false;
+    }
 
+    // Add player to existing queue in speed order
+    this.addToQueue(question, pid);
     return true;
+  }
+
+  private initializeBuzzQueue(question: Question, firstPlayerId: number, players: Player[]): void {
+    // Initialize queue with first player
+    question.buzzQueue = [{
+      playerId: firstPlayerId,
+      buzzTimestamp: Date.now(),
+      position: 1,
+      status: 'answering'
+    }];
+    question.currentQueueIndex = 0;
+
+    // Set active player and start timer
+    question.activePlayer = this.getPlayerById(firstPlayerId, players);
+    this.startTimer(question, players);
+  }
+
+  private addToQueue(question: Question, playerId: number): void {
+    const queueEntry: QueuedPlayer = {
+      playerId,
+      buzzTimestamp: Date.now(),
+      position: 0, // Will be updated
+      status: 'waiting'
+    };
+
+    // Insert in speed order (earliest timestamp first)
+    const insertIndex = question.buzzQueue.findIndex(
+      entry => entry.buzzTimestamp > queueEntry.buzzTimestamp
+    );
+
+    if (insertIndex === -1) {
+      question.buzzQueue.push(queueEntry);
+    } else {
+      question.buzzQueue.splice(insertIndex, 0, queueEntry);
+    }
+
+    // Update all positions
+    question.buzzQueue.forEach((entry, index) => {
+      entry.position = index + 1;
+    });
   }
 
   startTimer(question: Question, players: Player[]): void {
@@ -90,17 +135,21 @@ export class GameService {
         change: question.value,
         timestamp: Date.now()
       });
-      // Remove from active players now that decision is made
-      question.activePlayers.delete(question.activePlayer.id);
-      question.activePlayersArr = Array.from(question.activePlayers);
-    }
 
-    question.available = false;
-    question.availablePlayers.clear();
-    question.activePlayer = undefined;
+      // Mark current player as completed in queue
+      const currentEntry = question.buzzQueue[question.currentQueueIndex];
+      if (currentEntry) {
+        currentEntry.status = 'completed';
+      }
+
+      // End question immediately on correct answer
+      question.available = false;
+      question.queueResolved = true;
+      question.activePlayer = undefined;
+    }
   }
 
-  incorrectAnswer(question: Question): void {
+  incorrectAnswer(question: Question, players: Player[]): void {
     this.audioService.playFail();
     this.clearTimer(); // Clear current timer - decision is made
     if (question.activePlayer) {
@@ -115,23 +164,43 @@ export class GameService {
         timestamp: Date.now()
       });
 
-      // Remove current player from active players
-      question.activePlayers.delete(question.activePlayer.id);
-      question.activePlayersArr = Array.from(question.activePlayers);
-
-      // Decision is made - clear active player and allow new buzzing round
-      question.activePlayer = undefined;
-
-      // If no more players available to buzz in, close the question
-      if (question.availablePlayers.size === 0) {
-        // If incorrect answers were given, mark as incorrectly answered
-        if (question.hadIncorrectAnswers) {
-          this.markQuestionIncorrect(question);
-        } else {
-          this.notAnswered(question);
-        }
+      // Remove current player from queue permanently
+      const currentEntry = question.buzzQueue.splice(question.currentQueueIndex, 1)[0];
+      if (currentEntry) {
+        currentEntry.status = 'eliminated';
       }
-      // Question stays open, allowing remaining players to buzz in sequentially
+
+      // Update positions for remaining players
+      question.buzzQueue.forEach((entry, index) => {
+        entry.position = index + 1;
+      });
+
+      // Advance to next player (index stays the same since we removed current)
+      this.advanceQueue(question, players);
+    }
+  }
+
+  advanceQueue(question: Question, players: Player[]): void {
+    if (question.queueResolved) return;
+
+    question.currentQueueIndex++;
+
+    if (question.currentQueueIndex >= question.buzzQueue.length) {
+      // Queue exhausted - no correct answers
+      if (question.hadIncorrectAnswers) {
+        this.markQuestionIncorrect(question);
+      } else {
+        this.notAnswered(question);
+      }
+      return;
+    }
+
+    // Set next player as active
+    const nextPlayerEntry = question.buzzQueue[question.currentQueueIndex];
+    if (nextPlayerEntry) {
+      nextPlayerEntry.status = 'answering';
+      question.activePlayer = this.getPlayerById(nextPlayerEntry.playerId, players);
+      this.startTimer(question, players);
     }
   }
 
@@ -169,13 +238,19 @@ export class GameService {
     question.activePlayersArr = [];
     question.timeoutPlayers.clear();
     question.timeoutPlayersArr = [];
-     // Reset to all active players (1 through current player count)
-     const playerCount = players.length;
-     question.availablePlayers = new Set(
-       Array.from({ length: playerCount }, (_, i) => i + 1)
-     );
+    // Reset to all active players (1 through current player count)
+    const playerCount = players.length;
+    question.availablePlayers = new Set(
+      Array.from({ length: playerCount }, (_, i) => i + 1)
+    );
     question.hadIncorrectAnswers = false;
     question.scoreChanges = [];
+
+    // Reset queuing system
+    question.buzzQueue = [];
+    question.currentQueueIndex = 0;
+    question.queueResolved = false;
+
     question.resetTimestamp = Date.now();
 
     this.clearTimer();

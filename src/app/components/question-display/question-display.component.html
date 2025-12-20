@@ -50,26 +50,30 @@
       </div>
     </div>
 
-    <div *ngIf="question.activePlayersArr.length > 0" class="players-section">
-      <h4>Players in Line:</h4>
+    <div *ngIf="question.buzzQueue.length > 0" class="players-section">
+      <h4>Player Queue:</h4>
       <div class="active-players">
         <div
-          *ngFor="let playerId of getActivePlayerIds()"
+          *ngFor="let queuedPlayer of question.buzzQueue"
           class="player-badge"
+          [class.current-player-badge]="queuedPlayer.status === 'answering'"
+          [class.eliminated-badge]="queuedPlayer.status === 'eliminated'"
+          [class.completed-badge]="queuedPlayer.status === 'completed'"
           [ngStyle]="{
-            'border-color': getPlayerById(playerId)?.fgcolor,
-            'color': getPlayerById(playerId)?.fgcolor,
-            'box-shadow': '0 0 25px ' + getPlayerById(playerId)?.fgcolor + ', inset 0 0 25px rgba(255, 255, 255, 0.05)'
+            'border-color': getPlayerById(queuedPlayer.playerId)?.fgcolor,
+            'color': getPlayerById(queuedPlayer.playerId)?.fgcolor,
+            'box-shadow': queuedPlayer.status === 'answering'
+              ? '0 0 40px ' + getPlayerById(queuedPlayer.playerId)?.fgcolor + ', 0 0 60px ' + getPlayerById(queuedPlayer.playerId)?.fgcolor + ', inset 0 0 40px rgba(255, 255, 255, 0.1)'
+              : '0 0 20px ' + getPlayerById(queuedPlayer.playerId)?.fgcolor + ', inset 0 0 20px rgba(255, 255, 255, 0.05)'
           }"
         >
-          <div class="player-name">{{ getPlayerById(playerId)?.name }}</div>
-          <div *ngIf="getPlayerById(playerId)?.remainingtime !== null" class="player-timer">
-            {{ getPlayerById(playerId)?.remainingtime }}s
+          <div class="player-name">{{ getPlayerById(queuedPlayer.playerId)?.name }}</div>
+          <div class="queue-position">{{ queuedPlayer.position }}{{ getOrdinalSuffix(queuedPlayer.position) }}</div>
+          <div *ngIf="queuedPlayer.status === 'answering' && getPlayerById(queuedPlayer.playerId)?.remainingtime !== null" class="player-timer active-timer">
+            {{ getPlayerById(queuedPlayer.playerId)?.remainingtime }}s
           </div>
-        </div>
-      </div>
-    </div>
-
+          <div *ngIf="queuedPlayer.status === 'completed'" class="completion-indicator">✓</div>
+          <div *ngIf="queuedPlayer.status === 'eliminated'" class="elimination-indicator">✗</div>
        <div class="modal-footer">
           <button *ngIf="question.available" class="btn btn-warning" (click)="onNoOneKnows()" aria-label="Mark question as no one knows the answer">No One Knows</button>
           <button class="btn btn-primary" (click)="onClose()" aria-label="Close clue modal">Close</button>

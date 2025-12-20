@@ -86,4 +86,11 @@ export class QuestionDisplayComponent {
   getPlayerById(id: number): Player | undefined {
     return this.players.find(player => player.id === id);
   }
+
+  getOrdinalSuffix(position: number): string {
+    if (position === 1) return 'st';
+    if (position === 2) return 'nd';
+    if (position === 3) return 'rd';
+    return 'th';
+  }
 }

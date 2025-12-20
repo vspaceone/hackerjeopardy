@@ -50,7 +50,7 @@ export class PlayerControlsComponent implements AfterViewInit {
 
   saveRename(): void {
     if (this.newName.trim()) {
-      this.player.name = this.player.name;
+      this.player.name = this.newName.trim();
     }
     this.isRenaming = false;
     this.renamingStateChange.emit(false);

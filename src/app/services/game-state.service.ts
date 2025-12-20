@@ -148,13 +148,7 @@ export class GameStateService {
     this.couldBeCanceledSubject.next(false);
   }
 
-  /**
-   * Cancel question selection
-   */
-  cancelQuestion(): void {
-    this.selectedQuestionSubject.next(null);
-    this.couldBeCanceledSubject.next(false);
-  }
+
 
   /**
    * Mark question as answered (correct or incorrect)

@@ -1,9 +1,8 @@
 <div *ngIf="question" class="question-overlay">
   <div class="question-modal" role="dialog" aria-labelledby="question-header">
-     <div class="question-header" id="question-header">
-       <h3>{{ question.cat }} - {{ question.value }} points</h3>
-      <button *ngIf="canCancel" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-    </div>
+      <div class="question-header" id="question-header">
+        <h3>{{ question.cat }} - {{ question.value }} points</h3>
+     </div>
     
     <div class="question-content">
       <h3>Answer:</h3>

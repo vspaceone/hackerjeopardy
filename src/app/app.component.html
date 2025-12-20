@@ -30,7 +30,7 @@
 
   <app-game-board *ngIf="qanda && !showContentManager" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
 
-  <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
+  <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
 
     <div class="players-container" *ngIf="qanda && !showContentManager">
       <div class="players-header">

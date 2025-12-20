@@ -12,10 +12,8 @@ import { ContentManagerService } from '../../services/content/content-manager.se
 })
 export class QuestionDisplayComponent {
   @Input() question?: Question;
-  @Input() canCancel: boolean = false;
   @Input() players: Player[] = [];
   @Output() close = new EventEmitter<void>();
-  @Output() cancel = new EventEmitter<void>();
   @Output() correct = new EventEmitter<void>();
   @Output() incorrect = new EventEmitter<void>();
   @Output() noOneKnows = new EventEmitter<void>();
@@ -50,10 +48,6 @@ export class QuestionDisplayComponent {
 
   onClose(): void {
     this.close.emit();
-  }
-
-  onCancel(): void {
-    this.cancel.emit();
   }
 
   onCorrect(): void {

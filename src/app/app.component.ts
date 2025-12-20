@@ -418,10 +418,4 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.gameStateService.closeQuestion();
 	}
 
-	/**
-	 * Cancel question selection
-	 */
-	cancel(): void {
-		this.gameStateService.cancelQuestion();
-	}
 }

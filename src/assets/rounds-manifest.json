@@ -1,196 +1,382 @@
 {
   "rounds": [
     {
-      "id": "XMAS19_1_de",
-      "name": "XMAS19 Round 1 (German)",
-      "language": "de",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS19_2_de",
-      "name": "XMAS19 Round 2 (German)",
-      "language": "de",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS19_3_de",
-      "name": "XMAS19 Round 3 (German)",
-      "language": "de",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS19_4_de",
-      "name": "XMAS19 Round 4 (German)",
-      "language": "de",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "Lounge_And_Chill_1_de",
-      "name": "Lounge & Chill 1 (German)",
-      "language": "de",
-      "difficulty": "easy"
-    },
-    {
-      "id": "Lounge_And_Chill_2_de",
-      "name": "Lounge & Chill 2 (German)",
-      "language": "de",
-      "difficulty": "easy"
-    },
-    {
-      "id": "Lounge_And_Chill_3_de",
-      "name": "Lounge & Chill 3 (German)",
-      "language": "de",
-      "difficulty": "easy"
-    },
-    {
-      "id": "XMAS18_1_de",
-      "name": "XMAS18 Round 1 (German)",
-      "language": "de",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS18_2_de",
-      "name": "XMAS18 Round 2 (German)",
-      "language": "de",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "Tim_Runde_de",
-      "name": "Tim's Round (German)",
-      "language": "de",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "Lounge_And_Chill_1",
-      "name": "Lounge & Chill 1 (Ascii)",
+      "id": "XMAS22_2_en",
+      "name": "XMAS22_2_en",
       "language": "en",
-      "difficulty": "easy"
-    },
-    {
-      "id": "Lounge_And_Chill_1_en",
-      "name": "Lounge & Chill 1 (English)",
-      "language": "en",
-      "difficulty": "easy"
-    },
-    {
-      "id": "Lounge_And_Chill_2_en",
-      "name": "Lounge & Chill 2 (English)",
-      "language": "en",
-      "difficulty": "easy"
-    },
-    {
-      "id": "Lounge_And_Chill_3",
-      "name": "Lounge & Chill 3 (Chaos)",
-      "language": "en",
-      "difficulty": "easy"
-    },
-    {
-      "id": "Lounge_And_Chill_3_en",
-      "name": "Lounge & Chill 3 (English)",
-      "language": "en",
-      "difficulty": "easy"
-    },
-    {
-      "id": "Tim_Runde",
-      "name": "Tim's Round (English)",
-      "language": "en",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS18_1_en",
-      "name": "XMAS18 Round 1 (English)",
-      "language": "en",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS18_2_en",
-      "name": "XMAS18 Round 2 (English)",
-      "language": "en",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS18_RND1",
-      "name": "XMAS18 Special Round 1",
-      "language": "en",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS18_RND2",
-      "name": "XMAS18 Special Round 2",
-      "language": "en",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS19_1_en",
-      "name": "XMAS19 Round 1 (English)",
-      "language": "en",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS19_2_en",
-      "name": "XMAS19 Round 2 (English)",
-      "language": "en",
-      "difficulty": "mixed"
-    },
-    {
-      "id": "XMAS19_3_en",
-      "name": "XMAS19 Round 3 (English)",
-      "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
       "id": "XMAS19_4_en",
-      "name": "XMAS19 Round 4 (English)",
+      "name": "XMAS19-Turn4",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
-      "id": "XMAS19-Turn1",
-      "name": "XMAS19 Turn 1",
+      "id": "XMAS19_1_de",
+      "name": "XMAS19-Turn1",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS18_1_en",
+      "name": "XMAS18_1_en",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_2",
+      "name": "Hackerjeopardy_Loung_and_Chill_Turn_2",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19_1_en",
+      "name": "XMAS19-1_en",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Demo",
+      "name": "Demo",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_2_de",
+      "name": "Hackerjeopardy_Loung_and_Chill_Turn_2",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
       "id": "XMAS19-Turn2",
-      "name": "XMAS19 Turn 2",
+      "name": "XMAS19-Turn2",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
       "id": "XMAS19-Turn3",
-      "name": "XMAS19 Turn 3",
+      "name": "XMAS19-Turn3",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
-      "id": "XMAS19-Turn4",
-      "name": "XMAS19 Turn 4",
+      "id": "XMAS18_2_en",
+      "name": "XMAS18_2_en",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_1_de",
+      "name": "Hackerjeopardy_Loung_and_Chill_Turn_1",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19_3_de",
+      "name": "XMAS19-Turn3",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS18_2_de",
+      "name": "XMAS18_RND2",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_1",
+      "name": "Hackerjeopardy_Loung_and_Chill_Turn_1",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_3",
+      "name": "Hackerjeopardy_Loung_and_Chill_Turn_3",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_1_en",
+      "name": "Hackerjeopardy_Loung_and_Chill_1_en",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
       "id": "XMAS22_1_en",
-      "name": "XMAS22 Round 1 (English)",
+      "name": "XMAS22_1_en",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
-      "id": "XMAS22_2_en",
-      "name": "XMAS22 Round 2 (English)",
+      "id": "XMAS18_1_de",
+      "name": "XMAS18_RND1",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
-      "id": "XMAS22_3_en",
-      "name": "XMAS22 Round 3 (English)",
+      "id": "Tim_Runde_de",
+      "name": "Tim_Runde",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "easy",
+      "author": "Tim",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19-Turn4",
+      "name": "XMAS19-Turn4",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19-Turn1",
+      "name": "XMAS19-Turn1",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19_2_de",
+      "name": "XMAS19-Turn2",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Tim_Runde",
+      "name": "Tim_Runde",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Tim",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS18_RND1",
+      "name": "XMAS18_RND1",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19_3_en",
+      "name": "XMAS19-Turn3",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     },
     {
       "id": "mixed_bag_round",
-      "name": "Mixed Bag Round",
+      "name": "Mixed Bag",
       "language": "en",
-      "difficulty": "mixed"
+      "difficulty": "medium",
+      "author": "Unknown",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19_2_en",
+      "name": "XMAS19-Turn2",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_3_en",
+      "name": "Hackerjeopardy_Loung_and_Chill_3_en",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_2_en",
+      "name": "Hackerjeopardy_Loung_and_Chill_2_en",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS18_RND2",
+      "name": "XMAS18_RND2",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "Lounge_And_Chill_3_de",
+      "name": "Hackerjeopardy_Loung_and_Chill_Turn_3",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS19_4_de",
+      "name": "XMAS19-Turn4",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
+    },
+    {
+      "id": "XMAS22_3_en",
+      "name": "XMAS22_3_en",
+      "language": "en",
+      "difficulty": "easy",
+      "author": "Max Noppel",
+      "lastModified": "2024-01-01T00:00:00.000Z",
+      "size": 0,
+      "description": "",
+      "tags": []
     }
-  ]
+  ],
+  "lastUpdated": "2024-01-01T00:00:00.000Z",
+  "totalRounds": 34,
+  "totalSize": 0,
+  "version": "bundled"
 }

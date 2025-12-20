@@ -10,6 +10,7 @@
   --neon-blue-light: #4dd4ff;
   --neon-blue-dark: #0099cc;
   --neon-blue-muted: #66e0ff;
+  --neon-green: #00ff88;
   --text-primary: #ffffff;
   --text-secondary: #9ca3af;
   --text-accent: var(--neon-blue);
@@ -17,6 +18,7 @@
   --glow-blue-light: 0 0 20px var(--neon-blue-light);
   --glow-blue-dark: 0 0 20px var(--neon-blue-dark);
   --glow-blue-muted: 0 0 20px var(--neon-blue-muted);
+  --glow-green: 0 0 20px var(--neon-green);
 }
 
 /* Global Reset and Base Styles */
@@ -191,6 +193,7 @@ p {
 
 .cyber-button:hover {
   color: var(--bg-primary);
+  background: var(--neon-blue);
   box-shadow: var(--glow-blue);
 }
 
@@ -200,6 +203,22 @@ p {
 
 .cyber-button:active {
   transform: scale(0.95);
+}
+
+.btn-icon {
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+
+.header-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.header-controls .cyber-button {
+  font-size: 0.9em;
+  padding: 10px 16px;
 }
 
 /* Matrix Rain Background Animation */

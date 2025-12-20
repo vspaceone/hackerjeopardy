@@ -2,7 +2,7 @@
 
 ## 📊 Current Game Logic & Flow Analysis
 
-Based on examination of the codebase, here's a comprehensive analysis of the current Hacker Jeopardy game logic and flow.
+Based on examination of the codebase, here's a comprehensive analysis of the current Hacker Jeopardy game logic and flow. **Updated to reflect the speed-based queuing system and dynamic player management implemented in the latest version.**
 
 ### 🎮 Core Game Components
 
@@ -21,34 +21,45 @@ Based on examination of the codebase, here's a comprehensive analysis of the cur
 - `value`: Point value (100-500)
 - `cat`: Category name
 - `player`: Player who successfully answered (if any)
-- `activePlayers`: Set of currently active player IDs (only 1 in sequential mode)
-- `activePlayersArr`: Array version of activePlayers for easier access
+- `activePlayers`: Legacy field (maintained for compatibility)
+- `activePlayersArr`: Legacy field (maintained for compatibility)
 - `timeoutPlayers`: Set of players who timed out on this question
 - `timeoutPlayersArr`: Array version of timeoutPlayers
-- `availablePlayers`: Set of player IDs who can still buzz in
+- `availablePlayers`: Set of player IDs who can still buzz in (dynamically updated)
 - `buttonsActive`: Legacy field (not actively used)
-- `activePlayer`: Currently active player with timer
+- `activePlayer`: Currently active player with timer (only one at a time)
 - `activationtime`: When player became active (for potential future use)
 - `hadIncorrectAnswers`: Boolean indicating if any incorrect answers were given
 - `scoreChanges`: Array tracking all score modifications during question lifecycle (for reset functionality)
 - `resetTimestamp`: Timestamp when question was last reset (for visual feedback)
+- **NEW: `buzzQueue`**: Ordered array of QueuedPlayer objects (speed-based order)
+- **NEW: `currentQueueIndex`**: Current position in the queue (0-based)
+- **NEW: `queueResolved`**: Boolean indicating if question ended with correct answer
+
+**QueuedPlayer Object (New):**
+- `playerId`: Player's unique identifier
+- `buzzTimestamp`: When player buzzed in (for speed ordering)
+- `position`: Queue position (1-based, for display)
+- `status`: 'waiting' | 'answering' | 'completed' | 'eliminated'
 
 **Player Object:**
-- `id`: Unique identifier (1-4)
+- `id`: Unique identifier (1-8, dynamically configurable)
 - `btn`: Button identifier string
 - `name`: Display name
 - `score`: Current score
-- `bgcolor`: Background color for UI
+- `bgcolor`: Background color for UI (8 distinct colors)
 - `fgcolor`: Foreground/text color
-- `key`: Keyboard shortcut (1-4)
-- `remainingtime`: Countdown timer when active
+- `key`: Keyboard shortcut (1-8, dynamically mapped)
+- `remainingtime`: Countdown timer when active (6 seconds)
 - `activationtime`: When player became active (optional)
+- `highlighted`: Boolean for visual highlighting during selection
+- `selectionBuzzes`: Count of selection phase buzzes (for penalty system)
 
 ### 🔄 Game Flow
 
 #### 1. Setup Phase
 ```
-Select Round → Load Categories → Display Game Board
+Configure Players (1-8) → Select Round → Load Categories → Display Game Board
 ```
 
 #### 2. Question Selection
@@ -57,148 +68,198 @@ Player Clicks Question → Question Marked Unavailable → Display Modal
 Modal Shows: "Answer:" + question.answer (the clue)
 ```
 
-#### 3. Buzzing Phase (Sequential)
+#### 3. Simultaneous Buzzing Phase
 ```
-All players eligible initially (availablePlayers = [1,2,3,4])
-First player to buzz in becomes activePlayer
-6-second timer starts
-Other players cannot buzz until resolution
+All active players can buzz simultaneously when question appears
+availablePlayers = [1,2,3,...,n] (based on current player count)
+Players buzz in any order - speed determines queue position
 ```
 
-#### 4. Answer Resolution
+#### 4. Queue Formation & Turn-Based Answering
 ```
-Host Clicks "Correct" or "Incorrect":
+✅ BUZZ DETECTED:
+- Player added to buzzQueue in speed order (earliest timestamp = position 1)
+- Queue displays all buzzed players with positions
+- First player in queue becomes activePlayer
+- 6-second timer starts for activePlayer
+
+🎯 ANSWER RESOLUTION (Only activePlayer can answer):
 
 ✅ CORRECT:
 - Active player gets +points
 - Question closes immediately
 - Correct question auto-reveals
+- Queue resolved (no more turns)
 
 ❌ INCORRECT:
 - Active player gets -points
-- Player marked as timed out
-- If more players available: New buzzing round begins
-- If no players left: Question closes with manual reveal button
+- Player permanently removed from queue
+- Next player in queue becomes activePlayer
+- If queue empty: Question closes
 
 ⏰ TIMEOUT:
-- Active player marked as timed out
-- Same logic as incorrect (new buzzing round or close)
+- Active player gets -points (same as incorrect)
+- Player permanently removed from queue
+- Next player in queue becomes activePlayer
+- If queue empty: Question closes
 ```
 
 #### 5. Question Closure
 ```
-When no players can answer:
-- Manual "Reveal Question" button appears (except for correct answers)
+When queue exhausted without correct answer:
+- Manual "Reveal Question" button appears
 - Shows what the correct question should have been
-- Host can use "No One Knows" button to mark question as unanswered/incorrect
+- Host can use "No One Knows" button to mark as unanswered
 - Question permanently unavailable
+
+When correct answer given:
+- Question auto-resolves immediately
+- No further player turns allowed
 ```
 
 #### 6. Host Controls
-```
-"No One Knows" Button:
-- Available when question is open and active
-- Allows host to manually mark question as unanswered
-- Sets question as having incorrect answers
-- Useful for closing questions without waiting for player interaction
 
-Question Reset (Long-Press):
+**Question Action Buttons** (Always visible below question content):
+```
+"Reveal Question": Shows the correct question text (conditional)
+"No One Knows": Manually closes question as unanswered (when question active)
+"Close": Closes question modal and returns to game board (always available)
+```
+
+**Player Judgment Buttons** (Visible when player is answering):
+```
+"✓ Correct": Awards points and ends question immediately
+"✗ Incorrect": Deducts points and advances to next player in queue
+```
+
+**Dynamic Player Management** (During gameplay):
+```
++/- Buttons: Add/remove players without resetting round
+Changes take effect immediately while preserving existing player stats
+```
+
+**Question Reset** (Long-Press on answered questions):
 - Long-press (1.5 seconds) on any answered question tile
 - Completely undoes the question transaction
 - Reverts all score changes (points awarded/deducted)
 - Returns question to initial available state on game board
 - Visual feedback: red blinking animation for 1 second
 - Available at any time during or after question resolution
-```
 
 ### ⏱️ Timer Logic
 
-- **6-second countdown** per active player
-- **Sequential buzzing**: Only one player active at a time
-- **Timeout handling**: Player loses turn, question stays open for others
-- **No automatic progression**: Host must judge each answer
+- **6-second countdown** per active player in queue
+- **Strict turn-based**: Only the current queue position can have an active timer
+- **Timeout penalty**: Player permanently loses turn, advances to next in queue
+- **No simultaneous timers**: Only one player can be "answering" at a time
+- **Queue preservation**: Timer only affects current player, queue continues
 
 ### 👥 Player Management
 
-- **4 players** by default (configurable)
-- **Keyboard shortcuts**: 1-4 keys for buzzing
-- **Score tracking**: +points for correct, -points for incorrect
-- **Timeout penalty**: Prevents re-buzzing on same question
+- **Dynamic player count**: 1-8 players configurable during setup
+- **Speed-based queuing**: Fastest buzz determines queue position
+- **Keyboard shortcuts**: 1-8 keys dynamically mapped to active players
+- **Buzzer sounds**: 8 distinct audio cues for player identification
+- **Score tracking**: +points for correct, -points for incorrect/timeout
+- **Permanent elimination**: Incorrect/timeout answers remove player from queue
+- **Live player adjustment**: Add/remove players during gameplay without reset
 
 ### 🎵 Audio System
 
-- **Click sounds** for interactions
-- **Success/fail audio** for answers
-- **Background theme music** during questions
+- **Click sounds** for UI interactions
+- **Success/fail audio** for answer judgments
+- **8 distinct buzzer sounds** using advanced Web Audio API synthesis:
+  - Player 1: High descending sweep
+  - Player 2: Pulsing square wave
+  - Player 3: Harmonic triangle
+  - Player 4: Resonant filter sweep
+  - Player 5: Fast trilling modulation
+  - Player 6: Dual-tone chord
+  - Player 7: Warbling modulation
+  - Player 8: Burst sequence
+- **Background theme music** during active questions
 
 ### 🎨 UI Flow
 
 ```
-Game Board → Question Modal → Answer Display → Resolution → Back to Board
-     ↓             ↓             ↓            ↓            ↓
-  Category Grid  "Answer:"    Player Timer   Correct/     Question
-   w/ Points     + Clue Text   + Countdown   Incorrect    Unavailable
-   (Green =         |             |            |            (Green if
-    Correct,         |             |            |            Correctly
-    Red =            |             |            |            Answered,
-    Unanswered)      |             |            |            Red if
-                     |             |            |            Unanswered)
+Game Setup → Game Board → Question Modal → Queue Formation → Turn-Based Answering → Resolution → Back to Board
+     ↓          ↓             ↓              ↓                    ↓              ↓            ↓
+Player Count  Category Grid  "Answer:"    Speed-Based Queue   Active Player     Correct/     Question
+Configuration  w/ Points     + Clue Text   Position Display   + 6s Timer        Incorrect    Unavailable
+(1-8 players)  (Green =                      (1st, 2nd, 3rd)  + Answer Input    Resolution   (Green if
+                Correct,                                                         Queue        Correctly
+                Red =                                                              Advances     Answered,
+                Unanswered)                                                        or Ends      Red if
+                                                                                   Question     Unanswered)
 ```
 
 ### 🔍 Current Strengths
 
-✅ **Authentic Jeopardy Format**: Answers displayed as clues, questions revealed later
-✅ **Sequential Buzzing**: Prevents simultaneous activation
-✅ **Host Control**: Manual judgment of answers with "No One Knows" button for unanswered questions
+✅ **Speed-Based Competition**: Fastest buzz determines queue position, rewarding reaction time
+✅ **Fair Turn-Based Progression**: Each player gets opportunity despite incorrect answers
+✅ **Dynamic Player Management**: Add/remove players (1-8) during gameplay without disruption
+✅ **8 Distinct Buzzer Sounds**: Advanced audio synthesis for clear player identification
+✅ **Immediate Resolution**: Correct answers end questions instantly, maintaining pace
+✅ **Host Control**: Manual judgment with comprehensive button controls
 ✅ **Question Reset**: Long-press reset functionality for fixing gameplay issues
 ✅ **Score Integrity**: Complete undo of all score changes when resetting questions
-✅ **Visual Feedback**: Clear indication of active players, timers, answered questions, and unanswered questions
-✅ **Audio Enhancement**: Immersive sound effects
+✅ **Visual Queue**: Clear display of player positions and waiting order
+✅ **Audio Enhancement**: Immersive sound effects with distinct player audio cues
 ✅ **Flexible Question Management**: Host can manually close or reset questions at any time
+✅ **Responsive Design**: Adapts to different player counts and screen sizes
 
 ### ⚠️ Potential Issues/Areas for Improvement
 
-❓ **Complex State Management**: Multiple Sets (availablePlayers, activePlayers, timeoutPlayers)
-❓ **Timer Edge Cases**: What happens if host clicks buttons during countdown?
-❓ **Player Re-entry**: Can timed-out players buzz on same question?
-❓ **Question Persistence**: How are resolved questions tracked across sessions?
-❓ **Error Handling**: What if GameService methods are called on invalid state?
+❓ **Timer Edge Cases**: What happens if host clicks buttons during countdown? (Currently handled gracefully)
+❓ **Question Persistence**: How are resolved questions tracked across sessions? (Currently session-only)
+❓ **Error Handling**: What if GameService methods are called on invalid state? (Robust error handling implemented)
+❓ **Network Play**: How would speed-based buzzing work in online multiplayer?
+❓ **Accessibility**: Audio-based player identification may not work for hearing-impaired players
 
 ### 🔧 Key Methods Summary
 
 | Method | Purpose |
 |--------|---------|
-| `activatePlayer()` | Handle buzzing, start timer, prevent multiple activation |
-| `startTimer()` | Initialize 6-second countdown for active player |
-| `decrementTimer()` | Handle timeout, shift to next player or close |
-| `correctAnswer()` | Award points, close question, auto-reveal answer |
-| `incorrectAnswer()` | Deduct points, allow continued buzzing or close |
-| `notAnswered()` | Final closure when no valid answers |
-| `markQuestionIncorrect()` | Mark question as attempted but incorrectly answered by all |
-| `resetQuestion()` | Complete undo of question transaction and score changes |
+| `activatePlayer()` | Handle initial buzzing, create speed-ordered queue |
+| `addToQueue()` | Insert player into queue based on buzz timestamp |
+| `advanceQueue()` | Move to next player or close question if queue empty |
+| `startTimer()` | Initialize 6-second countdown for current queue position |
+| `decrementTimer()` | Handle timeout, eliminate player, advance queue |
+| `correctAnswer()` | Award points, mark queue resolved, close question immediately |
+| `incorrectAnswer()` | Deduct points, eliminate player permanently, advance queue |
+| `resetQuestion()` | Complete undo including queue reset and score restoration |
+| `setPlayerCount()` | Dynamically add/remove players with state preservation |
 
 ### 📁 File Structure Impact
 
 **Services:**
-- `GameService`: Core game logic and state management
-- `GameDataService`: Question loading and initialization
-- `AudioService`: Sound effect management
+- `GameService`: Core game logic with speed-based queuing system
+- `GameDataService`: Question loading and initialization with queue setup
+- `GameStateService`: Centralized reactive state management for players and game state
+- `AudioService`: Advanced Web Audio API synthesis for 8 distinct buzzer sounds
 
 **Components:**
-- `GameBoardComponent`: Question selection interface
-- `QuestionDisplayComponent`: Answer modal with judging controls
-- `PlayerControlsComponent`: Score display and management
+- `GameBoardComponent`: Question selection interface with long-press reset
+- `QuestionDisplayComponent`: Enhanced modal with queuing display and consolidated controls
+- `PlayerControlsComponent`: Individual player score and management
+- `SetSelectionComponent`: Round selection with player count configuration
 
 **Models:**
-- `game.models.ts`: TypeScript interfaces for type safety
+- `game.models.ts`: Extended TypeScript interfaces with QueuedPlayer and enhanced Question model
+
+**Configuration:**
+- `game.constants.ts`: Centralized configuration for timing, scoring, player colors, and keyboard mappings
 
 ### 🎯 Game Rules Implementation
 
-1. **Sequential Buzzing**: Only one player can be active at a time
-2. **Timeout Penalty**: 6 seconds to respond, then turn passes
-3. **Score Changes**: +value for correct, -value for incorrect
-4. **Host Judgment**: Manual correct/incorrect buttons
-5. **Answer Reveals**: Auto-reveal on correct, manual on incorrect/timeout
+1. **Speed-Based Queue Formation**: Fastest buzz determines turn order
+2. **Strict Turn-Based Answering**: Only queued players can answer, one at a time
+3. **Immediate Correct Resolution**: Right answers end questions instantly
+4. **Permanent Elimination**: Wrong/timeout answers remove players from queue
+5. **Dynamic Player Count**: 1-8 players configurable with live adjustments
+6. **Host Judgment**: Manual correct/incorrect buttons with queue control
+7. **Answer Reveals**: Auto-reveal on correct, manual reveal for unresolved questions
+8. **8 Distinct Audio Cues**: Unique buzzer sounds for each player
 
 This analysis provides a complete reference for understanding and maintaining the Hacker Jeopardy game logic and flow.</content>
 <parameter name="filePath">GAME_LOGIC_ANALYSIS.md

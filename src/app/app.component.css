@@ -2,11 +2,14 @@
   margin: 20px 0;
 }
 
+
+
 .players-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 15px;
 }
 
@@ -15,10 +18,118 @@
   margin: 0;
 }
 
+/* Players header - centered heading */
+.players-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.players-header h2 {
+  margin: 0;
+}
+
+/* Players content with controls on the right */
+.players-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.players-row {
+  flex: 1;
+}
+
+.player-count-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.count-btn {
+  min-width: 35px;
+  padding: 6px 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.count-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #333;
+}
+
+.count-btn[title*="Remove"]:disabled,
+.count-btn[title*="Add"]:disabled {
+  opacity: 0.6;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .players-row {
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
   }
+}
+
+.app-footer {
+  position: relative;
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #333;
+  color: #00ffff;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.center-text {
+  text-align: center;
+  margin: 0;
+  flex: 1;
+}
+
+.footer-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.controller-indicator {
+  font-size: 1.5em;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
+  animation: pulse 2s infinite;
+  filter: brightness(1.2) contrast(1.5) hue-rotate(200deg);
+}
+
+.long-press-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8em;
+  cursor: pointer;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.long-press-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }

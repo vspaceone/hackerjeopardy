@@ -13,18 +13,92 @@
 <div class="matrix-rain" id="matrixRain"></div>
 
 <div class="container scan-lines">
-  <h1 class="neon-text-blue">{{ title }}</h1>
+   <div class="app-header">
+     <h1 class="neon-text-blue">{{ title }}</h1>
+      <div class="header-controls">
+      </div>
+   </div>
 
-  <app-set-selection *ngIf="!qanda" [availableSets]="sets" (setSelected)="selectSet($event)"></app-set-selection>
+   <app-content-manager
+     *ngIf="showContentManager"
+     (close)="showContentManager = false">
+   </app-content-manager>
 
-  <app-game-board *ngIf="qanda" [categories]="qanda" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
 
-    <app-question-display *ngIf="selectedQuestion" [question]="selectedQuestion" [canCancel]="couldBeCanceled" [players]="players" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()"></app-question-display>
 
-  <div class="players-container" *ngIf="qanda">
-    <h2 class="neon-text-purple">Players</h2>
-    <div class="players-row">
-      <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" (rename)="rename(player)" (scoreAdjust)="adjustScore($event)"></app-player-controls>
+    <app-set-selection *ngIf="!qanda && !showContentManager" [availableRounds]="availableRounds" (setSelected)="selectSet($event)" (openContentManager)="showContentManager = true"></app-set-selection>
+
+  <app-game-board *ngIf="qanda && !showContentManager" [categories]="qanda" [players]="players" (questionSelected)="onSelect($event)" (questionReset)="resetQuestion($event)"></app-game-board>
+
+   <app-question-display *ngIf="selectedQuestion && !showContentManager" [question]="selectedQuestion" [players]="players" [triggerReveal]="revealTrigger" (close)="close()" (correct)="correct()" (incorrect)="incorrect()" (noOneKnows)="noOneKnows()" (reveal)="reveal()"></app-question-display>
+
+    <div class="players-container" *ngIf="qanda && !showContentManager">
+      <div class="players-header">
+        <h2 class="neon-text-purple">Players</h2>
+      </div>
+      <div class="players-content">
+        <div class="players-row">
+          <app-player-controls *ngFor="let player of players" [player]="player" [canRename]="true" [isActive]="false" [highlighted]="player.highlighted" [isCurrentSelector]="currentSelector?.id === player.id" (scoreAdjust)="adjustScore($event)" (renamingStateChange)="onPlayerRenamingStateChange($event)"></app-player-controls>
+        </div>
+        <div class="player-count-controls">
+          <button class="cyber-button count-btn" (click)="decreasePlayerCount()" [disabled]="playerCount <= 1" title="Remove Player">-</button>
+          <button class="cyber-button count-btn" (click)="increasePlayerCount()" [disabled]="playerCount >= 8" title="Add Player">+</button>
+        </div>
+      </div>
+    </div>
+ </div>
+
+  <div class="app-footer">
+    <div class="footer-left">
+      <button
+        *ngIf="qanda"
+        class="long-press-btn"
+        (mousedown)="startLongPress('resetScores')"
+        (mouseup)="endLongPress()"
+        (mouseleave)="endLongPress()"
+        title="Long press to reset scores">
+        Reset Scores
+      </button>
+      <button
+        *ngIf="qanda"
+        class="long-press-btn"
+        (mousedown)="startLongPress('resetRound')"
+        (mouseup)="endLongPress()"
+        (mouseleave)="endLongPress()"
+        title="Long press to reset round">
+        Reset Round
+      </button>
+    </div>
+    <div class="center-text">
+      <p *ngIf="currentRoundName && !showContentManager && !selectedQuestion">Current Round: {{ currentRoundName }}</p>
+      <div *ngIf="qanda && !showContentManager" class="keyboard-controls">
+        <div *ngIf="!selectedQuestion" class="control-group">
+          <kbd>1</kbd>-<kbd>8</kbd> Player Buzz • <kbd>C</kbd> Correct • <kbd>I</kbd> Incorrect • <kbd>R</kbd> Reveal • <kbd>Esc</kbd> Close • <kbd>N</kbd> No One Knows
+        </div>
+        <span *ngIf="!selectedQuestion" class="control-group-alt">
+          <kbd>Shift</kbd>+<kbd>S</kbd> Reset Scores • <kbd>Shift</kbd>+<kbd>Q</kbd> Reset Round
+        </span>
+        <div *ngIf="selectedQuestion">
+          <span class="control-group">
+            <kbd>C</kbd> Correct • <kbd>I</kbd> Incorrect • <kbd>R</kbd> Reveal • <kbd>Esc</kbd> Close • <kbd>N</kbd> No One Knows
+          </span>
+        <span class="control-group-alt">
+          <kbd>Shift</kbd>+<kbd>S</kbd> Reset Scores • <kbd>Shift</kbd>+<kbd>Q</kbd> Reset Round
+        </span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-controls">
+      <span *ngIf="hasControllers" class="controller-indicator" title="Buzz controllers detected">🔴</span>
+      <button
+        *ngIf="qanda"
+        class="cyber-button rounds-btn"
+        (click)="backToRoundSelection()"
+        title="Return to Round Selection">
+        Select Round
+      </button>
+      <button class="cyber-button content-btn" (click)="showContentManager = !showContentManager" title="Content Manager">
+        ⚙️
+      </button>
     </div>
   </div>
-</div>

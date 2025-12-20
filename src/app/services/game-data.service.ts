@@ -1,86 +1,107 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin } from 'rxjs';
-import { GameRound, Category, Question } from '../models/game.models';
+import { Observable, forkJoin, from } from 'rxjs';
+import { map, catchError, switchMap } from 'rxjs/operators';
+import { Category, Question } from '../models/game.models';
+import { RoundMetadata } from './content/content.types';
+import { ContentManagerService } from './content/content-manager.service';
+import { QUESTION_VALUES, PLAYER_CONFIG } from '../constants/game.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameDataService {
-  // Dynamic round loading - comprehensive list of all available rounds
-  // FUTURE: This could be loaded dynamically from a manifest file at runtime
-  // by implementing: loadRoundManifest() and validateRoundExists()
-  private availableRounds = [
-    // German rounds
-    "XMAS19_1_de", "XMAS19_2_de", "XMAS19_3_de", "XMAS19_4_de",
-    "Lounge_And_Chill_1_de", "Lounge_And_Chill_2_de", "Lounge_And_Chill_3_de",
-    "XMAS18_1_de", "XMAS18_2_de", "Tim_Runde_de",
+  constructor(
+    private contentManager: ContentManagerService,
+    private http: HttpClient
+  ) {}
 
-    // English rounds
-    "Lounge_And_Chill_1", "Lounge_And_Chill_1_en", "Lounge_And_Chill_2_en",
-    "Lounge_And_Chill_3", "Lounge_And_Chill_3_en", "Tim_Runde",
-    "XMAS18_1_en", "XMAS18_2_en", "XMAS18_RND1", "XMAS18_RND2",
-    "XMAS19_1_en", "XMAS19_2_en", "XMAS19_3_en", "XMAS19_4_en",
-    "XMAS19-Turn1", "XMAS19-Turn2", "XMAS19-Turn3", "XMAS19-Turn4",
-    "XMAS22_1_en", "XMAS22_2_en", "XMAS22_3_en",
-
-    // Mixed/Special rounds
-    "mixed_bag_round"
-  ];
-
-  constructor(private http: HttpClient) {}
-
-  getAvailableSets(useVspace: boolean = false): string[] {
-    return this.availableRounds;
+  /**
+   * Get available round IDs (for backward compatibility)
+   */
+  getAvailableSets(useVspace: boolean = false): Observable<string[]> {
+    return this.contentManager.getAvailableRounds().pipe(
+      map(rounds => rounds.map(round => round.id)),
+      catchError(() => {
+        // Fallback to empty array if content loading fails
+        return from([]);
+      })
+    );
   }
 
+  /**
+   * Get detailed round metadata
+   */
+  getAvailableRounds(): Observable<RoundMetadata[]> {
+    return this.contentManager.getAvailableRounds();
+  }
+
+  /**
+   * Load a complete game round with all categories
+   */
   loadGameRound(setName: string): Observable<Category[]> {
-    return new Observable<Category[]>(observer => {
-      this.http.get<GameRound>(`/assets/${setName}/round.json`).subscribe(
-        (roundData: GameRound) => {
-          const categoryRequests = roundData.categories.map(categoryName =>
-            this.http.get<Category>(`/assets/${setName}/${categoryName}/cat.json`)
-          );
-
-          forkJoin(categoryRequests).subscribe(
-            (categories: Category[]) => {
-              const processedCategories = this.processCategories(categories, setName);
-              observer.next(processedCategories);
-              observer.complete();
-            },
-            (error) => {
-              observer.error(error);
-            }
-          );
-        },
-        (error) => {
-          observer.error(error);
-        }
-      );
-    });
+    // Try content manager first, fall back to direct loading if it fails
+    return from(this.contentManager.loadRound(setName)).pipe(
+      switchMap(roundData => {
+        // Convert category loading promises to observables
+        const categoryRequests = roundData.categories.map(categoryName =>
+          from(this.contentManager.loadCategory(setName, categoryName))
+        );
+        return forkJoin(categoryRequests).pipe(
+          map((categories: Category[]) => this.processCategories(categories, setName))
+        );
+      }),
+      catchError(error => {
+        console.warn(`ContentManager failed for ${setName}, trying direct load:`, error);
+        // Fallback: Load directly from assets
+        return this.loadGameRoundDirect(setName);
+      })
+    );
   }
 
+  private loadGameRoundDirect(setName: string): Observable<Category[]> {
+    // Direct loading from assets as fallback
+    return this.http.get<{categories: string[]}>(`/assets/${setName}/round.json`).pipe(
+      switchMap(roundData => {
+        const categoryRequests = roundData.categories.map((categoryName: string) =>
+          this.http.get<Category>(`/assets/${setName}/${categoryName}/cat.json`)
+        );
+        return forkJoin(categoryRequests).pipe(
+          map((categories: Category[]) => this.processCategories(categories, setName))
+        );
+      })
+    );
+  }
+
+  /**
+   * Process categories to initialize game state
+   */
   private processCategories(categories: Category[], setName: string): Category[] {
     return categories.map(category => {
       const processedQuestions = category.questions.map((question, qIdx) => {
         const processedQuestion: Question = {
           ...question,
           available: true,
-          value: (qIdx + 1) * 100,
+          value: (qIdx + 1) * QUESTION_VALUES.BASE_MULTIPLIER,
           cat: category.name,
+          folder: category.path || category.name, // Use path for folder, fallback to name
+          roundId: setName, // Add round ID
           activePlayers: new Set<number>(),
           activePlayersArr: [],
           timeoutPlayers: new Set<number>(),
           timeoutPlayersArr: [],
-          availablePlayers: new Set<number>([1, 2, 3, 4]),
-          buttonsActive: false
+          availablePlayers: new Set<number>(
+            Array.from({ length: PLAYER_CONFIG.COUNT }, (_, i) => i + 1)
+          ),
+          buttonsActive: false,
+          // Initialize queuing system
+          buzzQueue: [],
+          currentQueueIndex: 0,
+          queueResolved: false
         };
 
-        if (question.image && category.path) {
-          processedQuestion.image = `assets/${setName}/${category.path}/${question.image}`;
-        } else if (question.image && category.name) {
-          processedQuestion.image = `assets/${setName}/${category.name}/${question.image}`;
-        }
+        // Keep original image paths - URLs will be resolved when displaying
+        processedQuestion.image = question.image;
 
         return processedQuestion;
       });
@@ -90,5 +111,12 @@ export class GameDataService {
         questions: processedQuestions
       };
     });
+  }
+
+  /**
+   * Get content manager for advanced operations
+   */
+  getContentManager(): ContentManagerService {
+    return this.contentManager;
   }
 }

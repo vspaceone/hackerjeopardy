@@ -99,32 +99,98 @@
   cursor: default;
 }
 
-.question-button.answered-correctly {
-  background: #00ff88; /* Green for correct */
-  color: var(--bg-primary);
+/* Player-specific colors for correct answers */
+.question-button.answered-correctly.player-1 {
+  background: #ff6b6b;
+  color: #9f0b0b;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 15px #ff6b6b;
+  opacity: 0.9;
+  cursor: default;
+}
+
+.question-button.answered-correctly.player-2 {
+  background: #ff9900;
+  color: #995c00;
+  border-color: #ff9900;
+  box-shadow: 0 0 15px #ff9900;
+  opacity: 0.9;
+  cursor: default;
+}
+
+.question-button.answered-correctly.player-3 {
+  background: #9cfcff;
+  color: #3c9c9f;
+  border-color: #9cfcff;
+  box-shadow: 0 0 15px #9cfcff;
+  opacity: 0.9;
+  cursor: default;
+}
+
+.question-button.answered-correctly.player-4 {
+  background: #FFFF66;
+  color: #cccc00;
+  border-color: #FFFF66;
+  box-shadow: 0 0 15px #FFFF66;
+  opacity: 0.9;
+  cursor: default;
+}
+
+.question-button.answered-correctly.player-5 {
+  background: #00ff88;
+  color: #008844;
   border-color: #00ff88;
   box-shadow: 0 0 15px #00ff88;
   opacity: 0.9;
   cursor: default;
 }
 
-.question-button.answered-correctly:hover {
-  transform: none;
-  box-shadow: 0 0 20px #00ff88;
-}
-
-.question-button.answered-incorrectly {
-  background: #ff073a; /* Red for incorrect */
-  color: var(--bg-primary);
-  border-color: #ff073a;
-  box-shadow: 0 0 15px #ff073a;
-  opacity: 0.8;
+.question-button.answered-correctly.player-6 {
+  background: #ff00ff;
+  color: #880088;
+  border-color: #ff00ff;
+  box-shadow: 0 0 15px #ff00ff;
+  opacity: 0.9;
   cursor: default;
 }
 
-.question-button.answered-incorrectly:hover {
+.question-button.answered-correctly.player-7 {
+  background: #ff1493;
+  color: #cc3366;
+  border-color: #ff1493;
+  box-shadow: 0 0 15px #ff1493;
+  opacity: 0.9;
+  cursor: default;
+}
+
+.question-button.answered-correctly.player-8 {
+  background: #00ffff;
+  color: #008888;
+  border-color: #00ffff;
+  box-shadow: 0 0 15px #00ffff;
+  opacity: 0.9;
+  cursor: default;
+}
+
+.question-button.answered-correctly:hover {
   transform: none;
-  box-shadow: 0 0 20px #ff073a;
+}
+
+/* Muted disabled appearance for incorrect/unanswered */
+.question-button.muted-disabled {
+  background: rgba(40, 40, 40, 0.4);
+  color: #aaa;
+  border-color: #666;
+  box-shadow: 0 0 8px rgba(100, 100, 100, 0.3);
+  opacity: 0.7;
+  filter: brightness(0.6) saturate(0.4);
+  cursor: default;
+}
+
+.question-button.muted-disabled:hover {
+  transform: none;
+  box-shadow: 0 0 8px rgba(100, 100, 100, 0.3);
+  opacity: 0.7;
 }
 
 .question-button.unanswered {
@@ -161,6 +227,30 @@
 .question-button.long-pressing:hover,
 .question-button.reset:hover {
   transform: none;
+}
+
+.question-button.keyboard-selected {
+  position: relative;
+  border-color: var(--neon-green);
+  box-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+  animation: keyboardFocus 1.5s ease-in-out infinite;
+  /* Smooth fade transition */
+  transition: box-shadow 1s ease-out, border-color 1s ease-out;
+}
+
+.question-button.keyboard-selected::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid var(--neon-green);
+  border-radius: 10px;
+  /* Fade the border too */
+  transition: border-color 1s ease-out;
+  animation: keyboardBorder 1.5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes redGlow {
@@ -218,6 +308,33 @@
   100% {
     opacity: 1;
     transform: scale(1.05);
+  }
+}
+
+@keyframes keyboardFocus {
+  0% {
+    box-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--neon-green), 0 0 60px var(--neon-green), 0 0 90px var(--neon-green);
+  }
+  100% {
+    box-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+  }
+}
+
+@keyframes keyboardBorder {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

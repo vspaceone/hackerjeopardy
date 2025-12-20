@@ -25,6 +25,29 @@
 
 .modal-header {
   margin-bottom: 40px;
+  position: relative;
+}
+
+.content-manager-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(42, 42, 42, 0.8);
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', monospace;
+}
+
+.content-manager-btn:hover {
+  background: var(--neon-blue);
+  color: var(--bg-primary);
+  box-shadow: var(--glow-blue);
+  transform: scale(1.1);
 }
 
 .game-title {
@@ -79,6 +102,25 @@
   min-width: 250px;
   white-space: normal;
   word-wrap: break-word;
+  text-align: left;
+}
+
+.round-meta {
+  font-size: 0.8em;
+  margin-top: 8px;
+  opacity: 0.8;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.difficulty {
+  color: var(--neon-purple);
+  font-weight: bold;
+}
+
+.categories {
+  color: var(--neon-blue-light);
 }
 
 .set-button:hover {
@@ -88,9 +130,30 @@
   color: var(--bg-primary);
 }
 
+.set-button.selected {
+  background: var(--neon-blue);
+  color: var(--bg-primary);
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 30px var(--neon-blue), 0 0 60px var(--neon-blue), 0 0 90px var(--neon-blue);
+  transform: translateY(-2px);
+  animation: selectedPulse 1.5s ease-in-out infinite;
+}
+
+.set-button.selected:hover {
+  transform: translateY(-4px);
+}
+
 .set-button:active {
   transform: translateY(0);
   box-shadow: var(--glow-purple);
+}
+
+.keyboard-hint {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: var(--neon-blue-light);
+  font-family: 'Roboto Mono', monospace;
+  opacity: 0.7;
 }
 
 /* Scrollbar styling */
@@ -122,6 +185,18 @@
   100% {
     text-shadow: 0 0 40px var(--neon-blue), 0 0 80px var(--neon-blue), 0 0 120px var(--neon-blue);
     filter: brightness(1.2);
+  }
+}
+
+@keyframes selectedPulse {
+  0% {
+    box-shadow: 0 0 30px var(--neon-blue), 0 0 60px var(--neon-blue), 0 0 90px var(--neon-blue);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--neon-blue), 0 0 80px var(--neon-blue), 0 0 120px var(--neon-blue);
+  }
+  100% {
+    box-shadow: 0 0 30px var(--neon-blue), 0 0 60px var(--neon-blue), 0 0 90px var(--neon-blue);
   }
 }
 
